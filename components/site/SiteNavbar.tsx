@@ -116,6 +116,22 @@ function LinkOrA({
       </a>
     );
   }
+  if (href.startsWith("http://") || href.startsWith("https://")) {
+    return (
+      <a
+        className="navbar_info-block w-inline-block"
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        onClick={onClick}
+        onFocus={onFocus}
+        onMouseEnter={onMouseEnter}
+        onTouchStart={onTouchStart}
+      >
+        {children}
+      </a>
+    );
+  }
   return (
     <Link
       className="navbar_info-block w-inline-block"

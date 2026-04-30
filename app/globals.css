@@ -295,6 +295,94 @@ html, body {
   text-decoration: none;
 }
 
+/* Katy location detail hero */
+.section_location {
+  --location-top-chrome: 132px;
+  background-color: var(--brand-red) !important;
+  height: calc(100dvh - var(--location-top-chrome)) !important;
+  min-height: calc(100dvh - var(--location-top-chrome)) !important;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.section_location > .spacer-medium,
+.section_location > .padding-section-medium {
+  display: none !important;
+}
+
+.section_location > .padding-global {
+  width: 100%;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.section_location > .padding-global > .container-xsmall {
+  width: min(1180px, 100%);
+  max-width: 1180px !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.section_location .location_component {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.section_location .location_img-wrap {
+  width: 100%;
+  max-width: 560px;
+  justify-self: center;
+}
+
+.section_location .location_content,
+.section_location .locations-list_block {
+  max-width: 520px;
+}
+
+.section_location .heading-style-h3,
+.section_location .text-size-medium,
+.section_location .text-size-medium p,
+.section_location .locations-list_info,
+.section_location .locations-list_info p {
+  color: #fff !important;
+}
+
+.section_location .locations-list_info a,
+.section_location .locations-list_info a:visited,
+.section_location .locations-list_info a:hover,
+.section_location .locations-list_info a:active {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.section_location .icon-height-small {
+  filter: brightness(0) !important;
+}
+
+@media (max-width: 991px) {
+  .section_location {
+    --location-top-chrome: 122px;
+    height: calc(100dvh - var(--location-top-chrome)) !important;
+    min-height: calc(100dvh - var(--location-top-chrome)) !important;
+  }
+
+  .section_location > .padding-global > .container-xsmall {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .section_location .location_component {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Menu category pills: reduce type by one step */
 .section_home-menu .menu_link {
   font-size: var(--_sizes---fixed--1-5rem, 1.5rem) !important;
@@ -522,9 +610,46 @@ html, body {
   opacity: 0.9;
 }
 
-.navbar .navbar_line svg * {
-  stroke: #fff !important;
-  fill: #fff !important;
+/* Nav/footer underline Lottie — Brasa-style layout; one vertical offset for all links */
+.navbar .navbar_line,
+.footer .footer_link-line {
+  pointer-events: none;
+  width: 120%;
+  display: none;
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  /* Composition is 173×44; keep proportional height so the stroke isn’t crushed */
+  aspect-ratio: 173 / 44;
+  height: auto;
+  max-height: 44px;
+  /* Webflow asset stroke is black — invert so it reads on dark shells */
+  filter: invert(1);
+}
+
+.navbar .navbar_link.navbar_link--line-hover .navbar_line,
+.footer .footer_link.footer_link--line-hover .footer_link-line {
+  display: block;
+}
+
+/* Longer labels use a wider 120% box → taller aspect-ratio height; nudge down so the
+   stroke aligns with shorter links (vendor used `bottom: -1.25rem` for `.large`). */
+.navbar .navbar_link .navbar_line.large {
+  width: 120%;
+  bottom: -1.58rem;
+}
+
+.footer .footer_link .footer_link-line.large {
+  width: 120%;
+  /* Closer to label than default -1rem (Locations / Contact) */
+  bottom: -0.2rem;
+}
+
+.navbar .navbar_line canvas,
+.footer .footer_link-line canvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
 }
 
 .navbar_info-icon {
@@ -586,4 +711,186 @@ a.footer_social-icon {
 a.footer_social-icon:hover {
   transform: translateY(-2px) scale(1.08);
   opacity: 0.9;
+}
+
+/* --- Footer layout (Birdside): [logo + social | nav links] → info columns --- */
+.footer .birdside-footer-main {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+}
+
+.footer .birdside-footer-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-bottom: 1.75rem;
+}
+
+.footer .birdside-footer-brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 0;
+  flex: 0 0 auto;
+}
+
+.footer .birdside-footer-brand-stack {
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.footer .birdside-footer-social.footer_social-row {
+  justify-content: flex-start;
+}
+
+/* Primary links — to the right of logo on wide screens */
+.footer .birdside-footer-nav-row {
+  flex: 1 1 auto;
+  min-width: min(100%, 12rem);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-block: 0;
+  border: none;
+  margin-top: -3.5rem;
+}
+
+.footer .birdside-footer-links-single-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem clamp(0.75rem, 2vw, 1.75rem);
+  max-width: 100%;
+}
+
+.footer .birdside-footer-links-single-row .footer_link {
+  flex: 0 0 auto;
+}
+
+.footer .birdside-footer-links-single-row .footer_link-text {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.footer .footer_link {
+  font-size: clamp(1.35rem, 2.75vw, 2rem) !important;
+  line-height: 1.05;
+}
+
+/* Location / Hours / Contact — centered columns, no rule above */
+.footer .birdside-footer-infos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+  justify-items: center;
+  text-align: center;
+  margin: 0;
+  padding-top: 1.75rem;
+  width: 100%;
+}
+
+.footer .birdside-footer-infos-grid .footer_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 22rem;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-text {
+  margin: 0;
+  line-height: 1.55;
+  text-align: center;
+  font-size: clamp(1rem, 1.65vw, 1.1875rem);
+  opacity: 0.95;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-label {
+  text-align: center;
+  font-size: clamp(1.4375rem, 2.35vw, 1.8125rem) !important;
+  line-height: 1.12;
+  margin: 0 0 0.4rem;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-link:hover {
+  opacity: 0.88;
+}
+
+.footer .footer_info-label {
+  font-size: clamp(0.8125rem, 1.1vw, 0.9375rem) !important;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.footer .footer_info-text {
+  font-size: 0.9375rem;
+  opacity: 0.92;
+}
+
+.footer .footer_legal-links {
+  justify-content: center;
+  width: 100%;
+}
+
+.footer .footer_legal-wrap {
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.footer .footer_line {
+  border-top: 1px solid #474747;
+}
+
+.footer .footer_copyright {
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem) !important;
+}
+
+@media (max-width: 900px) {
+  .footer .birdside-footer-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer .birdside-footer-nav-row {
+    justify-content: stretch;
+    width: 100%;
+    padding-top: 0.25rem;
+    margin-top: 0;
+  }
+
+  .footer .birdside-footer-links-single-row {
+    justify-content: center;
+    gap: 0.65rem 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer .birdside-footer-infos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

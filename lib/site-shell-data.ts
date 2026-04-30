@@ -1,7 +1,10 @@
 /** Hand-maintained shell content (nav, footer). Webflow classes preserved for CSS/ix2. */
 
 export const LINE_LOTTIE_SRC =
-  "/assets/lottie/line.json";
+  "/assets/lottie/nav-underline.lottie";
+
+/** DotLottie playback multiplier (1 = template duration; higher = faster). */
+export const LINE_LOTTIE_SPEED = 2.25;
 
 export type NavMainLink = {
   href: string;
@@ -54,6 +57,9 @@ export const navLogo = {
   alt: "Birdside HTX"
 };
 
+/** Square Online / pickup ordering (navbar “Order now”). */
+export const ORDER_NOW_URL = "https://birdsidehtx.square.site/";
+
 export const navInfoBlocks = [
   {
     href: "/locations",
@@ -63,7 +69,7 @@ export const navInfoBlocks = [
     value: "Katy, TX"
   },
   {
-    href: "tel:+18328738528",
+    href: ORDER_NOW_URL,
     iconWrapClass: "navbar_info-icon-wrap",
     iconType: "order",
     label: "Order now",
@@ -113,15 +119,6 @@ export const footerLinkGroups: FooterNavLink[][] = [
       lineIx2Target0: true
     },
     {
-      href: "/locations/los-angeles-ca",
-      label: "Location",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09f4",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09f7",
-      lineLarge: true,
-      lineAutoplay1: true,
-      lineIx2Target0: true
-    },
-    {
       href: "/contact",
       label: "Contact",
       linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09f8",
@@ -131,14 +128,6 @@ export const footerLinkGroups: FooterNavLink[][] = [
       lineIx2Target0: true
     }
   ],
-  [
-    {
-      href: "/blog",
-      label: "Blog",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09fd",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e0a00"
-    }
-  ]
 ];
 
 export const footerSocialLinks = [
@@ -169,17 +158,48 @@ export const footerSocialLinks = [
   }
 ] as const;
 
-export const footerInfos = [
+/** Google Maps short link for the Katy location */
+export const FOOTER_GOOGLE_MAPS_URL =
+  "https://maps.app.goo.gl/qPayB7SuizsmpvBXA";
+
+export type FooterInfoBody =
+  | { kind: "html"; html: string }
+  | { kind: "link"; href: string; text: string; external?: boolean }
+  | { kind: "links"; items: { href: string; text: string; external?: boolean }[] };
+
+export type FooterInfoBlock = {
+  label: string;
+  body: FooterInfoBody;
+};
+
+export const footerInfoBlocks: FooterInfoBlock[] = [
   {
     label: "Location",
-    html: "1989 N Fry Rd, Katy, TX 77449"
+    body: {
+      kind: "link",
+      href: FOOTER_GOOGLE_MAPS_URL,
+      text: "1989 N Fry Rd, Katy, TX 77449",
+      external: true
+    }
   },
   {
     label: "Hours",
-    html: "Open 7 Days a Week!<br/>Monday to Sunday 5PM - 12:30AM"
+    body: {
+      kind: "html",
+      html: "Open 7 Days a Week!<br/>Monday to Sunday 5PM - 12:30AM"
+    }
   },
   {
     label: "Contact Us",
-    html: "(832) 873-8528<br/>birdsidehtx@gmail.com"
+    body: {
+      kind: "links",
+      items: [
+        { href: "tel:+18328738528", text: "(832) 873-8528" },
+        {
+          href: "mailto:birdsidehtx@gmail.com",
+          text: "birdsidehtx@gmail.com"
+        }
+      ]
+    }
   }
-] as const;
+];
