@@ -7,7 +7,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: var(--brand-red) !important;
+  background-color: #000 !important;
 }
 
 /*
@@ -244,6 +244,60 @@ html, body {
 .section_home-menu .menu_img {
   width: 10rem !important;
   height: 10rem !important;
+}
+
+/* Brasa-style CTA image grow on scroll */
+.section_cta {
+  --cta-progress: 0;
+  --cta-pop: 0;
+  /* Let image reach full size before section-end so user scrolls further in the full state */
+  --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.35), 1);
+}
+
+.section_cta .cta_image-wrap {
+  contain: layout paint style;
+  width: 35vw !important;
+  height: 28vh !important;
+  border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
+  overflow: hidden;
+  z-index: 3;
+  transform-origin: center center;
+  transform: scale3d(
+    calc(1 + (var(--cta-scale-progress) * 1.9)),
+    calc(1 + (var(--cta-scale-progress) * 2.6)),
+    1
+  );
+  will-change: transform, border-radius;
+}
+
+.section_cta .cta_image {
+  transform: scale(calc(1 + (var(--cta-scale-progress) * 0.04)));
+  will-change: transform;
+}
+
+.section_cta .cta_component {
+  opacity: calc(1 - (var(--cta-progress) * 1.15));
+  will-change: opacity;
+}
+
+/* Ensure location card appears in the final scroll phase */
+.section_cta .cta_content {
+  contain: layout paint style;
+  display: none !important;
+  z-index: 6;
+  transform: translate3d(0, 38px, 0);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section_cta.is-cta-pop .cta_content {
+  display: flex !important;
+  transform: translate3d(0, 0, 0);
+}
+
+/* One step smaller location card */
+.section_cta .cta_main-content {
+  transform: scale(0.92);
+  transform-origin: center top;
 }
 
 
