@@ -1,5 +1,13 @@
-import RoutePage from "@/components/site/RoutePage";
+import HomeHeader from "@/components/site/HomeHeader";
+import PageShell from "@/components/site/PageShell";
+import { createStaticRouteMetadata } from "@/lib/page-metadata";
+import { getRouteContent } from "@/lib/site-content";
+import { notFound } from "next/navigation";
+
+export const generateMetadata = createStaticRouteMetadata("/");
 
 export default function HomePage() {
-  return <RoutePage route="/" />;
+  const content = getRouteContent("/");
+  if (!content) notFound();
+  return <PageShell lead={<HomeHeader />} mainHtml={content.mainHtml} />;
 }

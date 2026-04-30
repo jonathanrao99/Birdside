@@ -1,0 +1,8 @@
+Lighthouse 11 (desktop preset, performance only), local production server http://127.0.0.1:3010/ after this migration batch:
+
+- Performance score: 85
+- FCP: 0.5 s
+- LCP: 2.7 s
+
+Re-run: PORT=3010 npm run start, then:
+npx lighthouse@11 http://127.0.0.1:3010/ --only-categories=performance --preset=desktop --output=json --output-path=lh.json
