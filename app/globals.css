@@ -143,6 +143,66 @@ html, body {
   position: absolute !important;
 }
 
+/* About band should be black like Brasa */
+.section_home-about {
+  background-color: #000 !important;
+}
+
+.section_home-about::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #fff;
+  background-image: url("https://cdn.prod.website-files.com/67d43c25fbcd1b83dd9ac238/67dc43fbeefdfe48a354bf3d_bg-black.svg");
+  background-repeat: repeat;
+  background-size: 2.5rem;
+}
+
+.section_home-about h2,
+.section_home-about .text-size-medium,
+.section_home-about .text-weight-medium,
+.section_home-about p {
+  color: #fff !important;
+}
+
+.section_home-about .button {
+  background-color: #000 !important;
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+/* Home marquee ticker: force red section + continuous leftward scroll */
+.section_home-marquee {
+  background-color: var(--brand-red) !important;
+}
+
+.section_home-marquee .home-marquee_component {
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.section_home-marquee .home-marquee_wrapper {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: home-marquee-scroll 16s linear infinite;
+}
+
+.section_home-marquee .home-marquee_group {
+  flex: 0 0 auto;
+}
+
+
+@keyframes home-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
 @media (max-width: 991px) {
   .section_home-header .home-header_component {
     min-height: min(68vh, 640px);
@@ -166,6 +226,10 @@ html, body {
     width: min(68vw, 420px);
     height: min(34vh, 380px);
     min-height: 165px;
+  }
+
+  .section_home-marquee .home-marquee_wrapper {
+    animation-duration: 14s;
   }
 }
 
@@ -191,6 +255,10 @@ html, body {
     height: min(32vh, 300px);
     min-height: 152px;
   }
+
+  .section_home-marquee .home-marquee_wrapper {
+    animation-duration: 12s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -201,6 +269,10 @@ html, body {
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     transition: none !important;
+  }
+
+  .section_home-marquee .home-marquee_wrapper {
+    animation: none !important;
   }
 }
 
