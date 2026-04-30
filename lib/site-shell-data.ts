@@ -1,7 +1,7 @@
 /** Hand-maintained shell content (nav, footer). Webflow classes preserved for CSS/ix2. */
 
 export const LINE_LOTTIE_SRC =
-  "https://cdn.prod.website-files.com/67d43c25fbcd1b83dd9ac238/67db0560131ca0b295186d93_line.lottie";
+  "/assets/lottie/line.json";
 
 export type NavMainLink = {
   href: string;
@@ -58,8 +58,7 @@ export const navInfoBlocks = [
   {
     href: "/locations",
     iconWrapClass: "navbar_info-icon-wrap white",
-    iconSrc:
-      "https://cdn.prod.website-files.com/67d43c25fbcd1b83dd9ac238/67db074cb5080aede0d7f5c2_location.json",
+    iconSrc: "/assets/lottie/location.json",
     iconWId: "1968410c-ed6e-d558-6475-5b3f5ad134fc",
     iconDuration: "2.0166666666666666",
     label: "Location",
@@ -68,8 +67,7 @@ export const navInfoBlocks = [
   {
     href: "tel:987-654-3210",
     iconWrapClass: "navbar_info-icon-wrap",
-    iconSrc:
-      "https://cdn.prod.website-files.com/67d43c25fbcd1b83dd9ac238/67db0837131ca0b2951b1071_chef-hat.json",
+    iconSrc: "/assets/lottie/chef-hat.json",
     iconWId: "1968410c-ed6e-d558-6475-5b3f5ad13505",
     iconDuration: "2.533333333333333",
     label: "Order now",

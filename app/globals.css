@@ -154,7 +154,7 @@ html, body {
   width: 100%;
   height: 2.5rem;
   background-color: #fff;
-  background-image: url("https://cdn.prod.website-files.com/67d43c25fbcd1b83dd9ac238/67dc43fbeefdfe48a354bf3d_bg-black.svg");
+  background-image: url("/assets/navbar-checker-strip.png");
   background-repeat: repeat;
   background-size: 2.5rem;
 }
@@ -381,12 +381,6 @@ html, body {
   .section_home-marquee .home-marquee_wrapper {
     animation: none !important;
   }
-}
-
-.w-webflow-badge {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
 }
 
 .navbar {
