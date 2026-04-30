@@ -1,34 +1,51 @@
+"use client";
+
 import {
   NavbarLogoLink,
   NavbarMainLink
 } from "@/components/site/shell-interactive";
+import InteractiveLottieIcon, {
+  type InteractiveLottieIconHandle
+} from "@/components/site/InteractiveLottieIcon";
+import PatternStrip from "@/components/site/PatternStrip";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
-function NavbarInfoIcon({
-  iconSrc,
-  iconWId,
-  duration
+function NavbarInfoItem({
+  block
 }: {
-  iconSrc: string;
-  iconWId: string;
-  duration: string;
+  block: (typeof navInfoBlocks)[number];
 }) {
+  const iconRef = useRef<InteractiveLottieIconHandle | null>(null);
+  const triggerIcon = () => iconRef.current?.playOnce();
+
   return (
-    <div
-      className="navbar_info-icon"
-      data-animation-type="lottie"
-      data-autoplay="1"
-      data-default-duration="0"
-      data-direction="1"
-      data-duration={duration}
-      data-is-ix2-target="0"
-      data-loop="1"
-      data-renderer="svg"
-      data-src={iconSrc}
-      data-w-id={iconWId}
-    />
+    <LinkOrA
+      href={block.href}
+      onClick={triggerIcon}
+      onFocus={triggerIcon}
+      onMouseEnter={triggerIcon}
+      onTouchStart={triggerIcon}
+    >
+      <div className={block.iconWrapClass}>
+        <div className="navbar_info-icon">
+          {block.iconType === "location" ? (
+            <InteractiveLottieIcon
+              ref={iconRef}
+              size="location"
+              src="/assets/lottie/location.lottie"
+            />
+          ) : (
+            <InteractiveLottieIcon ref={iconRef} size="order" src="/assets/lottie/cookfree.lottie" />
+          )}
+        </div>
+      </div>
+      <div className="navbar_info-texts">
+        <div className="navbar_info-text">{block.label}</div>
+        <div className="navbar_info">{block.value}</div>
+      </div>
+    </LinkOrA>
   );
 }
 
@@ -49,19 +66,7 @@ export default function SiteNavbar() {
               </div>
               <div className="navbar_infos">
                 {navInfoBlocks.map((block) => (
-                  <LinkOrA key={block.href} href={block.href}>
-                    <div className={block.iconWrapClass}>
-                      <NavbarInfoIcon
-                        duration={block.iconDuration}
-                        iconSrc={block.iconSrc}
-                        iconWId={block.iconWId}
-                      />
-                    </div>
-                    <div className="navbar_info-texts">
-                      <div className="navbar_info-text">{block.label}</div>
-                      <div className="navbar_info">{block.value}</div>
-                    </div>
-                  </LinkOrA>
+                  <NavbarInfoItem key={block.href} block={block} />
                 ))}
               </div>
               <div
@@ -77,21 +82,49 @@ export default function SiteNavbar() {
           </div>
         </div>
       </nav>
-      <div aria-hidden className="pattern black" />
+      <PatternStrip tone="black" />
     </div>
   );
 }
 
-function LinkOrA({ href, children }: { href: string; children: ReactNode }) {
+function LinkOrA({
+  href,
+  children,
+  onMouseEnter,
+  onClick,
+  onFocus,
+  onTouchStart
+}: {
+  href: string;
+  children: ReactNode;
+  onMouseEnter?: () => void;
+  onClick?: () => void;
+  onFocus?: () => void;
+  onTouchStart?: () => void;
+}) {
   if (href.startsWith("tel:")) {
     return (
-      <a className="navbar_info-block w-inline-block" href={href}>
+      <a
+        className="navbar_info-block w-inline-block"
+        href={href}
+        onClick={onClick}
+        onFocus={onFocus}
+        onMouseEnter={onMouseEnter}
+        onTouchStart={onTouchStart}
+      >
         {children}
       </a>
     );
   }
   return (
-    <Link className="navbar_info-block w-inline-block" href={href}>
+    <Link
+      className="navbar_info-block w-inline-block"
+      href={href}
+      onClick={onClick}
+      onFocus={onFocus}
+      onMouseEnter={onMouseEnter}
+      onTouchStart={onTouchStart}
+    >
       {children}
     </Link>
   );

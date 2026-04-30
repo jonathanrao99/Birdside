@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PatternStrip from "@/components/site/PatternStrip";
 import {
   FooterLogoLink,
   FooterMainLink
@@ -14,7 +15,7 @@ import {
 export default function SiteFooter() {
   return (
     <footer className="footer">
-      <div aria-hidden className="pattern white" />
+      <PatternStrip tone="white" />
       <div className="spacer-large"></div>
       <div className="padding-global">
         <div className="container-small">

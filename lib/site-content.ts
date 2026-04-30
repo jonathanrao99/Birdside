@@ -23,12 +23,15 @@ type SiteContent = {
 let cached: SiteContent | null = null;
 
 function loadSiteContent(): SiteContent {
-  if (cached) return cached;
+  if (process.env.NODE_ENV !== "development" && cached) return cached;
 
   const filePath = path.join(process.cwd(), "content", "generated", "site-content.json");
   const raw = readFileSync(filePath, "utf-8");
-  cached = JSON.parse(raw) as SiteContent;
-  return cached;
+  const parsed = JSON.parse(raw) as SiteContent;
+  if (process.env.NODE_ENV !== "development") {
+    cached = parsed;
+  }
+  return parsed;
 }
 
 export function getSiteGlobal() {

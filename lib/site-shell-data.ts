@@ -58,20 +58,16 @@ export const navInfoBlocks = [
   {
     href: "/locations",
     iconWrapClass: "navbar_info-icon-wrap white",
-    iconSrc: "/assets/lottie/location.json",
-    iconWId: "1968410c-ed6e-d558-6475-5b3f5ad134fc",
-    iconDuration: "2.0166666666666666",
+    iconType: "location",
     label: "Location",
-    value: "New York, NY"
+    value: "Katy, TX"
   },
   {
-    href: "tel:987-654-3210",
+    href: "tel:+18328738528",
     iconWrapClass: "navbar_info-icon-wrap",
-    iconSrc: "/assets/lottie/chef-hat.json",
-    iconWId: "1968410c-ed6e-d558-6475-5b3f5ad13505",
-    iconDuration: "2.533333333333333",
+    iconType: "order",
     label: "Order now",
-    value: "987-654-3210"
+    value: "(832) 873-8528"
   }
 ] as const;
 
