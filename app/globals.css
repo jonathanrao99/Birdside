@@ -2,3 +2,24 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.w-webflow-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+.navbar {
+  background-color: #000 !important;
+}
+
+.navbar .navbar_text,
+.navbar .navbar_info,
+.navbar .navbar_info-text {
+  color: #fff !important;
+}
+
+.navbar .navbar_line svg * {
+  stroke: #fff !important;
+  fill: #fff !important;
+}
