@@ -193,6 +193,59 @@ html, body {
   flex: 0 0 auto;
 }
 
+/* Menu category pills: reduce type by one step */
+.section_home-menu .menu_link {
+  font-size: var(--_sizes---fixed--1-5rem, 1.5rem) !important;
+}
+
+/* Menu item description copy: one step smaller */
+.section_home-menu .menu_desc {
+  font-size: var(--_sizes---fixed--0-875rem, 0.875rem) !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Menu cards: keep all item blocks the same height */
+.section_home-menu .menu_list {
+  align-items: stretch;
+}
+
+.section_home-menu .menu_item {
+  height: 100%;
+}
+
+.section_home-menu .menu_block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_home-menu .menu_block-content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+}
+
+.section_home-menu .menu_infos {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_home-menu .button-icon_component {
+  margin-top: auto;
+}
+
+.section_home-menu .menu_img {
+  width: 10rem !important;
+  height: 10rem !important;
+}
+
 
 @keyframes home-marquee-scroll {
   from {
