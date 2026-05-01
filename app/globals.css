@@ -552,6 +552,13 @@ section:has(> .menu_content) > .pattern.black {
   cursor: pointer;
 }
 
+.section_home-menu .menu_tabs-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+
 /* Menu hero (wings spread) — taller than Brasa 25rem / 12rem / 8rem */
 .section_home-menu .home-menu_cover-wrap {
   --menu-parallax-y: 0px;
@@ -612,6 +619,8 @@ section:has(> .menu_content) > .pattern.black {
 .section_cta {
   --cta-progress: 0;
   --cta-pop: 0;
+  --cta-scale-x: 2.1;
+  --cta-scale-y: 2.6;
   /* Let image reach full size before section-end so user scrolls further in the full state */
   --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.35), 1);
   overflow-x: visible;
@@ -619,16 +628,15 @@ section:has(> .menu_content) > .pattern.black {
 
 .section_cta .cta_image-wrap {
   contain: layout paint style;
-  /* Wider base + stronger X scale so full-zoom doesn’t feel “fitted” to ~100vw */
-  width: 35vw !important;
+  width: clamp(16rem, 35vw, 34rem) !important;
   height: 28vh !important;
   border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
   overflow: hidden;
   z-index: 3;
   transform-origin: center center;
   transform: scale3d(
-    calc(1 + (var(--cta-scale-progress) * 2.1)),
-    calc(1 + (var(--cta-scale-progress) * 2.6)),
+    calc(1 + (var(--cta-scale-progress) * var(--cta-scale-x))),
+    calc(1 + (var(--cta-scale-progress) * var(--cta-scale-y))),
     1
   );
   will-change: transform, border-radius;
@@ -662,6 +670,7 @@ section:has(> .menu_content) > .pattern.black {
 .section_cta .cta_main-content {
   transform: scale(0.92);
   transform-origin: center top;
+  width: min(100%, 44rem);
 }
 
 /* CTA heading Lotties (DotLottie replaces empty Webflow placeholders) */
@@ -734,6 +743,39 @@ section:has(> .menu_content) > .pattern.black {
   .section_home-marquee .home-marquee_wrapper {
     animation-duration: 14s;
   }
+
+  .section_home-menu .menu_tabs-menu {
+    gap: 0.45rem 0.6rem;
+  }
+
+  .section_home-menu .menu_link {
+    font-size: clamp(1.05rem, 2.8vw, 1.35rem) !important;
+  }
+
+  .section_home-menu .menu_block-content {
+    grid-template-columns: 8rem 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .section_home-menu .menu_img {
+    width: 8rem !important;
+    height: 8rem !important;
+  }
+
+  .section_cta {
+    --cta-scale-x: 1.95;
+    --cta-scale-y: 2.25;
+  }
+
+  .section_cta .cta_image-wrap {
+    width: min(62vw, 27rem) !important;
+    height: min(30vh, 16.5rem) !important;
+  }
+
+  .section_cta .cta_main-content {
+    transform: scale(0.96);
+  }
 }
 
 @media (max-width: 767px) {
@@ -761,6 +803,110 @@ section:has(> .menu_content) > .pattern.black {
 
   .section_home-marquee .home-marquee_wrapper {
     animation-duration: 12s;
+  }
+
+  .section_home-menu .menu_tabs-menu {
+    justify-content: flex-start;
+    padding-inline: 0.25rem;
+  }
+
+  .section_home-menu .menu_list {
+    gap: 0.875rem;
+  }
+
+  .section_home-menu .menu_block-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.65rem;
+  }
+
+  .section_home-menu .menu_img {
+    width: min(54vw, 7.25rem) !important;
+    height: min(54vw, 7.25rem) !important;
+  }
+
+  .section_home-menu .menu_infos {
+    align-items: center;
+  }
+
+  .section_home-menu .menu_name {
+    text-align: center;
+  }
+
+  .section_home-menu .menu_desc {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    text-align: center;
+  }
+
+  .section_cta {
+    --cta-scale-x: 1.45;
+    --cta-scale-y: 1.72;
+  }
+
+  .section_cta .cta_wrapper {
+    height: min(126rem, 175vh);
+  }
+
+  .section_cta .cta_image-wrap {
+    width: min(78vw, 21rem) !important;
+    height: min(25vh, 13.5rem) !important;
+  }
+
+  .section_cta .cta_component {
+    padding-inline: 0.75rem;
+  }
+
+  .section_cta .cta_main-content {
+    width: min(100%, 26rem);
+    transform: none;
+    padding-inline: clamp(0.9rem, 4vw, 1.2rem);
+  }
+
+  .section_cta .cta_content {
+    padding-inline: 0.5rem;
+  }
+
+  .section_cta .cta_lottie-2 {
+    bottom: -3.5rem !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .section_home-header .home-header_heading {
+    font-size: clamp(2.35rem, 13vw, 3rem) !important;
+    line-height: 0.92 !important;
+  }
+
+  .section_home-header .home-header_image-wrap._1,
+  .section_home-header .home-header_image-wrap._2,
+  .section_home-header .home-header_image-wrap._3 {
+    width: min(86vw, 18rem);
+    height: min(30vh, 11.5rem);
+    min-height: 128px;
+  }
+
+  .section_home-menu .menu_link {
+    font-size: clamp(0.95rem, 4.4vw, 1.15rem) !important;
+  }
+
+  .section_cta {
+    --cta-scale-x: 1.28;
+    --cta-scale-y: 1.52;
+  }
+
+  .section_cta .cta_wrapper {
+    height: min(112rem, 160vh);
+  }
+
+  .section_cta .cta_image-wrap {
+    width: min(86vw, 18rem) !important;
+    height: min(22vh, 10.5rem) !important;
+  }
+
+  .section_cta .cta_heading {
+    font-size: clamp(2.35rem, 12.5vw, 3.15rem);
   }
 }
 
