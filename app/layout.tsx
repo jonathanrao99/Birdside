@@ -146,28 +146,129 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Script>
         <Script id="home-menu-tabs" strategy="afterInteractive">
           {`(() => {
-  const activateHomeMenuTab = (tabsRoot, tabId) => {
-    tabsRoot.setAttribute("data-current", tabId);
-    tabsRoot.querySelectorAll(".w-tab-menu .w-tab-link").forEach((a) => {
-      a.classList.toggle("w--current", a.getAttribute("data-w-tab") === tabId);
+  const SEL_HOME = ".section_home-menu";
+
+  const decorateHomeMenuTabs = (tabsRoot) => {
+    if (tabsRoot.dataset.menuTabsDecorated === "1") return;
+    tabsRoot.dataset.menuTabsDecorated = "1";
+    const menu = tabsRoot.querySelector(".w-tab-menu");
+    const links = menu ? [...menu.querySelectorAll("a.w-tab-link")] : [];
+    if (menu && !menu.hasAttribute("role")) menu.setAttribute("role", "tablist");
+    links.forEach((a, idx) => {
+      const key = a.getAttribute("data-w-tab");
+      if (!key) return;
+      if (!a.id) a.id = "hm-tab-" + idx;
+      a.setAttribute("role", "tab");
+      const pane = [...tabsRoot.querySelectorAll(".w-tab-content > .w-tab-pane")].find(
+        (p) => p.getAttribute("data-w-tab") === key
+      );
+      if (pane) {
+        if (!pane.id) pane.id = "hm-panel-" + idx;
+        pane.setAttribute("role", "tabpanel");
+        a.setAttribute("aria-controls", pane.id);
+        pane.setAttribute("aria-labelledby", a.id);
+      }
     });
-    tabsRoot.querySelectorAll(".w-tab-content > .w-tab-pane").forEach((pane) => {
-      pane.classList.toggle("w--tab-active", pane.getAttribute("data-w-tab") === tabId);
+  };
+
+  const activateHomeMenuTab = (tabsRoot, tabId) => {
+    const links = tabsRoot.querySelectorAll(".w-tab-menu a.w-tab-link");
+    const panes = tabsRoot.querySelectorAll(".w-tab-content > .w-tab-pane");
+    tabsRoot.setAttribute("data-current", tabId);
+    links.forEach((a) => {
+      const on = a.getAttribute("data-w-tab") === tabId;
+      a.classList.toggle("w--current", on);
+      a.setAttribute("aria-selected", on ? "true" : "false");
+      a.tabIndex = on ? 0 : -1;
+    });
+    panes.forEach((pane) => {
+      const on = pane.getAttribute("data-w-tab") === tabId;
+      pane.classList.toggle("w--tab-active", on);
+      pane.setAttribute("aria-hidden", on ? "false" : "true");
     });
   };
 
   const onClick = (e) => {
-    const link = e.target.closest(".section_home-menu .w-tab-menu a.w-tab-link");
-    if (!link) return;
+    const t = e.target;
+    if (!t || !t.closest) return;
+    const section = t.closest(SEL_HOME);
+    if (!section) return;
+    const link = t.closest(".w-tab-menu a.w-tab-link");
+    if (!link || !section.contains(link)) return;
     const tabsRoot = link.closest(".w-tabs");
-    if (!tabsRoot || !tabsRoot.closest(".section_home-menu")) return;
+    if (!tabsRoot) return;
     const tabId = link.getAttribute("data-w-tab");
-    if (!tabId) return;
+    if (!tabId || link.classList.contains("w--current")) return;
     e.preventDefault();
+    decorateHomeMenuTabs(tabsRoot);
     activateHomeMenuTab(tabsRoot, tabId);
   };
 
+  const onKeydown = (e) => {
+    const k = e.key;
+    if (k !== "ArrowLeft" && k !== "ArrowRight" && k !== "Home" && k !== "End") return;
+    const t = e.target;
+    if (!t || !t.closest || !t.matches || !t.matches("a.w-tab-link")) return;
+    const menu = t.closest(SEL_HOME + " .w-tab-menu");
+    if (!menu || !menu.contains(t)) return;
+    const tabsRoot = menu.closest(".w-tabs");
+    if (!tabsRoot) return;
+    const links = [...menu.querySelectorAll("a.w-tab-link")];
+    const i = links.indexOf(t);
+    if (i < 0) return;
+    e.preventDefault();
+    decorateHomeMenuTabs(tabsRoot);
+    let next = i;
+    if (k === "ArrowRight") next = (i + 1) % links.length;
+    else if (k === "ArrowLeft") next = (i - 1 + links.length) % links.length;
+    else if (k === "Home") next = 0;
+    else if (k === "End") next = links.length - 1;
+    const tabId = links[next].getAttribute("data-w-tab");
+    if (!tabId) return;
+    activateHomeMenuTab(tabsRoot, tabId);
+    links[next].focus();
+  };
+
   document.addEventListener("click", onClick);
+  document.addEventListener("keydown", onKeydown);
+
+  const boot = () => {
+    document.querySelectorAll(SEL_HOME + " .w-tabs").forEach((tabsRoot) => {
+      decorateHomeMenuTabs(tabsRoot);
+      const links = [...tabsRoot.querySelectorAll(".w-tab-menu a.w-tab-link")];
+      const cur =
+        tabsRoot.getAttribute("data-current") ||
+        links.find((a) => a.classList.contains("w--current"))?.getAttribute("data-w-tab") ||
+        links[0]?.getAttribute("data-w-tab");
+      if (cur) activateHomeMenuTab(tabsRoot, cur);
+    });
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+})();`}
+        </Script>
+        <Script id="home-menu-product-img-nav" strategy="afterInteractive">
+          {`(() => {
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0) return;
+    const img = e.target.closest(".section_home-menu img.menu_img");
+    if (!img) return;
+    const row = img.closest(".menu_block-content");
+    if (!row) return;
+    const a = row.querySelector(
+      'a.button-icon_component[href], a[href^="/product/"]'
+    );
+    const href = a && a.getAttribute("href");
+    if (!href) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey) {
+      window.open(href, "_blank", "noopener,noreferrer");
+      return;
+    }
+    a.click();
+  });
 })();`}
         </Script>
       </body>

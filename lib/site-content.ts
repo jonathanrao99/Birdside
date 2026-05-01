@@ -13,6 +13,8 @@ type SiteContent = {
     siteName: string;
     navbarHtml: string;
     footerHtml: string;
+    /** Full `<section class="section_home-menu">…</section>` HTML; single source for `OurMenu`. */
+    ourMenuHtml?: string;
   };
   routes: Record<string, LegacyPageEntry>;
   products: Record<string, LegacyPageEntry>;
@@ -36,6 +38,10 @@ function loadSiteContent(): SiteContent {
 
 export function getSiteGlobal() {
   return loadSiteContent().global;
+}
+
+export function getOurMenuHtml(): string {
+  return loadSiteContent().global.ourMenuHtml?.trim() ?? "";
 }
 
 export function getRouteContent(route: string): LegacyPageEntry | null {

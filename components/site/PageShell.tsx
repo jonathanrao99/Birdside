@@ -1,23 +1,50 @@
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteNavbar from "@/components/site/SiteNavbar";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
+
+export type PageShellMainSlot = string | ReactNode;
 
 type PageShellProps = {
-  mainHtml: string;
-  /** Rendered after the navbar and before legacy `mainHtml` (e.g. home hero). */
+  /** Legacy single HTML document fragment (most routes). Omit when using `mainSlots`. */
+  mainHtml?: string;
+  /** Ordered segments: HTML strings render as inner HTML; nodes render as-is (e.g. `OurMenu`). */
+  mainSlots?: PageShellMainSlot[];
+  /** Rendered after the navbar and before main content (e.g. home hero). */
   lead?: ReactNode;
-  /** Optional content inserted between lead and legacy main HTML. */
+  /** Optional content inserted between lead and legacy `mainHtml`. */
   preMain?: ReactNode;
   /** Optional marker tag to insert `preMain` before within `mainHtml`. */
   insertPreMainBefore?: string;
 };
 
+function renderMainSlots(slots: PageShellMainSlot[]) {
+  return slots.map((slot, i) =>
+    typeof slot === "string" ? (
+      <div key={i} dangerouslySetInnerHTML={{ __html: slot }} />
+    ) : (
+      <Fragment key={i}>{slot}</Fragment>
+    )
+  );
+}
+
 export default function PageShell({
-  mainHtml,
+  mainHtml = "",
+  mainSlots,
   lead,
   preMain,
   insertPreMainBefore
 }: PageShellProps) {
+  if (mainSlots && mainSlots.length > 0) {
+    return (
+      <div className="page-wrapper">
+        <SiteNavbar />
+        {lead}
+        {renderMainSlots(mainSlots)}
+        <SiteFooter />
+      </div>
+    );
+  }
+
   const marker = insertPreMainBefore;
   const hasMarker = preMain && marker && mainHtml.includes(marker);
 

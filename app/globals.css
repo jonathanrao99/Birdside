@@ -32,6 +32,19 @@ html, body {
   background-repeat: repeat !important;
 }
 
+/* Product page: strip above embedded menu uses HTML `pattern black` — override transparent SVG with real B&W checker */
+section:has(> .menu_content) > .pattern.black {
+  flex-shrink: 0;
+  width: 100%;
+  background-color: #fff !important;
+  background-image:
+    linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+    linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000) !important;
+  background-position: 0 0, 1.25rem 1.25rem !important;
+  background-size: 2.5rem 2.5rem !important;
+  background-repeat: repeat !important;
+}
+
 .section_home-header {
   background-color: var(--brand-red) !important;
   overflow-x: visible;
@@ -295,6 +308,43 @@ html, body {
   text-decoration: none;
 }
 
+/* Product detail hero */
+.section_product {
+  background-color: var(--brand-red) !important;
+}
+
+.section_product .product_details-wrap,
+.section_product .product_details {
+  color: #fff !important;
+}
+
+.section_product .heading-style-h3,
+.section_product .shop-list_price {
+  color: #fff !important;
+}
+
+.section_product .text-color-black,
+.section_product .text-color-black * {
+  color: #fff !important;
+}
+
+.section_product p.text-weight-medium {
+  color: rgba(255, 255, 255, 0.96) !important;
+}
+
+.section_product .product_info-detail,
+.section_product .product_info-description {
+  color: #fff !important;
+}
+
+.section_product .product_infos {
+  border-bottom-color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.section_product .product_info {
+  border-top-color: rgba(255, 255, 255, 0.45) !important;
+}
+
 /* Katy location detail hero */
 .section_location {
   --location-top-chrome: 132px;
@@ -399,6 +449,37 @@ html, body {
   font-size: var(--_sizes---fixed--1-5rem, 1.5rem) !important;
 }
 
+.section_home-menu .menu_tabs-menu:focus-visible {
+  outline: none;
+}
+
+.section_home-menu .menu_tabs-menu a.w-tab-link:focus-visible {
+  outline: 2px solid var(--primary--white, #fff);
+  outline-offset: 3px;
+}
+
+.section_home-menu .w-tab-content > .w-tab-pane.w--tab-active {
+  animation: home-menu-tab-in 0.2s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section_home-menu .w-tab-content > .w-tab-pane.w--tab-active {
+    animation: none;
+  }
+}
+
+@keyframes home-menu-tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Menu item description copy: one step smaller */
 .section_home-menu .menu_desc {
   font-size: var(--_sizes---fixed--0-875rem, 0.875rem) !important;
@@ -445,6 +526,7 @@ html, body {
 .section_home-menu .menu_img {
   width: 10rem !important;
   height: 10rem !important;
+  cursor: pointer;
 }
 
 /* Menu hero (wings spread) — taller than Brasa 25rem / 12rem / 8rem */
