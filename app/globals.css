@@ -1027,6 +1027,34 @@ section:has(> .menu_content) > .pattern.black {
   background-color: var(--brand-red) !important;
 }
 
+/* Mobile menu: Webflow IX removed — React toggles `.is-nav-open`; button replaces inert hamburger div. */
+.navbar .navbar_hamburger-wrap {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .navbars.is-nav-open .navbar_links {
+    display: flex !important;
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_text,
+  .navbars.is-nav-open .navbar_links .navbar_link {
+    color: #fff !important;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link.w--current .navbar_text {
+    color: #fff !important;
+  }
+}
+
 .navbar .navbar_text,
 .navbar .navbar_info,
 .navbar .navbar_info-text {

@@ -10,7 +10,8 @@ import InteractiveLottieIcon, {
 import PatternStrip from "@/components/site/PatternStrip";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
 import Link from "next/link";
-import { useRef, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 function NavbarInfoItem({
   block
@@ -50,15 +51,64 @@ function NavbarInfoItem({
 }
 
 export default function SiteNavbar() {
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const id = requestAnimationFrame(() => {
+      if (!cancelled) setMenuOpen(false);
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(id);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 992px)");
+    const onChange = () => {
+      if (mq.matches) setMenuOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
   return (
-    <div className="navbars">
+    <div className={menuOpen ? "navbars is-nav-open" : "navbars"}>
       <nav aria-label="Main navigation" className="navbar">
         <div className="padding-global">
           <div className="container-medium">
             <div className="navbar_component">
               <div className="navbar_main">
                 <NavbarLogoLink alt={navLogo.alt} href="/" src={navLogo.src} />
-                <div className="navbar_links">
+                <div
+                  id="navbar-main-links"
+                  className="navbar_links"
+                  onClick={(e) => {
+                    if ((e.target as HTMLElement).closest("a")) {
+                      setMenuOpen(false);
+                    }
+                  }}
+                >
                   {navMainLinks.map((item) => (
                     <NavbarMainLink key={item.href} {...item} />
                   ))}
@@ -69,15 +119,20 @@ export default function SiteNavbar() {
                   <NavbarInfoItem key={block.href} block={block} />
                 ))}
               </div>
-              <div
+              <button
+                type="button"
                 className="navbar_hamburger-wrap"
                 data-w-id="9a3b798c-daff-c12d-dbef-1aaa741e672e"
+                aria-expanded={menuOpen}
+                aria-controls="navbar-main-links"
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+                onClick={() => setMenuOpen((o) => !o)}
               >
-                <div className="navbar_hamburger">
+                <div className="navbar_hamburger" aria-hidden>
                   <div className="navbar_hamburger-line _1"></div>
                   <div className="navbar_hamburger-line _2"></div>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
