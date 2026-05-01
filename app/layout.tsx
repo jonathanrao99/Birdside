@@ -1,7 +1,9 @@
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
+import SmoothScroll from "@/components/site/SmoothScroll";
 import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -24,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link href="/vendor/brasa-template.shared.38e119549.min.css" rel="stylesheet" />
       </head>
       <body>
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
         <Script id="cta-scroll-grow" strategy="afterInteractive">
           {`(() => {
   const setupCtaScroll = () => {
@@ -40,10 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     }
 
     let ticking = false;
-    let lastProgress = -1;
-    let lastPop = "";
-    const update = () => {
-      ticking = false;
+    const apply = () => {
       const rect = wrapper.getBoundingClientRect();
       const vh = window.innerHeight || 1;
       const total = Math.max(1, rect.height - vh);
@@ -51,27 +50,33 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       const progress = traveled / total;
       const progressStep = Math.round(progress * 200) / 200;
       const pop = progress >= 0.75 ? "1" : "0";
+      section.style.setProperty("--cta-progress", String(progressStep));
+      section.style.setProperty("--cta-pop", pop);
+      section.classList.toggle("is-cta-pop", pop === "1");
+    };
 
-      if (Math.abs(progressStep - lastProgress) >= 0.005) {
-        section.style.setProperty("--cta-progress", String(progressStep));
-        lastProgress = progressStep;
-      }
-      if (pop != lastPop) {
-        section.style.setProperty("--cta-pop", pop);
-        section.classList.toggle("is-cta-pop", pop === "1");
-        lastPop = pop;
-      }
+    const onFrame = () => {
+      ticking = false;
+      apply();
     };
 
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(update);
+      requestAnimationFrame(onFrame);
     };
 
-    update();
+    apply();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    window.addEventListener("scrollend", onScroll, { passive: true });
+    window.addEventListener("birdside-lenis-scroll", onScroll);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) onScroll();
+    });
+    window.addEventListener("pageshow", (e) => {
+      if (e.persisted) apply();
+    });
   };
 
   if (document.readyState === "loading") {

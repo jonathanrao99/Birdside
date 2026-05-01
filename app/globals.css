@@ -614,10 +614,12 @@ section:has(> .menu_content) > .pattern.black {
   --cta-pop: 0;
   /* Let image reach full size before section-end so user scrolls further in the full state */
   --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.35), 1);
+  overflow-x: visible;
 }
 
 .section_cta .cta_image-wrap {
   contain: layout paint style;
+  /* Wider base + stronger X scale so full-zoom doesn’t feel “fitted” to ~100vw */
   width: 35vw !important;
   height: 28vh !important;
   border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
@@ -625,7 +627,7 @@ section:has(> .menu_content) > .pattern.black {
   z-index: 3;
   transform-origin: center center;
   transform: scale3d(
-    calc(1 + (var(--cta-scale-progress) * 1.9)),
+    calc(1 + (var(--cta-scale-progress) * 2.1)),
     calc(1 + (var(--cta-scale-progress) * 2.6)),
     1
   );
@@ -683,6 +685,17 @@ section:has(> .menu_content) > .pattern.black {
   bottom: -4.75rem !important;
 }
 
+/* Pre-footer CTA: shorter scroll track on common viewports (template default 150rem) */
+@media (min-width: 992px) {
+  .section_cta .cta_wrapper {
+    height: min(150rem, 190vh);
+  }
+}
+
+/* Sticky stack: own compositing layer to reduce scroll jank */
+.section_cta .cta_sticky {
+  backface-visibility: hidden;
+}
 
 @keyframes home-marquee-scroll {
   from {
