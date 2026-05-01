@@ -81,6 +81,95 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   }
 })();`}
         </Script>
+        <Script id="home-menu-parallax" strategy="afterInteractive">
+          {`(() => {
+  const setupHomeMenuParallax = () => {
+    const section = document.querySelector(".section_home-menu");
+    if (!section) return;
+    const wrap = section.querySelector(".home-menu_cover-wrap");
+    if (!wrap) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      wrap.style.setProperty("--menu-parallax-y", "0px");
+      return;
+    }
+
+    let ticking = false;
+    let lastCover = null;
+
+    const maxCoverPx = () => (window.matchMedia("(max-width: 767px)").matches ? 28 : 52);
+
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const hidden = rect.bottom < 0 || rect.top > vh;
+
+      if (hidden) {
+        if (lastCover !== "0px") {
+          wrap.style.setProperty("--menu-parallax-y", "0px");
+          lastCover = "0px";
+        }
+        return;
+      }
+
+      const speed = 0.14;
+      const raw = -rect.top * speed;
+
+      const m = maxCoverPx();
+      const px = Math.max(-m, Math.min(m, Math.round(raw * 10) / 10));
+      const next = px + "px";
+      if (next !== lastCover) {
+        wrap.style.setProperty("--menu-parallax-y", next);
+        lastCover = next;
+      }
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupHomeMenuParallax, { once: true });
+  } else {
+    setupHomeMenuParallax();
+  }
+})();`}
+        </Script>
+        <Script id="home-menu-tabs" strategy="afterInteractive">
+          {`(() => {
+  const activateHomeMenuTab = (tabsRoot, tabId) => {
+    tabsRoot.setAttribute("data-current", tabId);
+    tabsRoot.querySelectorAll(".w-tab-menu .w-tab-link").forEach((a) => {
+      a.classList.toggle("w--current", a.getAttribute("data-w-tab") === tabId);
+    });
+    tabsRoot.querySelectorAll(".w-tab-content > .w-tab-pane").forEach((pane) => {
+      pane.classList.toggle("w--tab-active", pane.getAttribute("data-w-tab") === tabId);
+    });
+  };
+
+  const onClick = (e) => {
+    const link = e.target.closest(".section_home-menu .w-tab-menu a.w-tab-link");
+    if (!link) return;
+    const tabsRoot = link.closest(".w-tabs");
+    if (!tabsRoot || !tabsRoot.closest(".section_home-menu")) return;
+    const tabId = link.getAttribute("data-w-tab");
+    if (!tabId) return;
+    e.preventDefault();
+    activateHomeMenuTab(tabsRoot, tabId);
+  };
+
+  document.addEventListener("click", onClick);
+})();`}
+        </Script>
       </body>
     </html>
   );
