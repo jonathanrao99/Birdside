@@ -22,11 +22,14 @@ export function NavbarMainLink(props: NavMainLink) {
     return () => cancelAnimationFrame(id);
   }, [lineHover]);
 
+  const contactLine = props.href === "/contact";
+
   return (
     <Link
       className={[
         active ? "navbar_link w-inline-block w--current" : "navbar_link w-inline-block",
-        lineHover ? "navbar_link--line-hover" : ""
+        lineHover ? "navbar_link--line-hover" : "",
+        contactLine ? "navbar_link--contact-line" : ""
       ]
         .filter(Boolean)
         .join(" ")}
@@ -94,11 +97,14 @@ export function FooterMainLink(props: FooterNavLink) {
     return () => cancelAnimationFrame(id);
   }, [lineHover]);
 
+  const contactLine = props.href === "/contact";
+
   return (
     <Link
       className={[
         active ? "footer_link w-inline-block w--current" : "footer_link w-inline-block",
-        lineHover ? "footer_link--line-hover" : ""
+        lineHover ? "footer_link--line-hover" : "",
+        contactLine ? "footer_link--contact-line" : ""
       ]
         .filter(Boolean)
         .join(" ")}

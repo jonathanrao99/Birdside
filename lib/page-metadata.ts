@@ -11,7 +11,6 @@ const ROUTE_LABELS: Record<string, string> = {
   "/": SITE_NAME,
   "/about": "About",
   "/menu": "Menu",
-  "/blog": "Blog",
   "/contact": "Contact",
   "/locations": "Locations",
   "/checkout": "Checkout"

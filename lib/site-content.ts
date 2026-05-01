@@ -18,7 +18,6 @@ type SiteContent = {
   };
   routes: Record<string, LegacyPageEntry>;
   products: Record<string, LegacyPageEntry>;
-  posts: Record<string, LegacyPageEntry>;
   locations: Record<string, LegacyPageEntry>;
 };
 
@@ -52,20 +51,12 @@ export function getProductContent(slug: string): LegacyPageEntry | null {
   return loadSiteContent().products[slug] ?? null;
 }
 
-export function getPostContent(slug: string): LegacyPageEntry | null {
-  return loadSiteContent().posts[slug] ?? null;
-}
-
 export function getLocationContent(slug: string): LegacyPageEntry | null {
   return loadSiteContent().locations[slug] ?? null;
 }
 
 export function getProductSlugs(): string[] {
   return Object.keys(loadSiteContent().products);
-}
-
-export function getPostSlugs(): string[] {
-  return Object.keys(loadSiteContent().posts);
 }
 
 export function getLocationSlugs(): string[] {

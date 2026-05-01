@@ -45,8 +45,8 @@ export const navMainLinks: NavMainLink[] = [
     lineIx2Target0: true
   },
   {
-    href: "/blog",
-    label: "Blog",
+    href: "/contact",
+    label: "Contact",
     linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134bd",
     lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134c0"
   }

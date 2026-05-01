@@ -815,6 +815,15 @@ section:has(> .menu_content) > .pattern.black {
   bottom: -0.2rem;
 }
 
+/* Contact only — sit the underline one notch lower than sibling links */
+.navbar .navbar_link.navbar_link--contact-line .navbar_line {
+  bottom: -1.5rem;
+}
+
+.footer .footer_link.footer_link--contact-line .footer_link-line.large {
+  bottom: -0.7rem;
+}
+
 .navbar .navbar_line canvas,
 .footer .footer_link-line canvas {
   display: block;
