@@ -915,6 +915,39 @@ a.footer_social-icon:hover {
   opacity: 0.9;
 }
 
+/* Footer shell — full black background */
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding-bottom: 0;
+}
+
+.footer .footer_link,
+.footer .footer_link-text {
+  color: #fff !important;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-label {
+  color: var(--brand-red) !important;
+}
+
+.footer .birdside-footer-infos-grid .footer_info-text {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.footer .footer_info-label {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.footer .footer_info-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer a.footer_social-icon {
+  color: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
 /* --- Footer layout (Birdside): [logo + social | nav links] → info columns --- */
 .footer .birdside-footer-main {
   display: flex;
@@ -1064,12 +1097,94 @@ a.footer_social-icon:hover {
 }
 
 .footer .footer_line {
-  border-top: 1px solid #474747;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  /* Match gap below line → © block: wordmark margin-top + wordmark-top padding-top */
+  margin: calc(1.25rem + clamp(0.65rem, 1.8vw, 1.1rem)) 0 0;
+  width: 100%;
+}
+
+/* Full-bleed rule between main footer block and wordmark strip */
+.footer .footer_line--full {
+  display: block;
+  width: 100%;
+  max-width: none;
 }
 
 .footer .footer_copyright {
   font-size: clamp(0.9375rem, 1.15vw, 1.0625rem) !important;
 }
+
+/* Wordmark strip (legal left, credit right); footer shell is already black */
+.footer .birdside-footer-wordmark {
+  position: relative;
+  width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.footer .birdside-footer-wordmark-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(0.65rem, 1.8vw, 1.1rem) clamp(0.65rem, 2.5vw, 1.5rem) 0;
+}
+
+.footer .birdside-footer-wordmark-legal,
+.footer .birdside-footer-wordmark-credit {
+  margin: 0;
+  /* +2 steps from 0.6875rem (11px) → 0.9375rem (15px) */
+  font-size: clamp(0.8125rem, 1.05vw, 0.9375rem);
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.42);
+  font-weight: 400;
+}
+
+.footer .birdside-footer-wordmark-legal {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: min(100%, 26rem);
+  text-align: left;
+}
+
+.footer .birdside-footer-wordmark-credit {
+  flex: 0 1 auto;
+  min-width: 0;
+  text-align: right;
+}
+
+.footer .birdside-footer-wordmark-credit-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+  letter-spacing: inherit;
+}
+
+.footer .birdside-footer-wordmark-credit-link:hover {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer .birdside-footer-wordmark-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+}
+
+.footer .birdside-footer-wordmark-img {
+  display: block;
+  width: 80%;
+  height: 100%;
+}
+
+
 
 @media (max-width: 900px) {
   .footer .birdside-footer-top {

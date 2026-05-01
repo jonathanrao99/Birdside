@@ -65,7 +65,7 @@ function FooterInfoBody({
 export default function SiteFooter() {
   return (
     <footer className="footer">
-      <PatternStrip tone="white" />
+      <PatternStrip tone="black" />
       <div className="spacer-large"></div>
       <div className="padding-global">
         <div className="container-small">
@@ -120,29 +120,37 @@ export default function SiteFooter() {
                 ))}
               </div>
             </div>
-            <div className="footer_line"></div>
-            <div className="footer_legal-links">
-              <div
-                className="footer_legal-wrap"
-                id="w-node-_2da64e58-7a64-a03c-8c3f-856a365e0a18-365e09d4"
-              >
-                <div className="footer_copyright">© 2026 Birdside HTX</div>
-                <div className="footer_legal-divider"></div>
-                <div className="footer_copyright">
-                  {" "}
-                  Created by{" "}
-                  <Link
-                    className="footer_legal-link"
-                    href="https://sol3studio.com"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Sol3 Studio
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
+      <div aria-hidden className="footer_line footer_line--full" />
+      <div className="birdside-footer-wordmark">
+        <div className="birdside-footer-wordmark-top">
+          <p className="birdside-footer-wordmark-legal">
+            © 2026 Birdside HTX. All rights reserved.
+          </p>
+          <p className="birdside-footer-wordmark-credit">
+            Created by{" "}
+            <Link
+              className="birdside-footer-wordmark-credit-link"
+              href="https://sol3studio.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Sol3 Studio
+            </Link>
+          </p>
+        </div>
+        <div className="birdside-footer-wordmark-inner">
+          <Image
+            alt="Birdside"
+            className="birdside-footer-wordmark-img"
+            height={484}
+            priority
+            sizes="100vw"
+            src="/assets/footer.png"
+            width={2356}
+          />
         </div>
       </div>
     </footer>

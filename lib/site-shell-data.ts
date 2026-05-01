@@ -186,7 +186,7 @@ export const footerInfoBlocks: FooterInfoBlock[] = [
     label: "Hours",
     body: {
       kind: "html",
-      html: "Open 7 Days a Week!<br/>Monday to Sunday 5PM - 12:30AM"
+      html: "Open 7 Days a Week!<br/>5PM - 12:30AM"
     }
   },
   {
