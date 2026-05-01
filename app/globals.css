@@ -4,25 +4,103 @@
   --surface-black: #101010;
 }
 
+html {
+  max-width: 100%;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   background-color: #000 !important;
 }
 
+html.lenis,
+html.lenis body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 100%;
+  /* Allow full-bleed children (e.g. checker strip); horizontal scroll is capped by `body { overflow-x: hidden }`. */
+  overflow-x: visible;
+}
+
+/* Home only: red hero sits under nav + checker; nav stack paints above (z-index). */
+/* Stack height must cover real navbar + checker (strip is 2.5rem once we override Brasa ≤767px 1.5rem). */
+.page-wrapper:has(> .section_home-header) {
+  --home-nav-stack-h: clamp(9.75rem, 17vh, 12rem);
+}
+
+@media (min-width: 992px) {
+  .page-wrapper:has(> .section_home-header) {
+    --home-nav-stack-h: clamp(10.5rem, 13vh, 13.5rem);
+  }
+}
+
+.page-wrapper:has(> .section_home-header) > .navbars {
+  position: relative;
+  z-index: 25;
+}
+
+.page-wrapper:has(> .section_home-header) > .section_home-header {
+  position: relative;
+  z-index: 0;
+  margin-top: calc(-1 * var(--home-nav-stack-h));
+  padding-top: calc(var(--home-nav-stack-h) + clamp(0.25rem, 1vw, 0.65rem));
+}
+
+.page-wrapper:has(> .section_home-header) > .section_home-header > .padding-section-xsmall {
+  padding-top: 0 !important;
+}
+
 /*
  * Brasa `.pattern.black` sets background-color transparent so the page red was showing
  * through the SVG — reads as black/red. Force white under the black-tile SVG for true B&W.
  */
-.navbars .pattern.black {
-  flex-shrink: 0;
+.navbars {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Checker under nav — 100% of navbars (100vw + transform clipped under `overflow-x: hidden` on body). */
+.navbars > .pattern.pattern-strip.black {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  left: auto;
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  margin: 0;
+  transform: none;
   background-color: #fff !important;
   background-repeat: repeat !important;
 }
 
 /* Enforce true black/white checker for reusable black strip. */
 .pattern-strip.black {
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  /* Brasa ≤767px sets `.pattern{ height: 1.5rem }` while we keep 2.5rem tiles — without this the
+     checker is clipped inside the strip. Two-class selector beats single `.pattern`. */
+  height: auto;
+  min-height: 2.5rem;
   background-color: #fff !important;
   background-image:
     linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
@@ -30,6 +108,17 @@ html, body {
   background-position: 0 0, 1.25rem 1.25rem !important;
   background-size: 2.5rem 2.5rem !important;
   background-repeat: repeat !important;
+}
+
+/* Home main: checker between HTML segments */
+.main-wrapper > .pattern.pattern-strip.black {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* Product page: strip above embedded menu uses HTML `pattern black` — override transparent SVG with real B&W checker */
@@ -47,8 +136,10 @@ section:has(> .menu_content) > .pattern.black {
 
 .section_home-header {
   background-color: var(--brand-red) !important;
-  overflow-x: visible;
+  overflow-x: clip;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Brasa `home-header_component` stack; Birdside red background */
@@ -92,7 +183,8 @@ section:has(> .menu_content) > .pattern.black {
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
-  font-size: 20vh !important;
+  /* +2 steps from prior clamp */
+  font-size: clamp(4.75rem, 31vh, 18.5rem) !important;
   line-height: 0.82 !important;
   padding-top: 0.35vh !important;
   padding-left: 0;
@@ -131,7 +223,7 @@ section:has(> .menu_content) > .pattern.black {
   margin-top: clamp(-5vh, -3.5vw, -0.5rem) !important;
   width: 100%;
   max-width: 100%;
-  overflow-x: visible;
+  overflow-x: clip;
   position: relative;
   z-index: 2;
   padding-inline: clamp(1rem, 5vw, 2.5rem);
@@ -721,7 +813,7 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_home-header .home-header_heading {
-    font-size: 16vw !important;
+    font-size: clamp(4rem, 22vw, 7.75rem) !important;
     line-height: 0.85 !important;
     max-width: none;
     text-align: center !important;
@@ -784,7 +876,7 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_home-header .home-header_heading {
-    font-size: var(--_sizes---fixed--3-5rem, 3.5rem) !important;
+    font-size: clamp(4.15rem, 13.5vw, 7rem) !important;
     line-height: 0.9 !important;
     padding-top: 0.4rem !important;
   }
@@ -875,7 +967,7 @@ section:has(> .menu_content) > .pattern.black {
 
 @media (max-width: 479px) {
   .section_home-header .home-header_heading {
-    font-size: clamp(2.35rem, 13vw, 3rem) !important;
+    font-size: clamp(3.75rem, 19vw, 5.25rem) !important;
     line-height: 0.92 !important;
   }
 
@@ -926,7 +1018,13 @@ section:has(> .menu_content) > .pattern.black {
 }
 
 .navbar {
+  width: 100%;
+  box-sizing: border-box;
   background-color: #000 !important;
+}
+
+.navbar .navbar_hamburger-line {
+  background-color: var(--brand-red) !important;
 }
 
 .navbar .navbar_text,

@@ -31,6 +31,14 @@ const nextConfig = {
         ]
       }
     ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/favicon.ico",
+        destination: "/assets/birdside-logo.png"
+      }
+    ];
   }
 };
 

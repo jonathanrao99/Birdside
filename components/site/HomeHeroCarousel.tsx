@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties
+} from "react";
 import {
   homeHeroSlides,
   type HomeHeroSlide
@@ -27,11 +32,54 @@ const AUTOPLAY_MS = 6000;
  * translateX (vw) for wraps _1.._3 — tighter than published Brasa so side cards stay in view
  * (51/65vw pushes past the viewport on many widths).
  */
-const BRASA_TX: ReadonlyArray<readonly [number, number, number]> = [
+/** Desktop — Brasa-like spread (vw). */
+const BRASA_TX_LG: ReadonlyArray<readonly [number, number, number]> = [
   [0, 30, 40],
   [-30, 0, 30],
   [-40, -30, 0]
 ];
+
+/** Tablet — keep motion but stay inside the hero clip (no horizontal bleed). */
+const BRASA_TX_MD: ReadonlyArray<readonly [number, number, number]> = [
+  [0, 14, 18],
+  [-14, 0, 14],
+  [-18, -14, 0]
+];
+
+/** Phone — tighter stage for narrow viewports. */
+const BRASA_TX_SM: ReadonlyArray<readonly [number, number, number]> = [
+  [0, 9, 12],
+  [-9, 0, 9],
+  [-12, -9, 0]
+];
+
+function heroTxTier(): "lg" | "md" | "sm" {
+  if (typeof window === "undefined") return "lg";
+  const w = window.innerWidth;
+  if (w <= 479) return "sm";
+  if (w <= 767) return "md";
+  return "lg";
+}
+
+function subscribeHeroTx(cb: () => void) {
+  window.addEventListener("resize", cb);
+  const mq479 = window.matchMedia("(max-width: 479px)");
+  const mq767 = window.matchMedia("(max-width: 767px)");
+  mq479.addEventListener("change", cb);
+  mq767.addEventListener("change", cb);
+  return () => {
+    window.removeEventListener("resize", cb);
+    mq479.removeEventListener("change", cb);
+    mq767.removeEventListener("change", cb);
+  };
+}
+
+function useHeroTx(): ReadonlyArray<readonly [number, number, number]> {
+  const tier = useSyncExternalStore(subscribeHeroTx, heroTxTier, () => "lg");
+  if (tier === "sm") return BRASA_TX_SM;
+  if (tier === "md") return BRASA_TX_MD;
+  return BRASA_TX_LG;
+}
 
 const BRASA_SC: ReadonlyArray<readonly [number, number, number]> = [
   [1, 0.55, 0.46],
@@ -67,9 +115,10 @@ function headingStyle(
 function imageWrapStyle(
   activeIdx: number,
   slot: number,
-  reduced: boolean
+  reduced: boolean,
+  txTable: ReadonlyArray<readonly [number, number, number]>
 ): CSSProperties {
-  const tx = BRASA_TX[activeIdx][slot];
+  const tx = txTable[activeIdx][slot];
   const sc = BRASA_SC[activeIdx][slot];
   const z = sc >= 1 ? 5 : Math.abs(tx) >= 36 ? 2 : 3;
   return {
@@ -87,6 +136,7 @@ export default function HomeHeroCarousel({
   const count = stageSlides.length;
   const [index, setIndex] = useState(0);
   const reducedMotion = usePrefersReducedMotion();
+  const heroTx = useHeroTx();
 
   useEffect(() => {
     if (reducedMotion || count <= 1) return;
@@ -117,7 +167,7 @@ export default function HomeHeroCarousel({
             key={slide.imageSrc}
             aria-hidden={i !== index}
             className={`home-header_image-wrap _${i + 1}`}
-            style={imageWrapStyle(index, i, reducedMotion)}
+            style={imageWrapStyle(index, i, reducedMotion, heroTx)}
           >
             <Image
               alt={slide.alt}
