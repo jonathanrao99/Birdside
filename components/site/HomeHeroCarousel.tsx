@@ -57,20 +57,20 @@ function heroTxTier(): "lg" | "md" | "sm" {
   if (typeof window === "undefined") return "lg";
   const w = window.innerWidth;
   if (w <= 479) return "sm";
-  if (w <= 767) return "md";
+  if (w <= 991) return "md";
   return "lg";
 }
 
 function subscribeHeroTx(cb: () => void) {
   window.addEventListener("resize", cb);
   const mq479 = window.matchMedia("(max-width: 479px)");
-  const mq767 = window.matchMedia("(max-width: 767px)");
+  const mq991 = window.matchMedia("(max-width: 991px)");
   mq479.addEventListener("change", cb);
-  mq767.addEventListener("change", cb);
+  mq991.addEventListener("change", cb);
   return () => {
     window.removeEventListener("resize", cb);
     mq479.removeEventListener("change", cb);
-    mq767.removeEventListener("change", cb);
+    mq991.removeEventListener("change", cb);
   };
 }
 
