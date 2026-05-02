@@ -53,6 +53,15 @@ function NavbarInfoItem({
 export default function SiteNavbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileNavLayout, setMobileNavLayout] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 991px)");
+    const apply = () => setMobileNavLayout(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -103,6 +112,7 @@ export default function SiteNavbar() {
                 <div
                   id="navbar-main-links"
                   className="navbar_links"
+                  inert={mobileNavLayout && !menuOpen ? true : undefined}
                   onClick={(e) => {
                     if ((e.target as HTMLElement).closest("a")) {
                       setMenuOpen(false);

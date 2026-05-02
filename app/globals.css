@@ -758,6 +758,15 @@ section:has(> .menu_content) > .pattern.black {
   transform: translate3d(0, 0, 0);
 }
 
+/* Embed defaults to 600×450 — constrain for narrow viewports (done again in tablet/mobile blocks). */
+.section_cta .cta_main-content iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+  box-sizing: border-box;
+}
+
 /* One step smaller location card */
 .section_cta .cta_main-content {
   transform: scale(0.92);
@@ -856,17 +865,64 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta {
-    --cta-scale-x: 1.95;
-    --cta-scale-y: 2.25;
+    --cta-scale-x: 2.45;
+    --cta-scale-y: 2.85;
+    padding-bottom: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* Flow layout: drop desktop absolute/stacking quirks that bleed into the footer on narrow screens. */
+  .section_cta .cta_sticky {
+    align-items: stretch !important;
+    width: 100%;
+    max-width: 100%;
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    box-sizing: border-box;
   }
 
   .section_cta .cta_image-wrap {
-    width: min(62vw, 27rem) !important;
-    height: min(30vh, 16.5rem) !important;
+    width: min(94vw, 34rem) !important;
+    height: min(42vh, 22rem) !important;
+    position: relative !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section_cta .cta_content {
+    contain: none !important;
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100%;
+    margin-top: clamp(1rem, 3vw, 1.75rem);
+    padding-inline: clamp(0.75rem, 3vw, 1.25rem);
+    padding-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .section_cta .cta_block {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .section_cta .cta_main-content {
     transform: scale(0.96);
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: min(100%, 28rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section_cta .cta_main-content iframe {
+    width: 100% !important;
+    max-width: 100%;
+    height: clamp(240px, 42vw, 360px) !important;
+    border-radius: 0.75rem;
   }
 }
 
@@ -933,8 +989,9 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta {
-    --cta-scale-x: 1.45;
-    --cta-scale-y: 1.72;
+    --cta-scale-x: 2.02;
+    --cta-scale-y: 2.42;
+    padding-bottom: clamp(1.5rem, 5vw, 2.75rem);
   }
 
   .section_cta .cta_wrapper {
@@ -942,8 +999,15 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta .cta_image-wrap {
-    width: min(78vw, 21rem) !important;
-    height: min(25vh, 13.5rem) !important;
+    width: min(96vw, 29rem) !important;
+    height: min(40vh, 20rem) !important;
+    position: relative !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section_cta .cta_image {
+    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.15)));
   }
 
   .section_cta .cta_component {
@@ -951,13 +1015,18 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta .cta_main-content {
-    width: min(100%, 26rem);
+    width: 100% !important;
+    max-width: 26rem !important;
     transform: none;
     padding-inline: clamp(0.9rem, 4vw, 1.2rem);
   }
 
+  .section_cta .cta_main-content iframe {
+    height: clamp(200px, 52vw, 300px) !important;
+  }
+
   .section_cta .cta_content {
-    padding-inline: 0.5rem;
+    padding-inline: clamp(0.5rem, 2vw, 0.75rem);
   }
 
   .section_cta .cta_lottie-2 {
@@ -984,8 +1053,8 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta {
-    --cta-scale-x: 1.28;
-    --cta-scale-y: 1.52;
+    --cta-scale-x: 1.52;
+    --cta-scale-y: 1.82;
   }
 
   .section_cta .cta_wrapper {
@@ -993,12 +1062,23 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta .cta_image-wrap {
-    width: min(86vw, 18rem) !important;
-    height: min(22vh, 10.5rem) !important;
+    width: min(94vw, 22rem) !important;
+    height: min(30vh, 14.5rem) !important;
+    position: relative !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section_cta .cta_image {
+    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.12)));
   }
 
   .section_cta .cta_heading {
     font-size: clamp(2.35rem, 12.5vw, 3.15rem);
+  }
+
+  .section_cta .cta_main-content iframe {
+    height: clamp(188px, 56vw, 272px) !important;
   }
 }
 
@@ -1023,10 +1103,6 @@ section:has(> .menu_content) > .pattern.black {
   background-color: #000 !important;
 }
 
-.navbar .navbar_hamburger-line {
-  background-color: var(--brand-red) !important;
-}
-
 /* Mobile menu: Webflow IX removed — React toggles `.is-nav-open`; button replaces inert hamburger div. */
 .navbar .navbar_hamburger-wrap {
   margin: 0;
@@ -1038,20 +1114,109 @@ section:has(> .menu_content) > .pattern.black {
   cursor: pointer;
 }
 
+/* Hamburger lines + morph to X (Brasa mobile gap 6px, lines 2px → ±4px centers) */
+.navbar .navbar_hamburger-line {
+  background-color: var(--brand-red) !important;
+  transform-origin: center;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbars.is-nav-open .navbar_hamburger-line._1 {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.navbars.is-nav-open .navbar_hamburger-line._2 {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
 @media (max-width: 991px) {
-  .navbars.is-nav-open .navbar_links {
+  /*
+   * Overlay always `display:flex` so open/close can animate; when closed it’s invisible and non-interactive.
+   * Keep bg + link colors on the **closed** state too — otherwise removing `.is-nav-open` swaps Brasa beige/dark
+   * text in for one frame while opacity is still high → perceived “flash” instead of a fade.
+   */
+  .navbar .navbar_links {
     display: flex !important;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-0.6rem);
     background-color: #000 !important;
     color: #fff !important;
+    /* One timing curve for open + close so removing `.is-nav-open` doesn’t swap transition mid-flight. */
+    transition:
+      opacity 0.42s cubic-bezier(0.33, 1, 0.32, 1),
+      transform 0.45s cubic-bezier(0.33, 1, 0.32, 1);
   }
 
-  .navbars.is-nav-open .navbar_links .navbar_text,
+  .navbar .navbar_links .navbar_text,
+  .navbar .navbar_links .navbar_link {
+    color: #fff !important;
+  }
+
+  .navbar .navbar_links .navbar_link.w--current .navbar_text {
+    color: #fff !important;
+  }
+
+  .navbars.is-nav-open .navbar_links {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /*
+   * Transitions (not one-shot animations) so closing doesn’t snap when `animation` is removed.
+   * Open: stagger via delay; close: delays drop to 0 — links ease out together with the overlay.
+   */
+  .navbar .navbar_links .navbar_link {
+    opacity: 0;
+    transform: translateY(0.65rem);
+    transition:
+      opacity 0.42s cubic-bezier(0.33, 1, 0.32, 1),
+      transform 0.45s cubic-bezier(0.33, 1, 0.32, 1);
+    transition-delay: 0s;
+  }
+
   .navbars.is-nav-open .navbar_links .navbar_link {
-    color: #fff !important;
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .navbars.is-nav-open .navbar_links .navbar_link.w--current .navbar_text {
-    color: #fff !important;
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(3) {
+    transition-delay: 0.15s;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(4) {
+    transition-delay: 0.2s;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(5) {
+    transition-delay: 0.25s;
+  }
+
+  .navbars.is-nav-open .navbar_links .navbar_link:nth-child(6) {
+    transition-delay: 0.3s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar .navbar_hamburger-line {
+    transition-duration: 0.01ms;
+  }
+
+  .navbar .navbar_links {
+    transition-duration: 0.01ms !important;
+  }
+
+  .navbar .navbar_links .navbar_link {
+    transition-duration: 0.01ms !important;
   }
 }
 

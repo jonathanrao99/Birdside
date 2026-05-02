@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   useEffect,
   useState,
@@ -12,6 +11,7 @@ import {
   homeHeroSlides,
   type HomeHeroSlide
 } from "@/lib/home-hero-slides";
+import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 
 function usePrefersReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
@@ -180,9 +180,14 @@ export default function HomeHeroCarousel({
           </div>
         ))}
         <div className="home-header_button-wrap">
-          <Link className="home-header_button w-inline-block" href="/menu">
+          <a
+            className="home-header_button w-inline-block"
+            href={ORDER_NOW_URL}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <div className="home-header_button-text">Order now</div>
-          </Link>
+          </a>
         </div>
       </div>
     </>
