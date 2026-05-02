@@ -1,0 +1,411 @@
+"use client";
+
+import { useState, useRef, useCallback } from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import MenuPreloader from "./MenuPreloader";
+
+// SVG as a React Component - only the blurred radial shadow
+const DropShadowSVG = () => (
+  <svg
+    width="776"
+    height="776"
+    viewBox="0 0 776 776"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: "absolute",
+      left: "50%",
+      top: "40%",
+      transform: "translate(-50%, -60%)",
+      pointerEvents: "none",
+      zIndex: 0,
+      width: "clamp(350px, 50vw, 760px)",
+      height: "clamp(350px, 50vw, 760px)",
+      mixBlendMode: "screen",
+    }}
+    aria-hidden="true"
+  >
+    <defs>
+      <filter id="burgerGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="35" />
+      </filter>
+      <radialGradient id="burgerWhiteGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+        <stop offset="40%" stopColor="#ffffff" stopOpacity="0.6" />
+        <stop offset="70%" stopColor="#ffffff" stopOpacity="0.25" />
+        <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+      </radialGradient>
+    </defs>
+
+    <circle
+      cx="388"
+      cy="388"
+      r="260"
+      fill="url(#burgerWhiteGlow)"
+      filter="url(#burgerGlow)"
+    />
+  </svg>
+);
+
+const BURGERS = [
+  {
+    name: "OG BURGER",
+    image:
+      "https://masizvgutzgmuetrzfyk.supabase.co/storage/v1/object/public/PEACKERS%20CLIENT/Burger%20Image%201.png",
+    boost: 1,
+  },
+  {
+    name: "BBQ CLASSIC",
+    image:
+      "https://masizvgutzgmuetrzfyk.supabase.co/storage/v1/object/public/PEACKERS%20CLIENT/Burger%20Imaeg%202%20BBQ.png",
+    boost: 1,
+  },
+  {
+    name: "HOT BURGER",
+    image:
+      "https://masizvgutzgmuetrzfyk.supabase.co/storage/v1/object/public/PEACKERS%20CLIENT/Burger%20REd-Picsart-AiImageEnhancer%20Final.png",
+    boost: 1.15,
+  },
+  {
+    name: "NORMAL CHEESE",
+    image:
+      "https://masizvgutzgmuetrzfyk.supabase.co/storage/v1/object/public/PEACKERS%20CLIENT/Burger%20lit%20yellow%20Finalone-Picsart-AiImageEnhancer%20(1).png",
+    boost: 1.25,
+  },
+  {
+    name: "MORE CHEESE",
+    image:
+      "https://masizvgutzgmuetrzfyk.supabase.co/storage/v1/object/public/PEACKERS%20CLIENT/Burger%20Final%20more%20cheese%20one-Picsart-AiImageEnhancer%20(1).png",
+    boost: 1.25,
+  },
+];
+
+const TOTAL = BURGERS.length;
+
+// Ensure card ids unique across new renders, cards re-key when carousel "jumps"
+const makeCard = (() => {
+  let globalId = 0;
+  return (index, slot) => ({
+    id: globalId++,
+    index,
+    slot,
+  });
+})();
+
+const createInitialCards = (center) => [
+  makeCard((center - 3 + TOTAL) % TOTAL, -3),
+  makeCard((center - 2 + TOTAL) % TOTAL, -2),
+  makeCard((center - 1 + TOTAL) % TOTAL, -1),
+  makeCard(center % TOTAL, 0),
+  makeCard((center + 1) % TOTAL, 1),
+  makeCard((center + 2) % TOTAL, 2),
+  makeCard((center + 3) % TOTAL, 3),
+];
+
+const POS = {
+  [-3]: { x: -58, y: -120, scale: 0.07, opacity: 0, z: 0 },
+  [-2]: { x: -42, y: -90, scale: 0.25, opacity: 0.65, z: 1 },
+  [-1]: { x: -27, y: -48, scale: 0.43, opacity: 0.85, z: 2 },
+  [0]: { x: 0, y: 0, scale: 1, opacity: 1, z: 5 },
+  [1]: { x: 27, y: -48, scale: 0.43, opacity: 0.85, z: 2 },
+  [2]: { x: 42, y: -90, scale: 0.25, opacity: 0.65, z: 1 },
+  [3]: { x: 58, y: -120, scale: 0.07, opacity: 0, z: 0 },
+};
+
+function getModIndex(idx) {
+  // always positive mod for index
+  return ((idx % TOTAL) + TOTAL) % TOTAL;
+}
+
+export default function BurgerCarouselFinal() {
+  const [center, setCenter] = useState(0);
+  // forcibly regenerate card id whenever new center assigned (resets if direct jump)
+  const [cards, setCards] = useState(() => createInitialCards(0));
+  const animatingRef = useRef(false);
+  const [preloaderDone, setPreloaderDone] = useState(false);
+
+  // Prevent multiple clicks firing while animating
+  const setAnimatingTimeout = () =>
+    setTimeout(() => {
+      animatingRef.current = false;
+    }, 650);
+
+  // Always reset animating immediately before changing
+  const handleCardClick = useCallback(
+    (clickedSlot) => {
+      if (animatingRef.current) return;
+      if (clickedSlot === 0) return;
+  
+      animatingRef.current = true;
+  
+      const steps = -clickedSlot;
+      let newCenter = center;
+  
+      setCards((prev) => {
+        let updated = [...prev];
+  
+        if (steps > 0) {
+          // move right
+          for (let i = 0; i < steps; i++) {
+            newCenter = getModIndex(newCenter + 1);
+  
+            updated = updated
+              .map((c) => ({ ...c, slot: c.slot - 1 }))
+              .filter((c) => c.slot >= -3);
+  
+            const newIndex = getModIndex(newCenter + 3);
+            updated.push(makeCard(newIndex, 3));
+          }
+        } else {
+          // move left
+          for (let i = 0; i < Math.abs(steps); i++) {
+            newCenter = getModIndex(newCenter - 1);
+  
+            updated = updated
+              .map((c) => ({ ...c, slot: c.slot + 1 }))
+              .filter((c) => c.slot <= 3);
+  
+            const newIndex = getModIndex(newCenter - 3);
+            updated.push(makeCard(newIndex, -3));
+          }
+        }
+  
+        return updated;
+      });
+  
+      setCenter(newCenter);
+  
+      setTimeout(() => {
+        animatingRef.current = false;
+      }, 650);
+    },
+    [center]
+  );
+
+  const goNext = useCallback(() => {
+    if (animatingRef.current) return;
+    animatingRef.current = true;
+  
+    setCenter((prevCenter) => {
+      const newCenter = getModIndex(prevCenter + 1);
+  
+      setCards((prevCards) => {
+        const shifted = prevCards
+          .map((c) => ({ ...c, slot: c.slot - 1 }))
+          .filter((c) => c.slot >= -3);
+  
+        const newIndex = getModIndex(newCenter + 3);
+        shifted.push(makeCard(newIndex, 3));
+  
+        return shifted;
+      });
+  
+      return newCenter;
+    });
+  
+    setTimeout(() => {
+      animatingRef.current = false;
+    }, 650);
+  }, []);
+
+  const goPrev = useCallback(() => {
+    if (animatingRef.current) return;
+    animatingRef.current = true;
+    const newCenter = getModIndex(center - 1);
+
+    // Shift every card slot +1 and generate new leftmost
+    setCards((prev) => {
+      const shifted = prev
+        .map((c) => ({ ...c, slot: c.slot + 1 }))
+        .filter((c) => c.slot <= 3);
+      // Find new index for slot -3
+      const newIndex = getModIndex(newCenter - 3);
+      shifted.push(makeCard(newIndex, -3));
+      return shifted;
+    });
+    setCenter(newCenter);
+    setAnimatingTimeout();
+  }, [center]);
+
+  return (
+    <>
+      <MenuPreloader
+        images={BURGERS.map((b) => b.image)}
+        onComplete={() => setPreloaderDone(true)}
+      />
+      <div
+        className="relative w-full flex flex-col items-center justify-center overflow-hidden"
+        style={{
+          minHeight: "100vh",
+          background:
+            "radial-gradient(ellipse 50% 52% at 50% 38%, #3d2900 0%, #1e1200 26%, #090909 58%, #000 100%)",
+          opacity: preloaderDone ? 1 : 0,
+          transition: "opacity 0.4s ease",
+        }}
+      >
+        <div>
+          <nav
+            className="subnavbar"
+            style={{ paddingTop: "1.5vw", color: "white" }}
+          >
+            <div
+              className="flex font-['Share_Tech'] gap-[3.4vw] justify-center items-center"
+              style={{ fontFamily: "var(--font-peakers)" }}
+            >
+              <a
+                href="#"
+                className="whitespace-nowrap font-sharetech text-[1.3vw] border-b-2 border-red-500 pb-1"
+              >
+                BURGERS
+              </a>
+              <a href="#" className="whitespace-nowrap text-[1.4vw] pb-2">
+                WRAPS
+              </a>
+              <a href="#" className="whitespace-nowrap text-[1.4vw] pb-2">
+                RICE BOWLS
+              </a>
+              <a href="#" className="whitespace-nowrap text-[1.4vw] pb-2">
+                WINGS AND TENDERS
+              </a>
+              <a href="#" className="whitespace-nowrap text-[1.4vw] pb-2">
+                GRIILLED
+              </a>
+              <a href="#" className="whitespace-nowrap text-[1.4vw] pb-2">
+                MEAL BOX
+              </a>
+            </div>
+          </nav>
+        </div>
+        {/* BURGER STAGE */}
+        <div
+          className="relative w-full overflow-hidden"
+          style={{ height: "clamp(320px, 54vw, 560px)" }}
+        >
+          {/* SVG Drop Shadow */}
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -33%)",
+              zIndex: 1,
+              pointerEvents: "none",
+              width: "clamp(430px, 62vw, 880px)",
+              height: "clamp(430px, 62vw, 880px)",
+            }}
+            aria-hidden="true"
+          >
+            <DropShadowSVG />
+          </div>
+          {cards.map((card) => {
+            const cfg = POS[card.slot] || POS[3];
+            const burger = BURGERS[card.index];
+            const isCenter = card.slot === 0;
+            return (
+              <div
+                key={card.id}
+                onClick={() =>
+                  !animatingRef.current && handleCardClick(card.slot)
+                }
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  top: "50%",
+                  transform: `
+                    translate(calc(-50% + ${cfg.x}vw), calc(-50% + ${cfg.y}px))
+                    scale(${cfg.scale * burger.boost})
+                  `,
+                  opacity: cfg.opacity,
+                  zIndex: cfg.z,
+                  transition:
+                    "transform .65s cubic-bezier(.22,1,.36,1), opacity .5s ease",
+                  pointerEvents: isCenter
+                    ? "none"
+                    : animatingRef.current
+                    ? "none"
+                    : "auto",
+                  cursor: isCenter ? "default" : "pointer",
+                  userSelect: "none",
+                }}
+              >
+                <img
+                  src={burger.image}
+                  alt={burger.name}
+                  draggable={false}
+                  style={{
+                    width: "clamp(270px, 40vw, 520px)",
+                    display: "block",
+                    filter: isCenter
+                      ? "drop-shadow(0 30px 80px rgba(0,0,0,0.6))"
+                      : "none",
+                    transition: "filter .4s ease",
+                    userSelect: "none",
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* SLIDING INDICATOR */}
+        <div className="flex gap-3 mt-4">
+          {BURGERS.map((_, i) => (
+            <div
+              key={i}
+              style={{
+                height: "6px",
+                width: i === center ? "36px" : "10px",
+                background: i === center ? "#e8b800" : "#333",
+                borderRadius: "999px",
+                transition: "all .4s cubic-bezier(.22,1,.36,1)",
+              }}
+            />
+          ))}
+        </div>
+        {/* TITLE + ARROWS */}
+        <div className="w-full flex items-center justify-center relative pb-4">
+          <button
+            onClick={() => {
+              if (!animatingRef.current) goPrev();
+            }}
+            className="absolute left-0 px-[4vw]"
+            disabled={animatingRef.current}
+            style={{
+              cursor: animatingRef.current ? "not-allowed" : "pointer",
+              opacity: animatingRef.current ? 0.5 : 1,
+              transition: "opacity 0.2s",
+            }}
+          >
+            <FiChevronLeft size={38} color="#888" />
+          </button>
+
+          <h1
+            className="uppercase text-white text-center"
+            style={{
+              fontFamily: "var(--font-peakers)",
+              fontSize: "clamp(2.2rem, 7.5vw, 6rem)",
+              fontWeight: 900,
+              letterSpacing: "0.04em",
+            }}
+          >
+            {BURGERS[center].name}
+          </h1>
+
+          <button
+            onClick={() => {
+              if (!animatingRef.current) goNext();
+            }}
+            className="absolute right-0 px-[4vw]"
+            disabled={animatingRef.current}
+            style={{
+              cursor: animatingRef.current ? "not-allowed" : "pointer",
+              opacity: animatingRef.current ? 0.5 : 1,
+              transition: "opacity 0.2s",
+            }}
+          >
+            <FiChevronRight size={38} color="#888" />
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

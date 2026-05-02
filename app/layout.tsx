@@ -3,6 +3,8 @@ import "lenis/dist/lenis.css";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
+import BootSplash from "@/components/site/BootSplash";
+import PageTransitionChrome from "@/components/site/PageTransitionChrome";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -26,7 +28,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link href="/vendor/brasa-template.shared.38e119549.min.css" rel="stylesheet" />
       </head>
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <BootSplash />
+        <PageTransitionChrome>
+          <SmoothScroll>{children}</SmoothScroll>
+        </PageTransitionChrome>
         <Script id="cta-scroll-grow" strategy="afterInteractive">
           {`(() => {
   const setupCtaScroll = () => {

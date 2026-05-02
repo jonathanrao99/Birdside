@@ -1,0 +1,329 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000;
+  --foreground: #000;
+}
+
+html,
+body {
+  scroll-behavior: auto;
+  position: relative;
+  /* Hide native scrollbar — Lenis handles all scrolling */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE / Edge */
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe:not(.allow-interaction) {
+  pointer-events: none;
+}
+
+.lenis.lenis-smooth iframe.allow-interaction {
+  pointer-events: auto;
+}
+
+/* Allow map iframes to be interactive (pan, zoom, click) */
+.lenis.lenis-smooth .map-interactive,
+.lenis.lenis-smooth .map-interactive iframe {
+  pointer-events: auto;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  /* Chrome / Safari / WebKit */
+}
+
+/* Make date/time picker icons visible on dark backgrounds */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+#main-content {
+  will-change: opacity;
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(80px);
+  }
+}
+
+.animate-scroll-line {
+  animation: scrollLine 1.6s ease-in-out infinite;
+}
+
+@keyframes saucePopDown {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+    /* Shrinks further for a deeper exit effect */
+    filter: blur(4px);
+  }
+}
+
+@keyframes saucePopFromTop {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+    /* Starts larger to "land" into the frame */
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+.sauce-pop-down {
+  /* Using a smooth quintic ease-out for a more natural feel */
+  animation: saucePopDown 500ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.sauce-pop-from-top {
+  /* Slight delay can help the 'incoming' sauce feel like it's following the exit */
+  animation: saucePopFromTop 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes sauceLayerFadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sauceBgDissolveIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.sauce-layer-fade-in {
+  animation: sauceLayerFadeIn 260ms ease-out forwards;
+}
+
+.sauce-bg-dissolve-in {
+  animation: sauceBgDissolveIn 300ms ease-out forwards;
+  will-change: opacity;
+}
+
+@keyframes sauceTitleFast {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.999);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sauce-title-fade-in {
+  animation: sauceTitleFast 220ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-neuzeit);
+  --font-mono: var(--font-neuzeit);
+  --font-neuzeit: var(--font-neuzeit);
+  --font-peakers: var(--font-peakers);
+  --color-peckers-yellow: #F2DF0D;
+  --color-peckers-red: #EF4444;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #000;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* overflow is controlled by ClientWrapper JS, not CSS class */
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* GPU acceleration for animated elements */
+.gsap-animated,
+[class*="will-change"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Hide scrollbar but keep functionality */
+.custom-scrollbar::-webkit-scrollbar,
+.custom-scrollbar *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.custom-scrollbar,
+.custom-scrollbar * {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+}
+
+/* Uniqueness Page - Hide all scrollbars */
+.uniqueness-page *::-webkit-scrollbar,
+.uniqueness-page::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.uniqueness-page *,
+.uniqueness-page {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Time picker custom scrollbar */
+.time-picker-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+
+.time-picker-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.time-picker-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.time-picker-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.time-picker-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+/* Screen reader only - Hidden SEO Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sauce-circular-text {
+  font-size: 20px !important;
+  letter-spacing: 0em;
+}
+
+/* Keep circular ring text readable on mobile without collisions */
+@media (max-width: 767px) {
+  .sauce-circular-text {
+    font-size: 24px !important;
+    letter-spacing: 0.08em !important;
+    transform: translateY(-0.6rem) scale(1.02);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sauce-circular-text {
+    font-size: 28px !important;
+    letter-spacing: 0.02em !important;
+  }
+}
+
+/* Navbar hover underline/card effects */
+.navbar-link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.15rem;
+  transition:
+    color 260ms ease,
+    transform 260ms ease;
+}
+
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.2rem;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  transition: width 260ms ease;
+}
+
+.navbar-link:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* Hide Safari/iOS native play button overlay and controls */
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

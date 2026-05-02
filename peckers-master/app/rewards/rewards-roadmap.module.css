@@ -1,0 +1,336 @@
+/* ────────────────────────────────────────────────────────────────────── */
+/* Rewards Roadmap Animation Styles                                       */
+/* ────────────────────────────────────────────────────────────────────── */
+
+/* ── Keyframe Animations ─────────────────────────────────────────────── */
+
+/* Small cards: Smooth opacity fade-in with subtle glow effect (NO POP) */
+@keyframes smallCardAppear {
+  0% {
+    opacity: 0.15;
+    transform: none;
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+
+  40% {
+    opacity: 1;
+    transform: none;
+    filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.35));
+  }
+
+  100% {
+    opacity: 0.75;
+    transform: none;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.12));
+  }
+}
+
+/* Large reward cards: Simple highlight effect with glow */
+@keyframes rewardCardHighlight {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0px rgba(229, 26, 56, 0));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(229, 26, 56, 0.6));
+  }
+
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(229, 26, 56, 0.2));
+  }
+}
+
+/* Alpha card: Simple highlight effect */
+@keyframes alphaCardHighlight {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0px rgba(229, 26, 56, 0));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(229, 26, 56, 0.6));
+  }
+
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(229, 26, 56, 0.2));
+  }
+}
+
+@keyframes betaCardHighlight {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0px rgba(255, 126, 0, 0));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(255, 126, 0, 0.6));
+  }
+
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 126, 0, 0.2));
+  }
+}
+
+@keyframes gammaCardHighlight {
+  0% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0px rgba(200, 100, 150, 0));
+  }
+
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px rgba(200, 100, 150, 0.6));
+  }
+
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(200, 100, 150, 0.2));
+  }
+}
+
+
+
+/* Global dimming at the end of the cycle (starts at 10s) */
+@keyframes globalDimIcon {
+  to {
+    opacity: 0.15;
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+}
+
+@keyframes globalDimLine {
+  to {
+    opacity: 0.15;
+  }
+}
+
+/* ── Animation Classes ────────────────────────────────────────────────── */
+
+/* Small card animations with staggered delays (triggered on view) */
+.smallCard {
+  opacity: 0.15;
+  transform: none;
+}
+
+.smallCard.animated {
+  animation: 
+    smallCardAppear 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Specific delays for small cards (left to right progression, longer spacing) */
+.goldBox1.animated {
+  animation-delay: 0.4s, 10s;
+}
+
+.goldBox2.animated {
+  animation-delay: 0.7s, 10s;
+}
+
+.gammaCard.animated {
+  animation-delay: 1.1s, 10s;
+}
+
+.betaBox.animated {
+  animation-delay: 3.4s, 10s;
+}
+
+.darkRedBox1.animated {
+  animation-delay: 3.0s, 10s;
+}
+
+.darkRedBox2.animated {
+  animation-delay: 2.7s, 10s;
+}
+
+.orangeBox1.animated {
+  animation-delay: 6.5s, 10s;
+}
+
+.orangeBox2.animated {
+  animation-delay: 6.8s, 10s;
+}
+
+.orangeBox3.animated {
+  animation-delay: 7.1s, 10s;
+}
+
+/* Large reward card animations (slower, gentler) */
+.rewardCard {
+  opacity: 0.15;
+  transform-origin: center;
+  z-index: 50;
+}
+
+.rewardCard.animated {
+  animation: 
+    rewardCardHighlight 2.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.alphaLargeCard.animated {
+  animation: 
+    alphaCardHighlight 2.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 8.5s, 10s;
+}
+
+.alphaCard.animated {
+  animation: 
+    smallCardAppear 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 7.5s, 10s;
+  transform: none !important;
+}
+
+.betaLargeCard.animated {
+  animation: 
+    betaCardHighlight 2.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 4.5s, 10s;
+}
+
+.gammaLargeCard.animated {
+  animation: 
+    gammaCardHighlight 2.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 1.6s, 10s;
+}
+
+.recruitGroup.animated {
+  animation: 
+    smallCardAppear 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimIcon 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.2s, 10s;
+}
+
+/* Connection lines and arrows (subtle appearance) */
+.connectorLine {
+  opacity: 0.15;
+}
+
+.connectorLine.animated {
+  animation: 
+    lineAppear 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimLine 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes lineAppear {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Row 1 connectors (after recruit 0.3s, goldBox1 0.6s, goldBox2 1.2s, gamma 1.8s) */
+.connR1a.animated {
+  animation-delay: 0.6s, 10s;
+}
+
+.connR1b.animated {
+  animation-delay: 1.1s, 10s;
+}
+
+.connR1c.animated {
+  animation-delay: 1.4s, 10s;
+}
+
+.connR1toR2.animated {
+  animation-delay: 1.8s, 10s;
+}
+
+/* Outline frame (roadmap border) */
+
+/* Down-turn connector (row 1 right → row 2, after gamma pop 8.7s) */
+.connDownTurn.animated {
+  animation-delay: 2.2s, 10s;
+}
+
+/* Row 2 connectors (after darkRedBox2 9.8s, darkRedBox1 10.4s, betaBox 11s) */
+.connR2a.animated {
+  animation-delay: 3.3s, 10s;
+}
+
+.connR2toR3.animated {
+  animation-delay: 3.8s, 10s;
+}
+
+.connR2b.animated {
+  animation-delay: 3.8s, 10s;
+}
+
+/* Vertical connector (left side, after beta area) */
+.connVertical.animated {
+  animation-delay: 6.0s, 10s;
+}
+
+/* Row 3 connectors (after orangeBox1 18s, orangeBox2 18.4s, orangeBox3 18.8s) */
+.connR3a.animated {
+  animation-delay: 6.8s, 10s;
+}
+
+.connR3b.animated {
+  animation-delay: 7.1s, 10s;
+}
+
+.connR3c.animated {
+  animation-delay: 7.3s, 10s;
+}
+
+.connR3d.animated {
+  animation-delay: 7.8s, 10s;
+}
+
+/* Text elements (fade in smoothly) */
+.textElement {
+  opacity: 0;
+}
+
+.textElement.animated {
+  animation: textFadeIn 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.headerText.animated {
+  animation-delay: 0.4s;
+}
+
+.registerText.animated {
+  animation-delay: 0.2s;
+}
+
+.logoIcon.animated {
+  animation: 
+    lineAppear 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+    globalDimLine 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.8s, 10s;
+}
+
+/* Outline frame */
+.outlineFrame {
+  opacity: 0.15;
+}
+
+.outlineFrame.animated {
+  animation: lineAppear 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 10.0s;
+}
+
+/* No mobile-specific overrides needed — the design scales uniformly via CSS transform */
