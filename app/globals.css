@@ -1089,6 +1089,7 @@ section:has(> .menu_content) > .pattern.black {
     --cta-scale-y: 2.42;
     --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.5), 1);
     overflow-x: hidden;
+    overflow-y: hidden;
     padding-bottom: clamp(1.5rem, 5vw, 2.75rem);
   }
 
@@ -1100,26 +1101,37 @@ section:has(> .menu_content) > .pattern.black {
     position: relative !important;
     top: auto !important;
     min-height: 0 !important;
+    isolation: isolate;
+    overflow: hidden;
     padding-top: clamp(2.25rem, 8vw, 4.5rem);
     padding-bottom: clamp(2.25rem, 8vw, 4.5rem);
   }
 
   .section_cta .cta_image-wrap {
-    width: min(96vw, 29rem) !important;
-    height: min(40vh, 20rem) !important;
-    position: relative !important;
-    margin-left: auto;
-    margin-right: auto;
-    transform: none !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.16))) !important;
+    transform-origin: center bottom;
   }
 
   .section_cta .cta_image {
-    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.15)));
+    inset: 0;
+    object-fit: cover;
+    object-position: center bottom;
+    transform: none !important;
   }
 
   .section_cta .cta_component {
     opacity: 1 !important;
     padding-inline: 0.75rem;
+    position: relative;
+    z-index: 1;
   }
 
   .section_cta .cta_main-content {
@@ -1137,7 +1149,9 @@ section:has(> .menu_content) > .pattern.black {
     display: flex !important;
     margin-top: clamp(1.25rem, 5vw, 2rem);
     padding-inline: clamp(0.5rem, 2vw, 0.75rem);
+    position: relative !important;
     transform: none !important;
+    z-index: 1;
   }
 
   .section_cta .cta_lottie-2 {
@@ -1185,19 +1199,6 @@ section:has(> .menu_content) > .pattern.black {
 
   .section_cta .cta_wrapper {
     height: auto !important;
-  }
-
-  .section_cta .cta_image-wrap {
-    width: min(98vw, 24rem) !important;
-    height: min(38vh, 17rem) !important;
-    position: relative !important;
-    margin-left: auto;
-    margin-right: auto;
-    transform: none !important;
-  }
-
-  .section_cta .cta_image {
-    transform: none !important;
   }
 
   .section_cta .cta_heading {
