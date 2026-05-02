@@ -867,6 +867,7 @@ section:has(> .menu_content) > .pattern.black {
   .section_cta {
     --cta-scale-x: 2.45;
     --cta-scale-y: 2.85;
+    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.42), 1);
     padding-bottom: clamp(1.25rem, 4vw, 2.5rem);
   }
 
@@ -991,6 +992,7 @@ section:has(> .menu_content) > .pattern.black {
   .section_cta {
     --cta-scale-x: 2.02;
     --cta-scale-y: 2.42;
+    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.5), 1);
     padding-bottom: clamp(1.5rem, 5vw, 2.75rem);
   }
 
@@ -1053,8 +1055,9 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta {
-    --cta-scale-x: 1.52;
-    --cta-scale-y: 1.82;
+    --cta-scale-x: 1.88;
+    --cta-scale-y: 2.22;
+    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.58), 1);
   }
 
   .section_cta .cta_wrapper {
@@ -1062,15 +1065,15 @@ section:has(> .menu_content) > .pattern.black {
   }
 
   .section_cta .cta_image-wrap {
-    width: min(94vw, 22rem) !important;
-    height: min(30vh, 14.5rem) !important;
+    width: min(98vw, 24rem) !important;
+    height: min(38vh, 17rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
   }
 
   .section_cta .cta_image {
-    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.12)));
+    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.18)));
   }
 
   .section_cta .cta_heading {
