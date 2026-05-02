@@ -1109,21 +1109,21 @@ section:has(> .menu_content) > .pattern.black {
 
   .section_cta .cta_image-wrap {
     position: absolute !important;
-    inset: 0 !important;
+    inset: -12% 0 -8% !important;
     z-index: 0;
     width: 100% !important;
     max-width: none !important;
-    height: 100% !important;
+    height: auto !important;
     margin: 0 !important;
     border-radius: 0 !important;
-    transform: scale(calc(1 + (var(--cta-scale-progress) * 0.16))) !important;
-    transform-origin: center bottom;
+    transform: scale(calc(1.18 + (var(--cta-scale-progress) * 0.36))) !important;
+    transform-origin: center center;
   }
 
   .section_cta .cta_image {
     inset: 0;
     object-fit: cover;
-    object-position: center bottom;
+    object-position: center 72%;
     transform: none !important;
   }
 
