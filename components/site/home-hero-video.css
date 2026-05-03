@@ -33,6 +33,19 @@
   min-height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0;
+  transition: opacity 0.75s ease-out;
+}
+
+.section_home-header .home-hero-video.home-hero-video--visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section_home-header .home-hero-video {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .section_home-header .home-hero-video--mobile {

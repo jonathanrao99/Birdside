@@ -1,12 +1,9 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
-import { useEffect, useRef } from "react";
-import { homeHeroSlides } from "@/lib/home-hero-slides";
+import { useEffect, useRef, type SyntheticEvent } from "react";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import "./home-hero-video.css";
-
-const poster = homeHeroSlides[0]?.imageSrc ?? "";
 
 type BackdropProps = {
   desktopSrc: string;
@@ -25,6 +22,38 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
     mobileRef.current?.pause();
   }, [reducedMotion]);
 
+  /** Paused hero never fires `playing` — show first frame without fade. */
+  useEffect(() => {
+    if (!reducedMotion) return;
+    desktopRef.current?.classList.add("home-hero-video--visible");
+    mobileRef.current?.classList.add("home-hero-video--visible");
+  }, [reducedMotion, desktopSrc, mobileSrc]);
+
+  /** Reset fade when src changes (reduced-motion effect below may re-apply immediately). */
+  useEffect(() => {
+    desktopRef.current?.classList.remove("home-hero-video--visible");
+    mobileRef.current?.classList.remove("home-hero-video--visible");
+  }, [desktopSrc, mobileSrc]);
+
+  /** Autoplay policies: nudge play after mount when `autoPlay` alone stalls (common with remote src). */
+  useEffect(() => {
+    if (reducedMotion) return;
+    const d = desktopRef.current;
+    const m = mobileRef.current;
+    const kick = (v: HTMLVideoElement | null) => {
+      if (!v) return;
+      void v.play().catch(() => {
+        /* ignore — user gesture may be required on some browsers */
+      });
+    };
+    kick(d);
+    kick(m);
+  }, [reducedMotion, desktopSrc, mobileSrc]);
+
+  const onVideoPlaying = (e: SyntheticEvent<HTMLVideoElement>) => {
+    e.currentTarget.classList.add("home-hero-video--visible");
+  };
+
   return (
     <div className="home-hero-video-stage" aria-hidden="true">
       <video
@@ -35,7 +64,7 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
         loop
         muted
         playsInline
-        poster={poster}
+        onPlaying={onVideoPlaying}
         preload="auto"
         src={desktopSrc}
       />
@@ -47,8 +76,8 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
         loop
         muted
         playsInline
-        poster={poster}
-        preload="metadata"
+        onPlaying={onVideoPlaying}
+        preload="auto"
         src={mobileSrc}
       />
     </div>
