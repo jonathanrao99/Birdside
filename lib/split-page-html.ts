@@ -3,6 +3,8 @@ import { HOME_ABOUT_SECTION_MARKER, OUR_MENU_SLOT_HTML } from "@/lib/our-menu-sl
 const HOME_MENU_SECTION_PREFIX = '<section class="section_home-menu"';
 const HOME_MAIN_OPEN = '<main class="main-wrapper">';
 const MENU_ROUTE_WRAPPER_PREFIX = '<div class="main-wrapper">';
+/** First block inside `/menu` inner main (after legacy `section_menu` strip). */
+export const MENU_PAGE_LEAD_SECTION_PREFIX = '<section class="section_testimonials">';
 
 function findSectionBounds(html: string, startIdx: number): { end: number } {
   let depth = 0;
@@ -116,4 +118,27 @@ export function getMenuRouteInnerMainHtml(mainHtml: string): string {
   if (wrapClose <= innerStart) return html.slice(innerStart).trim();
 
   return html.slice(innerStart, wrapClose).trim();
+}
+
+/**
+ * Splits `/menu` inner main HTML into the testimonials lead section and the remainder.
+ * Used so the lead can be isolated (or regenerated via `npm run extract:menu-lead`).
+ */
+export function splitMenuInnerHtmlLeadRest(inner: string): { lead: string; rest: string } {
+  const idx = inner.indexOf(MENU_PAGE_LEAD_SECTION_PREFIX);
+  if (idx < 0) {
+    return { lead: "", rest: inner };
+  }
+  const { end } = findSectionBounds(inner, idx);
+  const lead = inner.slice(idx, end);
+  const rest = (inner.slice(0, idx) + inner.slice(end)).trim();
+  return { lead, rest };
+}
+
+export function getMenuRouteLeadAndRestInnerMainHtml(mainHtml: string): {
+  lead: string;
+  rest: string;
+} {
+  const inner = getMenuRouteInnerMainHtml(mainHtml);
+  return splitMenuInnerHtmlLeadRest(inner);
 }

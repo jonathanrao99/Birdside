@@ -1,4 +1,4 @@
-import HomeCtaLotties from "@/components/site/HomeCtaLotties";
+import HomeCtaLottiesDynamic from "@/components/site/HomeCtaLottiesDynamic";
 import HomeHeader from "@/components/site/HomeHeader";
 import OurMenu from "@/components/site/OurMenu";
 import PageShell from "@/components/site/PageShell";
@@ -28,7 +28,7 @@ export default function HomePage() {
           </main>
         ]}
       />
-      <HomeCtaLotties />
+      <HomeCtaLottiesDynamic />
     </>
   );
 }

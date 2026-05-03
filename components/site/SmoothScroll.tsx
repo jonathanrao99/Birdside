@@ -4,13 +4,14 @@ import Lenis from "lenis";
 import { type ReactNode, useLayoutEffect, useState } from "react";
 import ScrollEffectsClient from "@/components/site/ScrollEffectsClient";
 import { LenisProvider } from "@/components/site/lenis-context";
+import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
 
 type Props = { children: ReactNode };
 
 /**
  * Lenis smooth scroll — softer inertia than CSS scroll-behavior alone.
- * Skipped when the user prefers reduced motion. Exposes instance via LenisProvider
- * for scroll-linked effects (CTA, home menu parallax).
+ * Skipped when the user prefers reduced motion. Exposes instance via LenisProvider.
+ * Lenis `scroll` drives `ScrollTrigger.update` so GSAP scroll effects stay in sync.
  */
 export default function SmoothScroll({ children }: Props) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
@@ -20,6 +21,8 @@ export default function SmoothScroll({ children }: Props) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
+
+    const ScrollTrigger = ensureScrollTriggerRegistered();
 
     const instance = new Lenis({
       autoRaf: true,
@@ -32,20 +35,41 @@ export default function SmoothScroll({ children }: Props) {
       smoothWheel: true
     });
 
-    const syncCta = () => {
-      window.dispatchEvent(new CustomEvent("birdside-lenis-scroll"));
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length && typeof value === "number") {
+          instance.scrollTo(value, { immediate: true });
+        }
+        return instance.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        };
+      },
+      pinType: document.documentElement.style.transform ? "transform" : "fixed"
+    });
+
+    const onLenisScroll = () => {
+      ScrollTrigger.update();
     };
-    instance.on("scroll", syncCta);
+    instance.on("scroll", onLenisScroll);
 
     queueMicrotask(() => {
       setLenis(instance);
+      ScrollTrigger.refresh();
     });
 
     return () => {
-      instance.off("scroll", syncCta);
+      instance.off("scroll", onLenisScroll);
       instance.destroy();
+      ScrollTrigger.scrollerProxy(document.documentElement, undefined);
       queueMicrotask(() => {
         setLenis(null);
+        ScrollTrigger.refresh();
       });
     };
   }, []);

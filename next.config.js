@@ -1,7 +1,14 @@
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true"
+});
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ["gsap"]
+  },
   images: {
     remotePatterns: [
       {
@@ -20,7 +27,7 @@ const nextConfig = {
     root: __dirname
   },
   async headers() {
-    return [
+    const rows = [
       {
         source: "/vendor/:path*",
         headers: [
@@ -31,6 +38,32 @@ const nextConfig = {
         ]
       }
     ];
+
+    if (process.env.NODE_ENV === "production") {
+      const csp = [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: https:",
+        "font-src 'self' data:",
+        "connect-src 'self'",
+        "frame-ancestors 'none'",
+        "base-uri 'self'",
+        "form-action 'self'"
+      ].join("; ");
+
+      rows.push({
+        source: "/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: csp
+          }
+        ]
+      });
+    }
+
+    return rows;
   },
   async rewrites() {
     return [
@@ -42,4 +75,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

@@ -1,5 +1,30 @@
 /* Home Our Menu — colocated overrides; imported from app/globals.css */
 
+.section_home-menu a.menu_img-hit {
+  display: contents;
+}
+
+/* `display: contents` — show focus on the image via :has (link has no layout box). */
+.section_home-menu
+  .menu_block-content:has(a.menu_img-hit:focus-visible)
+  .menu_img {
+  outline: 2px solid var(--primary--white, #fff);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.section_home-menu .menu_tabs-menu button.w-tab-link.menu_link {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+}
+
 .section_home-menu {
   background-color: #000;
 }
@@ -20,7 +45,8 @@
   outline: none;
 }
 
-.section_home-menu .menu_tabs-menu a.w-tab-link:focus-visible {
+.section_home-menu .menu_tabs-menu a.w-tab-link:focus-visible,
+.section_home-menu .menu_tabs-menu button.w-tab-link:focus-visible {
   outline: 2px solid var(--primary--white, #fff);
   outline-offset: 3px;
 }

@@ -19,12 +19,16 @@ function FooterInfoBody({
 }: {
   body: (typeof footerInfoBlocks)[number]["body"];
 }) {
-  if (body.kind === "html") {
+  if (body.kind === "lines") {
     return (
-      <p
-        className="footer_info-text"
-        dangerouslySetInnerHTML={{ __html: body.html }}
-      />
+      <p className="footer_info-text">
+        {body.lines.map((line, i) => (
+          <span key={`${i}-${line}`}>
+            {i > 0 ? <br /> : null}
+            {line}
+          </span>
+        ))}
+      </p>
     );
   }
 

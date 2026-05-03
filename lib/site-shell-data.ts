@@ -163,7 +163,7 @@ export const FOOTER_GOOGLE_MAPS_URL =
   "https://maps.app.goo.gl/qPayB7SuizsmpvBXA";
 
 export type FooterInfoBody =
-  | { kind: "html"; html: string }
+  | { kind: "lines"; lines: string[] }
   | { kind: "link"; href: string; text: string; external?: boolean }
   | { kind: "links"; items: { href: string; text: string; external?: boolean }[] };
 
@@ -185,8 +185,8 @@ export const footerInfoBlocks: FooterInfoBlock[] = [
   {
     label: "Hours",
     body: {
-      kind: "html",
-      html: "Open 7 Days a Week!<br/>5PM - 12:30AM"
+      kind: "lines",
+      lines: ["Open 7 Days a Week!", "5PM - 12:30AM"]
     }
   },
   {

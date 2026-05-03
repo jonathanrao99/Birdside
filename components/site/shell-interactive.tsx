@@ -2,13 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { FooterNavLink, NavMainLink } from "@/lib/site-shell-data";
 import { pathIsActive } from "@/lib/path-active";
-import HoverUnderlineLottie, {
-  type HoverUnderlineLottieHandle
-} from "@/components/site/HoverUnderlineLottie";
+import type { HoverUnderlineLottieHandle } from "@/components/site/HoverUnderlineLottie";
+
+const HoverUnderlineLottie = dynamic(
+  () => import("@/components/site/HoverUnderlineLottie"),
+  { ssr: false }
+);
 
 export function NavbarMainLink(props: NavMainLink) {
   const pathname = usePathname();

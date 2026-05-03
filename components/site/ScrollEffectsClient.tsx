@@ -1,29 +1,35 @@
 "use client";
 
 import { useLenis } from "@/components/site/lenis-context";
-import { setupHomeMenuProductImgNav } from "@/lib/dom/home-menu-product-img-nav";
+import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
 import { setupCtaProgress } from "@/lib/scroll/cta-progress";
 import { setupHomeMenuParallax } from "@/lib/scroll/home-menu-parallax";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 /**
- * Scroll/DOM effects previously inline in app/layout.tsx.
- * `pathname` in deps re-binds section observers after client navigations (layout persists).
- * Our Menu tabs are React-controlled when `our-menu.json` exists (`HomeMenuClient` + `home-menu-overrides.css`).
+ * Scroll-linked DOM effects (GSAP ScrollTrigger + `gsap.context` revert).
+ * Lenis calls `ScrollTrigger.update` from SmoothScroll when smooth scroll is active;
+ * otherwise the window scroller drives ScrollTrigger.
+ * UI transitions (PageLoader, hero, nav, tabs) stay on Motion — not here.
+ *
+ * `pathname` and `lenis` in deps re-bind after client navigations and Lenis init/teardown.
  */
 export default function ScrollEffectsClient() {
   const lenis = useLenis();
   const pathname = usePathname();
 
   useEffect(() => {
-    const unsubs = [
-      setupCtaProgress(lenis),
-      setupHomeMenuParallax(lenis),
-      setupHomeMenuProductImgNav()
-    ];
+    const ScrollTrigger = ensureScrollTriggerRegistered();
+    const unsubs = [setupCtaProgress(lenis), setupHomeMenuParallax(lenis)];
+    queueMicrotask(() => {
+      ScrollTrigger.refresh();
+    });
     return () => {
       unsubs.forEach((u) => u());
+      queueMicrotask(() => {
+        ScrollTrigger.refresh();
+      });
     };
   }, [lenis, pathname]);
 

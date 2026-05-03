@@ -1,11 +1,14 @@
+import gsap from "gsap";
 import type Lenis from "lenis";
+import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
 
 /**
  * Home menu cover parallax via `--menu-parallax-y` (legacy script parity).
- * Subscribes to Lenis scroll when available so updates align with CTA / smooth scroll.
+ * ScrollTrigger + Lenis drive updates (see SmoothScroll).
  */
-export function setupHomeMenuParallax(lenis: Lenis | null): () => void {
-  const section = document.querySelector(".section_home-menu");
+export function setupHomeMenuParallax(_lenis: Lenis | null): () => void {
+  const ScrollTrigger = ensureScrollTriggerRegistered();
+  const section = document.querySelector(".section_home-menu") as HTMLElement | null;
   const wrap = section?.querySelector(
     ".home-menu_cover-wrap"
   ) as HTMLElement | null;
@@ -18,14 +21,12 @@ export function setupHomeMenuParallax(lenis: Lenis | null): () => void {
     return () => {};
   }
 
-  let ticking = false;
   let lastCover: string | null = null;
 
   const maxCoverPx = () =>
     window.matchMedia("(max-width: 767px)").matches ? 28 : 52;
 
   const update = () => {
-    ticking = false;
     const rect = section.getBoundingClientRect();
     const vh = window.innerHeight || 1;
     const hidden = rect.bottom < 0 || rect.top > vh;
@@ -50,30 +51,19 @@ export function setupHomeMenuParallax(lenis: Lenis | null): () => void {
     }
   };
 
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  const onLenisScroll = () => onScroll();
-  const onBirdsideLenis = () => onScroll();
+  const ctx = gsap.context(() => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top bottom",
+      end: "bottom top",
+      invalidateOnRefresh: true,
+      onUpdate: update
+    });
+  }, section);
 
   update();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-  window.addEventListener("birdside-lenis-scroll", onBirdsideLenis);
-
-  if (lenis) {
-    lenis.on("scroll", onLenisScroll);
-  }
 
   return () => {
-    window.removeEventListener("scroll", onScroll);
-    window.removeEventListener("resize", onScroll);
-    window.removeEventListener("birdside-lenis-scroll", onBirdsideLenis);
-    if (lenis) {
-      lenis.off("scroll", onLenisScroll);
-    }
+    ctx.revert();
   };
 }
