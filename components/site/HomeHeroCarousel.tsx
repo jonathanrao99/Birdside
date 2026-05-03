@@ -1,29 +1,18 @@
 "use client";
 
+/**
+ * Home hero motion: `motion/react` drives heading and image-stage transforms.
+ * Marquee, mobile nav, and other global motion stay in app/globals.css (see plan).
+ */
+
 import Image from "next/image";
-import {
-  useEffect,
-  useState,
-  useSyncExternalStore,
-  type CSSProperties
-} from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   homeHeroSlides,
   type HomeHeroSlide
 } from "@/lib/home-hero-slides";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
-
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReduced(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-  return reduced;
-}
 
 /** Brasa home hero IX timing (approximate; template has no manual controls). */
 const AUTOPLAY_MS = 6000;
@@ -87,47 +76,12 @@ const BRASA_SC: ReadonlyArray<readonly [number, number, number]> = [
   [0.46, 0.55, 1]
 ];
 
-const EASE_IMAGE = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-const EASE_HEAD = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+/** Matches prior CSS cubic-bezier(0.25, 0.46, 0.45, 0.94) for headings and images. */
+const EASE_BRASA = [0.25, 0.46, 0.45, 0.94] as const;
 
 type HomeHeroCarouselProps = {
   slides?: HomeHeroSlide[];
 };
-
-function headingStyle(
-  activeIdx: number,
-  i: number,
-  reduced: boolean
-): CSSProperties {
-  const on = activeIdx === i;
-  return {
-    opacity: on ? 1 : 0,
-    transform: on
-      ? "translate3d(0, 0, 0) scale3d(1, 1, 1)"
-      : "translate3d(0, 30%, 0) scale3d(0.7, 0.7, 1)",
-    display: "block",
-    transition: reduced
-      ? undefined
-      : `opacity 0.55s ease, transform 0.85s ${EASE_HEAD}`
-  };
-}
-
-function imageWrapStyle(
-  activeIdx: number,
-  slot: number,
-  reduced: boolean,
-  txTable: ReadonlyArray<readonly [number, number, number]>
-): CSSProperties {
-  const tx = txTable[activeIdx][slot];
-  const sc = BRASA_SC[activeIdx][slot];
-  const z = sc >= 1 ? 5 : Math.abs(tx) >= 36 ? 2 : 3;
-  return {
-    transform: `translate3d(${tx}vw, 0, 0) scale3d(${sc}, ${sc}, 1)`,
-    display: "flex",
-    zIndex: z,
-    transition: reduced ? undefined : `transform 0.9s ${EASE_IMAGE}`
-  };
-}
 
 export default function HomeHeroCarousel({
   slides = homeHeroSlides
@@ -135,7 +89,7 @@ export default function HomeHeroCarousel({
   const stageSlides = slides.slice(0, 3);
   const count = stageSlides.length;
   const [index, setIndex] = useState(0);
-  const reducedMotion = usePrefersReducedMotion();
+  const reducedMotion = useReducedMotion() ?? false;
   const heroTx = useHeroTx();
 
   useEffect(() => {
@@ -146,39 +100,74 @@ export default function HomeHeroCarousel({
     return () => window.clearInterval(t);
   }, [reducedMotion, count]);
 
+  const instant = reducedMotion ? { duration: 0 } : false;
+
   return (
     <>
       <div className="home-header_headings">
-        {stageSlides.map((s, i) => (
-          <h1
-            key={s.imageSrc}
-            aria-hidden={i !== index}
-            className={`home-header_heading _${i + 1}`}
-            style={headingStyle(index, i, reducedMotion)}
-          >
-            <span className="home-header_heading-line">{s.line1}</span>
-            <span className="home-header_heading-line">{s.line2}</span>
-          </h1>
-        ))}
+        {stageSlides.map((s, i) => {
+          const on = index === i;
+          return (
+            <motion.h1
+              key={s.imageSrc}
+              aria-hidden={!on}
+              className={`home-header_heading _${i + 1}`}
+              style={{ display: "block" }}
+              initial={false}
+              animate={{
+                opacity: on ? 1 : 0,
+                y: on ? "0%" : "30%",
+                scale: on ? 1 : 0.7
+              }}
+              transition={
+                instant
+                  ? instant
+                  : {
+                      opacity: { duration: 0.55, ease: "easeOut" },
+                      y: { duration: 0.85, ease: EASE_BRASA },
+                      scale: { duration: 0.85, ease: EASE_BRASA }
+                    }
+              }
+            >
+              <span className="home-header_heading-line">{s.line1}</span>
+              <span className="home-header_heading-line">{s.line2}</span>
+            </motion.h1>
+          );
+        })}
       </div>
       <div className="home-header_images">
-        {stageSlides.map((slide, i) => (
-          <div
-            key={slide.imageSrc}
-            aria-hidden={i !== index}
-            className={`home-header_image-wrap _${i + 1}`}
-            style={imageWrapStyle(index, i, reducedMotion, heroTx)}
-          >
-            <Image
-              alt={slide.alt}
-              className="home-header_image"
-              fill
-              priority={i === 0}
-              sizes="(max-width: 767px) 90vw, 70vw"
-              src={slide.imageSrc}
-            />
-          </div>
-        ))}
+        {stageSlides.map((slide, i) => {
+          const tx = heroTx[index][i];
+          const sc = BRASA_SC[index][i];
+          const z = sc >= 1 ? 5 : Math.abs(tx) >= 36 ? 2 : 3;
+          return (
+            <motion.div
+              key={slide.imageSrc}
+              aria-hidden={i !== index}
+              className={`home-header_image-wrap _${i + 1}`}
+              style={{ display: "flex", zIndex: z }}
+              initial={false}
+              animate={{
+                x: `${tx}vw`,
+                scale: sc
+              }}
+              transition={
+                instant
+                  ? instant
+                  : { duration: 0.9, ease: EASE_BRASA }
+              }
+            >
+              <Image
+                alt={slide.alt}
+                className="home-header_image"
+                fill
+                priority={i === 0}
+                sizes="(max-width: 767px) 90vw, 70vw"
+                src={slide.imageSrc}
+              />
+            </motion.div>
+          );
+        })}
         <div className="home-header_button-wrap">
           <a
             className="home-header_button w-inline-block"

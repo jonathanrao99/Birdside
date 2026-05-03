@@ -11,7 +11,11 @@ import PatternStrip from "@/components/site/PatternStrip";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+
+const EASE_NAV = [0.33, 1, 0.32, 1] as const;
+const EASE_BURGER = [0.22, 1, 0.36, 1] as const;
 
 function NavbarInfoItem({
   block
@@ -54,6 +58,7 @@ export default function SiteNavbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileNavLayout, setMobileNavLayout] = useState(false);
+  const reducedMotion = useReducedMotion() ?? false;
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 991px)");
@@ -101,28 +106,84 @@ export default function SiteNavbar() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  const instant = reducedMotion ? { duration: 0 } : false;
+  const mobile = mobileNavLayout;
+
   return (
-    <div className={menuOpen ? "navbars is-nav-open" : "navbars"}>
+    <div className="navbars">
       <nav aria-label="Main navigation" className="navbar">
         <div className="padding-global">
           <div className="container-medium">
             <div className="navbar_component">
               <div className="navbar_main">
                 <NavbarLogoLink alt={navLogo.alt} href="/" src={navLogo.src} />
-                <div
+                <motion.div
                   id="navbar-main-links"
                   className="navbar_links"
-                  inert={mobileNavLayout && !menuOpen ? true : undefined}
+                  inert={mobile && !menuOpen ? true : undefined}
+                  style={
+                    mobile ? { pointerEvents: menuOpen ? "auto" : "none" } : undefined
+                  }
+                  initial={false}
+                  animate={
+                    mobile
+                      ? {
+                          opacity: menuOpen ? 1 : 0,
+                          y: menuOpen ? "0rem" : "-0.6rem"
+                        }
+                      : { opacity: 1, y: "0rem" }
+                  }
+                  transition={
+                    instant
+                      ? instant
+                      : {
+                          opacity: {
+                            duration: 0.42,
+                            ease: EASE_NAV
+                          },
+                          y: { duration: 0.45, ease: EASE_NAV }
+                        }
+                  }
                   onClick={(e) => {
                     if ((e.target as HTMLElement).closest("a")) {
                       setMenuOpen(false);
                     }
                   }}
                 >
-                  {navMainLinks.map((item) => (
-                    <NavbarMainLink key={item.href} {...item} />
-                  ))}
-                </div>
+                  {navMainLinks.map((item, i) =>
+                    mobile ? (
+                      <motion.div
+                        key={item.href}
+                        className="navbar_link-motion-wrap"
+                        initial={false}
+                        animate={{
+                          opacity: menuOpen ? 1 : 0,
+                          y: menuOpen ? "0rem" : "0.65rem"
+                        }}
+                        transition={
+                          instant
+                            ? instant
+                            : {
+                                opacity: {
+                                  duration: 0.42,
+                                  ease: EASE_NAV,
+                                  delay: menuOpen ? 0.05 * (i + 1) : 0
+                                },
+                                y: {
+                                  duration: 0.45,
+                                  ease: EASE_NAV,
+                                  delay: menuOpen ? 0.05 * (i + 1) : 0
+                                }
+                              }
+                        }
+                      >
+                        <NavbarMainLink {...item} />
+                      </motion.div>
+                    ) : (
+                      <NavbarMainLink key={item.href} {...item} />
+                    )
+                  )}
+                </motion.div>
               </div>
               <div className="navbar_infos">
                 {navInfoBlocks.map((block) => (
@@ -139,8 +200,34 @@ export default function SiteNavbar() {
                 onClick={() => setMenuOpen((o) => !o)}
               >
                 <div className="navbar_hamburger" aria-hidden>
-                  <div className="navbar_hamburger-line _1"></div>
-                  <div className="navbar_hamburger-line _2"></div>
+                  <motion.div
+                    className="navbar_hamburger-line _1"
+                    initial={false}
+                    animate={
+                      mobile && menuOpen
+                        ? { y: 4, rotate: 45 }
+                        : { y: 0, rotate: 0 }
+                    }
+                    transition={
+                      instant
+                        ? instant
+                        : { duration: 0.32, ease: EASE_BURGER }
+                    }
+                  />
+                  <motion.div
+                    className="navbar_hamburger-line _2"
+                    initial={false}
+                    animate={
+                      mobile && menuOpen
+                        ? { y: -4, rotate: -45 }
+                        : { y: 0, rotate: 0 }
+                    }
+                    transition={
+                      instant
+                        ? instant
+                        : { duration: 0.32, ease: EASE_BURGER }
+                    }
+                  />
                 </div>
               </button>
             </div>

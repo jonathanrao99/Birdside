@@ -9,6 +9,9 @@ type Props = { children: ReactNode };
 /**
  * Loader runs on first visit and on every client navigation, with path synced during render
  * so the next route doesn’t paint before the overlay.
+ *
+ * Layering: full-screen fade is `PageLoader` (motion/react). The content shell below uses
+ * CSS (`.birdside-page-transition-shell` in app/globals.css) only — no second motion fade.
  */
 export default function PageTransitionChrome({ children }: Props) {
   const pathname = usePathname();

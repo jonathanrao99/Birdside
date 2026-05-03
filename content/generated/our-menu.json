@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "heading": "Our menu",
+  "defaultTabId": "Tab 1",
+  "cover": {
+    "alt": "Birdside wings spread — menu hero banner.",
+    "src": "/assets/menu-cover-wings-spread.webp",
+    "width": 2560,
+    "height": 1705,
+    "sizes": "100vw",
+    "dataWId": "2e9ed6a6-0f57-4bff-fc1b-129e3113e29b"
+  },
+  "pattern": {
+    "dataWId": "0082254a-3520-4bc4-3d2e-84b006be3728"
+  },
+  "tabs": [
+    {
+      "id": "Tab 1",
+      "label": "Nashville Hot Chicken",
+      "items": [
+        {
+          "imageAlt": "The Sando",
+          "imageSrc": "/assets/menu-cover-sando.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "The Sando",
+          "price": "$15.99",
+          "description": "Crispy Nashville hot chicken tender with house-made slaw, pickles and Bird Sauce on a toasted bun at Birdside HTX in Katy.",
+          "productHref": "/product/the-sando",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "The Sando Combo",
+          "imageSrc": "/assets/THE%20SANDO%20COMBO.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "The Sando Combo",
+          "price": "$18.99",
+          "description": "Toasted Bun, Fried Tender, House-Made Slaw, Pickles, Bird Sauce. at Birdside HTX in Katy.",
+          "productHref": "/product/the-sando-combo",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "The Basket",
+          "imageSrc": "/assets/Tenders%20cropped.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "The Basket",
+          "price": "$17.99",
+          "description": "Fried Tenders with choice of Fries or Mac and Cheese and Bird Sauce at Birdside HTX in Katy.",
+          "productHref": "/product/the-basket",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "The Loaded Fries",
+          "imageSrc": "/assets/Loaded%20side%20fries%20chicken.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "The Loaded Fries",
+          "price": "$15.99",
+          "description": "Chopped Tenders, Seasoned Fries, Melted Cheese, Bird Sauce at Birdside HTX in Katy.",
+          "productHref": "/product/the-loaded-fries",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        }
+      ]
+    },
+    {
+      "id": "Tab 2",
+      "label": "Wings",
+      "items": [
+        {
+          "imageAlt": "5PC Wings",
+          "imageSrc": "/assets/THE%205%20PIECE.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "5PC Wings",
+          "price": "$12.99",
+          "description": "5 Crispy Wings, Choice of One Flavor. Includes One House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "productHref": "/product/wing-5pc",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "5PC Wings Combo",
+          "imageSrc": "/assets/THE%205%20PIECE%20COMBO.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "5PC Wings Combo",
+          "price": "$15.99",
+          "description": "5 Crispy Wings, Choice of One Flavor. at Birdside HTX in Katy.",
+          "productHref": "/product/wing-5pc-combo",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "8PC Wings",
+          "imageSrc": "/assets/THE%208%20PIECE.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "8PC Wings",
+          "price": "$16.99",
+          "description": "8 Crispy Wings, Choice of Two Flavors. Includes Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "productHref": "/product/wing-8pc",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "8PC Wings Combo",
+          "imageSrc": "/assets/THE%208%20PIECE%20COMBO.jpeg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "8PC Wings Combo",
+          "price": "$19.99",
+          "description": "8 Crispy Wings, Choice of Two Flavors. at Birdside HTX in Katy.",
+          "productHref": "/product/wing-8pc-combo",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "12PC Wings",
+          "imageSrc": "/assets/THE%2012%20PIECE.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "12PC Wings",
+          "price": "$23.99",
+          "description": "12 Crispy Wings, Choice of Two Flavors. Includes Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "productHref": "/product/wing-12pc",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "12PC Wings Combo",
+          "imageSrc": "/assets/THE%2012%20PIECE%20COMBO.jpeg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "12PC Wings Combo",
+          "price": "$25.99",
+          "description": "12 Crispy Wings, Choice of Two Flavors. at Birdside HTX in Katy.",
+          "productHref": "/product/wing-12pc-combo",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "The Wing Box",
+          "imageSrc": "/assets/11.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "The Wing Box",
+          "price": "$23.99",
+          "description": "8 Crispy Wings, Choice of Two Flavors. Served with Fries, Mac and Cheese, and Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "productHref": "/product/the-wing-box",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        }
+      ]
+    },
+    {
+      "id": "Tab 3",
+      "label": "Sides & Extras",
+      "items": [
+        {
+          "imageAlt": "Extra Tender",
+          "imageSrc": "/assets/2.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Extra Tender",
+          "price": "$3.99",
+          "description": "Fried Tender with Choice of Heat Level at Birdside HTX in Katy.",
+          "productHref": "/product/extra-tender",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Garlic Parmesan Fries",
+          "imageSrc": "/assets/9.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Garlic Parmesan Fries",
+          "price": "$7.99",
+          "description": "Crispy fries tossed with garlic butter, parmesan, and herbs at Birdside HTX in Katy.",
+          "productHref": "/product/garlic-parmesan-fries",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Large Slaw",
+          "imageSrc": "/assets/Screenshot%202026-04-28%20at%208.41.10%E2%80%AFPM.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Large Slaw",
+          "price": "$5.99",
+          "description": "Shredded cabbage and carrots, mayonnaise, vinegar, sugar, salt, celery seed, black pepper at Birdside HTX in Katy.",
+          "productHref": "/product/large-slaw",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Seasoned Fries",
+          "imageSrc": "/assets/Screenshot%202026-04-28%20at%208.42.37%E2%80%AFPM.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Seasoned Fries",
+          "price": "$5.99",
+          "description": "House-Made Seasoned Fries at Birdside HTX in Katy.",
+          "productHref": "/product/french-fries",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Maple Buffalo Ranch Fries",
+          "imageSrc": "/assets/MAPLE%20BUFFALO%20RANCH%20FRIES.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Maple Buffalo Ranch Fries",
+          "price": "$7.99",
+          "description": "Seasoned Fries, Maple Buffalo Sauce, topped with house-made buttermilk ranch and chives at Birdside HTX in Katy.",
+          "productHref": "/product/maple-buffalo-ranch-fries",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Creamy Mac & Cheese",
+          "imageSrc": "/assets/Mac_and_cheese.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Creamy Mac & Cheese",
+          "price": "$5.99",
+          "description": "House-made creamy mac and cheese with a blend of three cheeses, paprika, and chives at Birdside HTX in Katy.",
+          "productHref": "/product/creamy-mac-cheese",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Dipping Sauce",
+          "imageSrc": "/assets/Screenshot%202026-04-28%20at%208.37.03%E2%80%AFPM.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Dipping Sauce",
+          "price": "$0.99",
+          "description": "Signature Bird Sauce or House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "productHref": "/product/dipping-sauce",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Wing Sauce",
+          "imageSrc": "/assets/Screenshot%202026-04-28%20at%208.31.10%E2%80%AFPM.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Wing Sauce",
+          "price": "$1.29",
+          "description": "House-made wing sauce, five flavors to choose from at Birdside HTX in Katy.",
+          "productHref": "/product/wing-sauce",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        }
+      ]
+    },
+    {
+      "id": "Tab 4",
+      "label": "Drinks",
+      "items": [
+        {
+          "imageAlt": "Calypso Lemonade",
+          "imageSrc": "/assets/VDV06465.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Calypso Lemonade",
+          "price": "$3.99",
+          "description": "Lemonade made with real fruit, real sugar, lemon bits, and natural flavors at Birdside HTX in Katy.",
+          "productHref": "/product/calypso-lemonade",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Soda",
+          "imageSrc": "/assets/VDV06487.jpg",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Soda",
+          "price": "$2.49",
+          "description": "Chilled fountain soda at Birdside HTX in Katy.",
+          "productHref": "/product/soda",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Water",
+          "imageSrc": "/assets/20411_-3__67398.webp",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Water",
+          "price": "$1.79",
+          "description": "Bottled water at Birdside HTX in Katy.",
+          "productHref": "/product/water",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        }
+      ]
+    }
+  ]
+}

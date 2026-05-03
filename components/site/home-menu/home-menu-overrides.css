@@ -1,0 +1,220 @@
+/* Home Our Menu — colocated overrides; imported from app/globals.css */
+
+.section_home-menu {
+  background-color: #000;
+}
+
+.section_home-menu .menu_content {
+  background-color: #000 !important;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+/* Menu category pills: reduce type by one step */
+.section_home-menu .menu_link {
+  font-size: var(--_sizes---fixed--1-5rem, 1.5rem) !important;
+}
+
+.section_home-menu .menu_tabs-menu:focus-visible {
+  outline: none;
+}
+
+.section_home-menu .menu_tabs-menu a.w-tab-link:focus-visible {
+  outline: 2px solid var(--primary--white, #fff);
+  outline-offset: 3px;
+}
+
+.section_home-menu .w-tab-content > .w-tab-pane.w--tab-active {
+  animation: home-menu-tab-in 0.2s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section_home-menu .w-tab-content > .w-tab-pane.w--tab-active {
+    animation: none;
+  }
+}
+
+@keyframes home-menu-tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu item description copy: one step smaller */
+.section_home-menu .menu_desc {
+  font-size: var(--_sizes---fixed--0-875rem, 0.875rem) !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Menu cards: keep all item blocks the same height */
+.section_home-menu .menu_list {
+  align-items: stretch;
+}
+
+.section_home-menu .menu_list > .menu_item {
+  height: 100%;
+}
+
+.section_home-menu .menu_block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_home-menu .menu_block-content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+}
+
+.section_home-menu .menu_infos {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_home-menu .button-icon_component {
+  margin-top: auto;
+}
+
+.section_home-menu .menu_img {
+  width: 10rem !important;
+  height: 10rem !important;
+  cursor: pointer;
+}
+
+.section_home-menu .menu_tabs-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+}
+
+/* Menu hero (wings spread) — taller than Brasa 25rem / 12rem / 8rem */
+.section_home-menu .home-menu_cover-wrap {
+  --menu-parallax-y: 0px;
+  position: relative;
+  overflow: hidden;
+  height: 42rem !important;
+}
+
+@media (max-width: 991px) {
+  .section_home-menu .home-menu_cover-wrap {
+    height: 20rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .section_home-menu .home-menu_cover-wrap {
+    height: 14rem !important;
+  }
+}
+
+.section_home-menu .menu_cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  transform: translate3d(0, var(--menu-parallax-y), 0) scale(1.08);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@media (max-width: 767px) {
+  .section_home-menu .menu_cover {
+    object-position: center 55%;
+  }
+}
+
+/* Full-bleed strip above testimonials — intrinsic ~2172×370; full width visible (no side crop) */
+.section_home-menu .menu_bg {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 2172 / 370;
+  background-image: url("/assets/ChatGPT Image Apr 28, 2026, 06_42_39 PM (1).png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% auto !important;
+  background-position: center bottom;
+}
+
+@media (max-width: 991px) {
+  .section_home-menu .menu_tabs-menu {
+    gap: 0.45rem 0.6rem;
+  }
+
+  .section_home-menu .menu_link {
+    font-size: clamp(1.05rem, 2.8vw, 1.35rem) !important;
+  }
+
+  .section_home-menu .menu_block-content {
+    grid-template-columns: 8rem 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .section_home-menu .menu_img {
+    width: 8rem !important;
+    height: 8rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .section_home-menu .menu_tabs-menu {
+    justify-content: flex-start;
+    padding-inline: 0.25rem;
+  }
+
+  .section_home-menu .menu_list {
+    gap: 0.875rem;
+  }
+
+  .section_home-menu .menu_block-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.65rem;
+  }
+
+  .section_home-menu .menu_img {
+    width: min(54vw, 7.25rem) !important;
+    height: min(54vw, 7.25rem) !important;
+  }
+
+  .section_home-menu .menu_infos {
+    align-items: center;
+  }
+
+  .section_home-menu .menu_name {
+    text-align: center;
+  }
+
+  .section_home-menu .menu_desc {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    text-align: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .section_home-menu .menu_link {
+    font-size: clamp(0.95rem, 4.4vw, 1.15rem) !important;
+  }
+}
+
