@@ -1,6 +1,7 @@
 import { HOME_ABOUT_SECTION_MARKER, OUR_MENU_SLOT_HTML } from "@/lib/our-menu-slot";
 
 const HOME_MENU_SECTION_PREFIX = '<section class="section_home-menu"';
+const HOME_MARQUEE_SECTION_PREFIX = '<section class="section_home-marquee';
 const HOME_MAIN_OPEN = '<main class="main-wrapper">';
 const MENU_ROUTE_WRAPPER_PREFIX = '<div class="main-wrapper">';
 /** First block inside `/menu` inner main (after legacy `section_menu` strip). */
@@ -25,6 +26,20 @@ function findSectionBounds(html: string, startIdx: number): { end: number } {
     i += 1;
   }
   throw new Error("split-page-html: unclosed <section>");
+}
+
+/** Removes the Webflow home ticker (`section_home-marquee`) when present. */
+export function stripHomeMarqueeSection(html: string): string {
+  const idx = html.indexOf(HOME_MARQUEE_SECTION_PREFIX);
+  if (idx < 0) {
+    return html;
+  }
+  try {
+    const { end } = findSectionBounds(html, idx);
+    return html.slice(0, idx) + html.slice(end);
+  } catch {
+    return html;
+  }
 }
 
 /** Balanced fragments inside `<main class="main-wrapper">` (PatternStrip + OurMenu mount between them). */

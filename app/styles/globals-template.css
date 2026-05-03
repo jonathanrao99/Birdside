@@ -353,15 +353,6 @@
   backface-visibility: hidden;
 }
 
-@keyframes home-marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-33.333%, 0, 0);
-  }
-}
-
 @media (max-width: 991px) {
   .section_home-header .home-header_component {
     min-height: min(68vh, 640px);
@@ -385,10 +376,6 @@
     width: min(68vw, 420px);
     height: min(34vh, 380px);
     min-height: 165px;
-  }
-
-  .section_home-marquee .home-marquee_wrapper {
-    animation-duration: 14s;
   }
 
   .section_cta {
@@ -475,10 +462,6 @@
     width: min(72vw, 340px);
     height: min(32vh, 300px);
     min-height: 152px;
-  }
-
-  .section_home-marquee .home-marquee_wrapper {
-    animation-duration: 12s;
   }
 
   .section_cta {
@@ -583,9 +566,6 @@
     transition: none !important;
   }
 
-  .section_home-marquee .home-marquee_wrapper {
-    animation: none !important;
-  }
 }
 
 .navbar {
@@ -644,6 +624,12 @@
   color: #fff !important;
 }
 
+/* Main nav labels only (Brasa default is often ≥1.125rem — clamp keeps this clearly larger). */
+.navbar .navbar_links .navbar_text {
+  font-size: clamp(1.3125rem, 0.55vw + 1.2rem, 1.5625rem) !important;
+  line-height: 1.28 !important;
+}
+
 .navbar .navbar_infos .navbar_info-text {
   color: #e30119 !important;
 }
@@ -671,55 +657,78 @@
   opacity: 0.9;
 }
 
-/* Nav/footer underline Lottie — Brasa-style layout; one vertical offset for all links */
-.navbar .navbar_line,
-.footer .footer_link-line {
-  pointer-events: none;
-  width: 120%;
-  display: none;
+/*
+ * Nav / footer — white underline via ::after + scaleX (smooth in on hover/focus, out on leave).
+ */
+.navbar .navbar_link.w-inline-block,
+.navbar a.navbar_link {
+  position: relative;
+  text-decoration: none !important;
+  padding-bottom: 0.22em;
+}
+
+.navbar .navbar_link.w-inline-block::after,
+.navbar a.navbar_link::after {
+  content: "";
   position: absolute;
-  bottom: -1rem;
   left: 0;
-  /* Composition is 173×44; keep proportional height so the stroke isn’t crushed */
-  aspect-ratio: 173 / 44;
-  height: auto;
-  max-height: 44px;
-  /* Webflow asset stroke is black — invert so it reads on dark shells */
-  filter: invert(1);
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.32s cubic-bezier(0.33, 1, 0.32, 1);
+  pointer-events: none;
 }
 
-.navbar .navbar_link.navbar_link--line-hover .navbar_line,
-.footer .footer_link.footer_link--line-hover .footer_link-line {
-  display: block;
+.navbar .navbar_link.w-inline-block:hover::after,
+.navbar .navbar_link.w-inline-block:focus-visible::after,
+.navbar a.navbar_link:hover::after,
+.navbar a.navbar_link:focus-visible::after,
+.navbar .navbar_link.w-inline-block.w--current::after,
+.navbar a.navbar_link.w--current::after {
+  transform: scaleX(1);
 }
 
-/* Longer labels use a wider 120% box → taller aspect-ratio height; nudge down so the
-   stroke aligns with shorter links (vendor used `bottom: -1.25rem` for `.large`). */
-.navbar .navbar_link .navbar_line.large {
-  width: 120%;
-  bottom: -1.58rem;
+.footer .footer_link.w-inline-block,
+.footer a.footer_link {
+  position: relative;
+  text-decoration: none !important;
+  padding-bottom: 0.22em;
 }
 
-.footer .footer_link .footer_link-line.large {
-  width: 120%;
-  /* Closer to label than default -1rem (Locations / Contact) */
-  bottom: -0.2rem;
+.footer .footer_link.w-inline-block::after,
+.footer a.footer_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #fff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.32s cubic-bezier(0.33, 1, 0.32, 1);
+  pointer-events: none;
 }
 
-/* Contact only — sit the underline one notch lower than sibling links */
-.navbar .navbar_link.navbar_link--contact-line .navbar_line {
-  bottom: -1.5rem;
+.footer .footer_link.w-inline-block:hover::after,
+.footer .footer_link.w-inline-block:focus-visible::after,
+.footer a.footer_link:hover::after,
+.footer a.footer_link:focus-visible::after,
+.footer .footer_link.w-inline-block.w--current::after,
+.footer a.footer_link.w--current::after {
+  transform: scaleX(1);
 }
 
-.footer .footer_link.footer_link--contact-line .footer_link-line.large {
-  bottom: -0.7rem;
-}
-
-.navbar .navbar_line canvas,
-.footer .footer_link-line canvas {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
+@media (prefers-reduced-motion: reduce) {
+  .navbar .navbar_link.w-inline-block::after,
+  .navbar a.navbar_link::after,
+  .footer .footer_link.w-inline-block::after,
+  .footer a.footer_link::after {
+    transition-duration: 0.01ms;
+  }
 }
 
 .navbar_info-icon {

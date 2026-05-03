@@ -8,7 +8,7 @@ import PageTransitionChrome from "@/components/site/PageTransitionChrome";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import { getSiteUrl } from "@/lib/site-url";
 
-// Motion: PageLoader, HomeHeroCarousel, mobile nav. Marquee, CTA vars, page shell: globals.css. Scroll/tab DOM: ScrollEffectsClient in SmoothScroll.
+// Motion: PageLoader, mobile nav. Home hero: video. Marquee, CTA vars, page shell: globals.css. Scroll/tab DOM: ScrollEffectsClient in SmoothScroll.
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: "Birdside HTX",

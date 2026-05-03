@@ -215,24 +215,3 @@ section:has(> .menu_content) > .pattern.black {
   color: #fff !important;
 }
 
-/* Home marquee ticker: force red section + continuous leftward scroll */
-.section_home-marquee {
-  background-color: var(--brand-red) !important;
-}
-
-.section_home-marquee .home-marquee_component {
-  width: 100% !important;
-  overflow: hidden;
-}
-
-.section_home-marquee .home-marquee_wrapper {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: home-marquee-scroll 16s linear infinite;
-}
-
-.section_home-marquee .home-marquee_group {
-  flex: 0 0 auto;
-}
-

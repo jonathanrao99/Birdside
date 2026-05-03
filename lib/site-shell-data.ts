@@ -1,11 +1,5 @@
 /** Hand-maintained shell content (nav, footer). Webflow classes preserved for CSS/ix2. */
 
-export const LINE_LOTTIE_SRC =
-  "/assets/lottie/nav-underline.lottie";
-
-/** DotLottie playback multiplier (1 = template duration; higher = faster). */
-export const LINE_LOTTIE_SPEED = 2.25;
-
 export type NavMainLink = {
   href: string;
   label: string;
@@ -18,37 +12,34 @@ export type NavMainLink = {
 
 export const navMainLinks: NavMainLink[] = [
   {
-    href: "/",
-    label: "Home",
-    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134b1",
-    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134b4"
-  },
-  {
-    href: "/about",
-    label: "About",
-    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134b5",
-    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134b8"
-  },
-  {
     href: "/menu",
     label: "Menu",
     linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134b9",
     lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134bc"
   },
   {
-    href: "/locations",
-    label: "Locations",
-    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134c1",
-    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134c4",
-    lineLarge: true,
-    lineAutoplay1: true,
-    lineIx2Target0: true
+    href: "/sauce-lab",
+    label: "Sauce Lab",
+    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134b1",
+    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134b4"
   },
   {
-    href: "/contact",
-    label: "Contact",
+    href: "/locations",
+    label: "Find Us",
+    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134c1",
+    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134c4"
+  },
+  {
+    href: "/catering",
+    label: "Catering",
     linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134bd",
     lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134c0"
+  },
+  {
+    href: "/about",
+    label: "Our Story",
+    linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134b5",
+    lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134b8"
   }
 ];
 

@@ -9,11 +9,13 @@ const GENERIC_WEBFLOW_ECOM = /Webflow Ecommerce website template/i;
 
 const ROUTE_LABELS: Record<string, string> = {
   "/": SITE_NAME,
-  "/about": "About",
+  "/about": "Our Story",
   "/menu": "Menu",
   "/contact": "Contact",
-  "/locations": "Locations",
-  "/checkout": "Checkout"
+  "/locations": "Find Us",
+  "/checkout": "Checkout",
+  "/sauce-lab": "Sauce Lab",
+  "/catering": "Catering"
 };
 
 /** Prefer real titles; replace Webflow template noise with Birdside naming. */

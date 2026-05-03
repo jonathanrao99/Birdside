@@ -8,7 +8,9 @@ const STATIC_PATHS = [
   "/menu",
   "/contact",
   "/locations",
-  "/checkout"
+  "/checkout",
+  "/sauce-lab",
+  "/catering"
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
