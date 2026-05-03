@@ -37,9 +37,11 @@ export default function PageShell({
   if (mainSlots && mainSlots.length > 0) {
     return (
       <div className="page-wrapper">
-        <SiteNavbar />
-        {lead}
-        {renderMainSlots(mainSlots)}
+        <div id="birdside-preloader-reveal">
+          <SiteNavbar />
+          {lead}
+          {renderMainSlots(mainSlots)}
+        </div>
         <SiteFooter />
       </div>
     );
@@ -54,11 +56,13 @@ export default function PageShell({
     const afterHtml = mainHtml.slice(splitIndex);
     return (
       <div className="page-wrapper">
-        <SiteNavbar />
-        {lead}
-        <div dangerouslySetInnerHTML={{ __html: beforeHtml }} />
-        {preMain}
-        <div dangerouslySetInnerHTML={{ __html: afterHtml }} />
+        <div id="birdside-preloader-reveal">
+          <SiteNavbar />
+          {lead}
+          <div dangerouslySetInnerHTML={{ __html: beforeHtml }} />
+          {preMain}
+          <div dangerouslySetInnerHTML={{ __html: afterHtml }} />
+        </div>
         <SiteFooter />
       </div>
     );
@@ -66,10 +70,12 @@ export default function PageShell({
 
   return (
     <div className="page-wrapper">
-      <SiteNavbar />
-      {lead}
-      {preMain}
-      <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <div id="birdside-preloader-reveal">
+        <SiteNavbar />
+        {lead}
+        {preMain}
+        <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      </div>
       <SiteFooter />
     </div>
   );

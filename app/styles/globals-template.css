@@ -1124,6 +1124,57 @@ a.footer_social-icon:hover {
   object-fit: contain;
 }
 
+/* Homepage letter intro — components/site/HomePreloader.tsx */
+.birdside-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.birdside-home-preloader,
+.birdside-home-preloader--pending {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  pointer-events: auto;
+}
+
+.birdside-home-preloader--pending {
+  pointer-events: none;
+}
+
+.birdside-home-preloader__letters {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  max-width: min(96vw, 56rem);
+  padding-inline: clamp(0.5rem, 3vw, 1.5rem);
+}
+
+.birdside-home-preloader__letter {
+  flex: 0 0 auto;
+  width: auto;
+  height: clamp(3.25rem, 18vw, 7.5rem);
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .birdside-home-preloader__letters {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 .birdside-page-transition-shell {
   transition:
     opacity 0.4s cubic-bezier(0.33, 1, 0.32, 1),

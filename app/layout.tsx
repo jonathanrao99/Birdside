@@ -3,6 +3,7 @@ import "lenis/dist/lenis.css";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import BootSplash from "@/components/site/BootSplash";
+import ElevenLabsConvai from "@/components/site/ElevenLabsConvai";
 import PageTransitionChrome from "@/components/site/PageTransitionChrome";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import { getSiteUrl } from "@/lib/site-url";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PageTransitionChrome>
           <SmoothScroll>{children}</SmoothScroll>
         </PageTransitionChrome>
+        <ElevenLabsConvai />
       </body>
     </html>
   );

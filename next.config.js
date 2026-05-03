@@ -42,11 +42,13 @@ const nextConfig = {
     if (process.env.NODE_ENV === "production") {
       const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: https:",
         "font-src 'self' data:",
-        "connect-src 'self'",
+        "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io",
+        "frame-src 'self' https://*.elevenlabs.io",
+        "media-src 'self' blob: https:",
         "frame-ancestors 'none'",
         "base-uri 'self'",
         "form-action 'self'"

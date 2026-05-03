@@ -1,10 +1,14 @@
 "use client";
 
 import Lenis from "lenis";
-import { type ReactNode, useLayoutEffect, useState } from "react";
+import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
 import ScrollEffectsClient from "@/components/site/ScrollEffectsClient";
 import { LenisProvider } from "@/components/site/lenis-context";
 import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
+import {
+  HOME_PRELOADER_COMPLETE_EVENT,
+  HOME_PRELOADER_LENIS_BUMP_MS
+} from "@/lib/home-preloader-letters";
 
 type Props = { children: ReactNode };
 
@@ -73,6 +77,21 @@ export default function SmoothScroll({ children }: Props) {
       });
     };
   }, []);
+
+  useEffect(() => {
+    if (!lenis) return;
+    const bump = () => {
+      lenis.resize();
+      ensureScrollTriggerRegistered().refresh();
+    };
+    const onPreloaderDone = () => {
+      queueMicrotask(bump);
+      window.setTimeout(bump, HOME_PRELOADER_LENIS_BUMP_MS);
+    };
+    window.addEventListener(HOME_PRELOADER_COMPLETE_EVENT, onPreloaderDone);
+    return () =>
+      window.removeEventListener(HOME_PRELOADER_COMPLETE_EVENT, onPreloaderDone);
+  }, [lenis]);
 
   return (
     <LenisProvider value={lenis}>
