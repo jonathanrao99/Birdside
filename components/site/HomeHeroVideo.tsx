@@ -6,15 +6,15 @@ import { homeHeroSlides } from "@/lib/home-hero-slides";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import "./home-hero-video.css";
 
-/** GitHub rejects >100MB files; keep .mov out of git and point production at hosted URLs. */
-const DESKTOP_SRC =
-  process.env.NEXT_PUBLIC_HOME_HERO_VIDEO_DESKTOP?.trim() || "/BirdsideDesktop.mov";
-const MOBILE_SRC =
-  process.env.NEXT_PUBLIC_HOME_HERO_VIDEO_MOBILE?.trim() || "/BirdsideHeroMobile.mov";
 const poster = homeHeroSlides[0]?.imageSrc ?? "";
 
+type BackdropProps = {
+  desktopSrc: string;
+  mobileSrc: string;
+};
+
 /** Full-viewport-width video layer; render as first child of `section_home-header`. */
-export function HomeHeroVideoBackdrop() {
+export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) {
   const reducedMotion = useReducedMotion() ?? false;
   const desktopRef = useRef<HTMLVideoElement>(null);
   const mobileRef = useRef<HTMLVideoElement>(null);
@@ -37,7 +37,7 @@ export function HomeHeroVideoBackdrop() {
         playsInline
         poster={poster}
         preload="auto"
-        src={DESKTOP_SRC}
+        src={desktopSrc}
       />
       <video
         ref={mobileRef}
@@ -49,7 +49,7 @@ export function HomeHeroVideoBackdrop() {
         playsInline
         poster={poster}
         preload="metadata"
-        src={MOBILE_SRC}
+        src={mobileSrc}
       />
     </div>
   );
