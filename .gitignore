@@ -12,3 +12,5 @@ peckers-master/
 # Hero videos (~620MB each) — host via CDN / blob storage; set NEXT_PUBLIC_* in .env
 public/BirdsideDesktop.mov
 public/BirdsideHeroMobile.mov
+public/assets/video/hero-desktop.mov
+public/assets/video/hero-mobile.mov

@@ -3,11 +3,11 @@ export function getHomeHeroVideoUrls(): { desktopSrc: string; mobileSrc: string 
   const desktopRaw =
     trimEnv("NEXT_PUBLIC_HOME_HERO_VIDEO_DESKTOP") ||
     trimEnv("HOME_HERO_VIDEO_DESKTOP") ||
-    "/BirdsideDesktop.mov";
+    "/assets/video/hero-desktop.mov";
   const mobileRaw =
     trimEnv("NEXT_PUBLIC_HOME_HERO_VIDEO_MOBILE") ||
     trimEnv("HOME_HERO_VIDEO_MOBILE") ||
-    "/BirdsideHeroMobile.mov";
+    "/assets/video/hero-mobile.mov";
   return {
     desktopSrc: normalizeHeroVideoUrl(desktopRaw),
     mobileSrc: normalizeHeroVideoUrl(mobileRaw)

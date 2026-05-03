@@ -14,6 +14,6 @@ describe("getHomeHeroVideoUrls", () => {
     vi.stubEnv("NEXT_PUBLIC_HOME_HERO_VIDEO_MOBILE", "");
     const { desktopSrc, mobileSrc } = getHomeHeroVideoUrls();
     expect(desktopSrc).toBe("https://x.public.blob.vercel-storage.com/BirdsideDesktop.mov");
-    expect(mobileSrc).toBe("/BirdsideHeroMobile.mov");
+    expect(mobileSrc).toBe("/assets/video/hero-mobile.mov");
   });
 });

@@ -1,3 +1,5 @@
+import { PUBLIC_ASSET_BASE_PATH } from "@/lib/public-asset-layout";
+
 /** Hand-maintained shell content (nav, footer). Webflow classes preserved for CSS/ix2. */
 
 export type NavMainLink = {
@@ -44,7 +46,7 @@ export const navMainLinks: NavMainLink[] = [
 ];
 
 export const navLogo = {
-  src: "/assets/birdside-logo.png",
+  src: `${PUBLIC_ASSET_BASE_PATH}/brand/birdside-logo.png`,
   alt: "Birdside HTX"
 };
 

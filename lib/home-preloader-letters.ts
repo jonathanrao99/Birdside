@@ -8,17 +8,17 @@ export const HOME_PRELOADER_COMPLETE_EVENT = "birdside-home-preloader-complete";
 export const HOME_PRELOADER_LENIS_BUMP_MS = 455;
 
 /**
- * Ordered letter PNGs (manual slices, BIRDSIDE) under `public/assets/home-preloader-letters/`.
+ * Ordered letter PNGs (manual slices, BIRDSIDE) under `public/assets/home/preloader/`.
  */
 export const HOME_PRELOADER_LETTER_SRCS: readonly string[] = [
-  "/assets/home-preloader-letters/1.png",
-  "/assets/home-preloader-letters/2.png",
-  "/assets/home-preloader-letters/3.png",
-  "/assets/home-preloader-letters/4.png",
-  "/assets/home-preloader-letters/5.png",
-  "/assets/home-preloader-letters/6.png",
-  "/assets/home-preloader-letters/7.png",
-  "/assets/home-preloader-letters/8.png"
+  "/assets/home/preloader/letter-1.png",
+  "/assets/home/preloader/letter-2.png",
+  "/assets/home/preloader/letter-3.png",
+  "/assets/home/preloader/letter-4.png",
+  "/assets/home/preloader/letter-5.png",
+  "/assets/home/preloader/letter-6.png",
+  "/assets/home/preloader/letter-7.png",
+  "/assets/home/preloader/letter-8.png"
 ] as const;
 
 export const HOME_PRELOADER_SR_LABEL = "Birdside";

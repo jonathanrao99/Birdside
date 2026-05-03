@@ -71,7 +71,7 @@ const nextConfig = {
     return [
       {
         source: "/favicon.ico",
-        destination: "/assets/birdside-logo.png"
+        destination: "/assets/brand/birdside-logo.png"
       }
     ];
   }

@@ -152,7 +152,7 @@ export default function SiteFooter() {
             height={484}
             priority
             sizes="100vw"
-            src="/assets/footer.png"
+            src="/assets/home/footer-decoration.png"
             width={2356}
           />
         </div>

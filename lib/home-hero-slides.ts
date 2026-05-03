@@ -11,19 +11,19 @@ export const homeHeroSlides: HomeHeroSlide[] = [
   {
     line1: "Sando love.",
     line2: "Always.",
-    imageSrc: "/assets/10-077375a3-b633-494a-844b-52967a4a1d05.png",
+    imageSrc: "/assets/home/hero-marquee-panel.png",
     alt: "A cheeseburger on a wooden cutting board with ketchup."
   },
   {
     line1: "Wings done",
     line2: "right.",
-    imageSrc: "/assets/hero-wings-tray.jpg",
+    imageSrc: "/assets/home/hero-wings-tray.jpg",
     alt: "Saucy chicken wings in a takeout box with dipping sauces."
   },
   {
     line1: "Crispy tenders,",
     line2: "no contest.",
-    imageSrc: "/assets/2.jpg",
+    imageSrc: "/assets/menu/items/extra-tender.jpg",
     alt: "A basket filled with french fries next to a burger."
   }
 ];
