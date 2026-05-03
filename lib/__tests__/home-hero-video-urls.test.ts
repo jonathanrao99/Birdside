@@ -16,16 +16,4 @@ describe("getHomeHeroVideoUrls", () => {
     expect(desktopSrc).toBe("https://x.public.blob.vercel-storage.com/BirdsideDesktop.mov");
     expect(mobileSrc).toBe("/assets/video/hero-mobile.mov");
   });
-
-  it("rewrites Blob download links to inline video URLs", () => {
-    vi.stubEnv(
-      "NEXT_PUBLIC_HOME_HERO_VIDEO_DESKTOP",
-      "https://x.public.blob.vercel-storage.com/BirdsideDesktop.mov?download=1"
-    );
-    vi.stubEnv("NEXT_PUBLIC_HOME_HERO_VIDEO_MOBILE", "");
-
-    const { desktopSrc } = getHomeHeroVideoUrls();
-
-    expect(desktopSrc).toBe("https://x.public.blob.vercel-storage.com/BirdsideDesktop.mov");
-  });
 });

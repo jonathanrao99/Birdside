@@ -3,10 +3,6 @@
 .section_home-header {
   position: relative;
   z-index: 0;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Video fills entire hero section (edge to edge); sits under padded content. */
@@ -26,12 +22,6 @@
 .section_home-header > .padding-section-small {
   position: relative;
   z-index: 1;
-}
-
-.section_home-header > .padding-global {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
 }
 
 .section_home-header .home-hero-video {
@@ -65,23 +55,20 @@
 .section_home-header .home-header_component {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
-  justify-content: center;
-  min-height: 0;
 }
 
 .section_home-header .home-header_images.home-header_images--video-cta {
   position: relative;
   z-index: 2;
   flex: 1 1 auto;
-  min-height: 0;
+  min-height: min(36vh, 360px);
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: flex-start !important;
   width: 100%;
   margin-top: 0 !important;
   padding-inline: 0 !important;
-  padding-block: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(1rem, 3vw, 2rem);
 }
 
 .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-stack {
@@ -143,5 +130,9 @@
 
   .section_home-header .home-hero-video--mobile {
     display: block;
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta {
+    min-height: min(40vh, 400px);
   }
 }

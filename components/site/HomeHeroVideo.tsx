@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef, useState, type SyntheticEvent } from "react";
+import { useEffect, useRef, type SyntheticEvent } from "react";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import "./home-hero-video.css";
 
@@ -10,34 +10,11 @@ type BackdropProps = {
   mobileSrc: string;
 };
 
-const LOCAL_DESKTOP_FALLBACKS = ["/assets/video/hero-desktop.mov", "/BirdsideDesktop.mov"];
-const LOCAL_MOBILE_FALLBACKS = ["/assets/video/hero-mobile.mov", "/BirdsideHeroMobile.mov"];
-
-function withLocalFallbacks(src: string, fallbacks: string[]) {
-  const candidates = [src, ...fallbacks];
-  return candidates.filter((candidate, index) => candidates.indexOf(candidate) === index);
-}
-
 /** Full-viewport-width video layer; render as first child of `section_home-header`. */
 export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) {
   const reducedMotion = useReducedMotion() ?? false;
   const desktopRef = useRef<HTMLVideoElement>(null);
   const mobileRef = useRef<HTMLVideoElement>(null);
-  const desktopSources = useMemo(
-    () => withLocalFallbacks(desktopSrc, LOCAL_DESKTOP_FALLBACKS),
-    [desktopSrc]
-  );
-  const mobileSources = useMemo(
-    () => withLocalFallbacks(mobileSrc, LOCAL_MOBILE_FALLBACKS),
-    [mobileSrc]
-  );
-  const [desktopSourceIndex, setDesktopSourceIndex] = useState(0);
-  const [mobileSourceIndex, setMobileSourceIndex] = useState(0);
-
-  useEffect(() => {
-    setDesktopSourceIndex(0);
-    setMobileSourceIndex(0);
-  }, [desktopSrc, mobileSrc]);
 
   useEffect(() => {
     if (!reducedMotion) return;
@@ -50,45 +27,31 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
     if (!reducedMotion) return;
     desktopRef.current?.classList.add("home-hero-video--visible");
     mobileRef.current?.classList.add("home-hero-video--visible");
-  }, [reducedMotion, desktopSources, mobileSources]);
+  }, [reducedMotion, desktopSrc, mobileSrc]);
 
   /** Reset fade when src changes (reduced-motion effect below may re-apply immediately). */
   useEffect(() => {
     desktopRef.current?.classList.remove("home-hero-video--visible");
     mobileRef.current?.classList.remove("home-hero-video--visible");
-  }, [desktopSources, mobileSources, desktopSourceIndex, mobileSourceIndex]);
-
-  const playVideo = useCallback(
-    (video: HTMLVideoElement | null) => {
-      if (!video || reducedMotion) return;
-      void video.play().catch(() => {
-        /* ignore — user gesture may be required on some browsers */
-      });
-    },
-    [reducedMotion]
-  );
+  }, [desktopSrc, mobileSrc]);
 
   /** Autoplay policies: nudge play after mount when `autoPlay` alone stalls (common with remote src). */
   useEffect(() => {
-    playVideo(desktopRef.current);
-    playVideo(mobileRef.current);
-  }, [desktopSourceIndex, mobileSourceIndex, playVideo]);
-
-  const onVideoReady = (e: SyntheticEvent<HTMLVideoElement>) => {
-    e.currentTarget.classList.add("home-hero-video--visible");
-    playVideo(e.currentTarget);
-  };
+    if (reducedMotion) return;
+    const d = desktopRef.current;
+    const m = mobileRef.current;
+    const kick = (v: HTMLVideoElement | null) => {
+      if (!v) return;
+      void v.play().catch(() => {
+        /* ignore — user gesture may be required on some browsers */
+      });
+    };
+    kick(d);
+    kick(m);
+  }, [reducedMotion, desktopSrc, mobileSrc]);
 
   const onVideoPlaying = (e: SyntheticEvent<HTMLVideoElement>) => {
     e.currentTarget.classList.add("home-hero-video--visible");
-  };
-
-  const onDesktopError = () => {
-    setDesktopSourceIndex((i) => Math.min(i + 1, desktopSources.length - 1));
-  };
-
-  const onMobileError = () => {
-    setMobileSourceIndex((i) => Math.min(i + 1, mobileSources.length - 1));
   };
 
   return (
@@ -101,12 +64,9 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
         loop
         muted
         playsInline
-        onCanPlay={onVideoReady}
-        onError={onDesktopError}
-        onLoadedData={onVideoReady}
         onPlaying={onVideoPlaying}
         preload="auto"
-        src={desktopSources[desktopSourceIndex]}
+        src={desktopSrc}
       />
       <video
         ref={mobileRef}
@@ -116,12 +76,9 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
         loop
         muted
         playsInline
-        onCanPlay={onVideoReady}
-        onError={onMobileError}
-        onLoadedData={onVideoReady}
         onPlaying={onVideoPlaying}
         preload="auto"
-        src={mobileSources[mobileSourceIndex]}
+        src={mobileSrc}
       />
     </div>
   );

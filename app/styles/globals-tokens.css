@@ -36,31 +36,29 @@ body {
 
 /* Home only: red hero sits under nav + checker; nav stack paints above (z-index). */
 /* Stack height must cover real navbar + checker (strip is 2.5rem once we override Brasa ≤767px 1.5rem). */
-.page-wrapper:has(> #birdside-preloader-reveal > .section_home-header) {
+.page-wrapper:has(> .section_home-header) {
   --home-nav-stack-h: clamp(9.75rem, 17vh, 12rem);
 }
 
 @media (min-width: 992px) {
-  .page-wrapper:has(> #birdside-preloader-reveal > .section_home-header) {
+  .page-wrapper:has(> .section_home-header) {
     --home-nav-stack-h: clamp(10.5rem, 13vh, 13.5rem);
   }
 }
 
-.page-wrapper:has(> #birdside-preloader-reveal > .section_home-header) > #birdside-preloader-reveal > .navbars {
+.page-wrapper:has(> .section_home-header) > .navbars {
   position: relative;
   z-index: 25;
 }
 
-.page-wrapper:has(> #birdside-preloader-reveal > .section_home-header) > #birdside-preloader-reveal > .section_home-header {
+.page-wrapper:has(> .section_home-header) > .section_home-header {
   position: relative;
   z-index: 0;
   margin-top: calc(-1 * var(--home-nav-stack-h));
   padding-top: calc(var(--home-nav-stack-h) + clamp(0.25rem, 1vw, 0.65rem));
-  min-height: 100vh;
-  min-height: 100svh;
 }
 
-.page-wrapper:has(> #birdside-preloader-reveal > .section_home-header) > #birdside-preloader-reveal > .section_home-header > .padding-section-xsmall {
+.page-wrapper:has(> .section_home-header) > .section_home-header > .padding-section-xsmall {
   padding-top: 0 !important;
 }
 

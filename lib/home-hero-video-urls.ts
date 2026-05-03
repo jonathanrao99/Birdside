@@ -19,11 +19,8 @@ export function getHomeHeroVideoUrls(): { desktopSrc: string; mobileSrc: string 
  * `*.public.blob.vercel-storage.com` (dashboard sometimes surfaces the private host).
  */
 function normalizeHeroVideoUrl(url: string): string {
-  const publicUrl = url.replace(
-    /\.private\.blob\.vercel-storage\.com/g,
-    ".public.blob.vercel-storage.com"
-  );
-  return publicUrl.replace(/[?&]download=1(?=&|$)/, "").replace(/[?&]$/, "");
+  if (!url.includes(".private.blob.vercel-storage.com")) return url;
+  return url.replace(/\.private\.blob\.vercel-storage\.com/g, ".public.blob.vercel-storage.com");
 }
 
 function trimEnv(name: string): string | undefined {
