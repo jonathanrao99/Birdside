@@ -1101,12 +1101,6 @@ a.footer_social-icon:hover {
   pointer-events: none;
 }
 
-.birdside-boot-splash__img {
-  width: clamp(7.75rem, 34vw, 13rem);
-  height: clamp(7.75rem, 34vw, 13rem);
-  object-fit: contain;
-}
-
 /* Route page loader shell layout; opacity/logo motion lives in components/site/PageLoader.tsx (motion/react). */
 .birdside-page-loader {
   position: fixed;
