@@ -624,6 +624,23 @@
   color: #fff !important;
 }
 
+/* Navbar right CTAs — Peckers-style pills (components/site/PeckersStyleActionButton.tsx). */
+.navbar .navbar_infos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.35rem, 0.9vw, 0.75rem);
+}
+
+.navbar .navbar_infos .navbar_peckers-cta .peckers-action-btn {
+  font-size: clamp(0.65rem, 1.05vw, 0.8125rem);
+  padding: 0.48em 1em 0.42em;
+  min-height: 2.35rem;
+  min-width: 6.75rem;
+}
+
 /* Main nav labels only (Brasa default is often ≥1.125rem — clamp keeps this clearly larger). */
 .navbar .navbar_links .navbar_text {
   font-size: clamp(1.3125rem, 0.55vw + 1.2rem, 1.5625rem) !important;

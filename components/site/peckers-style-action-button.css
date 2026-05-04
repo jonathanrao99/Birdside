@@ -1,0 +1,104 @@
+/* Peckers-style header CTAs: offset shadow + rounded pill (see peckers-master HeaderActionButton). */
+
+.peckers-action-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.peckers-action-btn-shadow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 9999px;
+  transform: translate(4px, 4px);
+  opacity: 0;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+.peckers-action-btn-wrap:hover .peckers-action-btn-shadow,
+.peckers-action-btn-wrap:focus-within .peckers-action-btn-shadow {
+  opacity: 1;
+  transform: translate(6px, 6px);
+}
+
+.peckers-action-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  text-align: center;
+  line-height: 1;
+  padding: 0.52em 1.2em 0.48em;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none !important;
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
+}
+
+.peckers-action-btn-wrap:hover .peckers-action-btn,
+.peckers-action-btn-wrap:focus-within .peckers-action-btn {
+  transform: translate(-1px, -1px);
+}
+
+.peckers-action-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.peckers-action-btn-wrap--light .peckers-action-btn-shadow {
+  background-color: var(--brand-red);
+}
+
+.peckers-action-btn--light {
+  background-color: #fff;
+  color: #101010;
+  border-color: #fff;
+}
+
+.peckers-action-btn--light:hover,
+.peckers-action-btn--light:focus-visible {
+  filter: brightness(0.97);
+}
+
+.peckers-action-btn-wrap--accent .peckers-action-btn-shadow {
+  background-color: #fff;
+}
+
+.peckers-action-btn--accent {
+  background-color: var(--brand-red);
+  color: #fff;
+  border-color: var(--brand-red);
+}
+
+.peckers-action-btn--accent:hover,
+.peckers-action-btn--accent:focus-visible {
+  filter: brightness(0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peckers-action-btn-shadow,
+  .peckers-action-btn {
+    transition: none;
+  }
+
+  .peckers-action-btn-wrap:hover .peckers-action-btn-shadow,
+  .peckers-action-btn-wrap:focus-within .peckers-action-btn-shadow {
+    opacity: 0;
+    transform: translate(4px, 4px);
+  }
+
+  .peckers-action-btn-wrap:hover .peckers-action-btn,
+  .peckers-action-btn-wrap:focus-within .peckers-action-btn {
+    transform: none;
+  }
+}

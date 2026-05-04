@@ -6,6 +6,6 @@
  * - `menu/covers/` — large menu tab cover art
  * - `menu/items/` — product and combo photography
  * - `lottie/` — DotLottie / JSON animations for nav, CTAs, icons
- * - `video/` — full-bleed hero background `.mov` files (`hero-desktop.mov`, `hero-mobile.mov`)
+ * - `video/` — full-bleed hero background MP4 (`hero-desktop.mp4`, `hero-mobile.mp4`)
  */
 export const PUBLIC_ASSET_BASE_PATH = "/assets" as const;

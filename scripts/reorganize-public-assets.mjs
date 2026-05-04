@@ -99,8 +99,8 @@ const assetMoves = [
 ];
 
 const videoMoves = [
-  ["BirdsideDesktop.mov", "assets/video/hero-desktop.mov"],
-  ["BirdsideHeroMobile.mov", "assets/video/hero-mobile.mov"]
+  ["BirdsideDesktop.mp4", "assets/video/hero-desktop.mp4"],
+  ["BirdsideMobile.mp4", "assets/video/hero-mobile.mp4"]
 ];
 
 function encodedAssetPath(rel) {
@@ -175,11 +175,11 @@ function main() {
     }
   }
 
-  const oldVideoDesktop = "/BirdsideDesktop.mov";
-  const oldVideoMobile = "/BirdsideHeroMobile.mov";
+  const oldVideoDesktop = "/BirdsideDesktop.mp4";
+  const oldVideoMobile = "/BirdsideMobile.mp4";
   pairs.push(
-    [oldVideoDesktop, "/assets/video/hero-desktop.mov"],
-    [oldVideoMobile, "/assets/video/hero-mobile.mov"]
+    [oldVideoDesktop, "/assets/video/hero-desktop.mp4"],
+    [oldVideoMobile, "/assets/video/hero-mobile.mp4"]
   );
 
   pairs.sort((a, b) => b[0].length - a[0].length);

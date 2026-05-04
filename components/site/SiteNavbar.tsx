@@ -4,55 +4,15 @@ import {
   NavbarLogoLink,
   NavbarMainLink
 } from "@/components/site/shell-interactive";
-import InteractiveLottieIcon, {
-  type InteractiveLottieIconHandle
-} from "@/components/site/InteractiveLottieIcon";
 import PatternStrip from "@/components/site/PatternStrip";
+import PeckersStyleActionButton from "@/components/site/PeckersStyleActionButton";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 const EASE_NAV = [0.33, 1, 0.32, 1] as const;
 const EASE_BURGER = [0.22, 1, 0.36, 1] as const;
-
-function NavbarInfoItem({
-  block
-}: {
-  block: (typeof navInfoBlocks)[number];
-}) {
-  const iconRef = useRef<InteractiveLottieIconHandle | null>(null);
-  const triggerIcon = () => iconRef.current?.playOnce();
-
-  return (
-    <LinkOrA
-      href={block.href}
-      onClick={triggerIcon}
-      onFocus={triggerIcon}
-      onMouseEnter={triggerIcon}
-      onTouchStart={triggerIcon}
-    >
-      <div className={block.iconWrapClass}>
-        <div className="navbar_info-icon">
-          {block.iconType === "location" ? (
-            <InteractiveLottieIcon
-              ref={iconRef}
-              size="location"
-              src="/assets/lottie/location.lottie"
-            />
-          ) : (
-            <InteractiveLottieIcon ref={iconRef} size="order" src="/assets/lottie/cookfree.lottie" />
-          )}
-        </div>
-      </div>
-      <div className="navbar_info-texts">
-        <div className="navbar_info-text">{block.label}</div>
-        <div className="navbar_info">{block.value}</div>
-      </div>
-    </LinkOrA>
-  );
-}
 
 export default function SiteNavbar() {
   const pathname = usePathname();
@@ -187,7 +147,14 @@ export default function SiteNavbar() {
               </div>
               <div className="navbar_infos">
                 {navInfoBlocks.map((block) => (
-                  <NavbarInfoItem key={block.href} block={block} />
+                  <PeckersStyleActionButton
+                    key={block.href}
+                    className="navbar_peckers-cta"
+                    href={block.href}
+                    variant={block.variant}
+                  >
+                    {block.label}
+                  </PeckersStyleActionButton>
                 ))}
               </div>
               <button
@@ -236,64 +203,5 @@ export default function SiteNavbar() {
       </nav>
       <PatternStrip tone="black" />
     </div>
-  );
-}
-
-function LinkOrA({
-  href,
-  children,
-  onMouseEnter,
-  onClick,
-  onFocus,
-  onTouchStart
-}: {
-  href: string;
-  children: ReactNode;
-  onMouseEnter?: () => void;
-  onClick?: () => void;
-  onFocus?: () => void;
-  onTouchStart?: () => void;
-}) {
-  if (href.startsWith("tel:")) {
-    return (
-      <a
-        className="navbar_info-block w-inline-block"
-        href={href}
-        onClick={onClick}
-        onFocus={onFocus}
-        onMouseEnter={onMouseEnter}
-        onTouchStart={onTouchStart}
-      >
-        {children}
-      </a>
-    );
-  }
-  if (href.startsWith("http://") || href.startsWith("https://")) {
-    return (
-      <a
-        className="navbar_info-block w-inline-block"
-        href={href}
-        rel="noopener noreferrer"
-        target="_blank"
-        onClick={onClick}
-        onFocus={onFocus}
-        onMouseEnter={onMouseEnter}
-        onTouchStart={onTouchStart}
-      >
-        {children}
-      </a>
-    );
-  }
-  return (
-    <Link
-      className="navbar_info-block w-inline-block"
-      href={href}
-      onClick={onClick}
-      onFocus={onFocus}
-      onMouseEnter={onMouseEnter}
-      onTouchStart={onTouchStart}
-    >
-      {children}
-    </Link>
   );
 }

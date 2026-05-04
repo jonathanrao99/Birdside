@@ -53,22 +53,16 @@ export const navLogo = {
 /** Square Online / pickup ordering (navbar “Order now”). */
 export const ORDER_NOW_URL = "https://birdsidehtx.square.site/";
 
-export const navInfoBlocks = [
-  {
-    href: "/locations",
-    iconWrapClass: "navbar_info-icon-wrap white",
-    iconType: "location",
-    label: "Location",
-    value: "Katy, TX"
-  },
-  {
-    href: ORDER_NOW_URL,
-    iconWrapClass: "navbar_info-icon-wrap",
-    iconType: "order",
-    label: "Order now",
-    value: "(832) 873-8528"
-  }
-] as const;
+export type NavInfoBlock = {
+  href: string;
+  label: string;
+  variant: "light" | "accent";
+};
+
+export const navInfoBlocks: NavInfoBlock[] = [
+  { href: "/locations", label: "Find us", variant: "light" },
+  { href: ORDER_NOW_URL, label: "Order now", variant: "accent" }
+];
 
 export type FooterNavLink = {
   href: string;
