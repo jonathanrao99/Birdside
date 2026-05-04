@@ -19,7 +19,7 @@ export default function MenuPage() {
   return (
     <PageShell
       mainSlots={[
-        <div key="menu-main" className="main-wrapper">
+        <div key="menu-main" className="main-wrapper menu-page-route">
           {menuData ? (
             <BirdsideMenuPageClient data={menuData} />
           ) : (

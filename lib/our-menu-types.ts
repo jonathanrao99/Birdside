@@ -31,7 +31,7 @@ export type OurMenuTab = {
 };
 
 export type OurMenuData = {
-  version: 1;
+  version: number;
   heading: string;
   defaultTabId: string;
   cover: OurMenuCover;

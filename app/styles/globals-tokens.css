@@ -58,6 +58,11 @@ body {
   padding-top: calc(var(--home-nav-stack-h) + clamp(0.25rem, 1vw, 0.65rem));
 }
 
+/* /menu — full main column black (carousel + CMS blocks share one canvas). */
+.main-wrapper.menu-page-route {
+  background-color: #000;
+}
+
 .page-wrapper:has(> .section_home-header) > .section_home-header > .padding-section-xsmall {
   padding-top: 0 !important;
 }

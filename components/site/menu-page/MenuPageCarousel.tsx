@@ -1,5 +1,6 @@
 "use client";
 
+import carouselStyles from "@/components/site/menu-page/peckers-menu-page.module.css";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {
@@ -85,9 +86,9 @@ function DropShadowSVG({ filterId, gradId }: { filterId: string; gradId: string 
           <feGaussianBlur stdDeviation="35" />
         </filter>
         <radialGradient id={gradId} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-          <stop offset="40%" stopColor="#ffffff" stopOpacity="0.5" />
-          <stop offset="70%" stopColor="#ffffff" stopOpacity="0.2" />
+          <stop offset="0%" stopColor="#e30119" stopOpacity="0.35" />
+          <stop offset="35%" stopColor="#ffffff" stopOpacity="0.55" />
+          <stop offset="65%" stopColor="#ffffff" stopOpacity="0.18" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
         </radialGradient>
       </defs>
@@ -234,63 +235,17 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
 
   if (TOTAL === 0) return null;
 
-  const arrowBtnStyle: React.CSSProperties = {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    zIndex: 30,
-    padding: "1vw",
-    cursor: "pointer",
-    background: "none",
-    border: "none"
-  };
-
-  const arrowInnerStyle: React.CSSProperties = {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "clamp(28px, 8vw, 56px)",
-    height: "clamp(28px, 8vw, 56px)"
-  };
-
   return (
-    <div
-      className="menu-page-carousel"
-      style={{
-        position: "relative",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        overflow: "hidden",
-        paddingTop: 0,
-        minHeight: 0,
-        paddingBottom: "2vh",
-        background:
-          "radial-gradient(ellipse 50% 52% at 50% 38%, #1c1c1c 0%, #0d0d0d 26%, #070707 58%, #000 100%)"
-      }}
-    >
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "clamp(1.5rem, 8vw, 2rem)",
-          height: "clamp(230px, 38vw, 450px)"
-        }}
-      >
+    <div className={carouselStyles.carousel}>
+      <div className={carouselStyles.carouselStage}>
         <button
           type="button"
           onClick={goPrev}
           disabled={isAnimating}
           aria-label="Previous item"
-          style={{ ...arrowBtnStyle, left: "clamp(0.5rem, 2vw, 2rem)" }}
+          className={`${carouselStyles.arrowBtn} ${carouselStyles.arrowLeft}`}
         >
-          <span style={arrowInnerStyle}>
+          <span className={carouselStyles.arrowBtnInner}>
             <span
               style={{
                 width: "100%",
@@ -303,13 +258,7 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
             >
               <svg
                 viewBox="0 0 100 100"
-                style={{
-                  width: "65%",
-                  height: "65%",
-                  color: "#eab308",
-                  transform: "rotate(180deg)"
-                }}
-                fill="currentColor"
+                className={`${carouselStyles.arrowSvg} ${carouselStyles.arrowSvgFlip}`}
                 aria-hidden
               >
                 <path d="M45 20 L85 50 L45 80 L58 50 Z" />
@@ -324,9 +273,9 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
           onClick={goNext}
           disabled={isAnimating}
           aria-label="Next item"
-          style={{ ...arrowBtnStyle, right: "clamp(0.5rem, 2vw, 2rem)" }}
+          className={`${carouselStyles.arrowBtn} ${carouselStyles.arrowRight}`}
         >
-          <span style={arrowInnerStyle}>
+          <span className={carouselStyles.arrowBtnInner}>
             <span
               style={{
                 width: "100%",
@@ -336,12 +285,7 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
                 justifyContent: "center"
               }}
             >
-              <svg
-                viewBox="0 0 100 100"
-                style={{ width: "65%", height: "65%", color: "#eab308" }}
-                fill="currentColor"
-                aria-hidden
-              >
+              <svg viewBox="0 0 100 100" className={carouselStyles.arrowSvg} aria-hidden>
                 <path d="M45 20 L85 50 L45 80 L58 50 Z" />
                 <path d="M15 25 L50 50 L15 75 L28 50 Z" opacity={0.4} />
               </svg>
@@ -350,15 +294,8 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
         </button>
 
         <div
+          className={carouselStyles.glowWrap}
           style={{
-            position: "absolute",
-            left: "50%",
-            top: "52%",
-            transform: "translate(-50%, -33%)",
-            zIndex: 1,
-            pointerEvents: "none",
-            width: "clamp(340px, 70vw, 760px)",
-            height: "clamp(340px, 70vw, 760px)",
             opacity: glowVisible ? 0.5 : 0,
             transition: glowVisible ? "opacity 0.4s ease" : "opacity 0.1s ease"
           }}
@@ -484,7 +421,9 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
                     width: "clamp(220px, 45vw, 520px)",
                     height: "auto",
                     aspectRatio: "1 / 1",
-                    filter: isCenter ? "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" : "none"
+                    filter: isCenter
+                      ? "drop-shadow(0 20px 36px rgba(0,0,0,0.55)) drop-shadow(0 12px 28px rgba(227,1,25,0.12))"
+                      : "none"
                   }}
                 >
                   <Image
@@ -502,35 +441,8 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
           })}
       </div>
 
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          padding: "0.5rem 0.75rem 1rem",
-          zIndex: 20,
-          overflow: "hidden"
-        }}
-      >
-        <h1
-          style={{
-            margin: 0,
-            textTransform: "uppercase",
-            color: "#fff",
-            textAlign: "center",
-            fontWeight: 900,
-            letterSpacing: "0.05em",
-            lineHeight: 1.1,
-            textShadow: "0px 2px 6px rgba(0,0,0,0.4)",
-            fontFamily:
-              'system-ui, "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif',
-            fontSize: "clamp(1.25rem, 6.4vw, 2.75rem)"
-          }}
-        >
-          {items[carousel.center]?.name}
-        </h1>
+      <div className={carouselStyles.titleBlock}>
+        <h1 className={carouselStyles.title}>{items[carousel.center]?.name}</h1>
       </div>
     </div>
   );

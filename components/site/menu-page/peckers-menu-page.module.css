@@ -1,10 +1,12 @@
-/* Peckers-style /menu layout — Birdside data (no Tailwind). */
+/* /menu full-bleed layout — Birdside tokens + Brasa typography vars (vendor CSS on :root). */
 
 .root {
   position: relative;
   background: #000;
   min-height: 28rem;
   overflow: hidden;
+  color: #fff;
+  font-family: var(--_typography---font-family--primary), system-ui, sans-serif;
 }
 
 @media (min-width: 1280px) {
@@ -13,13 +15,122 @@
   }
 }
 
+/* Carousel stage */
+.carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-top: 0;
+  min-height: 0;
+  padding-bottom: 2vh;
+  background: #000;
+}
+
+.carouselStage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(1.5rem, 8vw, 2rem);
+  height: clamp(230px, 38vw, 450px);
+}
+
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  padding: 1vw;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--brand-red, #e30119);
+}
+
+.arrowBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.arrowBtnInner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 8vw, 56px);
+  height: clamp(28px, 8vw, 56px);
+}
+
+.arrowLeft {
+  left: clamp(0.5rem, 2vw, 2rem);
+}
+
+.arrowRight {
+  right: clamp(0.5rem, 2vw, 2rem);
+}
+
+.arrowSvg {
+  width: 65%;
+  height: 65%;
+  color: var(--brand-red, #e30119);
+  fill: currentColor;
+}
+
+.arrowSvgFlip {
+  transform: rotate(180deg);
+}
+
+.titleBlock {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem 0.75rem 1rem;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.title {
+  margin: 0;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(227, 1, 25, 0.22);
+  /* OMG Sans via Brasa primary stack. */
+  font-family: var(--_typography---font-family--primary);
+  /* +3 steps @ 0.25rem from base clamp */
+  font-size: clamp(2rem, 7.15vw, 3.5rem);
+}
+
+.glowWrap {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -33%);
+  z-index: 1;
+  pointer-events: none;
+  width: clamp(340px, 70vw, 760px);
+  height: clamp(340px, 70vw, 760px);
+}
+
 .tabNavWrap {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 0 1rem;
   z-index: 50;
-  background: transparent;
+  background: #000;
 }
 
 .tabNav {
@@ -58,13 +169,15 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* OMG Sans via Brasa primary stack. */
+  font-family: var(--_typography---font-family--primary);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
   padding: 0 0 0.35rem;
-  font-size: clamp(0.8rem, 2.8vw, 1.05rem);
+  /* +4 steps @ 0.25rem (was clamp(0.8rem, 2.8vw, 1.05rem)) */
+  font-size: clamp(1.8rem, 4vw, 2.05rem);
   color: rgba(255, 255, 255, 0.72);
   border-bottom: 2px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
@@ -72,6 +185,12 @@
 
 .tabBtn:hover {
   color: #fff;
+}
+
+.tabBtn:focus-visible {
+  outline: 2px solid var(--brand-red, #e30119);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .tabBtnActive {
@@ -97,20 +216,21 @@
   text-align: center;
   padding: 0.25rem 1.5rem 0;
   max-width: 48rem;
-  font-size: clamp(0.85rem, 3.2vw, 1.05rem);
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.82);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* +2 steps @ 0.25rem */
+  font-size: clamp(1.35rem, 3.7vw, 1.55rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+  letter-spacing: 0.015em;
+  font-family: var(--_typography---font-family--primary), system-ui, sans-serif;
 }
 
 .price {
   margin-top: 0.75rem;
   font-size: clamp(1.1rem, 4vw, 1.5rem);
   font-weight: 800;
-  color: #f2df0d;
+  color: var(--brand-red, #e30119);
   letter-spacing: 0.06em;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
 }
 
 .actions {
@@ -121,34 +241,47 @@
   margin-top: 1.5rem;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
+/* Reuse Brasa hero “Order now” (black + white ring + offset shadow); undo hero-only absolute layout. */
+.actions :global(.home-header_button-wrap) {
+  position: relative !important;
+  bottom: auto !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  z-index: 1;
+  width: 100%;
+  display: flex;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0.65rem 1.25rem;
-  border-radius: 4px;
-  border: 2px solid #f2df0d;
-  color: #fff;
-  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  font-size: clamp(0.7rem, 2.8vw, 0.95rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.15s ease;
+  box-sizing: border-box;
 }
 
-.btn:hover {
-  background: rgba(242, 223, 13, 0.12);
+.actions :global(.home-header_button) {
+  box-sizing: border-box;
+  max-width: min(100%, 22rem);
+  text-decoration: none !important;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    color 0.3s ease,
+    filter 0.2s ease;
 }
 
-.btnGhost {
-  border-color: rgba(255, 255, 255, 0.35);
+/* Default Brasa: white ring + white drop chip; hover fades those accents to brand red. */
+.actions :global(.home-header_button:hover),
+.actions :global(.home-header_button:focus-visible) {
+  border-color: var(--brand-red, #e30119) !important;
+  background-color: var(--brand-red, #e30119) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 0 0 var(--brand-red, #e30119) !important;
 }
 
-.btnGhost:hover {
-  background: rgba(255, 255, 255, 0.08);
+.actions :global(.home-header_button:active) {
+  filter: brightness(0.94);
+}
+
+.actions :global(.home-header_button:focus-visible) {
+  outline: 2px solid var(--primary--white, #fff);
+  outline-offset: 4px;
 }
 
 .meta {
@@ -156,16 +289,26 @@
   padding: 0 1.25rem;
 }
 
+.metaMuted {
+  color: rgba(255, 255, 255, 0.45);
+  /* +2 steps @ 0.25rem (was 0.7rem) */
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--_typography---font-family--primary), system-ui, sans-serif;
+}
+
 .metaLink {
-  color: #f2df0d;
+  color: var(--brand-red, #e30119);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-decoration: none;
-  border-bottom: 1px solid rgba(242, 223, 13, 0.35);
+  border-bottom: 1px solid rgba(227, 1, 25, 0.4);
+  font-family: var(--_typography---font-family--detail), system-ui, sans-serif;
 }
 
 .metaLink:hover {
-  border-bottom-color: #f2df0d;
+  border-bottom-color: var(--brand-red, #e30119);
 }

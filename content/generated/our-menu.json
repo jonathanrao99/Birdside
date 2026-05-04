@@ -1,9 +1,9 @@
 {
-  "version": 1,
+  "version": 3,
   "heading": "Our menu",
   "defaultTabId": "Tab 1",
   "cover": {
-    "alt": "Birdside wings spread — menu hero banner.",
+    "alt": "Birdside wings spread, menu hero banner.",
     "src": "/assets/menu/covers/wings-spread.webp",
     "width": 2560,
     "height": 1705,
@@ -24,7 +24,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Sando",
           "price": "$15.99",
-          "description": "Crispy Nashville hot chicken tender with house-made slaw, pickles and Bird Sauce on a toasted bun at Birdside HTX in Katy.",
+          "description": "Crispy Nashville hot chicken sandwich with slaw, pickles, and Bird Sauce on a toasted bun. Spicy hot chicken sandwich in Katy, TX and West Houston for lunch or late night.",
           "productHref": "/product/the-sando",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -34,7 +34,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Sando Combo",
           "price": "$18.99",
-          "description": "Toasted Bun, Fried Tender, House-Made Slaw, Pickles, Bird Sauce. at Birdside HTX in Katy.",
+          "description": "Hot chicken sandwich combo: juicy tender, slaw, pickles, Bird Sauce on a bun plus seasoned fries. Nashville hot combo near Fry Road, Katy for Houston-area takeout.",
           "productHref": "/product/the-sando-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -44,7 +44,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Basket",
           "price": "$17.99",
-          "description": "Fried Tenders with choice of Fries or Mac and Cheese and Bird Sauce at Birdside HTX in Katy.",
+          "description": "Crispy fried chicken tenders with fries or mac and cheese plus Bird Sauce. Nashville-style tender basket for Katy, TX takeout and West Houston hot chicken runs.",
           "productHref": "/product/the-basket",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -54,7 +54,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Loaded Fries",
           "price": "$15.99",
-          "description": "Chopped Tenders, Seasoned Fries, Melted Cheese, Bird Sauce at Birdside HTX in Katy.",
+          "description": "Loaded fries with chopped tenders, melted cheese, and Bird Sauce over seasoned fries. Cheesy late-night loaded fries in Katy and West Houston.",
           "productHref": "/product/the-loaded-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }
@@ -66,71 +66,71 @@
       "items": [
         {
           "imageAlt": "5PC Wings",
-          "imageSrc": "/assets/menu/items/five-piece.png",
+          "imageSrc": "/assets/menu/items/wings-5pc.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "5PC Wings",
           "price": "$12.99",
-          "description": "5 Crispy Wings, Choice of One Flavor. Includes One House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "description": "Five crispy chicken wings, your flavor, with house ranch. Hot wings order in Katy, TX or Houston takeout.",
           "productHref": "/product/wing-5pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "5PC Wings Combo",
-          "imageSrc": "/assets/menu/items/five-piece-combo.jpg",
+          "imageSrc": "/assets/menu/items/wings-5pc-combo.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "5PC Wings Combo",
           "price": "$15.99",
-          "description": "5 Crispy Wings, Choice of One Flavor. at Birdside HTX in Katy.",
+          "description": "Five wings plus fries in one wing combo, pick your flavor. Value chicken wings near Katy and Houston.",
           "productHref": "/product/wing-5pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "8PC Wings",
-          "imageSrc": "/assets/menu/items/eight-piece.jpg",
+          "imageSrc": "/assets/menu/items/wings-8pc.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "8PC Wings",
           "price": "$16.99",
-          "description": "8 Crispy Wings, Choice of Two Flavors. Includes Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "description": "Eight chicken wings, two flavors, two ranch cups. Party hot wings for Katy, TX and West Houston late night.",
           "productHref": "/product/wing-8pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "8PC Wings Combo",
-          "imageSrc": "/assets/menu/items/eight-piece-combo.jpeg",
+          "imageSrc": "/assets/menu/items/wings-8pc-combo.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "8PC Wings Combo",
           "price": "$19.99",
-          "description": "8 Crispy Wings, Choice of Two Flavors. at Birdside HTX in Katy.",
+          "description": "Eight wings, two flavors, plus fries. Full wing combo for Katy takeout or Houston suburb pickup.",
           "productHref": "/product/wing-8pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "12PC Wings",
-          "imageSrc": "/assets/menu/items/twelve-piece.jpg",
+          "imageSrc": "/assets/menu/items/wings-12pc.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "12PC Wings",
           "price": "$23.99",
-          "description": "12 Crispy Wings, Choice of Two Flavors. Includes Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "description": "Twelve crispy wings, two flavors, ranch on the side. Crowd chicken wings for Katy gatherings or Houston game night.",
           "productHref": "/product/wing-12pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "12PC Wings Combo",
-          "imageSrc": "/assets/menu/items/twelve-piece-combo.jpeg",
+          "imageSrc": "/assets/menu/items/wings-12pc-combo.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "12PC Wings Combo",
           "price": "$25.99",
-          "description": "12 Crispy Wings, Choice of Two Flavors. at Birdside HTX in Katy.",
+          "description": "Twelve wings, two flavors, and fries. Party wing combo for a crowd in Katy or west of Houston.",
           "productHref": "/product/wing-12pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "The Wing Box",
-          "imageSrc": "/assets/menu/items/wing-box.jpg",
+          "imageSrc": "/assets/menu/items/wings-wing-box.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Wing Box",
           "price": "$23.99",
-          "description": "8 Crispy Wings, Choice of Two Flavors. Served with Fries, Mac and Cheese, and Two House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "description": "Eight wings, two flavors, fries, mac, two ranch cups. Birdside wing box combo: saucy wings and sides for Katy, TX late night or Houston food runs.",
           "productHref": "/product/the-wing-box",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }
@@ -142,81 +142,81 @@
       "items": [
         {
           "imageAlt": "Extra Tender",
-          "imageSrc": "/assets/menu/items/extra-tender.jpg",
+          "imageSrc": "/assets/menu/items/sides-extra-tender.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Extra Tender",
           "price": "$3.99",
-          "description": "Fried Tender with Choice of Heat Level at Birdside HTX in Katy.",
+          "description": "Add a fried Nashville hot tender, your heat. Extra protein for sandwiches, baskets, or wings in Katy and Houston.",
           "productHref": "/product/extra-tender",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
-          "imageAlt": "Garlic Parmesan Fries",
-          "imageSrc": "/assets/menu/items/garlic-parmesan-fries.jpg",
-          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
-          "name": "Garlic Parmesan Fries",
-          "price": "$7.99",
-          "description": "Crispy fries tossed with garlic butter, parmesan, and herbs at Birdside HTX in Katy.",
-          "productHref": "/product/garlic-parmesan-fries",
-          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
-        },
-        {
-          "imageAlt": "Large Slaw",
-          "imageSrc": "/assets/menu/items/large-slaw.png",
-          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
-          "name": "Large Slaw",
-          "price": "$5.99",
-          "description": "Shredded cabbage and carrots, mayonnaise, vinegar, sugar, salt, celery seed, black pepper at Birdside HTX in Katy.",
-          "productHref": "/product/large-slaw",
-          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
-        },
-        {
           "imageAlt": "Seasoned Fries",
-          "imageSrc": "/assets/menu/items/seasoned-fries.png",
+          "imageSrc": "/assets/menu/items/sides-seasoned-fries.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Seasoned Fries",
           "price": "$5.99",
-          "description": "House-Made Seasoned Fries at Birdside HTX in Katy.",
+          "description": "Crispy seasoned fries, golden outside, fluffy inside. Fry side for hot chicken sandwiches and wing combos in Katy or West Houston.",
           "productHref": "/product/french-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "Maple Buffalo Ranch Fries",
-          "imageSrc": "/assets/menu/items/maple-buffalo-ranch-fries.jpg",
+          "imageSrc": "/assets/menu/items/sides-maple-buffalo-ranch-fries.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Maple Buffalo Ranch Fries",
           "price": "$7.99",
-          "description": "Seasoned Fries, Maple Buffalo Sauce, topped with house-made buttermilk ranch and chives at Birdside HTX in Katy.",
+          "description": "Seasoned fries with maple buffalo, ranch, and chives. Sweet-heat loaded fries in Katy, TX and West Houston.",
           "productHref": "/product/maple-buffalo-ranch-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
+          "imageAlt": "Garlic Parmesan Fries",
+          "imageSrc": "/assets/menu/items/sides-garlic-parmesan-fries.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Garlic Parmesan Fries",
+          "price": "$7.99",
+          "description": "Garlic butter, parmesan, and herbs on crispy fries. Savory loaded fries with Nashville hot chicken in Katy.",
+          "productHref": "/product/garlic-parmesan-fries",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
           "imageAlt": "Creamy Mac & Cheese",
-          "imageSrc": "/assets/menu/items/mac-and-cheese.jpg",
+          "imageSrc": "/assets/menu/items/sides-mac-cheese.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Creamy Mac & Cheese",
           "price": "$5.99",
-          "description": "House-made creamy mac and cheese with a blend of three cheeses, paprika, and chives at Birdside HTX in Katy.",
+          "description": "Creamy three-cheese mac with paprika and chives. Cheesy side for hot chicken baskets and combos, Katy and Houston.",
           "productHref": "/product/creamy-mac-cheese",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
-          "imageAlt": "Dipping Sauce",
-          "imageSrc": "/assets/menu/items/dipping-sauce.png",
+          "imageAlt": "Large Slaw",
+          "imageSrc": "/assets/menu/items/sides-large-slaw.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
-          "name": "Dipping Sauce",
+          "name": "Large Slaw",
+          "price": "$5.99",
+          "description": "Big cup of creamy house slaw, cool crunch for Nashville hot sandwiches and tenders in Katy, TX.",
+          "productHref": "/product/large-slaw",
+          "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
+        },
+        {
+          "imageAlt": "Bird Sauce",
+          "imageSrc": "/assets/menu/items/sides-dipping-sauce.png",
+          "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
+          "name": "Bird Sauce",
           "price": "$0.99",
-          "description": "Signature Bird Sauce or House-Made Buttermilk Ranch at Birdside HTX in Katy.",
+          "description": "Bird Sauce or house ranch for wings, fries, and tenders. Birdside dipping sauces in Katy and Houston.",
           "productHref": "/product/dipping-sauce",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "Wing Sauce",
-          "imageSrc": "/assets/menu/items/wing-sauce.png",
+          "imageSrc": "/assets/menu/items/sides-wing-sauce.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Wing Sauce",
           "price": "$1.29",
-          "description": "House-made wing sauce, five flavors to choose from at Birdside HTX in Katy.",
+          "description": "House wing sauce, five flavors. Extra saucy dip for hot wings in Katy, TX.",
           "productHref": "/product/wing-sauce",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }
@@ -228,31 +228,31 @@
       "items": [
         {
           "imageAlt": "Calypso Lemonade",
-          "imageSrc": "/assets/menu/items/photo-vdv06465.jpg",
+          "imageSrc": "/assets/menu/items/drinks-lemonade.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Calypso Lemonade",
           "price": "$3.99",
-          "description": "Lemonade made with real fruit, real sugar, lemon bits, and natural flavors at Birdside HTX in Katy.",
+          "description": "Calypso lemonade, real fruit and sugar, bottled and cold. Pairs with wings or hot chicken sandwiches in Katy and Houston.",
           "productHref": "/product/calypso-lemonade",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "Soda",
-          "imageSrc": "/assets/menu/items/photo-vdv06487.jpg",
+          "imageSrc": "/assets/menu/items/drinks-soda.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Soda",
           "price": "$2.49",
-          "description": "Chilled fountain soda at Birdside HTX in Katy.",
+          "description": "Ice-cold fountain soda with wings, hot chicken combos, or late-night food in Katy, TX.",
           "productHref": "/product/soda",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
         {
           "imageAlt": "Water",
-          "imageSrc": "/assets/menu/items/water-bottle.webp",
+          "imageSrc": "/assets/menu/items/drinks-water.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Water",
           "price": "$1.79",
-          "description": "Bottled water at Birdside HTX in Katy.",
+          "description": "Chilled bottled water with spicy Nashville hot chicken. Hydration for Katy and West Houston orders.",
           "productHref": "/product/water",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }
