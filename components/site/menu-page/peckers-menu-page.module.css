@@ -1,0 +1,171 @@
+/* Peckers-style /menu layout — Birdside data (no Tailwind). */
+
+.root {
+  position: relative;
+  background: #000;
+  min-height: 28rem;
+  overflow: hidden;
+}
+
+@media (min-width: 1280px) {
+  .root {
+    min-height: 100vh;
+  }
+}
+
+.tabNavWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  z-index: 50;
+  background: transparent;
+}
+
+.tabNav {
+  position: relative;
+  width: 100%;
+  max-width: 72rem;
+  color: #fff;
+}
+
+.tabScroll {
+  display: flex;
+  gap: clamp(0.75rem, 4vw, 2rem);
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0.5rem 0.75rem;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.tabScroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .tabScroll {
+    justify-content: space-between;
+    padding: 1.5rem 1.5rem 1rem;
+  }
+}
+
+.tabBtn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 0 0.35rem;
+  font-size: clamp(0.8rem, 2.8vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.72);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.tabBtn:hover {
+  color: #fff;
+}
+
+.tabBtnActive {
+  color: #fff;
+  border-bottom-color: var(--brand-red, #e30119);
+  opacity: 1;
+}
+
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+  background: #000;
+}
+
+.desc {
+  text-align: center;
+  padding: 0.25rem 1.5rem 0;
+  max-width: 48rem;
+  font-size: clamp(0.85rem, 3.2vw, 1.05rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.price {
+  margin-top: 0.75rem;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  font-weight: 800;
+  color: #f2df0d;
+  letter-spacing: 0.06em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 4px;
+  border: 2px solid #f2df0d;
+  color: #fff;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: clamp(0.7rem, 2.8vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: rgba(242, 223, 13, 0.12);
+}
+
+.btnGhost {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btnGhost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.meta {
+  margin-top: 1.75rem;
+  padding: 0 1.25rem;
+}
+
+.metaLink {
+  color: #f2df0d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 223, 13, 0.35);
+}
+
+.metaLink:hover {
+  border-bottom-color: #f2df0d;
+}

@@ -20,7 +20,7 @@
       "items": [
         {
           "imageAlt": "The Sando",
-          "imageSrc": "/assets/menu/covers/sando.png",
+          "imageSrc": "/assets/menu/items/nashville-hot-sando.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Sando",
           "price": "$15.99",
@@ -30,7 +30,7 @@
         },
         {
           "imageAlt": "The Sando Combo",
-          "imageSrc": "/assets/menu/items/sando-combo.jpg",
+          "imageSrc": "/assets/menu/items/nashville-sando-combo.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Sando Combo",
           "price": "$18.99",
@@ -40,7 +40,7 @@
         },
         {
           "imageAlt": "The Basket",
-          "imageSrc": "/assets/menu/items/tenders.png",
+          "imageSrc": "/assets/menu/items/nashville-the-basket.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Basket",
           "price": "$17.99",
@@ -50,7 +50,7 @@
         },
         {
           "imageAlt": "The Loaded Fries",
-          "imageSrc": "/assets/menu/items/loaded-side-fries.jpg",
+          "imageSrc": "/assets/menu/items/nashville-loaded-fries.png",
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Loaded Fries",
           "price": "$15.99",
