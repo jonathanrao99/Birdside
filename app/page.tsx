@@ -1,6 +1,7 @@
 import HomeAbout from "@/components/site/home-about/HomeAbout";
 import HomeCtaLottiesDynamic from "@/components/site/HomeCtaLottiesDynamic";
 import HomeHeader from "@/components/site/HomeHeader";
+import HomeStoryTeaser from "@/components/site/home-story-teaser/HomeStoryTeaser";
 import PageShell from "@/components/site/PageShell";
 import PatternStrip from "@/components/site/PatternStrip";
 import { createStaticRouteMetadata } from "@/lib/page-metadata";
@@ -28,6 +29,7 @@ export default function HomePage() {
             <div dangerouslySetInnerHTML={{ __html: p1 }} />
             <PatternStrip tone="black" />
             <HomeAbout />
+            <HomeStoryTeaser />
             <div dangerouslySetInnerHTML={{ __html: p3 }} />
           </main>
         ]}
