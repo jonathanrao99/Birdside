@@ -73,12 +73,13 @@ export type FooterColumnNavLink = {
 export const footerTagline = "Houston hot chicken, open late.";
 
 export const footerQuickLinks: FooterColumnNavLink[] = [
-  { href: "/menu", label: "Our Menu" },
+  { href: "/menu", label: "Menu" },
   { href: "/locations", label: "Find Us" },
   { href: "/sauce-lab", label: "Sauce Lab" },
   { href: "/about", label: "Our Story" },
   { href: "/catering", label: "Catering" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Contact" },
+  { href: "/faq", label: "FAQ" }
 ];
 
 /** Primary brick-and-mortar rows; add slugs as new stores roll out. */
@@ -87,18 +88,9 @@ export const footerLocationLinks: FooterColumnNavLink[] = [
 ];
 
 export const footerInformationLinks: FooterColumnNavLink[] = [
-  {
-    href: "mailto:birdsidehtx@gmail.com?subject=Privacy%20policy",
-    label: "Privacy Policy"
-  },
-  {
-    href: "mailto:birdsidehtx@gmail.com?subject=Terms%20of%20service",
-    label: "Terms of Service"
-  },
-  {
-    href: "mailto:birdsidehtx@gmail.com?subject=Allergen%20information",
-    label: "Allergen Info"
-  }
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/allergen", label: "Allergen Info" }
 ];
 
 export const footerSocialLinks = [
@@ -128,29 +120,3 @@ export const footerSocialLinks = [
     iconSrc: "https://cdn.simpleicons.org/yelp/ffffff"
   }
 ] as const;
-
-export type FooterInfoBody =
-  | { kind: "lines"; lines: string[] }
-  | { kind: "link"; href: string; text: string; external?: boolean }
-  | { kind: "links"; items: { href: string; text: string; external?: boolean }[] };
-
-export type FooterInfoBlock = {
-  label: string;
-  body: FooterInfoBody;
-};
-
-export const footerInfoBlocks: FooterInfoBlock[] = [
-  {
-    label: "Contact Us",
-    body: {
-      kind: "links",
-      items: [
-        { href: "tel:+18328738528", text: "(832) 873-8528" },
-        {
-          href: "mailto:birdsidehtx@gmail.com",
-          text: "birdsidehtx@gmail.com"
-        }
-      ]
-    }
-  }
-];

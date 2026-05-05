@@ -69,7 +69,13 @@ export function FooterColumnLink({ href, label }: FooterColumnLinkProps) {
   const isHttp = href.startsWith("http://") || href.startsWith("https://");
   const isMailOrTel =
     href.startsWith("mailto:") || href.startsWith("tel:");
-  const active = !isHttp && !isMailOrTel && pathIsActive(pathname, href);
+  const pathForActive = href.split("#")[0]?.split("?")[0] ?? href;
+  const skipActiveForHashRoute = href.includes("#");
+  const active =
+    !isHttp &&
+    !isMailOrTel &&
+    !skipActiveForHashRoute &&
+    pathIsActive(pathname, pathForActive);
   const className = active
     ? "birdside-footer-column-link birdside-footer-column-link--current"
     : "birdside-footer-column-link";

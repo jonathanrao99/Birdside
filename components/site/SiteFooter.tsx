@@ -7,7 +7,6 @@ import {
 } from "@/components/site/ShellInteractive";
 import {
   footerInformationLinks,
-  footerInfoBlocks,
   footerLocationLinks,
   footerQuickLinks,
   footerSocialLinks,
@@ -15,14 +14,7 @@ import {
   navLogo
 } from "@/lib/site-shell-data";
 
-function getContactItems() {
-  const block = footerInfoBlocks.find((b) => b.label === "Contact Us");
-  return block?.body.kind === "links" ? block.body.items : [];
-}
-
 export default function SiteFooter() {
-  const contactItems = getContactItems();
-
   return (
     <footer className="footer">
       <PatternStrip tone="black" />
@@ -88,14 +80,6 @@ export default function SiteFooter() {
                     {footerInformationLinks.map((item) => (
                       <li key={item.label}>
                         <FooterColumnLink {...item} />
-                      </li>
-                    ))}
-                    {contactItems.map((item) => (
-                      <li key={item.href}>
-                        <FooterColumnLink
-                          href={item.href}
-                          label={item.text}
-                        />
                       </li>
                     ))}
                   </ul>

@@ -15,7 +15,11 @@ const ROUTE_LABELS: Record<string, string> = {
   "/locations": "Find Us",
   "/checkout": "Checkout",
   "/sauce-lab": "Sauce Lab",
-  "/catering": "Catering"
+  "/catering": "Catering",
+  "/faq": "FAQ",
+  "/privacy": "Privacy Policy",
+  "/terms": "Terms of Service",
+  "/allergen": "Allergen Info"
 };
 
 /** Prefer real titles; replace Webflow template noise with Birdside naming. */
@@ -61,5 +65,30 @@ export function createStaticRouteMetadata(route: string): () => Metadata {
     const entry = getRouteContent(route);
     if (!entry) return {};
     return buildPageMetadata(route, entry);
+  };
+}
+
+/** Static legal / info pages that are not backed by CMS JSON. */
+export function buildPlaceholderMetadata(
+  route: string,
+  description: string
+): Metadata {
+  const label = ROUTE_LABELS[route] ?? route;
+  const title = `${label} | ${SITE_NAME}`;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: route,
+      siteName: SITE_NAME,
+      type: "website"
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description
+    }
   };
 }
