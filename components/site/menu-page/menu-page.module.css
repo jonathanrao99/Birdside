@@ -29,7 +29,7 @@
   overflow: hidden;
   padding-top: 0;
   min-height: 0;
-  padding-bottom: 2vh;
+  padding-bottom: 0;
   background: #000;
 }
 
@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: clamp(1.5rem, 8vw, 2rem);
+  margin-top: clamp(-1.05rem, -4vw, -0.5rem);
   height: clamp(230px, 38vw, 450px);
 }
 
@@ -94,7 +94,8 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0.5rem 0.75rem 1rem;
+  margin-top: clamp(-2.25rem, -7.2vw, -1.35rem);
+  padding: 0 0.75rem 0.05rem;
   z-index: 20;
   overflow: hidden;
 }
@@ -151,7 +152,7 @@
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 1rem 0.5rem 0.75rem;
+  padding: 2.15rem 0.5rem 0;
   scroll-behavior: smooth;
   width: 100%;
 }
@@ -163,7 +164,7 @@
 @media (min-width: 1024px) {
   .tabScroll {
     justify-content: space-between;
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 2.65rem 1.5rem 0;
   }
 }
 
@@ -172,7 +173,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-family: var(--_typography---font-family--primary);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -206,9 +207,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0;
+  margin-top: -0.35rem;
   margin-bottom: 2rem;
-  padding-top: 0.5rem;
+  padding-top: 0;
   padding-bottom: 0.5rem;
   position: relative;
   background: #000;
@@ -216,10 +217,9 @@
 
 .desc {
   text-align: center;
-  padding: 0.25rem 1.5rem 0;
-  max-width: 48rem;
-  /* +2 steps @ 0.25rem */
-  font-size: clamp(1.35rem, 3.7vw, 1.55rem);
+  padding: 0 1.5rem 0;
+  max-width: 56rem;
+  font-size: clamp(1rem, 2.85vw, 1.15rem);
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.86);
   letter-spacing: 0.03em;
