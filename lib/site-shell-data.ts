@@ -64,57 +64,41 @@ export const navInfoBlocks: NavInfoBlock[] = [
   { href: ORDER_NOW_URL, label: "Order now", variant: "accent" }
 ];
 
-export type FooterNavLink = {
+/** Footer column links (no Webflow ix2 ids). */
+export type FooterColumnNavLink = {
   href: string;
   label: string;
-  linkWId: string;
-  lineWId: string;
-  lineLarge?: boolean;
-  lineAutoplay1?: boolean;
-  lineIx2Target0?: boolean;
 };
 
-export const footerLinkGroups: FooterNavLink[][] = [
-  [
-    {
-      href: "/",
-      label: "Home",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09e3",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09e6"
-    },
-    {
-      href: "/about",
-      label: "About",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09e7",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09ea"
-    },
-    {
-      href: "/menu",
-      label: "Menu",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09eb",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09ee"
-    }
-  ],
-  [
-    {
-      href: "/locations",
-      label: "Locations",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09f0",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09f3",
-      lineLarge: true,
-      lineAutoplay1: true,
-      lineIx2Target0: true
-    },
-    {
-      href: "/contact",
-      label: "Contact",
-      linkWId: "2da64e58-7a64-a03c-8c3f-856a365e09f8",
-      lineWId: "2da64e58-7a64-a03c-8c3f-856a365e09fb",
-      lineLarge: true,
-      lineAutoplay1: true,
-      lineIx2Target0: true
-    }
-  ],
+export const footerTagline = "Houston hot chicken, open late.";
+
+export const footerQuickLinks: FooterColumnNavLink[] = [
+  { href: "/menu", label: "Our Menu" },
+  { href: "/locations", label: "Find Us" },
+  { href: "/sauce-lab", label: "Sauce Lab" },
+  { href: "/about", label: "Our Story" },
+  { href: "/catering", label: "Catering" },
+  { href: "/contact", label: "Contact" }
+];
+
+/** Primary brick-and-mortar rows; add slugs as new stores roll out. */
+export const footerLocationLinks: FooterColumnNavLink[] = [
+  { href: "/locations/katy-tx", label: "Katy, TX" }
+];
+
+export const footerInformationLinks: FooterColumnNavLink[] = [
+  {
+    href: "mailto:birdsidehtx@gmail.com?subject=Privacy%20policy",
+    label: "Privacy Policy"
+  },
+  {
+    href: "mailto:birdsidehtx@gmail.com?subject=Terms%20of%20service",
+    label: "Terms of Service"
+  },
+  {
+    href: "mailto:birdsidehtx@gmail.com?subject=Allergen%20information",
+    label: "Allergen Info"
+  }
 ];
 
 export const footerSocialLinks = [
@@ -145,10 +129,6 @@ export const footerSocialLinks = [
   }
 ] as const;
 
-/** Google Maps short link for the Katy location */
-export const FOOTER_GOOGLE_MAPS_URL =
-  "https://maps.app.goo.gl/qPayB7SuizsmpvBXA";
-
 export type FooterInfoBody =
   | { kind: "lines"; lines: string[] }
   | { kind: "link"; href: string; text: string; external?: boolean }
@@ -160,22 +140,6 @@ export type FooterInfoBlock = {
 };
 
 export const footerInfoBlocks: FooterInfoBlock[] = [
-  {
-    label: "Location",
-    body: {
-      kind: "link",
-      href: FOOTER_GOOGLE_MAPS_URL,
-      text: "1989 N Fry Rd, Katy, TX 77449",
-      external: true
-    }
-  },
-  {
-    label: "Hours",
-    body: {
-      kind: "lines",
-      lines: ["Open 7 Days a Week!", "5PM - 12:30AM"]
-    }
-  },
   {
     label: "Contact Us",
     body: {

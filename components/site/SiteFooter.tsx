@@ -2,71 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import PatternStrip from "@/components/site/PatternStrip";
 import {
-  FooterLogoLink,
-  FooterMainLink
+  FooterColumnLink,
+  FooterLogoLink
 } from "@/components/site/ShellInteractive";
 import {
+  footerInformationLinks,
   footerInfoBlocks,
-  footerLinkGroups,
+  footerLocationLinks,
+  footerQuickLinks,
   footerSocialLinks,
+  footerTagline,
   navLogo
 } from "@/lib/site-shell-data";
 
-const footerNavLinksFlat = footerLinkGroups.flat();
-
-function FooterInfoBody({
-  body
-}: {
-  body: (typeof footerInfoBlocks)[number]["body"];
-}) {
-  if (body.kind === "lines") {
-    return (
-      <p className="footer_info-text">
-        {body.lines.map((line, i) => (
-          <span key={`${i}-${line}`}>
-            {i > 0 ? <br /> : null}
-            {line}
-          </span>
-        ))}
-      </p>
-    );
-  }
-
-  if (body.kind === "link") {
-    return (
-      <p className="footer_info-text">
-        <a
-          className="footer_info-link"
-          href={body.href}
-          rel={body.external ? "noopener noreferrer" : undefined}
-          target={body.external ? "_blank" : undefined}
-        >
-          {body.text}
-        </a>
-      </p>
-    );
-  }
-
-  return (
-    <p className="footer_info-text birdside-footer-contact-lines">
-      {body.items.map((item, i) => (
-        <span key={item.href}>
-          {i > 0 ? <br /> : null}
-          <a
-            className="footer_info-link"
-            href={item.href}
-            rel={item.external ? "noopener noreferrer" : undefined}
-            target={item.external ? "_blank" : undefined}
-          >
-            {item.text}
-          </a>
-        </span>
-      ))}
-    </p>
-  );
+function getContactItems() {
+  const block = footerInfoBlocks.find((b) => b.label === "Contact Us");
+  return block?.body.kind === "links" ? block.body.items : [];
 }
 
 export default function SiteFooter() {
+  const contactItems = getContactItems();
+
   return (
     <footer className="footer">
       <PatternStrip tone="black" />
@@ -75,11 +31,12 @@ export default function SiteFooter() {
         <div className="container-small">
           <div className="footer_component">
             <div className="footer_main birdside-footer-main">
-              <div className="birdside-footer-top">
-                <div className="birdside-footer-brand-block">
+              <div className="birdside-footer-columns">
+                <div className="birdside-footer-col birdside-footer-col--brand">
                   <div className="footer_brand birdside-footer-brand-stack">
                     <FooterLogoLink alt={navLogo.alt} href="/" src={navLogo.src} />
                   </div>
+                  <p className="birdside-footer-tagline">{footerTagline}</p>
                   <div className="footer_social-row birdside-footer-social">
                     {footerSocialLinks.map((s) => (
                       <a
@@ -103,25 +60,46 @@ export default function SiteFooter() {
                   </div>
                 </div>
 
-                <nav aria-label="Footer navigation" className="birdside-footer-nav-row">
-                  <div className="birdside-footer-links-single-row">
-                    {footerNavLinksFlat.map((item) => (
-                      <FooterMainLink key={item.href} {...item} />
+                <nav className="birdside-footer-col" aria-label="Quick links">
+                  <h2 className="birdside-footer-col-heading">Quick links</h2>
+                  <ul className="birdside-footer-col-list">
+                    {footerQuickLinks.map((item) => (
+                      <li key={item.href}>
+                        <FooterColumnLink {...item} />
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </nav>
-              </div>
 
-              <div
-                className="footer_infos birdside-footer-infos-grid"
-                id="w-node-_2da64e58-7a64-a03c-8c3f-856a365e0a09-365e09d4"
-              >
-                {footerInfoBlocks.map((info) => (
-                  <div key={info.label} className="footer_info">
-                    <p className="footer_info-label">{info.label}</p>
-                    <FooterInfoBody body={info.body} />
-                  </div>
-                ))}
+                <div className="birdside-footer-col">
+                  <h2 className="birdside-footer-col-heading">Locations</h2>
+                  <ul className="birdside-footer-col-list">
+                    {footerLocationLinks.map((item) => (
+                      <li key={item.href}>
+                        <FooterColumnLink {...item} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <nav className="birdside-footer-col" aria-label="Information">
+                  <h2 className="birdside-footer-col-heading">Information</h2>
+                  <ul className="birdside-footer-col-list">
+                    {footerInformationLinks.map((item) => (
+                      <li key={item.label}>
+                        <FooterColumnLink {...item} />
+                      </li>
+                    ))}
+                    {contactItems.map((item) => (
+                      <li key={item.href}>
+                        <FooterColumnLink
+                          href={item.href}
+                          label={item.text}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>

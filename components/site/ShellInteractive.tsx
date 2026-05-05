@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { FooterNavLink, NavMainLink } from "@/lib/site-shell-data";
+import type { NavMainLink } from "@/lib/site-shell-data";
 import { pathIsActive } from "@/lib/path-active";
 
 export function NavbarMainLink(props: NavMainLink) {
@@ -58,20 +58,50 @@ export function NavbarLogoLink({
   );
 }
 
-export function FooterMainLink(props: FooterNavLink) {
+export type FooterColumnLinkProps = {
+  href: string;
+  label: string;
+};
+
+/** Footer column list link — internal routes get active state; mailto/http stay plain anchors. */
+export function FooterColumnLink({ href, label }: FooterColumnLinkProps) {
   const pathname = usePathname();
-  const active = pathIsActive(pathname, props.href);
+  const isHttp = href.startsWith("http://") || href.startsWith("https://");
+  const isMailOrTel =
+    href.startsWith("mailto:") || href.startsWith("tel:");
+  const active = !isHttp && !isMailOrTel && pathIsActive(pathname, href);
+  const className = active
+    ? "birdside-footer-column-link birdside-footer-column-link--current"
+    : "birdside-footer-column-link";
+
+  if (isHttp) {
+    return (
+      <a
+        className={className}
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {label}
+      </a>
+    );
+  }
+
+  if (isMailOrTel) {
+    return (
+      <a className={className} href={href}>
+        {label}
+      </a>
+    );
+  }
 
   return (
     <Link
-      className={
-        active ? "footer_link w-inline-block w--current" : "footer_link w-inline-block"
-      }
-      data-w-id={props.linkWId}
-      href={props.href}
+      className={className}
+      href={href}
       aria-current={active ? "page" : undefined}
     >
-      <div className="footer_link-text">{props.label}</div>
+      {label}
     </Link>
   );
 }

@@ -834,14 +834,6 @@ a.footer_social-icon:hover {
   color: #fff !important;
 }
 
-.footer .birdside-footer-infos-grid .footer_info-label {
-  color: var(--brand-red) !important;
-}
-
-.footer .birdside-footer-infos-grid .footer_info-text {
-  color: rgba(255, 255, 255, 0.95);
-}
-
 .footer .footer_info-label {
   color: rgba(255, 255, 255, 0.92) !important;
 }
@@ -853,77 +845,121 @@ a.footer_social-icon:hover {
 .footer a.footer_social-icon {
   color: rgba(255, 255, 255, 0.88);
   border-color: rgba(255, 255, 255, 0.38);
+  border-radius: 50%;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* --- Footer layout (Birdside): [logo + social | nav links] → info columns --- */
+.footer a.footer_social-icon .footer_social-icon-img {
+  display: block;
+  /* Do not transition `filter` — browsers lerp it and flash wrong hues (e.g. blue/green). */
+  transition: none;
+}
+
+.footer a.footer_social-icon:hover {
+  opacity: 1;
+  border-color: var(--color-primary, #e30119);
+}
+
+/* White simpleicons → Birdside red on hover */
+.footer a.footer_social-icon:hover .footer_social-icon-img {
+  filter: brightness(0) saturate(100%) invert(11%) sepia(94%) saturate(7458%)
+    hue-rotate(349deg) brightness(91%) contrast(119%);
+}
+
+/* --- Footer layout (Birdside): four columns — brand | quick links | locations | info --- */
 .footer .birdside-footer-main {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0;
   width: 100%;
+  padding-bottom: 0.25rem;
 }
 
-.footer .birdside-footer-top {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem 2rem;
-  flex-wrap: wrap;
+.footer .birdside-footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: start;
   width: 100%;
-  padding-bottom: 1.75rem;
+  text-align: left;
 }
 
-.footer .birdside-footer-brand-block {
+.footer .birdside-footer-col {
+  min-width: 0;
+}
+
+.footer .birdside-footer-col--brand {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.25rem;
-  margin-bottom: 0;
-  flex: 0 0 auto;
+  gap: 1rem;
 }
 
 .footer .birdside-footer-brand-stack {
-  justify-content: flex-start;
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
+}
+
+.footer .birdside-footer-tagline {
+  margin: 0;
+  max-width: 16rem;
+  font-size: clamp(0.875rem, 1.05vw, 0.9375rem);
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .footer .birdside-footer-social.footer_social-row {
   justify-content: flex-start;
 }
 
-/* Primary links — to the right of logo on wide screens */
-.footer .birdside-footer-nav-row {
-  flex: 1 1 auto;
-  min-width: min(100%, 12rem);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-block: 0;
-  border: none;
-  margin-top: -3.5rem;
-}
-
-.footer .birdside-footer-links-single-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.75rem clamp(0.75rem, 2vw, 1.75rem);
+.footer .birdside-footer-col-heading {
+  margin: 0 0 0.65rem;
+  padding-bottom: 0.4rem;
+  display: inline-block;
+  width: fit-content;
   max-width: 100%;
-}
-
-.footer .birdside-footer-links-single-row .footer_link {
-  flex: 0 0 auto;
-}
-
-.footer .birdside-footer-links-single-row .footer_link-text {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.38);
+  font-family: var(--_typography---font-family--primary);
+  font-size: clamp(0.8125rem, 1.05vw, 0.9375rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.footer .birdside-footer-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer .birdside-footer-column-link {
+  display: inline-block;
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.footer .birdside-footer-column-link:hover,
+.footer .birdside-footer-column-link:focus-visible {
+  color: var(--color-primary, #e30119) !important;
+}
+
+.footer .birdside-footer-column-link--current {
+  color: #fff !important;
+  font-weight: 600;
 }
 
 .footer .footer_link {
@@ -931,52 +967,6 @@ a.footer_social-icon:hover {
   line-height: 1.35;
   font-weight: 600;
   letter-spacing: 0.03em;
-}
-
-/* Location / Hours / Contact — centered columns, no rule above */
-.footer .birdside-footer-infos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem clamp(1.25rem, 3vw, 2.5rem);
-  align-items: start;
-  justify-items: center;
-  text-align: center;
-  margin: 0;
-  padding-top: 1.75rem;
-  width: 100%;
-}
-
-.footer .birdside-footer-infos-grid .footer_info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 22rem;
-}
-
-.footer .birdside-footer-infos-grid .footer_info-text {
-  margin: 0;
-  line-height: 1.4;
-  text-align: center;
-  font-size: clamp(1rem, 1.65vw, 1.1875rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  opacity: 0.95;
-}
-
-.footer .birdside-footer-infos-grid .footer_info-label {
-  text-align: center;
-  font-size: clamp(1.4375rem, 2.35vw, 1.8125rem) !important;
-  line-height: 1.12;
-  margin: 0 0 0.4rem;
-}
-
-.footer .birdside-footer-infos-grid .footer_info-link {
-  color: inherit;
-  text-decoration: none;
-}
-
-.footer .birdside-footer-infos-grid .footer_info-link:hover {
-  opacity: 0.88;
 }
 
 .footer .footer_info-label {
@@ -1100,29 +1090,28 @@ a.footer_social-icon:hover {
 
 
 
-@media (max-width: 900px) {
-  .footer .birdside-footer-top {
-    flex-direction: column;
-    align-items: stretch;
+@media (max-width: 1100px) {
+  .footer .birdside-footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.75rem, 4vw, 2.5rem);
   }
 
-  .footer .birdside-footer-nav-row {
-    justify-content: stretch;
-    width: 100%;
-    padding-top: 0.25rem;
-    margin-top: 0;
-  }
-
-  .footer .birdside-footer-links-single-row {
-    justify-content: center;
-    gap: 0.65rem 1.25rem;
+  .footer .birdside-footer-col--brand {
+    grid-column: span 2;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
-@media (max-width: 767px) {
-  .footer .birdside-footer-infos-grid {
+@media (max-width: 560px) {
+  .footer .birdside-footer-columns {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+  }
+
+  .footer .birdside-footer-col--brand {
+    grid-column: span 1;
+    border-bottom: none;
+    padding-bottom: 0;
   }
 }
 
