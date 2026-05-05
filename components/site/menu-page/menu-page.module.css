@@ -102,19 +102,17 @@
 
 .title {
   margin: 0;
-  text-transform: uppercase;
-  color: #fff;
+  text-transform: none;
+  color: var(--color-primary);
   text-align: center;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.18;
   text-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.45),
-    0 0 28px rgba(227, 1, 25, 0.22);
-  /* OMG Sans via Brasa primary stack. */
-  font-family: var(--_typography---font-family--primary);
-  /* +3 steps @ 0.25rem from base clamp */
-  font-size: clamp(2rem, 7.15vw, 3.5rem);
+    0 2px 10px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(227, 1, 25, 0.38);
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-size: clamp(2.1rem, 7.25vw, 3.65rem);
 }
 
 .glowWrap {
@@ -210,12 +208,13 @@
   margin-top: -0.35rem;
   margin-bottom: 2rem;
   padding-top: 0;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
   position: relative;
   background: #000;
 }
 
 .desc {
+  margin: 0;
   text-align: center;
   padding: 0 1.5rem 0;
   max-width: 56rem;

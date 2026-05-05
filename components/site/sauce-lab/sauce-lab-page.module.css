@@ -18,7 +18,8 @@
   width: 100%;
   min-height: 0;
   max-height: 100%;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: visible;
   background: #000;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,8 @@
   width: 100%;
   min-height: 0;
   max-height: 100%;
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,48 +144,50 @@
   align-items: center;
 }
 
+/* Match menu page item name + description (menu-page.module.css .title / .desc). */
 .title {
-  font-family: SauceDisplay, "Arial Narrow", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  margin: 0 0 0.5rem;
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  margin: 0;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(227, 1, 25, 0.22);
+  font-family: var(--_typography---font-family--primary);
+  font-size: clamp(2rem, 7.15vw, 3.5rem);
 }
 
 .desc {
+  text-align: center;
+  padding: 0 1.5rem 0;
+  max-width: 56rem;
+  font-size: clamp(1rem, 2.85vw, 1.15rem);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.86);
+  letter-spacing: 0.03em;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
   font-weight: 400;
-  letter-spacing: 0.03em;
-  line-height: 1.4;
-  font-size: 13px;
 }
 
-@media (min-width: 640px) {
-  .desc {
-    font-size: 14px;
-  }
+.desc p {
+  margin: 0;
 }
 
-@media (min-width: 768px) {
-  .desc {
-    font-size: 18px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .desc {
-    font-size: 20px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .desc {
-    font-size: clamp(14px, 0.9vw, 20px);
-  }
+/* Bird Sauce — accent words in detail script + brand red */
+.birdSauceEmphasis {
+  color: var(--color-primary);
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-weight: 400;
+  font-size: clamp(1.28em, 1.12em + 0.65vw, 1.52em);
+  letter-spacing: 0.02em;
 }
 
 .descExtra {
   display: none;
+  margin: 0.35rem 0 0;
 }
 
 @media (min-width: 640px) {
@@ -196,18 +200,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0.75rem;
+  margin-top: 0.35rem;
 }
 
 @media (min-width: 768px) {
   .badgeWrap {
-    margin-top: 1rem;
+    margin-top: 0.45rem;
   }
 }
 
 @media (min-width: 1280px) {
   .badgeWrap {
-    margin-top: 0.8vw;
+    margin-top: 0.5rem;
   }
 }
 
@@ -394,7 +398,7 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: min(54vh, 24rem);
+  top: min(50vh, 21rem);
   width: 190vw;
   height: 190vw;
   display: flex;
@@ -402,15 +406,15 @@
   justify-content: center;
   z-index: 10;
   pointer-events: none;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
   .circleWrap {
-    top: min(54vh, 24rem);
+    top: min(50vh, 21rem);
     width: 160vw;
     height: 160vw;
-    margin-top: 2.5rem;
+    margin-top: 1.25rem;
   }
 }
 
@@ -418,16 +422,16 @@
   .circleWrap {
     position: absolute;
     top: auto;
-    bottom: -31%;
+    bottom: -28%;
     width: 110vw;
     height: 110vw;
-    margin-top: 2.75rem;
+    margin-top: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .circleWrap {
-    top: 31rem;
+    top: 26.5rem;
     bottom: auto;
     width: 62vw;
     height: 65vw;
@@ -437,8 +441,8 @@
 
 @media (min-width: 1280px) {
   .circleWrap {
-    top: 19rem;
-    margin-top: max(3.25vw, 2rem);
+    top: 15.5rem;
+    margin-top: max(1.25vw, 0.75rem);
     width: 70vw;
     height: 70vw;
   }
@@ -551,11 +555,11 @@
 
 .arrows {
   position: absolute;
-  top: 63%;
+  top: 50%;
   bottom: auto;
   width: 94%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -565,28 +569,24 @@
 
 @media (min-width: 640px) {
   .arrows {
-    top: 65%;
     width: 92%;
   }
 }
 
 @media (min-width: 768px) {
   .arrows {
-    top: 60%;
     width: 90%;
   }
 }
 
 @media (min-width: 1024px) {
   .arrows {
-    top: auto;
-    bottom: 8%;
+    width: 90%;
   }
 }
 
 @media (min-width: 1280px) {
   .arrows {
-    bottom: 18%;
     width: 88%;
   }
 }
@@ -645,12 +645,16 @@
   justify-content: center;
   transition:
     border-color 0.3s,
-    box-shadow 0.3s;
+    box-shadow 0.3s,
+    background-color 0.3s;
 }
 
 .arrowBtn:hover .arrowCircleInner {
-  border-color: #fff;
-  box-shadow: 0 0 15px rgb(255 255 255 / 30%);
+  background-color: var(--brand-red, #e30119);
+  border-color: var(--brand-red, #e30119);
+  box-shadow:
+    0 0 18px rgb(227 1 25 / 55%),
+    0 0 32px rgb(227 1 25 / 25%);
 }
 
 .arrowIcon {

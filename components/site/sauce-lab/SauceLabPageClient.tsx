@@ -21,6 +21,25 @@ function isMayoTitle(title: string | undefined) {
   return t.includes("mayo") || t.includes("mayonnaise");
 }
 
+function isBirdSauce(title: string | undefined) {
+  return title?.trim().toLowerCase() === "bird sauce";
+}
+
+/** Highlights “secret” / “kill” for Bird Sauce copy (third font + brand red). */
+function birdSauceDescFragments(text: string) {
+  const parts = text.split(/(\bsecret\b|\bkill\b)/gi);
+  return parts.map((part, index) => {
+    if (/^(secret|kill)$/i.test(part)) {
+      return (
+        <span key={index} className={styles.birdSauceEmphasis}>
+          {part}
+        </span>
+      );
+    }
+    return part;
+  });
+}
+
 function displayHeadingTitle(title: string) {
   const upper = title.toUpperCase().trim();
   const baseTitle = upper.replace(/\s*SAUCE$/i, "").trim();
@@ -29,6 +48,9 @@ function displayHeadingTitle(title: string) {
   }
   if (["CHEESE", "BUFFALO", "BUFFLO", "BUFFLAO"].includes(baseTitle)) {
     return `${baseTitle} SAUCE`;
+  }
+  if (baseTitle === "BIRD") {
+    return "BIRD SAUCE";
   }
   return baseTitle;
 }
@@ -59,7 +81,7 @@ function SauceSectionContent() {
     ringCenterOffsetsData,
     baseRotation
   } = useMemo(() => {
-    const ringGapUnits = isDesktop ? 0.5 : 4.25;
+    const ringGapUnits = isDesktop ? 0.15 : 2;
     const ringItemsBase =
       saucesData.length > 1
         ? [
@@ -90,6 +112,8 @@ function SauceSectionContent() {
         ["CHEESE", "BUFFALO", "BUFFLO", "BUFFLAO"].includes(baseTitle)
       ) {
         finalTitle = `${baseTitle} SAUCE`;
+      } else if (baseTitle === "BIRD") {
+        finalTitle = "BIRD SAUCE";
       }
 
       return `• ${finalTitle} •`;
@@ -283,11 +307,15 @@ function SauceSectionContent() {
 
               <div className={styles.desc}>
                 <p>
-                  {currentSauce.descLine1}
+                  {isBirdSauce(currentSauce.title)
+                    ? birdSauceDescFragments(currentSauce.descLine1)
+                    : currentSauce.descLine1}
                   {currentSauce.descLine2 ? (
                     <>
                       <br />
-                      {currentSauce.descLine2}
+                      {isBirdSauce(currentSauce.title)
+                        ? birdSauceDescFragments(currentSauce.descLine2)
+                        : currentSauce.descLine2}
                     </>
                   ) : null}
                 </p>
@@ -296,17 +324,8 @@ function SauceSectionContent() {
                 ) : null}
               </div>
 
-              <div className={styles.badgeWrap}>
-                <div className={styles.badgeInner}>
-                  <div className={styles.badgePill}>
-                    <span className={styles.badgeText}>
-                      FRESHLY MADE IN-HOUSE EVERY DAY | NO ADDED PRESERVATIVES
-                      UNLIKE THE BIG BOYS
-                    </span>
-                  </div>
-                </div>
-
-                {nutritionItems.length > 0 ? (
+              {nutritionItems.length > 0 ? (
+                <div className={styles.badgeWrap}>
                   <div className={styles.nutriRow}>
                     <div className={styles.nutriCapsule}>
                       <AnimatePresence mode="wait">
@@ -330,8 +349,8 @@ function SauceSectionContent() {
                     </div>
                     <span className={styles.nutriHint}>Per 100g nutrition</span>
                   </div>
-                ) : null}
-              </div>
+                </div>
+              ) : null}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -370,7 +389,7 @@ function SauceSectionContent() {
                         style={{
                           fontFamily: "SauceDisplay, sans-serif",
                           fontWeight: 700,
-                          fontSize: isDesktop ? "1.02rem" : "1.28rem",
+                          fontSize: isDesktop ? "1.78rem" : "2.2rem",
                           letterSpacing: isDesktop ? "0.025em" : "0.035em",
                           textTransform: "uppercase",
                           transform: isDesktop ? undefined : "translateY(5px)"
