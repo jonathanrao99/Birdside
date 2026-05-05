@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "analyze": "ANALYZE=true next build",
+    "sync:sauce-lab": "node scripts/sync-sauce-lab-assets.mjs",
     "extract:our-menu": "node scripts/extract-our-menu.mjs",
     "extract:menu-lead": "node scripts/extract-menu-page-lead.mjs"
   },
