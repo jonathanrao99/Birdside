@@ -38,8 +38,8 @@
   border-radius: 9999px;
   border-width: 2px;
   border-style: solid;
-  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
-  font-weight: 600;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-decoration: none !important;

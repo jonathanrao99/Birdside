@@ -23,9 +23,9 @@
 
 .body {
   max-width: 40rem;
-  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
   font-size: clamp(1rem, 2vw, 1.1rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.55;
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.86);

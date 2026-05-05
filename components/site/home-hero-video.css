@@ -105,16 +105,6 @@
  * Stacked display hero (template home-marquee face):
  * Primary display: OMG Sans (brasa / vendor faces on :root).
  */
-.section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-accent {
-  margin: 0 0 clamp(0.35rem, 1.2vw, 0.65rem);
-  font-family: var(--_typography---font-family--detail), cursive;
-  font-weight: 400;
-  font-size: clamp(1.35rem, 3.2vw, 2rem);
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.92);
-}
-
 .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
   margin: 0;
   max-width: 100%;

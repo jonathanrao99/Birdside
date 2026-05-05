@@ -1,13 +1,11 @@
 import HomeAbout from "@/components/site/home-about/HomeAbout";
 import HomeCtaLottiesDynamic from "@/components/site/HomeCtaLottiesDynamic";
 import HomeHeader from "@/components/site/HomeHeader";
-import OurMenu from "@/components/site/OurMenu";
 import PageShell from "@/components/site/PageShell";
 import PatternStrip from "@/components/site/PatternStrip";
 import { createStaticRouteMetadata } from "@/lib/page-metadata";
 import {
   splitHomeMainAroundOurMenu,
-  stripHomeAboutSection,
   stripHomeMarqueeSection
 } from "@/lib/split-page-html";
 import { getRouteContent } from "@/lib/site-content";
@@ -18,9 +16,8 @@ export const generateMetadata = createStaticRouteMetadata("/");
 export default function HomePage() {
   const content = getRouteContent("/");
   if (!content) notFound();
-  const { part1, part2, part3 } = splitHomeMainAroundOurMenu(content.mainHtml);
+  const { part1, part3 } = splitHomeMainAroundOurMenu(content.mainHtml);
   const p1 = stripHomeMarqueeSection(part1);
-  const p2 = stripHomeMarqueeSection(part2);
   const p3 = stripHomeMarqueeSection(part3);
   return (
     <>
@@ -31,8 +28,6 @@ export default function HomePage() {
             <div dangerouslySetInnerHTML={{ __html: p1 }} />
             <PatternStrip tone="black" />
             <HomeAbout />
-            <div dangerouslySetInnerHTML={{ __html: stripHomeAboutSection(p2) }} />
-            <OurMenu />
             <div dangerouslySetInnerHTML={{ __html: p3 }} />
           </main>
         ]}

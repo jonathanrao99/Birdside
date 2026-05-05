@@ -28,6 +28,16 @@
   text-wrap: balance;
 }
 
+/* Batuphat Script + brand red — matches Sauce Lab / theme “detail” stack */
+.titleEmphasis {
+  color: var(--color-primary);
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: clamp(2.95rem, 10vw, 6.35rem);
+}
+
 /* --- LatestNewsCards-style stage --- */
 .cardsShell {
   position: relative;

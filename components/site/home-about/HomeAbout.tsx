@@ -46,7 +46,11 @@ export default function HomeAbout() {
     <section className="section_home-about">
       <div className={styles.sectionInner}>
         <header className={styles.header}>
-          <h2 className={styles.title}>Fresh Out the Fryer, Full of Flavor</h2>
+          <h2 className={styles.title}>
+            <span className={styles.titleEmphasis}>Fresh</span>
+            {" OUT THE FRYER, FULL OF "}
+            <span className={styles.titleEmphasis}>Flavor</span>
+          </h2>
         </header>
 
         <HomeAboutCarousel slides={SLIDES} initialIndex={INITIAL_SLIDE_INDEX} />

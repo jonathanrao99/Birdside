@@ -89,7 +89,6 @@ export default function HomeHeroVideo() {
   return (
     <div className="home-header_images home-header_images--video-cta">
       <div className="home-hero-video-cta-stack">
-        <p className="home-hero-video-cta-accent">Fresh.</p>
         <h1 className="home-hero-video-cta-heading">
           <span className="home-hero-video-cta-heading__line">This Ain&apos;t</span>
           <span className="home-hero-video-cta-heading__line">Regular</span>

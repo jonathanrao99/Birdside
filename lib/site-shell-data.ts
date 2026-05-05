@@ -27,7 +27,7 @@ export const navMainLinks: NavMainLink[] = [
   },
   {
     href: "/locations",
-    label: "Find Us",
+    label: "Locations",
     linkWId: "1968410c-ed6e-d558-6475-5b3f5ad134c1",
     lineWId: "1968410c-ed6e-d558-6475-5b3f5ad134c4"
   },
@@ -50,8 +50,11 @@ export const navLogo = {
   alt: "Birdside HTX"
 };
 
-/** Square Online / pickup ordering (navbar “Order now”). */
+/** Square Online / pickup ordering (navbar CTA). */
 export const ORDER_NOW_URL = "https://birdsidehtx.square.site/";
+
+/** Google Maps listing (Katy) — “Pull up” in nav. */
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/qPayB7SuizsmpvBXA";
 
 export type NavInfoBlock = {
   href: string;
@@ -60,8 +63,8 @@ export type NavInfoBlock = {
 };
 
 export const navInfoBlocks: NavInfoBlock[] = [
-  { href: "/locations", label: "Find us", variant: "light" },
-  { href: ORDER_NOW_URL, label: "Order now", variant: "accent" }
+  { href: GOOGLE_MAPS_URL, label: "Pull up", variant: "light" },
+  { href: ORDER_NOW_URL, label: "Get your fix", variant: "accent" }
 ];
 
 /** Footer column links (no Webflow ix2 ids). */

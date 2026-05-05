@@ -631,14 +631,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(0.35rem, 0.9vw, 0.75rem);
+  gap: clamp(0.65rem, 1.35vw, 1.05rem);
 }
 
 .navbar .navbar_infos .navbar_header_pill_cta .header-pill-cta {
-  font-size: clamp(0.65rem, 1.05vw, 0.8125rem);
-  padding: 0.48em 1em 0.42em;
-  min-height: 2.35rem;
-  min-width: 6.75rem;
+  font-size: clamp(1.4rem, 1.88vw, 1.5625rem);
+  padding: 0.3em 0.7em 0.26em;
+  min-height: 1.85rem;
+  min-width: 6.15rem;
 }
 
 /* Main nav — OMG Sans (primary display). */
@@ -647,7 +647,7 @@
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-size: clamp(1.3125rem, 0.55vw + 1.2rem, 1.5625rem) !important;
+  font-size: clamp(1.6875rem, 0.55vw + 1.575rem, 1.9375rem) !important;
   line-height: 1 !important;
 }
 
@@ -821,12 +821,12 @@ a.footer_social-icon:hover {
   opacity: 0.9;
 }
 
-/* Footer shell — full black background */
+/* Footer shell — full black background (OMG Sans; matches nav display stack). */
 .footer {
   background-color: #000;
   color: #fff;
   padding-bottom: 0;
-  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
 }
 
 .footer .footer_link,
@@ -943,7 +943,7 @@ a.footer_social-icon:hover {
 
 .footer .birdside-footer-column-link {
   display: inline-block;
-  font-size: clamp(0.8125rem, 1.05vw, 0.9375rem);
+  font-size: clamp(1.1875rem, 1.05vw + 0.375rem, 1.3125rem);
   line-height: 1.32;
   letter-spacing: 0.02em;
   font-weight: 400;
@@ -963,7 +963,7 @@ a.footer_social-icon:hover {
 }
 
 .footer .footer_link {
-  font-size: clamp(1.35rem, 2.75vw, 2rem) !important;
+  font-size: clamp(1.725rem, 2.75vw + 0.375rem, 2.375rem) !important;
   line-height: 1.35;
   font-weight: 600;
   letter-spacing: 0.03em;
