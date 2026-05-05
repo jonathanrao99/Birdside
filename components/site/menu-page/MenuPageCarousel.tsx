@@ -1,6 +1,6 @@
 "use client";
 
-import carouselStyles from "@/components/site/menu-page/peckers-menu-page.module.css";
+import carouselStyles from "@/components/site/menu-page/menu-page.module.css";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {

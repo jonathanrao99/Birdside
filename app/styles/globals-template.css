@@ -624,7 +624,7 @@
   color: #fff !important;
 }
 
-/* Navbar right CTAs — Peckers-style pills (components/site/PeckersStyleActionButton.tsx). */
+/* Navbar right CTAs — pill buttons (components/site/HeaderPillCta.tsx). */
 .navbar .navbar_infos {
   display: flex;
   flex-direction: row;
@@ -634,17 +634,29 @@
   gap: clamp(0.35rem, 0.9vw, 0.75rem);
 }
 
-.navbar .navbar_infos .navbar_peckers-cta .peckers-action-btn {
+.navbar .navbar_infos .navbar_header_pill_cta .header-pill-cta {
   font-size: clamp(0.65rem, 1.05vw, 0.8125rem);
   padding: 0.48em 1em 0.42em;
   min-height: 2.35rem;
   min-width: 6.75rem;
 }
 
-/* Main nav labels only (Brasa default is often ≥1.125rem — clamp keeps this clearly larger). */
+/* Main nav — OMG Sans (primary display). */
 .navbar .navbar_links .navbar_text {
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   font-size: clamp(1.3125rem, 0.55vw + 1.2rem, 1.5625rem) !important;
-  line-height: 1.28 !important;
+  line-height: 1 !important;
+}
+
+.navbar .navbar_infos .navbar_info,
+.navbar .navbar_infos .navbar_info-text {
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
 }
 
 .navbar .navbar_infos .navbar_info-text {
@@ -814,6 +826,7 @@ a.footer_social-icon:hover {
   background-color: #000;
   color: #fff;
   padding-bottom: 0;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
 }
 
 .footer .footer_link,
@@ -915,7 +928,9 @@ a.footer_social-icon:hover {
 
 .footer .footer_link {
   font-size: clamp(1.35rem, 2.75vw, 2rem) !important;
-  line-height: 1.05;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 /* Location / Hours / Contact — centered columns, no rule above */
@@ -940,9 +955,11 @@ a.footer_social-icon:hover {
 
 .footer .birdside-footer-infos-grid .footer_info-text {
   margin: 0;
-  line-height: 1.55;
+  line-height: 1.4;
   text-align: center;
   font-size: clamp(1rem, 1.65vw, 1.1875rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
   opacity: 0.95;
 }
 
@@ -968,11 +985,14 @@ a.footer_social-icon:hover {
   margin: 0 0 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .footer .footer_info-text {
   font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
   opacity: 0.92;
 }
 

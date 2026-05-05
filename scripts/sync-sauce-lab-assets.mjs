@@ -99,8 +99,4 @@ copyFileSync(
   join(fontSrcDir, "Supernett Cn Bold.otf"),
   join(assetDir, "fonts/Supernett-Cn-Bold.otf")
 );
-copyFileSync(
-  join(fontSrcDir, "NeuzeitGrotesk-Regular.otf"),
-  join(assetDir, "fonts/NeuzeitGrotesk-Regular.otf")
-);
-console.log("Copied Peckers fonts into public/assets/sauce-lab/fonts.");
+console.log("Copied display fonts into public/assets/sauce-lab/fonts.");

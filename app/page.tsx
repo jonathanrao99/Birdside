@@ -1,3 +1,4 @@
+import HomeAbout from "@/components/site/home-about/HomeAbout";
 import HomeCtaLottiesDynamic from "@/components/site/HomeCtaLottiesDynamic";
 import HomeHeader from "@/components/site/HomeHeader";
 import OurMenu from "@/components/site/OurMenu";
@@ -6,6 +7,7 @@ import PatternStrip from "@/components/site/PatternStrip";
 import { createStaticRouteMetadata } from "@/lib/page-metadata";
 import {
   splitHomeMainAroundOurMenu,
+  stripHomeAboutSection,
   stripHomeMarqueeSection
 } from "@/lib/split-page-html";
 import { getRouteContent } from "@/lib/site-content";
@@ -28,7 +30,8 @@ export default function HomePage() {
           <main key="home-main" className="main-wrapper">
             <div dangerouslySetInnerHTML={{ __html: p1 }} />
             <PatternStrip tone="black" />
-            <div dangerouslySetInnerHTML={{ __html: p2 }} />
+            <HomeAbout />
+            <div dangerouslySetInnerHTML={{ __html: stripHomeAboutSection(p2) }} />
             <OurMenu />
             <div dangerouslySetInnerHTML={{ __html: p3 }} />
           </main>

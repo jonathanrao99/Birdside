@@ -12,13 +12,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "SauceBody";
-  src: url("/assets/sauce-lab/fonts/NeuzeitGrotesk-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-display: swap;
-}
-
 .root {
   position: relative;
   flex: 1 1 auto;
@@ -158,10 +151,10 @@
 }
 
 .desc {
-  font-family: SauceBody, system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1.6;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
   font-size: 13px;
 }
 
@@ -249,9 +242,9 @@
 }
 
 .badgeText {
-  font-family: SauceBody, system-ui, sans-serif;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
@@ -368,11 +361,11 @@
 }
 
 .nutriHint {
-  font-family: SauceBody, system-ui, sans-serif;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
   font-size: 11px;
   padding-top: 3px;
   color: rgb(255 255 255 / 50%);
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   white-space: nowrap;

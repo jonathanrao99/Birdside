@@ -1,0 +1,280 @@
+/* Home about — carousel layout derived from peckers-master LatestNewsCards */
+
+.sectionInner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2rem);
+  padding-block: clamp(2rem, 8vw, 4rem);
+}
+
+@media (min-width: 768px) {
+  .sectionInner {
+    padding-inline: clamp(1rem, 1.4vw, 2rem);
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  .sectionInner {
+    padding-block: 3rem;
+  }
+}
+
+.header {
+  text-align: center;
+  max-width: min(100%, 72rem);
+  margin-inline: auto;
+  margin-bottom: clamp(2.25rem, 5vw, 3.75rem);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(2.85rem, 9.5vw, 6rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+/* --- LatestNewsCards-style stage --- */
+.cardsShell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+  overflow: visible;
+  padding-block: clamp(0.5rem, 1vw, 1rem);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 90vw;
+  padding-block: 0;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+@media (min-width: 768px) {
+  .stage {
+    height: 750px;
+    padding-block: clamp(1rem, 3vw, 2.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stage {
+    height: 850px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .stage {
+    height: 46vw;
+    max-height: 900px;
+  }
+}
+
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(44px, 12vw, 60px);
+  height: clamp(44px, 12vw, 60px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 8vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1;
+  padding-bottom: clamp(2px, 1vw, 6px);
+  transition: color 0.2s ease;
+}
+
+.arrowBtn:hover {
+  color: var(--color-primary);
+}
+
+.arrowBtn:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.arrowBtn:focus-visible:hover {
+  color: var(--color-primary);
+}
+
+.arrowBtnLeft {
+  left: clamp(0.25rem, 1vw, 0.75rem);
+}
+
+.arrowBtnRight {
+  right: clamp(0.25rem, 1vw, 0.75rem);
+}
+
+.latestCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  width: 60vw;
+  height: 82vw;
+  border-radius: 4vw;
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease,
+    filter 0.5s ease;
+}
+
+@media (min-width: 768px) {
+  .latestCard {
+    width: 48vw;
+    height: 68vw;
+    border-radius: 2.5vw;
+  }
+}
+
+@media (min-width: 1280px) {
+  .latestCard {
+    width: 30vw;
+    height: 44vw;
+    border-radius: 1.5vw;
+  }
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.7s ease-out;
+}
+
+.latestCardClickable:hover .cardImage {
+  transform: scale(1.1);
+}
+
+/* Mobile / base slot transforms (peckers-master LatestNewsCards) */
+.cardSlotM2 {
+  transform: translate(calc(-50% - 150vw), -50%) scale(0.8);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cardSlotM1 {
+  transform: translate(calc(-50% - 70vw), -50%) rotate(-4deg) scale(0.9);
+  opacity: 0.6;
+  z-index: 2;
+  filter: brightness(0.7);
+  cursor: pointer;
+}
+
+.cardSlot0 {
+  transform: translate(-50%, -50%) scale(1.02);
+  opacity: 1;
+  z-index: 10;
+  filter: brightness(1);
+  cursor: default;
+}
+
+.cardSlot1 {
+  transform: translate(calc(-50% + 70vw), -50%) rotate(4deg) scale(0.9);
+  opacity: 0.6;
+  z-index: 2;
+  filter: brightness(0.7);
+  cursor: pointer;
+}
+
+.cardSlot2 {
+  transform: translate(calc(-50% + 150vw), -50%) scale(0.8);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .cardSlotM2 {
+    transform: translate(calc(-50% - 97vw), -50%) rotateY(45deg) scale(0.6);
+  }
+
+  .cardSlotM1 {
+    transform: translate(calc(-50% - 38vw), -50%) rotate(-5deg) scale(0.92);
+  }
+
+  .cardSlot0 {
+    transform: translate(-50%, -50%) rotateY(0deg) scale(1.08);
+    opacity: 1;
+    z-index: 10;
+    filter: brightness(1);
+    cursor: default;
+  }
+
+  .cardSlot1 {
+    transform: translate(calc(-50% + 38vw), -50%) rotate(5deg) scale(0.92);
+  }
+
+  .cardSlot2 {
+    transform: translate(calc(-50% + 97vw), -50%) rotateY(-45deg) scale(0.6);
+  }
+}
+
+@media (min-width: 1280px) {
+  .cardSlotM1 {
+    transform: translate(calc(-50% - 32vw), -50%) rotate(-5deg) scale(0.92);
+  }
+
+  .cardSlot1 {
+    transform: translate(calc(-50% + 32vw), -50%) rotate(5deg) scale(0.92);
+  }
+}
+
+/* Mobile progress dashes (peckers) */
+.mobileDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+@media (min-width: 768px) {
+  .mobileDots {
+    display: none;
+  }
+}
+
+.mobileDot {
+  height: 3px;
+  width: clamp(2rem, 5vw, 3rem);
+  border-radius: 1px;
+  background: rgb(63 63 70);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.mobileDotActive {
+  background: var(--color-text);
+  transform: scaleX(1.1);
+}
+
+.reducedMotion .latestCard {
+  transition-duration: 0.01ms;
+}
+
+.reducedMotion .cardImage {
+  transition-duration: 0.01ms;
+}
+
+.reducedMotion .latestCardClickable:hover .cardImage {
+  transform: none;
+}

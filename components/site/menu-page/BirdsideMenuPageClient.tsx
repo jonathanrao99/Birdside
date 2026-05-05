@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/components/site/menu-page/peckers-menu-page.module.css";
+import styles from "@/components/site/menu-page/menu-page.module.css";
 import MenuPageCarousel, {
   type MenuCarouselItem
 } from "@/components/site/menu-page/MenuPageCarousel";

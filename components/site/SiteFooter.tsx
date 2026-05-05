@@ -4,7 +4,7 @@ import PatternStrip from "@/components/site/PatternStrip";
 import {
   FooterLogoLink,
   FooterMainLink
-} from "@/components/site/shell-interactive";
+} from "@/components/site/ShellInteractive";
 import {
   footerInfoBlocks,
   footerLinkGroups,

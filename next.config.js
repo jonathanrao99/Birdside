@@ -7,7 +7,8 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: {
-    optimizePackageImports: ["gsap"]
+    // `motion` is imported from `motion/react` across several client islands; this trims barrel resolution.
+    optimizePackageImports: ["gsap", "motion"]
   },
   images: {
     remotePatterns: [

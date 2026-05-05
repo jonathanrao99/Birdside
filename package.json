@@ -12,9 +12,14 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "analyze": "ANALYZE=true next build",
+    "analyze:webpack": "ANALYZE=true next build --webpack",
     "sync:sauce-lab": "node scripts/sync-sauce-lab-assets.mjs",
     "extract:our-menu": "node scripts/extract-our-menu.mjs",
-    "extract:menu-lead": "node scripts/extract-menu-page-lead.mjs"
+    "extract:menu-lead": "node scripts/extract-menu-page-lead.mjs",
+    "reorganize:public": "node scripts/reorganize-public-assets.mjs",
+    "sync:our-menu-global": "python3 scripts/sync-our-menu-global.py",
+    "patch:marquee-icons": "python3 scripts/patch-home-marquee-icons.py",
+    "refresh:product-seo": "python3 scripts/refresh-product-seo-copy.py"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +31,8 @@
     "motion": "^12.23.0",
     "next": "^16.2.4",
     "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.5",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.0.1",
@@ -38,8 +44,7 @@
     "eslint-config-next": "^16.2.4",
     "node-html-parser": "^7.1.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.0.16",
-    "zod": "^4.3.5"
+    "vitest": "^4.0.16"
   },
   "private": true
 }

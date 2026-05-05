@@ -1,0 +1,307 @@
+/*
+ * Webflow provides all card layout via:
+ *   .locations-list_block  → flex column, gap 2rem, align-items flex-start, width 100%
+ *   .locations-list_img-wrap → aspect-ratio 16/9, position relative, overflow clip
+ *   .locations-list_content  → flex column, gap 0.75rem
+ *
+ * This file adds only visual styling on top.
+ */
+
+/* ── Top visual panel ──────────────────────────────────────────── */
+
+.visual {
+  position: absolute;
+  inset: 0;
+  background: #060606;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  gap: 0;
+}
+
+/* Vignette from bottom so route graphic has depth */
+.visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 110%,
+    rgba(227, 1, 25, 0.18) 0%,
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+/* ── "NEXT STOP" heading ── */
+.visualHeading {
+  font-family: var(--_typography---font-family--primary);
+  font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  margin: 0 0 clamp(0.75rem, 2.5vw, 1.25rem);
+  user-select: none;
+}
+
+/* ── Route graphic: KATY TX ●──────○ ??? ── */
+.routeWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  width: min(82%, 270px);
+  position: relative;
+  z-index: 1;
+}
+
+.routeTrack {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.dotSolid {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(227, 1, 25, 0.2);
+}
+
+.routeLine {
+  flex: 1;
+  height: 1px;
+  margin: 0 0.4rem;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.38) 0,
+    rgba(255, 255, 255, 0.38) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+}
+
+.dotGhost {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.routeLabels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.routeLabel {
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+  white-space: nowrap;
+}
+
+/* ── "COMING SOON" tag at the bottom ── */
+.comingLabel {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* ── Content area ──────────────────────────────────────────────── */
+
+/* Stretch to full card width so form fills correctly */
+.content {
+  width: 100% !important;
+  align-self: stretch !important;
+}
+
+.heading {
+  margin: 0 !important;
+}
+
+.subtext {
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: -0.25rem 0 0;
+  line-height: 1.5;
+}
+
+/* ── Form ──────────────────────────────────────────────────────── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 0.65rem 1.1rem;
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.875rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s cubic-bezier(0.33, 1, 0.32, 1),
+              background 0.2s;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.input:disabled {
+  opacity: 0.45;
+}
+
+.sendBtn {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.68rem 1.25rem;
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s, transform 0.2s cubic-bezier(0.33, 1, 0.32, 1);
+}
+
+.sendBtn:hover:not(:disabled) {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.sendBtn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.sendBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Loading spinner ───────────────────────────────────────────── */
+
+.spinner {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; }
+}
+
+/* ── Success state ─────────────────────────────────────────────── */
+
+.successState {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.checkWrap {
+  width: 1.875rem;
+  height: 1.875rem;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-bottom: 0.125rem;
+}
+
+.checkSvg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: #fff;
+}
+
+.successHeading {
+  margin: 0 !important;
+}
+
+.successBody {
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.successCity {
+  color: #fff;
+  font-weight: 700;
+}
+
+.resetBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 0.25rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-family: var(--_typography---font-family--secondary);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.resetBtn:hover {
+  color: #fff;
+}

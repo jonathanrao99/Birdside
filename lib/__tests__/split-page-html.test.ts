@@ -4,6 +4,7 @@ import {
   getMenuRouteLeadAndRestInnerMainHtml,
   splitHomeMainAroundOurMenu,
   splitMenuInnerHtmlLeadRest,
+  stripHomeAboutSection,
   stripHomeMarqueeSection
 } from "@/lib/split-page-html";
 import { HOME_ABOUT_SECTION_MARKER, OUR_MENU_SLOT_HTML } from "@/lib/our-menu-slot";
@@ -38,6 +39,25 @@ describe("stripHomeMarqueeSection", () => {
   it("returns input when marquee absent", () => {
     const html = "<p>only</p>";
     expect(stripHomeMarqueeSection(html)).toBe(html);
+  });
+});
+
+describe("stripHomeAboutSection", () => {
+  it("removes balanced section_home-about and keeps siblings", () => {
+    const html = [
+      "<p>before</p>",
+      '<section class="section_home-about"><div class="x"></div></section>',
+      "<p>after</p>"
+    ].join("");
+    const out = stripHomeAboutSection(html);
+    expect(out).toContain("<p>before</p>");
+    expect(out).toContain("<p>after</p>");
+    expect(out).not.toContain("section_home-about");
+  });
+
+  it("returns input when about section absent", () => {
+    const html = "<p>only</p>";
+    expect(stripHomeAboutSection(html)).toBe(html);
   });
 });
 

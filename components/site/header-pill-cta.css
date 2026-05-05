@@ -1,0 +1,105 @@
+/* Header pill CTAs: offset shadow + rounded pill (reference template HeaderActionButton pattern). */
+
+.header-pill-cta-wrap {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.header-pill-cta-shadow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 9999px;
+  transform: translate(4px, 4px);
+  opacity: 0;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+.header-pill-cta-wrap:hover .header-pill-cta-shadow,
+.header-pill-cta-wrap:focus-within .header-pill-cta-shadow {
+  opacity: 1;
+  transform: translate(6px, 6px);
+}
+
+.header-pill-cta {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  text-align: center;
+  line-height: 1;
+  padding: 0.52em 1.2em 0.48em;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none !important;
+  transition: transform 0.2s ease-out, filter 0.2s ease-out;
+}
+
+.header-pill-cta-wrap:hover .header-pill-cta,
+.header-pill-cta-wrap:focus-within .header-pill-cta {
+  transform: translate(-1px, -1px);
+}
+
+.header-pill-cta:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.header-pill-cta-wrap--light .header-pill-cta-shadow {
+  background-color: var(--brand-red);
+}
+
+.header-pill-cta--light {
+  background-color: #fff;
+  color: #101010;
+  border-color: #fff;
+}
+
+.header-pill-cta--light:hover,
+.header-pill-cta--light:focus-visible {
+  filter: brightness(0.97);
+}
+
+.header-pill-cta-wrap--accent .header-pill-cta-shadow {
+  background-color: #fff;
+}
+
+.header-pill-cta--accent {
+  background-color: var(--brand-red);
+  color: #fff;
+  border-color: var(--brand-red);
+}
+
+.header-pill-cta--accent:hover,
+.header-pill-cta--accent:focus-visible {
+  filter: brightness(0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-pill-cta-shadow,
+  .header-pill-cta {
+    transition: none;
+  }
+
+  .header-pill-cta-wrap:hover .header-pill-cta-shadow,
+  .header-pill-cta-wrap:focus-within .header-pill-cta-shadow {
+    opacity: 0;
+    transform: translate(4px, 4px);
+  }
+
+  .header-pill-cta-wrap:hover .header-pill-cta,
+  .header-pill-cta-wrap:focus-within .header-pill-cta {
+    transform: none;
+  }
+}

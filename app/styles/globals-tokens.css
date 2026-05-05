@@ -2,8 +2,23 @@
 @import "../../components/site/home-menu/home-menu-overrides.css";
 
 :root {
-  --brand-red: #e30119;
-  --surface-black: #101010;
+  /* Intent-based (Birdside Design System v2 — docs/theme.md) */
+  --color-bg: #000;
+  --color-text: #fff;
+  --color-primary: #e30119;
+  --color-surface: #101010;
+  --color-muted: rgba(255, 255, 255, 0.7);
+  --border-light: rgba(255, 255, 255, 0.16);
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.7);
+
+  /* Supporting UI/body — Space Grotesk (next/font sets --font-space-grotesk on <html>) */
+  --_typography---font-family--secondary: var(--font-space-grotesk), "Space Grotesk", system-ui,
+    sans-serif;
+
+  /* Legacy aliases — existing CSS uses these names */
+  --brand-red: var(--color-primary);
+  --surface-black: var(--color-surface);
 }
 
 html {

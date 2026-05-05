@@ -1,5 +1,43 @@
 import { HOME_ABOUT_SECTION_MARKER, OUR_MENU_SLOT_HTML } from "@/lib/our-menu-slot";
 
+const LOCATIONS_LIST_ATTR = 'class="locations-list_list w-dyn-items"';
+/** Placeholder div injected as a sibling inside the locations list grid for portal mount. */
+export const NEXT_LOCATION_MOUNT_ID = "birdside-next-location-mount";
+
+/**
+ * Inserts a placeholder `div` as the last item inside `.locations-list_list.w-dyn-items`
+ * so a React portal can mount the "next location" card inside the Webflow grid.
+ */
+export function injectNextLocationPlaceholder(html: string): string {
+  const attrIdx = html.indexOf(LOCATIONS_LIST_ATTR);
+  if (attrIdx < 0) return html;
+
+  const divStart = html.lastIndexOf("<div", attrIdx);
+  if (divStart < 0) return html;
+
+  let depth = 0;
+  let i = divStart;
+  while (i < html.length) {
+    if (html.startsWith("<div", i)) {
+      depth++;
+      const gt = html.indexOf(">", i);
+      i = gt < 0 ? html.length : gt + 1;
+      continue;
+    }
+    if (html.startsWith("</div>", i)) {
+      depth--;
+      if (depth === 0) {
+        const placeholder = `<div id="${NEXT_LOCATION_MOUNT_ID}" class="locations-list_item w-dyn-item" role="listitem" aria-label="Coming soon location"></div>`;
+        return html.slice(0, i) + placeholder + html.slice(i);
+      }
+      i += 6;
+      continue;
+    }
+    i++;
+  }
+  return html;
+}
+
 const HOME_MENU_SECTION_PREFIX = '<section class="section_home-menu"';
 const HOME_MARQUEE_SECTION_PREFIX = '<section class="section_home-marquee';
 const HOME_MAIN_OPEN = '<main class="main-wrapper">';
@@ -31,6 +69,20 @@ function findSectionBounds(html: string, startIdx: number): { end: number } {
 /** Removes the Webflow home ticker (`section_home-marquee`) when present. */
 export function stripHomeMarqueeSection(html: string): string {
   const idx = html.indexOf(HOME_MARQUEE_SECTION_PREFIX);
+  if (idx < 0) {
+    return html;
+  }
+  try {
+    const { end } = findSectionBounds(html, idx);
+    return html.slice(0, idx) + html.slice(end);
+  } catch {
+    return html;
+  }
+}
+
+/** Removes the Webflow home about band (`section_home-about`) when present. */
+export function stripHomeAboutSection(html: string): string {
+  const idx = html.indexOf(HOME_ABOUT_SECTION_MARKER);
   if (idx < 0) {
     return html;
   }

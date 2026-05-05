@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/components/site/menu-page/peckers-menu-page.module.css";
+import styles from "@/components/site/menu-page/menu-page.module.css";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import type { OurMenuItem } from "@/lib/our-menu-types";
 

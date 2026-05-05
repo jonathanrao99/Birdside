@@ -102,17 +102,27 @@
 }
 
 /*
- * Peckers-style stacked display hero, Brasa home-marquee face:
- * `var(--_typography---font-family--primary)` → "OMG Sans" (see brasa-template shared CSS).
+ * Stacked display hero (template home-marquee face):
+ * Primary display: OMG Sans (brasa / vendor faces on :root).
  */
+.section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-accent {
+  margin: 0 0 clamp(0.35rem, 1.2vw, 0.65rem);
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
 .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
   margin: 0;
   max-width: 100%;
   font-family: var(--_typography---font-family--primary);
-  font-weight: 400;
+  font-weight: 800;
   font-size: clamp(1.875rem, min(11vw, 8svh), 5.25rem);
-  line-height: 0.9;
-  letter-spacing: 0.04em;
+  line-height: 0.95;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #fff;
   text-align: left;
@@ -158,6 +168,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 /* Taller main column than Brasa image hero — beats globals-home-nav / template `min-height` rules. */

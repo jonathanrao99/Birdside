@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "@/components/site/menu-page/peckers-menu-page.module.css";
+import styles from "@/components/site/menu-page/menu-page.module.css";
 import { useCallback, useEffect, useRef } from "react";
 
 export type MenuTabNavItem = { id: string; label: string };

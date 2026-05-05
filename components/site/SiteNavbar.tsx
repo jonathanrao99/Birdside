@@ -3,9 +3,9 @@
 import {
   NavbarLogoLink,
   NavbarMainLink
-} from "@/components/site/shell-interactive";
+} from "@/components/site/ShellInteractive";
 import PatternStrip from "@/components/site/PatternStrip";
-import PeckersStyleActionButton from "@/components/site/PeckersStyleActionButton";
+import HeaderPillCta from "@/components/site/HeaderPillCta";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
@@ -147,14 +147,14 @@ export default function SiteNavbar() {
               </div>
               <div className="navbar_infos">
                 {navInfoBlocks.map((block) => (
-                  <PeckersStyleActionButton
+                  <HeaderPillCta
                     key={block.href}
-                    className="navbar_peckers-cta"
+                    className="navbar_header_pill_cta"
                     href={block.href}
                     variant={block.variant}
                   >
                     {block.label}
-                  </PeckersStyleActionButton>
+                  </HeaderPillCta>
                 ))}
               </div>
               <button

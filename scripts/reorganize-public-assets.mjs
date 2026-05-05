@@ -50,7 +50,6 @@ const assetMoves = [
   ["9.jpg", "menu/items/garlic-parmesan-fries.jpg"],
   ["VDV06465.jpg", "menu/items/photo-vdv06465.jpg"],
   ["VDV06487.jpg", "menu/items/photo-vdv06487.jpg"],
-  ["VDV06735.jpg", "menu/items/photo-vdv06735.jpg"],
   ["20411_-3__67398.webp", "menu/items/water-bottle.webp"],
   ["BirdsideHTX-118.jpg", "home/location-hero-118.jpg"],
   ["Logo2.png", "brand/logo-mark-2.png"],
@@ -75,14 +74,6 @@ const assetMoves = [
     "home/menu-tab-panel-bg.png"
   ],
   ["1234-removebg-preview (1)-Photoroom.png", "brand/page-loader-logo.png"],
-  [
-    "Screenshot_2025-12-30_at_2.49.48_PM-removebg-preview-2.png",
-    "menu/items/legacy-strip-2025-12-30.png"
-  ],
-  [
-    "Screenshot_2025-12-30_at_2.49.48_PM-removebg-preview-2__1_-removebg-preview (1).png",
-    "menu/items/legacy-strip-2025-12-30-alt.png"
-  ],
   ["logo4-removebg-preview (1).png", "brand/logo-variant.png"],
   [
     "logo4-removebg-preview (1)-Picsart-BackgroundRemover.png",
