@@ -47,9 +47,14 @@ export default function HomeAbout() {
       <div className={styles.sectionInner}>
         <header className={styles.header}>
           <h2 className={styles.title}>
-            <span className={styles.titleEmphasis}>Fresh</span>
-            {" OUT THE FRYER, FULL OF "}
-            <span className={styles.titleEmphasis}>Flavor</span>
+            <span className={styles.titleLine}>
+              <span className={styles.titleEmphasis}>Fresh</span>
+              {" OUT THE FRYER,"}
+            </span>
+            <span className={styles.titleLine}>
+              {"FULL OF "}
+              <span className={styles.titleEmphasis}>Flavor</span>
+            </span>
           </h2>
         </header>
 

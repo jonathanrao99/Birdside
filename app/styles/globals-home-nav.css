@@ -209,6 +209,13 @@ section:has(> .menu_content) > .pattern.black {
   color: #fff !important;
 }
 
+/* React home-about headline: two lines (stack over inline spans from legacy CSS). */
+.section_home-about header h2 {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
 .section_home-about .button {
   background-color: #000 !important;
   border-color: #fff !important;
