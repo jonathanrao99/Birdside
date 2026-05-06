@@ -1,0 +1,240 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap');
+
+  .bs-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .bs-wrap {
+    --red: #c8281e;
+    --cream: #f0ebe0;
+    --cream-muted: #9a9080;
+    --white: #ffffff;
+    background: #0a0a0a;
+    font-family: 'Barlow', sans-serif;
+    color: #f0ebe0;
+    overflow: hidden;
+  }
+
+  .bs-marquee {
+    background: var(--red);
+    overflow: hidden;
+    padding: 9px 0;
+    border-top: 1px solid #9a1e16;
+    border-bottom: 1px solid #9a1e16;
+  }
+  .bs-track {
+    display: flex;
+    width: max-content;
+    animation: bsscroll 20s linear infinite;
+  }
+  .bs-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: #fff;
+    padding: 0 24px;
+    white-space: nowrap;
+  }
+  .bs-track span::after { content: '·'; margin-left: 24px; opacity: 0.55; }
+  @keyframes bsscroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .bs-about {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 48px 60px;
+  }
+
+  .bs-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 64px;
+    align-items: start;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(240,235,224,0.1);
+  }
+
+  .bs-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--red);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bs-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  .bs-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 6.5vw, 96px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+  }
+  .bs-headline em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--red);
+    font-size: clamp(60px, 7vw, 104px);
+    display: block;
+    line-height: 1.0;
+  }
+
+  .bs-intro {
+    padding-top: 12px;
+  }
+  .bs-lead {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--white);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .bs-body {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--cream-muted);
+  }
+  .bs-body a {
+    color: var(--cream);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--red);
+  }
+
+  .bs-pillars {
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+
+  .bs-pillar {
+    padding: 0 40px 0 0;
+    border-right: 1px solid rgba(240,235,224,0.08);
+  }
+  .bs-pillar:nth-child(2) { padding: 0 40px; }
+  .bs-pillar:last-child { border-right: none; padding: 0 0 0 40px; }
+
+  .bs-pnum {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--red);
+    margin-bottom: 22px;
+  }
+  .bs-ptitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .bs-pline {
+    width: 32px;
+    height: 1px;
+    background: var(--red);
+    margin-bottom: 16px;
+  }
+  .bs-pbody {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--cream-muted);
+  }
+  .bs-pbody a { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(200,40,30,0.4); }
+
+  .bs-cta-row {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(240,235,224,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .bs-cta-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--cream-muted);
+    line-height: 1.7;
+  }
+  .bs-cta-text a { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--red); font-weight: 500; }
+
+  .bs-btn {
+    flex-shrink: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid rgba(240,235,224,0.3);
+    padding: 16px 40px;
+    cursor: pointer;
+    transition: background 0.22s, border-color 0.22s, color 0.22s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .bs-btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+</style>
+
+<div class="bs-wrap">
+  <div class="bs-marquee" aria-hidden="true">
+    <div class="bs-track">
+      <span>Open Nightly</span><span>Katy TX</span><span>5 PM – 12:30 AM</span><span>Dine In</span><span>Pickup Available</span><span>House-Made Sauces</span><span>Sauce Lab</span><span>Catering</span><span>Open Nightly</span><span>Katy TX</span><span>5 PM – 12:30 AM</span><span>Dine In</span><span>Pickup Available</span><span>House-Made Sauces</span><span>Sauce Lab</span><span>Catering</span>
+    </div>
+  </div>
+
+  <div class="bs-about">
+    <div class="bs-top">
+      <div>
+        <p class="bs-eyebrow">Birdside HTX</p>
+        <h2 class="bs-headline">Late-Night<br>Chicken,<em>done right.</em></h2>
+      </div>
+      <div class="bs-intro">
+        <p class="bs-lead">Crispy chicken, sides, and house-made sauces in Katy — open late so you can scratch the itch when most kitchens are closed.</p>
+        <p class="bs-body">We keep the menu short on purpose. Every sandwich, tender, and wing gets the same attention from prep to pickup. Sauces and dips are made in-house — peek the full lineup in <a href="#">Sauce Lab</a>.</p>
+      </div>
+    </div>
+
+    <div class="bs-pillars">
+      <div class="bs-pillar">
+        <p class="bs-pnum">01 / HOURS</p>
+        <h3 class="bs-ptitle">Seven<br>Nights</h3>
+        <div class="bs-pline"></div>
+        <p class="bs-pbody">Open 5:00 PM – 12:30 AM every night. Dine in at our Katy location or order ahead for pickup.</p>
+      </div>
+      <div class="bs-pillar">
+        <p class="bs-pnum">02 / MENU</p>
+        <h3 class="bs-ptitle">Short.<br>Focused.</h3>
+        <div class="bs-pline"></div>
+        <p class="bs-pbody">A tight lineup built for consistency. Texture, heat, and flavor stay dialed even when we're moving fast. See the full <a href="#">menu</a>.</p>
+      </div>
+      <div class="bs-pillar">
+        <p class="bs-pnum">03 / GROUPS</p>
+        <h3 class="bs-ptitle">Feed<br>the Crew</h3>
+        <div class="bs-pline"></div>
+        <p class="bs-pbody">Catering for teams and get-togethers. Plan portions and pickup on our <a href="#">catering</a> page.</p>
+      </div>
+    </div>
+
+    <div class="bs-cta-row">
+      <p class="bs-cta-text">Dig into the full <a href="#">menu</a>, explore <a href="#">Sauce Lab</a>, or keep scrolling — guest favorites are up next.</p>
+      <a href="#" class="bs-btn">Our Story</a>
+    </div>
+  </div>
+</div>
