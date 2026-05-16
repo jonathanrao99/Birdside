@@ -1,17 +1,20 @@
+import CateringPage from "@/components/site/catering/CateringPage";
 import PageShell from "@/components/site/PageShell";
+import { buildPlaceholderMetadata } from "@/lib/page-metadata";
 import type { Metadata } from "next";
-import { SITE_NAME } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
-  title: `Catering | ${SITE_NAME}`,
-  description: "Catering from Birdside HTX, Katy, TX."
-};
+export const metadata: Metadata = buildPlaceholderMetadata(
+  "/catering",
+  "Hot chicken catering in Katy — trays, wings, tenders, sides, and house sauces from Birdside HTX. Plan pickup for teams, parties, and events."
+);
 
-export default function CateringPage() {
+export default function CateringRoutePage() {
   return (
     <PageShell
       mainSlots={[
-        `<main class="main-wrapper"><section class="padding-global padding-section-medium"><div class="container-small"><h1 class="heading-style-h2">Catering</h1><p class="text-size-medium">Catering information coming soon.</p></div></section></main>`
+        <main key="catering" className="main-wrapper">
+          <CateringPage />
+        </main>
       ]}
     />
   );

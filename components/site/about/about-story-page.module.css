@@ -1,0 +1,280 @@
+/* Our Story — Birdside narrative (replaces legacy CMS Brasa about markup). */
+
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.hero {
+  box-sizing: border-box;
+  padding-block: clamp(4.5rem, 12vh, 7rem);
+  padding-inline: var(--layout-section-padding-x);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.heroInner {
+  max-width: min(100%, var(--layout-content-max));
+  margin-inline: auto;
+  text-align: center;
+}
+
+.kicker {
+  margin: 0 0 0.65rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(0.6875rem, 1.15vw, 0.78125rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(2rem, 5.5vw, 3.25rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.titleAccent {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-weight: 400;
+  font-size: clamp(2.15rem, 5vw, 3rem);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--color-primary);
+}
+
+.lede {
+  margin: 0 auto;
+  max-width: 44rem;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(1rem, 1.85vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.025em;
+  color: var(--color-muted);
+  text-wrap: pretty;
+}
+
+.section {
+  box-sizing: border-box;
+  padding-block: var(--layout-section-padding-y);
+  padding-inline: var(--layout-section-padding-x);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.sectionInner {
+  max-width: min(100%, var(--layout-content-max));
+  margin-inline: auto;
+}
+
+.twoCol {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+@media (min-width: 900px) {
+  .twoCol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.subHeading {
+  margin: 0 0 0.85rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.prose {
+  margin: 0;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 1.65vw, 1.0625rem);
+  line-height: 1.55;
+  letter-spacing: 0.025em;
+  color: var(--color-muted);
+}
+
+.prose strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.prose + .prose {
+  margin-top: 1rem;
+}
+
+.inlineLink {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 0.15em;
+}
+
+.inlineLink:hover,
+.inlineLink:focus-visible {
+  color: var(--color-primary);
+}
+
+.inlineLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.35rem);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.pillar {
+  padding: 1.25rem 0;
+  border-top: 3px solid var(--color-primary);
+}
+
+@media (min-width: 640px) {
+  .pillar {
+    padding: 1.25rem 1rem 0 0;
+    border-top: none;
+    border-left: 3px solid var(--color-primary);
+    padding-left: 1.15rem;
+  }
+}
+
+.pillarTitle {
+  margin: 0 0 0.45rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pillarBody {
+  margin: 0;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+  line-height: 1.45;
+  color: var(--color-muted);
+}
+
+.visitBand {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.visitInner {
+  max-width: min(100%, var(--layout-content-max));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .visitInner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
+.visitCopy {
+  margin: 0;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(1rem, 1.65vw, 1.125rem);
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.visitMeta {
+  margin: 0.35rem 0 0;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+  color: var(--color-muted);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+}
+
+.btnPrimary,
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  padding: 0.5rem 1.45rem;
+  border-radius: 9999px;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(0.78125rem, 1.15vw, 0.875rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition:
+    filter 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btnPrimary {
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+  color: #fff !important;
+}
+
+.btnPrimary:hover,
+.btnPrimary:focus-visible {
+  filter: brightness(1.06);
+}
+
+.btnGhost {
+  border: 2px solid var(--color-text);
+  background: transparent;
+  color: var(--color-text) !important;
+}
+
+.btnGhost:hover,
+.btnGhost:focus-visible {
+  background: var(--color-text);
+  color: var(--color-bg) !important;
+}
+
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
