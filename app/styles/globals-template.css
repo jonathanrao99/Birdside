@@ -576,6 +576,7 @@
   width: 100%;
   box-sizing: border-box;
   background-color: #000 !important;
+  padding-block: clamp(0.2rem, 0.95vw, 0.55rem) !important;
 }
 
 /* Mobile menu: Webflow IX removed — React + motion drive overlay; button replaces inert hamburger div. */

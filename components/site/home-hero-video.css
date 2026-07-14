@@ -5,17 +5,19 @@
   z-index: 0;
 }
 
-/* Hero fills the viewport area reliably (URL bar / notches / foldables). */
+/* Hero media uses the remaining viewport below the visible nav/checker. */
 .section_home-header:has(.home-hero-video-stage) {
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  min-height: min(82svh, 56rem);
+  height: calc(100svh - var(--home-nav-stack-h, 0px));
+  min-height: 0;
+  overflow: hidden;
 }
 
 @supports (height: 100dvh) {
   .section_home-header:has(.home-hero-video-stage) {
-    min-height: min(82dvh, 56rem);
+    height: calc(100dvh - var(--home-nav-stack-h, 0px));
   }
 }
 
@@ -36,6 +38,14 @@
 .section_home-header > .padding-section-small {
   position: relative;
   z-index: 1;
+}
+
+.section_home-header > .padding-global {
+  height: 100%;
+}
+
+.section_home-header > .padding-section-small {
+  padding: 0 !important;
 }
 
 .section_home-header .home-hero-video {
@@ -75,19 +85,20 @@
   min-width: 0;
   width: 100%;
   max-width: 100%;
-  min-height: clamp(240px, 36svh, 380px);
+  height: 100%;
+  min-height: 0;
   display: flex !important;
   align-items: flex-end !important;
   justify-content: flex-start !important;
   margin-top: 0 !important;
   padding-inline: max(0.75rem, env(safe-area-inset-left, 0px))
     max(0.75rem, env(safe-area-inset-right, 0px)) !important;
-  padding-bottom: calc(clamp(0.75rem, 2.5vw, 1.75rem) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(clamp(2.75rem, 7.5vw, 5.75rem) + env(safe-area-inset-bottom, 0px));
 }
 
 @supports (height: 100dvh) {
   .section_home-header .home-header_images.home-header_images--video-cta {
-    min-height: clamp(240px, 36dvh, 380px);
+    min-height: 0;
   }
 }
 
@@ -95,9 +106,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: clamp(0.75rem, 2.2vw, 1.5rem);
-  width: 100%;
-  max-width: min(100%, 72rem);
+  gap: clamp(0.55rem, 1.1vw, 1rem);
+  width: min(100%, clamp(17rem, 44vw, 48rem));
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -110,9 +121,9 @@
   max-width: 100%;
   font-family: var(--_typography---font-family--primary);
   font-weight: 800;
-  font-size: clamp(1.875rem, min(11vw, 8svh), 5.25rem);
-  line-height: 0.95;
-  letter-spacing: 0.05em;
+  font-size: clamp(2.1rem, calc(0.8rem + 4.5vw), 4.75rem);
+  line-height: clamp(0.86em, calc(0.95em - 0.2vw), 0.92em);
+  letter-spacing: clamp(0.03em, calc(0.055em - 0.002vw), 0.048em);
   text-transform: uppercase;
   color: #fff;
   text-align: left;
@@ -128,14 +139,13 @@
 }
 
 @media (min-width: 768px) {
-  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
-    font-size: clamp(2.5rem, min(8.5vw, 10svh), 6.25rem);
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(2),
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(3) {
+    display: inline;
   }
-}
 
-@media (min-width: 1024px) {
-  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
-    font-size: clamp(2.75rem, min(7.5vw, 11svh), 6.75rem);
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(2)::after {
+    content: " ";
   }
 }
 
@@ -154,20 +164,24 @@
 .section_home-header .home-header_images.home-header_images--video-cta .home-header_button {
   box-sizing: border-box;
   max-width: 100%;
-  min-height: 2.75rem;
+  min-height: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(0.95rem, calc(0.82rem + 0.45vw), 1.25rem);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: clamp(0.035em, calc(0.065em - 0.001vw), 0.055em);
+  padding-block: clamp(0.65rem, calc(0.5rem + 0.45vw), 1rem) !important;
+  padding-inline: clamp(1.35rem, calc(1rem + 1.35vw), 2.25rem) !important;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.05;
 }
 
-/* Taller main column than Brasa image hero — beats globals-home-nav / template `min-height` rules. */
+/* Fill the viewport, accounting for the section-level nav offset and padding. */
 .section_home-header:has(.home-header_images--video-cta) .home-header_component {
-  min-height: clamp(17rem, 78svh, 52rem);
+  height: 100%;
+  min-height: 0;
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -176,17 +190,13 @@
 
 @supports (height: 100dvh) {
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
-    min-height: clamp(17rem, 78dvh, 52rem);
+    min-height: 0;
   }
 }
 
 @media (max-width: 991px) {
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
-    min-height: clamp(16rem, 72svh, 40rem);
-  }
-
-  .section_home-header:has(.home-hero-video-stage) {
-    min-height: min(78svh, 48rem);
+    min-height: 0;
   }
 }
 
@@ -200,26 +210,28 @@
   }
 
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
-    min-height: clamp(15.5rem, 68svh, 36rem);
-  }
-
-  .section_home-header:has(.home-hero-video-stage) {
-    min-height: min(72svh, 40rem);
+    min-height: 0;
   }
 
   .section_home-header .home-header_images.home-header_images--video-cta {
-    min-height: clamp(200px, 40svh, 400px);
+    min-height: 0;
   }
 }
 
 @media (max-width: 479px) {
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
-    min-height: clamp(14.5rem, 62svh, 32rem);
+    min-height: 0;
   }
 
   .section_home-header .home-header_images.home-header_images--video-cta {
     padding-inline: max(0.65rem, env(safe-area-inset-left, 0px))
       max(0.65rem, env(safe-area-inset-right, 0px)) !important;
+  }
+}
+
+@supports (height: 100dvh) {
+  .section_home-header:has(.home-header_images--video-cta) .home-header_component {
+    min-height: 0;
   }
 }
 
@@ -230,7 +242,7 @@
   }
 
   .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
-    font-size: clamp(1.5rem, min(7vw, 12svh), 3.25rem);
+    font-size: clamp(1.65rem, calc(0.9rem + 4vw), 3rem);
   }
 
   .section_home-header .home-header_images.home-header_images--video-cta {
@@ -239,12 +251,20 @@
   }
 
   .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-stack {
-    gap: 0.5rem;
+    gap: clamp(0.4rem, 1vw, 0.65rem);
   }
 }
 
 @media (min-width: 1200px) {
   .section_home-header:has(.home-hero-video-stage) {
-    min-height: min(80svh, 58rem);
+    height: calc(100svh - var(--home-nav-stack-h, 0px));
+  }
+}
+
+@supports (height: 100dvh) {
+  @media (min-width: 1200px) {
+    .section_home-header:has(.home-hero-video-stage) {
+      height: calc(100dvh - var(--home-nav-stack-h, 0px));
+    }
   }
 }

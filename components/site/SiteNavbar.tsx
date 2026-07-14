@@ -9,7 +9,7 @@ import HeaderPillCta from "@/components/site/HeaderPillCta";
 import { navInfoBlocks, navLogo, navMainLinks } from "@/lib/site-shell-data";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const EASE_NAV = [0.33, 1, 0.32, 1] as const;
 const EASE_BURGER = [0.22, 1, 0.36, 1] as const;
@@ -19,6 +19,28 @@ export default function SiteNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileNavLayout, setMobileNavLayout] = useState(false);
   const reducedMotion = useReducedMotion() ?? false;
+
+  useLayoutEffect(() => {
+    const nav = document.querySelector<HTMLElement>(".navbars");
+    if (!nav) return;
+
+    const updateNavHeight = () => {
+      document.documentElement.style.setProperty(
+        "--site-nav-height",
+        `${nav.getBoundingClientRect().height}px`
+      );
+    };
+
+    updateNavHeight();
+    const observer = new ResizeObserver(updateNavHeight);
+    observer.observe(nav);
+    window.addEventListener("resize", updateNavHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateNavHeight);
+    };
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 991px)");
