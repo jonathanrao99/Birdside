@@ -3,6 +3,13 @@ import styles from "./home-about.module.css";
 
 const SLIDES: HomeAboutSlide[] = [
   {
+    id: "reel-1",
+    type: "video",
+    src: "/assets/home/reels/reel-1.mp4",
+    alt: "Birdside reel showing a stacked chicken sandwich.",
+    caption: "Stacked sandos. Built fresh, served hot."
+  },
+  {
     id: "sando",
     type: "image",
     src: "/assets/home/about-sando.jpg",
@@ -10,10 +17,10 @@ const SLIDES: HomeAboutSlide[] = [
     caption: "Stacked sandos. Built fresh, served hot."
   },
   {
-    id: "hero-tray",
-    type: "image",
-    src: "/assets/home/hero-wings-tray.jpg",
-    alt: "Tray of crispy Birdside wings ready to serve.",
+    id: "reel-2",
+    type: "video",
+    src: "/assets/home/reels/reel-2.mp4",
+    alt: "Birdside reel showing sauced wings and ranch.",
     caption: "Fresh out the fryer, full of flavor."
   },
   {
@@ -24,22 +31,22 @@ const SLIDES: HomeAboutSlide[] = [
     caption: "Glazed wings, made to share."
   },
   {
-    id: "spread-cards",
-    type: "image",
-    src: "/assets/home/about-home-cards.jpg",
-    alt: "Birdside menu favorites and sides in a flat-lay spread.",
-    caption: "Late-night Houston favorite."
+    id: "reel-3",
+    type: "video",
+    src: "/assets/home/reels/reel-3.mp4",
+    alt: "Birdside reel showing glazed chicken wings.",
+    caption: "Glazed wings, made to share."
   },
   {
-    id: "composite",
+    id: "hero-tray",
     type: "image",
-    src: "/assets/home/about-section-composite.jpg",
-    alt: "Birdside food spread and in-kitchen moment.",
-    caption: "From the line to your table."
+    src: "/assets/home/hero-wings-tray.jpg",
+    alt: "Tray of crispy Birdside wings ready to serve.",
+    caption: "Fresh out the fryer, full of flavor."
   }
 ];
 
-const INITIAL_SLIDE_INDEX = 1;
+const INITIAL_SLIDE_INDEX = 0;
 
 export default function HomeAbout() {
   return (

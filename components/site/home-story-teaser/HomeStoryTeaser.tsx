@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import HomeStoryMarquee from "./HomeStoryMarquee";
 import styles from "./home-story-teaser.module.css";
 
 /**
- * Home bridge — scrolling marquee + centered headline + pillars (Birdside black / red / white).
+ * Home bridge — scrolling marquee + late-night restaurant details.
  */
 export default function HomeStoryTeaser() {
   return (
@@ -11,70 +12,54 @@ export default function HomeStoryTeaser() {
       <HomeStoryMarquee />
 
       <div className={styles.inner}>
-        <div className={styles.top}>
-          <h2 id="home-story-teaser-heading" className={styles.headline}>
-            Late-night chicken,
-            <br />
-            <span className={styles.headlineAccent}>done right.</span>
-          </h2>
+        <div className={styles.heroRow}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>Katy, Texas · 100% Halal</p>
+            <h2 id="home-story-teaser-heading" className={styles.headline}>
+              Late-night chicken
+              <br />
+              <span className={styles.headlineAccent}>made to order.</span>
+            </h2>
+            <p className={styles.lede}>
+              Fresh wings, sandos, and trays from 5 PM to 12:30 AM.
+            </p>
+          </div>
+
+          <div className={styles.hoursBlock} aria-label="Birdside hours">
+            <span className={styles.hoursLabel}>Open nightly</span>
+            <strong className={styles.hoursTime}>5 PM–12:30 AM</strong>
+            <span className={styles.hoursNote}>Katy dine-in, pickup, and late-night runs.</span>
+          </div>
         </div>
 
-        <ul className={styles.pillars} aria-label="Hours, menu, groups">
-          <li className={styles.pillar}>
-            <span className={styles.pillarKicker}>Hours</span>
-            <h3 className={styles.pillarTitle}>Seven nights straight</h3>
-            <p className={styles.pillarBody}>
-              <span className={styles.pillarTime}>5:00 PM – 12:30 AM</span>, every
-              night. Eat in or run it out the door.
-            </p>
+        <ul className={styles.factList} aria-label="Birdside details">
+          <li className={styles.factItem}>
+            <span className={styles.factNumber}>01</span>
+            <span className={styles.factText}>Fresh chicken cooked to order.</span>
           </li>
-          <li className={styles.pillar}>
-            <span className={styles.pillarKicker}>Menu</span>
-            <h3 className={styles.pillarTitle}>Busy line, same standard</h3>
-            <p className={styles.pillarBody}>
-              <Link href="/menu" className={styles.inlineLink}>
-                What we run
-              </Link>{" "}
-              <span className={styles.pillarBodyAccent}>is tight for a reason</span>ß. Even at full volume, it stays crispy.
-            </p>
+          <li className={styles.factItem}>
+            <span className={styles.factNumber}>02</span>
+            <span className={styles.factText}>100% Halal menu.</span>
           </li>
-          <li className={styles.pillar}>
-            <span className={styles.pillarKicker}>Groups</span>
-            <h3 className={styles.pillarTitle}>Tray math</h3>
-            <p className={styles.pillarBody}>
-              <Link href="/catering" className={styles.inlineLink}>
-                Catering
-              </Link>{" "}
-              for offices, parties, whatever needs wings and sides in bulk.
-            </p>
+          <li className={styles.factItem}>
+            <span className={styles.factNumber}>03</span>
+            <span className={styles.factText}>Catering trays for groups.</span>
+          </li>
+          <li className={styles.factItem}>
+            <span className={styles.factNumber}>04</span>
+            <span className={styles.factText}>Pull up in Katy.</span>
           </li>
         </ul>
 
         <div className={styles.ctaRow}>
-          <p className={styles.ctaSupport}>
-            <span className={styles.ctaLinks}>
-              <Link href="/menu" className={styles.inlineLink}>
-                Menu
-              </Link>
-              <span className={styles.ctaSep} aria-hidden>
-                ·
-              </span>
-              <Link href="/sauce-lab" className={styles.inlineLink}>
-                Sauce Lab
-              </Link>
-              <span className={styles.ctaSep} aria-hidden>
-                ·
-              </span>
-              <Link href="/catering" className={styles.inlineLink}>
-                Catering
-              </Link>
-            </span>{" "}
-            <span className={styles.ctaTail}>
-               &nbsp;the orders people run back for.
-            </span>
-          </p>
-          <Link href="/about" className={styles.ctaBtn}>
-            Our story
+          <Link href="/menu" className={styles.ctaBtnPrimary}>
+            View menu
+          </Link>
+          <a href={ORDER_NOW_URL} className={styles.ctaBtn}>
+            Order now
+          </a>
+          <Link href="/catering" className={styles.inlineLink}>
+            Catering
           </Link>
         </div>
       </div>

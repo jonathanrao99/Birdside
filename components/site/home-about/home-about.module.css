@@ -101,29 +101,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(64px, 18vw, 96px);
-  height: clamp(64px, 18vw, 96px);
+  width: clamp(80px, 22vw, 128px);
+  height: clamp(80px, 22vw, 128px);
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   border: none;
   background: transparent;
   color: var(--color-text);
   cursor: pointer;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
-  font-size: clamp(2.65rem, 12.5vw, 3.75rem);
+  font-size: clamp(3.35rem, 15.75vw, 5rem);
   font-weight: 700;
   line-height: 1;
   padding-bottom: clamp(3px, 1.2vw, 8px);
-  transition: color 0.2s ease;
+  opacity: 0.9;
+  text-shadow:
+    0 2px 12px rgb(255 255 255 / 0.65),
+    0 8px 26px rgb(0 0 0 / 0.45);
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .arrowBtn:hover {
   color: var(--color-primary);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.06);
+  text-shadow:
+    0 2px 14px rgb(255 255 255 / 0.75),
+    0 10px 30px rgb(0 0 0 / 0.52);
+}
+
+.arrowBtn:active {
+  transform: translateY(-50%) scale(0.98);
 }
 
 .arrowBtn:focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 9999px;
+  opacity: 1;
 }
 
 .arrowBtn:focus-visible:hover {
@@ -169,12 +189,67 @@
 }
 
 .cardImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease-out;
 }
 
 .latestCardClickable:hover .cardImage {
   transform: scale(1.1);
+}
+
+.muteToggle {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 9999px;
+  background: rgb(0 0 0 / 0.45);
+  color: #fff;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  opacity: 0.92;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.muteToggle:hover {
+  background: rgb(0 0 0 / 0.65);
+  border-color: rgb(255 255 255 / 0.25);
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.muteToggle:active {
+  transform: scale(0.96);
+}
+
+.muteToggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .muteToggle {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 /* Mobile / base slot transforms (peckers-master LatestNewsCards) */
