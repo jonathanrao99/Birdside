@@ -14,9 +14,9 @@ export default function SauceLabPage() {
     <PageShell
       mainSlots={[
         <div className="sauce-lab-viewport-fill" key="sauce-lab-screen">
-          <main className="main-wrapper sauce-lab-route">
+          <div className="main-wrapper sauce-lab-route">
             <SauceLabPageClient />
-          </main>
+          </div>
         </div>
       ]}
     />

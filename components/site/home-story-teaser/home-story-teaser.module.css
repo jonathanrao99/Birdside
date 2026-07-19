@@ -100,7 +100,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: #ff3045;
 }
 
 .headline {
@@ -123,7 +123,7 @@
   font-size: clamp(2.8rem, 7.25vw, 5.4rem);
   letter-spacing: 0.015em;
   text-transform: none;
-  color: var(--color-primary);
+  color: #ff3045;
   line-height: 1;
 }
 
@@ -213,7 +213,7 @@
   font-size: clamp(0.9rem, 1.6vw, 1rem);
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--color-primary);
+  color: #ff3045;
 }
 
 .factText {

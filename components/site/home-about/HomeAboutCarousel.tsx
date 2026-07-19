@@ -168,15 +168,6 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
     }, 750);
   }, [N]);
 
-  const handleCardClick = useCallback(
-    (slot: number) => {
-      if (animatingRef.current) return;
-      if (slot === -1) goPrev();
-      else if (slot === 1) goNext();
-    },
-    [goPrev, goNext]
-  );
-
   const handleMuteToggle = useCallback(() => {
     setAudioUnlocked(true);
     setUserMuted(activeMuted ? false : true);
@@ -197,28 +188,11 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
           const slide = slides[card.imageIndex];
           if (!slide) return null;
           const { src, alt } = slideToSrc(slide);
-          const clickable = card.slot === -1 || card.slot === 1;
           const slotCls = slotClassName(card.slot);
           return (
             <div
               key={card.id}
-              className={`${styles.latestCard} ${slotCls} ${clickable ? styles.latestCardClickable : ""}`}
-              onClick={clickable ? () => handleCardClick(card.slot) : undefined}
-              onKeyDown={
-                clickable
-                  ? (e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        handleCardClick(card.slot);
-                      }
-                    }
-                  : undefined
-              }
-              role={clickable ? "button" : undefined}
-              tabIndex={clickable ? 0 : undefined}
-              aria-label={
-                card.slot === -1 ? "Previous slide" : card.slot === 1 ? "Next slide" : undefined
-              }
+              className={`${styles.latestCard} ${slotCls}`}
             >
               {slide.type === "video" ? (
                 <>
@@ -231,7 +205,7 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
                     muted={card.slot !== 0 || activeMuted}
                     playsInline
                     poster={slide.poster}
-                    preload={Math.abs(card.slot) <= 1 ? "auto" : "metadata"}
+                    preload={card.slot === 0 ? "auto" : "none"}
                   >
                     <source src={slide.src} type="video/mp4" />
                   </video>

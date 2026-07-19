@@ -18,7 +18,7 @@
   width: 100%;
   min-height: 0;
   max-height: 100%;
-  overflow-x: visible;
+  overflow-x: clip;
   overflow-y: visible;
   background: #000;
   display: flex;
@@ -32,7 +32,7 @@
   width: 100%;
   min-height: 0;
   max-height: 100%;
-  overflow-x: visible;
+  overflow-x: clip;
   overflow-y: visible;
   display: flex;
   flex-direction: column;
@@ -596,6 +596,8 @@
   background: none;
   border: none;
   padding: 0;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   transition: transform 0.3s;
 }

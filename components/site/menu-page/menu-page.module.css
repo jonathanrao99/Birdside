@@ -49,10 +49,12 @@
   transform: translateY(-50%);
   z-index: 30;
   padding: 1vw;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   background: none;
   border: none;
-  color: var(--brand-red, #e30119);
+  color: #ff3045;
 }
 
 .arrowBtn:disabled {
@@ -67,6 +69,8 @@
   justify-content: center;
   width: clamp(28px, 8vw, 56px);
   height: clamp(28px, 8vw, 56px);
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .arrowLeft {
@@ -230,7 +234,7 @@
   margin-top: 0.75rem;
   font-size: clamp(1.1rem, 4vw, 1.5rem);
   font-weight: 500;
-  color: var(--brand-red, #e30119);
+  color: #ff3045;
   letter-spacing: 0.03em;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
 }
@@ -297,7 +301,7 @@
 }
 
 .metaMuted {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.74);
   /* +2 steps @ 0.25rem (was 0.7rem) */
   font-size: 1.2rem;
   letter-spacing: 0.04em;

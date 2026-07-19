@@ -193,6 +193,7 @@
   border: none;
   border-radius: 9999px;
   padding: 0.68rem 1.25rem;
+  min-height: 44px;
   font-family: var(--_typography---font-family--secondary);
   font-size: 0.7rem;
   font-weight: 800;

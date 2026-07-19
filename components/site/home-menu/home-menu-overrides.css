@@ -22,6 +22,7 @@
   font: inherit;
   margin: 0;
   padding: 0;
+  min-height: 44px;
   text-align: inherit;
 }
 
@@ -39,6 +40,7 @@
 /* Menu category pills: reduce type by one step */
 .section_home-menu .menu_link {
   font-size: var(--_sizes---fixed--1-5rem, 1.5rem) !important;
+  color: #fff !important;
 }
 
 .section_home-menu .menu_tabs-menu:focus-visible {
@@ -243,4 +245,3 @@
     font-size: clamp(0.95rem, 4.4vw, 1.15rem) !important;
   }
 }
-

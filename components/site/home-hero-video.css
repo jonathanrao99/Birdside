@@ -164,7 +164,7 @@
 .section_home-header .home-header_images.home-header_images--video-cta .home-header_button {
   box-sizing: border-box;
   max-width: 100%;
-  min-height: 0;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -37,7 +37,7 @@ function homeIntroAlreadyShown(): boolean {
 export default function PageTransitionChrome({ children }: Props) {
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
-  const [isPageLoading, setIsPageLoading] = useState(true);
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
 

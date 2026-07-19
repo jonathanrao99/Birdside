@@ -26,7 +26,7 @@ export default function PageLoader({ loading, onComplete }: PageLoaderProps) {
 
   useEffect(() => {
     if (!loading) return;
-    const holdMs = reduced ? 220 : 880;
+    const holdMs = reduced ? 120 : 240;
     const t = window.setTimeout(() => {
       onComplete?.();
     }, holdMs);

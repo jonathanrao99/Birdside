@@ -27,6 +27,10 @@ function renderMainSlots(slots: PageShellMainSlot[]) {
   );
 }
 
+function MainContent({ children }: { children: ReactNode }) {
+  return <main id="main-content">{children}</main>;
+}
+
 export default function PageShell({
   mainHtml = "",
   mainSlots,
@@ -40,7 +44,7 @@ export default function PageShell({
         <div id="birdside-preloader-reveal">
           <SiteNavbar />
           {lead}
-          {renderMainSlots(mainSlots)}
+          <MainContent>{renderMainSlots(mainSlots)}</MainContent>
         </div>
         <SiteFooter />
       </div>
@@ -59,9 +63,11 @@ export default function PageShell({
         <div id="birdside-preloader-reveal">
           <SiteNavbar />
           {lead}
-          <div dangerouslySetInnerHTML={{ __html: beforeHtml }} />
-          {preMain}
-          <div dangerouslySetInnerHTML={{ __html: afterHtml }} />
+          <MainContent>
+            <div dangerouslySetInnerHTML={{ __html: beforeHtml }} />
+            {preMain}
+            <div dangerouslySetInnerHTML={{ __html: afterHtml }} />
+          </MainContent>
         </div>
         <SiteFooter />
       </div>
@@ -73,8 +79,10 @@ export default function PageShell({
       <div id="birdside-preloader-reveal">
         <SiteNavbar />
         {lead}
-        {preMain}
-        <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+        <MainContent>
+          {preMain}
+          <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+        </MainContent>
       </div>
       <SiteFooter />
     </div>

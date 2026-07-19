@@ -45,9 +45,9 @@ const nextConfig = {
         "default-src 'self'",
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com",
         "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: https:",
-        "font-src 'self' data:",
-        "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io",
+        "img-src 'self' data: blob: https:",
+        "font-src 'self' data: https://cdn.prod.website-files.com",
+        "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io https://cdn.jsdelivr.net https://unpkg.com",
         "frame-src 'self' https://*.elevenlabs.io",
         "media-src 'self' blob: https:",
         "frame-ancestors 'none'",
@@ -59,7 +59,7 @@ const nextConfig = {
         source: "/:path*",
         headers: [
           {
-            key: "Content-Security-Policy-Report-Only",
+            key: "Content-Security-Policy",
             value: csp
           }
         ]

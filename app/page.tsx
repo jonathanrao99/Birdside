@@ -25,13 +25,13 @@ export default function HomePage() {
       <PageShell
         lead={<HomeHeader />}
         mainSlots={[
-          <main key="home-main" className="main-wrapper">
+          <div key="home-main" className="main-wrapper">
             <div dangerouslySetInnerHTML={{ __html: p1 }} />
             <PatternStrip tone="black" />
             <HomeAbout />
             <HomeStoryTeaser />
             <div dangerouslySetInnerHTML={{ __html: p3 }} />
-          </main>
+          </div>
         ]}
       />
       <HomeCtaLottiesDynamic />

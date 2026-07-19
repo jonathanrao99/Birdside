@@ -35,6 +35,8 @@
   text-align: center;
   line-height: 1;
   padding: 0.52em 1.2em 0.48em;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 9999px;
   border-width: 2px;
   border-style: solid;

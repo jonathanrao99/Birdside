@@ -33,10 +33,10 @@ type Props = {
 };
 
 /** GSAP segment durations (seconds). */
-const DUR_GAP = 1.64;
-const DUR_ROW_SCALE = 1.64;
-const DUR_CURTAIN = 2.08;
-const DUR_REVEAL = 1.28;
+const DUR_GAP = 0.42;
+const DUR_ROW_SCALE = 0.36;
+const DUR_CURTAIN = 0.5;
+const DUR_REVEAL = 0.36;
 
 /**
  * First session visit to `/` only: letter-row tracking, scale, curtain slide + reveal zoom

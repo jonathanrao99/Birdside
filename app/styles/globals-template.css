@@ -588,6 +588,11 @@
   font: inherit;
   color: inherit;
   cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Hamburger lines: morph motion lives in components/site/SiteNavbar.tsx (motion/react). */
@@ -616,6 +621,10 @@
   .navbar .navbar_links .navbar_text,
   .navbar .navbar_links .navbar_link {
     color: #fff !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar .navbar_links .navbar_link.w--current .navbar_text {
@@ -642,7 +651,7 @@
 .navbar .navbar_infos .navbar_header_pill_cta .header-pill-cta {
   font-size: clamp(1.4rem, 1.88vw, 1.5625rem);
   padding: 0.3em 0.7em 0.26em;
-  min-height: 1.85rem;
+  min-height: 44px;
   min-width: 6.15rem;
 }
 
@@ -699,6 +708,8 @@
   position: relative;
   text-decoration: none !important;
   padding-bottom: 0.22em;
+  min-height: 44px;
+  align-items: center;
 }
 
 .navbar .navbar_link.w-inline-block::after,
@@ -811,8 +822,8 @@
 
 a.footer_social-icon {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   text-decoration: none;
@@ -855,6 +866,21 @@ a.footer_social-icon:hover {
     transform 0.2s ease,
     opacity 0.2s ease,
     border-color 0.2s ease;
+}
+
+.footer .birdside-footer-column-link,
+.footer .birdside-footer-wordmark-credit-link {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+#main-content a[href]:not(.menu_img-hit) {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .footer a.footer_social-icon .footer_social-icon-img {
@@ -1051,7 +1077,7 @@ a.footer_social-icon:hover {
   font-size: clamp(0.8125rem, 1.05vw, 0.9375rem);
   line-height: 1.35;
   letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.56);
   font-weight: 400;
 }
 
@@ -1210,6 +1236,7 @@ a.footer_social-icon:hover {
 }
 
 .birdside-page-transition-shell {
+  overflow-x: clip;
   transition:
     opacity 0.4s cubic-bezier(0.33, 1, 0.32, 1),
     visibility 0.4s;

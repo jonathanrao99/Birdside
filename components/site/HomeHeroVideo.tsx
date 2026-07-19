@@ -1,7 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
-import { useEffect, useRef, type SyntheticEvent } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
 import "./home-hero-video.css";
 
@@ -13,42 +13,44 @@ type BackdropProps = {
 /** Full-viewport-width video layer; render as first child of `section_home-header`. */
 export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) {
   const reducedMotion = useReducedMotion() ?? false;
-  const desktopRef = useRef<HTMLVideoElement>(null);
-  const mobileRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activeSrc, setActiveSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setActiveSrc(media.matches ? mobileSrc : desktopSrc);
+
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, [desktopSrc, mobileSrc]);
 
   useEffect(() => {
     if (!reducedMotion) return;
-    desktopRef.current?.pause();
-    mobileRef.current?.pause();
+    videoRef.current?.pause();
   }, [reducedMotion]);
 
   /** Paused hero never fires `playing` — show first frame without fade. */
   useEffect(() => {
     if (!reducedMotion) return;
-    desktopRef.current?.classList.add("home-hero-video--visible");
-    mobileRef.current?.classList.add("home-hero-video--visible");
-  }, [reducedMotion, desktopSrc, mobileSrc]);
+    videoRef.current?.classList.add("home-hero-video--visible");
+  }, [reducedMotion, activeSrc]);
 
   /** Reset fade when src changes (reduced-motion effect below may re-apply immediately). */
   useEffect(() => {
-    desktopRef.current?.classList.remove("home-hero-video--visible");
-    mobileRef.current?.classList.remove("home-hero-video--visible");
-  }, [desktopSrc, mobileSrc]);
+    videoRef.current?.classList.remove("home-hero-video--visible");
+  }, [activeSrc]);
 
   /** Autoplay policies: nudge play after mount when `autoPlay` alone stalls (common with remote src). */
   useEffect(() => {
-    if (reducedMotion) return;
-    const d = desktopRef.current;
-    const m = mobileRef.current;
-    const kick = (v: HTMLVideoElement | null) => {
-      if (!v) return;
-      void v.play().catch(() => {
-        /* ignore — user gesture may be required on some browsers */
-      });
-    };
-    kick(d);
-    kick(m);
-  }, [reducedMotion, desktopSrc, mobileSrc]);
+    if (reducedMotion || !activeSrc) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    void video.play().catch(() => {
+      /* ignore — user gesture may be required on some browsers */
+    });
+  }, [reducedMotion, activeSrc]);
 
   const onVideoPlaying = (e: SyntheticEvent<HTMLVideoElement>) => {
     e.currentTarget.classList.add("home-hero-video--visible");
@@ -56,30 +58,20 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
 
   return (
     <div className="home-hero-video-stage" aria-hidden="true">
-      <video
-        ref={desktopRef}
-        autoPlay={!reducedMotion}
-        className="home-hero-video home-hero-video--desktop"
-        controls={false}
-        loop
-        muted
-        playsInline
-        onPlaying={onVideoPlaying}
-        preload="auto"
-        src={desktopSrc}
-      />
-      <video
-        ref={mobileRef}
-        autoPlay={!reducedMotion}
-        className="home-hero-video home-hero-video--mobile"
-        controls={false}
-        loop
-        muted
-        playsInline
-        onPlaying={onVideoPlaying}
-        preload="auto"
-        src={mobileSrc}
-      />
+      {activeSrc ? (
+        <video
+          ref={videoRef}
+          autoPlay={!reducedMotion}
+          className="home-hero-video home-hero-video--active"
+          controls={false}
+          loop
+          muted
+          playsInline
+          onPlaying={onVideoPlaying}
+          preload="auto"
+          src={activeSrc}
+        />
+      ) : null}
     </div>
   );
 }
