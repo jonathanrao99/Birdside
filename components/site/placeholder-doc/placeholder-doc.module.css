@@ -1,99 +1,111 @@
 .wrap {
   background: #000;
   color: #fff;
-  min-height: min(70vh, 48rem);
+  min-height: 100vh;
+  padding: clamp(6rem, 12vw, 8rem) clamp(1.5rem, 4vw, 3rem);
 }
 
 .inner {
-  padding-top: clamp(4rem, 10vh, 7rem);
-  padding-bottom: clamp(4rem, 8vh, 6rem);
+  width: 100%;
+  max-width: 56rem;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .title {
-  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  margin: 0 0 clamp(3rem, 6vw, 4.25rem);
   font-family: var(--_typography---font-family--primary);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 800;
-  letter-spacing: 0.05em;
-  line-height: 1.15;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
   text-transform: uppercase;
   color: #fff;
 }
 
 .body {
   width: 100%;
-  max-width: 54rem;
   box-sizing: border-box;
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: clamp(1rem, 2vw, 1.5rem);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
-  font-size: clamp(0.98rem, 1.15vw, 1.075rem);
-  font-weight: 500;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(1.05rem, 2vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.625;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.body p {
-  margin: 0 0 1.1rem;
+.body > section {
+  margin: 0 0 clamp(3rem, 6vw, 3.5rem);
 }
 
-.body p:last-child {
+.body > section:last-child {
   margin-bottom: 0;
 }
 
+.body > section:last-child:not(:first-child) {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.body p {
+  margin: 0;
+}
+
+.body p + p,
+.body ul + p {
+  margin-top: 1rem;
+}
+
 .body ul {
-  margin: 0 0 1.25rem;
-  padding-left: 1.25rem;
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  list-style: disc;
 }
 
 .body li {
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.5rem;
   padding-left: 0.2rem;
 }
 
+.body li:last-child {
+  margin-bottom: 0;
+}
+
 .body li::marker {
-  color: #ff3045;
+  color: currentColor;
 }
 
 .body h2 {
-  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0.7rem;
-  padding-top: clamp(1.25rem, 3vw, 1.75rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
-  font-size: clamp(1.2rem, 2.8vw, 1.65rem);
-  font-weight: 900;
-  line-height: 1.12;
-  letter-spacing: 0.06em;
+  margin: 0 0 1rem;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(1.35rem, 3vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
 }
 
-.body h2:first-child {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: 0;
-}
-
-.body h2 + p {
-  margin-top: 0;
-}
-
 .body strong {
   color: #fff;
-  font-weight: 700;
+  font-weight: inherit;
 }
 
 .body a {
-  color: #ff3045;
+  color: #fff;
   text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-color: var(--color-primary, #e30119);
+  text-underline-offset: 0.2em;
   transition: opacity 0.15s ease;
 }
 
 .body a:hover {
   opacity: 0.88;
+}
+
+.body > section:last-child p {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.6);
 }
