@@ -5,13 +5,13 @@
 }
 
 .inner {
-  padding-top: clamp(5.5rem, 14vh, 8rem);
-  padding-bottom: clamp(3rem, 6vh, 5rem);
+  padding-top: clamp(4rem, 10vh, 7rem);
+  padding-bottom: clamp(4rem, 8vh, 6rem);
   box-sizing: border-box;
 }
 
 .title {
-  margin: 0 0 1.25rem;
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
   font-family: var(--_typography---font-family--primary);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
@@ -22,25 +22,73 @@
 }
 
 .body {
-  max-width: 40rem;
-  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  width: 100%;
+  max-width: 54rem;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02));
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: clamp(0.98rem, 1.15vw, 1.075rem);
   font-weight: 500;
-  line-height: 1.55;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .body p {
-  margin: 0 0 1rem;
+  margin: 0 0 1.1rem;
 }
 
 .body p:last-child {
   margin-bottom: 0;
 }
 
+.body ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.body li {
+  margin-bottom: 0.55rem;
+  padding-left: 0.2rem;
+}
+
+.body li::marker {
+  color: #ff3045;
+}
+
+.body h2 {
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0.7rem;
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1.2rem, 2.8vw, 1.65rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.body h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.body h2 + p {
+  margin-top: 0;
+}
+
+.body strong {
+  color: #fff;
+  font-weight: 700;
+}
+
 .body a {
-  color: var(--color-primary, #e30119);
+  color: #ff3045;
   text-decoration: underline;
   text-underline-offset: 0.18em;
   transition: opacity 0.15s ease;
