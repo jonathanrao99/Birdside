@@ -1,0 +1,56 @@
+.section {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  padding: clamp(4rem, 8vw, 6rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.header {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--layout-content-max);
+  margin: 0 auto clamp(1rem, 3vw, 1.75rem);
+  padding: 0 var(--layout-section-padding-x);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff3045;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.subtitle {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: clamp(0.15rem, 0.45vw, 0.28rem) auto clamp(0.9rem, 2vw, 1.35rem);
+  padding: 0 var(--layout-section-padding-x);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1.5rem, 4.5vw, 2.55rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: 0.055em;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}

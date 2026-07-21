@@ -106,9 +106,14 @@ function DropShadowSVG({ filterId, gradId }: { filterId: string; gradId: string 
 type Props = {
   items: MenuCarouselItem[];
   onActiveIndexChange?: (index: number) => void;
+  titleTag?: "h1" | "h3";
 };
 
-export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) {
+export default function MenuPageCarousel({
+  items,
+  onActiveIndexChange,
+  titleTag: TitleTag = "h1"
+}: Props) {
   const uid = useId().replace(/:/g, "");
   const filterId = `${uid}-blur`;
   const gradId = `${uid}-glow`;
@@ -323,7 +328,7 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
               if (!item) return null;
               const isCenter = card.slot === 0;
               const cfg = MOBILE_SLOT_MAPPING[card.slot] ?? MOBILE_SLOT_MAPPING[0];
-              const scale = cfg.scale * (item.boost ?? 1);
+              const scale = cfg.scale * (isCenter ? item.boost ?? 1 : 1);
 
               return (
                 <div
@@ -389,7 +394,7 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
                 animate={{
                   x: `calc(-50% + ${cfg.x}vw)`,
                   y: `calc(-50% + ${cfg.y}px)`,
-                  scale: cfg.scale * (item.boost ?? 1),
+                  scale: cfg.scale * (isCenter ? item.boost ?? 1 : 1),
                   opacity: isVisible ? cfg.opacity : 0,
                   zIndex: cfg.z
                 }}
@@ -442,7 +447,7 @@ export default function MenuPageCarousel({ items, onActiveIndexChange }: Props) 
       </div>
 
       <div className={carouselStyles.titleBlock}>
-        <h1 className={carouselStyles.title}>{items[carousel.center]?.name}</h1>
+        <TitleTag className={carouselStyles.title}>{items[carousel.center]?.name}</TitleTag>
       </div>
     </div>
   );

@@ -56,10 +56,11 @@
 /* --- LatestNewsCards-style stage --- */
 .cardsShell {
   position: relative;
-  width: 100%;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
   height: 100%;
   background: var(--color-bg);
-  overflow: clip;
+  overflow: visible;
   /* Vertical rhythm comes from .sectionInner; keep carousel flush to stack gap */
   padding-block: 0;
 }
@@ -71,7 +72,7 @@
   padding-block: 0;
   perspective: 1400px;
   transform-style: preserve-3d;
-  overflow: clip;
+  overflow: visible;
 }
 
 @media (min-width: 768px) {

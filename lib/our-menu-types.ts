@@ -20,6 +20,7 @@ export type OurMenuItem = {
   name: string;
   price: string;
   description: string;
+  descriptionNote?: string;
   productHref: string;
   buttonWId?: string;
 };

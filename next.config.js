@@ -43,12 +43,12 @@ const nextConfig = {
     if (process.env.NODE_ENV === "production") {
       const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://elfsightcdn.com",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https:",
         "font-src 'self' data: https://cdn.prod.website-files.com",
-        "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io https://cdn.jsdelivr.net https://unpkg.com",
-        "frame-src 'self' https://*.elevenlabs.io",
+        "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io https://cdn.jsdelivr.net https://unpkg.com https://elfsightcdn.com https://*.elfsight.com",
+        "frame-src 'self' https://*.elevenlabs.io https://*.elfsight.com",
         "media-src 'self' blob: https:",
         "frame-ancestors 'none'",
         "base-uri 'self'",
