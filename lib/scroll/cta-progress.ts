@@ -4,9 +4,9 @@ import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigge
 
 /**
  * CTA section scroll-linked `--cta-progress` / `--cta-pop` (legacy script parity).
- * ScrollTrigger + Lenis (`ScrollTrigger.update` on Lenis scroll in SmoothScroll) drive updates.
+ * ScrollTrigger plus direct scroll listeners keep the legacy HTML section in sync.
  */
-export function setupCtaProgress(_lenis: Lenis | null): () => void {
+export function setupCtaProgress(lenis: Lenis | null): () => void {
   const ScrollTrigger = ensureScrollTriggerRegistered();
   const section = document.querySelector(".section_cta") as HTMLElement | null;
   const wrapper = document.querySelector(
@@ -23,6 +23,8 @@ export function setupCtaProgress(_lenis: Lenis | null): () => void {
     return () => {};
   }
 
+  let frame = 0;
+
   const apply = () => {
     const rect = wrapper.getBoundingClientRect();
     const vh = window.innerHeight || 1;
@@ -36,12 +38,21 @@ export function setupCtaProgress(_lenis: Lenis | null): () => void {
     section.classList.toggle("is-cta-pop", pop === "1");
   };
 
+  const scheduleApply = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(() => {
+      frame = 0;
+      apply();
+    });
+  };
+
   const ctx = gsap.context(() => {
     ScrollTrigger.create({
       trigger: section,
       start: "top bottom",
       end: "bottom top",
       invalidateOnRefresh: true,
+      onRefresh: apply,
       onUpdate: apply
     });
   }, section);
@@ -51,20 +62,33 @@ export function setupCtaProgress(_lenis: Lenis | null): () => void {
   const onVisibility = () => {
     if (!document.hidden) {
       ScrollTrigger.update();
+      scheduleApply();
     }
   };
   const onPageshow = (e: PageTransitionEvent) => {
     if (e.persisted) {
       ScrollTrigger.update();
-      apply();
+      scheduleApply();
     }
   };
+  const onResize = () => {
+    ScrollTrigger.refresh();
+    scheduleApply();
+  };
+
+  window.addEventListener("scroll", scheduleApply, { passive: true });
+  window.addEventListener("resize", onResize, { passive: true });
   window.addEventListener("pageshow", onPageshow);
   document.addEventListener("visibilitychange", onVisibility);
+  lenis?.on("scroll", scheduleApply);
 
   return () => {
+    if (frame) window.cancelAnimationFrame(frame);
+    lenis?.off("scroll", scheduleApply);
     document.removeEventListener("visibilitychange", onVisibility);
     window.removeEventListener("pageshow", onPageshow);
+    window.removeEventListener("resize", onResize);
+    window.removeEventListener("scroll", scheduleApply);
     ctx.revert();
   };
 }
