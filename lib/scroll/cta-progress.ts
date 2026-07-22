@@ -2,6 +2,17 @@ import gsap from "gsap";
 import type Lenis from "lenis";
 import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
 
+const IMAGE_GROW_END = 0.92;
+const LOCATION_REVEAL_START = 0.94;
+
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value));
+}
+
+function snapProgress(value: number) {
+  return Math.round(value * 200) / 200;
+}
+
 /**
  * CTA section scroll-linked `--cta-progress` / `--cta-pop` (legacy script parity).
  * ScrollTrigger plus direct scroll listeners keep the legacy HTML section in sync.
@@ -30,9 +41,9 @@ export function setupCtaProgress(lenis: Lenis | null): () => void {
     const vh = window.innerHeight || 1;
     const total = Math.max(1, rect.height - vh);
     const traveled = Math.max(0, Math.min(total, -rect.top));
-    const progress = traveled / total;
-    const progressStep = Math.round(progress * 200) / 200;
-    const pop = progress >= 0.75 ? "1" : "0";
+    const sectionProgress = traveled / total;
+    const progressStep = snapProgress(clamp01(sectionProgress / IMAGE_GROW_END));
+    const pop = sectionProgress >= LOCATION_REVEAL_START ? "1" : "0";
     section.style.setProperty("--cta-progress", String(progressStep));
     section.style.setProperty("--cta-pop", pop);
     section.classList.toggle("is-cta-pop", pop === "1");

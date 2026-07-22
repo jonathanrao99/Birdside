@@ -260,7 +260,7 @@
   --cta-scale-x: 2.1;
   --cta-scale-y: 2.6;
   /* Let image reach full size before section-end so user scrolls further in the full state */
-  --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.35), 1);
+  --cta-scale-progress: var(--cta-progress);
   overflow-x: visible;
 }
 
@@ -381,7 +381,7 @@
   .section_cta {
     --cta-scale-x: 2.45;
     --cta-scale-y: 2.85;
-    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.42), 1);
+    --cta-scale-progress: var(--cta-progress);
     padding-bottom: clamp(1.25rem, 4vw, 2.5rem);
   }
 
@@ -467,7 +467,7 @@
   .section_cta {
     --cta-scale-x: 2.02;
     --cta-scale-y: 2.42;
-    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.5), 1);
+    --cta-scale-progress: var(--cta-progress);
     padding-bottom: clamp(1.5rem, 5vw, 2.75rem);
   }
 
@@ -530,7 +530,7 @@
   .section_cta {
     --cta-scale-x: 1.88;
     --cta-scale-y: 2.22;
-    --cta-scale-progress: clamp(0, calc(var(--cta-progress) * 1.58), 1);
+    --cta-scale-progress: var(--cta-progress);
   }
 
   .section_cta .cta_wrapper {
