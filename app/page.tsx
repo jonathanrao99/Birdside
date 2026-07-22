@@ -17,14 +17,22 @@ import { notFound } from "next/navigation";
 
 export const generateMetadata = createStaticRouteMetadata("/");
 
+const LEGACY_HOME_DIRECTIONS_URL =
+  "https://maps.google.com/?q=1989+North+Fry+Rd,+Katy,+Texas+77449";
+const HOME_DIRECTIONS_URL = "https://maps.app.goo.gl/qwzke7A98i3z2NSN6";
+
 export default function HomePage() {
   const content = getRouteContent("/");
   if (!content) notFound();
   const { part1, part3 } = splitHomeMainAroundOurMenu(content.mainHtml);
   const p1 = stripHomeMarqueeSection(part1);
   const p3 = stripHomeMarqueeSection(part3);
-  const { before: beforeTestimonials, after: afterTestimonials } =
+  const { before: beforeTestimonials, after: rawAfterTestimonials } =
     splitAroundTestimonialsSection(p3);
+  const afterTestimonials = rawAfterTestimonials.replace(
+    LEGACY_HOME_DIRECTIONS_URL,
+    HOME_DIRECTIONS_URL
+  );
   return (
     <>
       <PageShell

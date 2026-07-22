@@ -48,7 +48,7 @@ const nextConfig = {
         "img-src 'self' data: blob: https:",
         "font-src 'self' data: https://cdn.prod.website-files.com",
         "connect-src 'self' https://*.elevenlabs.io wss://*.elevenlabs.io https://cdn.jsdelivr.net https://unpkg.com https://elfsightcdn.com https://universe-static.elfsightcdn.com https://core.service.elfsight.com https://*.elfsight.com",
-        "frame-src 'self' https://*.elevenlabs.io https://*.elfsight.com",
+        "frame-src 'self' https://*.elevenlabs.io https://*.elfsight.com https://www.google.com https://maps.google.com",
         "media-src 'self' blob: https:",
         "frame-ancestors 'none'",
         "base-uri 'self'",
