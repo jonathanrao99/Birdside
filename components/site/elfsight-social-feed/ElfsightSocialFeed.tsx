@@ -43,16 +43,18 @@ export default function ElfsightSocialFeed() {
           />
         </div>
         <div className={`${styles.widgetBlock} ${styles.reviewBlock}`}>
-          <header className={`${styles.header} ${styles.reviewHeader}`}>
-            <div className={styles.stars} aria-hidden>
-              ★★★★★
-            </div>
-            <h2 className={styles.title}>What our clients say</h2>
-          </header>
-          <div
-            className="elfsight-app-fb3fe4c1-4bbb-4507-ad93-7d4835a7eb3e"
-            data-elfsight-app-lazy
-          />
+          <div className={styles.reviewInner}>
+            <header className={`${styles.header} ${styles.reviewHeader}`}>
+              <div className={styles.stars} aria-hidden>
+                ★★★★★
+              </div>
+              <h2 className={styles.title}>What our clients say</h2>
+            </header>
+            <div
+              className="elfsight-app-fb3fe4c1-4bbb-4507-ad93-7d4835a7eb3e"
+              data-elfsight-app-lazy
+            />
+          </div>
         </div>
       </div>
     </section>

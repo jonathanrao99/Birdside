@@ -99,11 +99,11 @@ export default function SiteFooter() {
             Created by{" "}
             <Link
               className="birdside-footer-wordmark-credit-link"
-              href="https://sol3studio.com"
+              href="https://saucedstudios.vercel.app"
               rel="noopener noreferrer"
               target="_blank"
             >
-              Sol3 Studio
+              Sauced Studios
             </Link>
           </p>
         </div>

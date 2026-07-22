@@ -8,7 +8,7 @@ import PageShell from "@/components/site/PageShell";
 import PatternStrip from "@/components/site/PatternStrip";
 import { createStaticRouteMetadata } from "@/lib/page-metadata";
 import {
-  MENU_PAGE_LEAD_SECTION_PREFIX,
+  splitAroundTestimonialsSection,
   splitHomeMainAroundOurMenu,
   stripHomeMarqueeSection
 } from "@/lib/split-page-html";
@@ -23,9 +23,8 @@ export default function HomePage() {
   const { part1, part3 } = splitHomeMainAroundOurMenu(content.mainHtml);
   const p1 = stripHomeMarqueeSection(part1);
   const p3 = stripHomeMarqueeSection(part3);
-  const testimonialsIdx = p3.indexOf(MENU_PAGE_LEAD_SECTION_PREFIX);
-  const beforeTestimonials = testimonialsIdx >= 0 ? p3.slice(0, testimonialsIdx) : p3;
-  const testimonialsAndRest = testimonialsIdx >= 0 ? p3.slice(testimonialsIdx) : "";
+  const { before: beforeTestimonials, after: afterTestimonials } =
+    splitAroundTestimonialsSection(p3);
   return (
     <>
       <PageShell
@@ -39,7 +38,7 @@ export default function HomePage() {
             <div dangerouslySetInnerHTML={{ __html: beforeTestimonials }} />
             <HomeBestSellers />
             <ElfsightSocialFeed />
-            <div dangerouslySetInnerHTML={{ __html: testimonialsAndRest }} />
+            <div dangerouslySetInnerHTML={{ __html: afterTestimonials }} />
           </div>
         ]}
       />

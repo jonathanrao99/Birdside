@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   getMenuRouteInnerMainHtml,
   getMenuRouteLeadAndRestInnerMainHtml,
+  splitAroundTestimonialsSection,
   splitHomeMainAroundOurMenu,
   splitMenuInnerHtmlLeadRest,
   stripHomeAboutSection,
@@ -58,6 +59,21 @@ describe("stripHomeAboutSection", () => {
   it("returns input when about section absent", () => {
     const html = "<p>only</p>";
     expect(stripHomeAboutSection(html)).toBe(html);
+  });
+});
+
+describe("splitAroundTestimonialsSection", () => {
+  it("removes only testimonials and keeps surrounding content", () => {
+    const html = [
+      "<p>Before</p>",
+      '<section class="section_testimonials"><div>Reviews</div></section>',
+      '<section class="section_map"><div>Map</div></section>'
+    ].join("");
+    const { before, after } = splitAroundTestimonialsSection(html);
+    expect(before).toContain("Before");
+    expect(before).not.toContain("section_testimonials");
+    expect(after).toContain("section_map");
+    expect(after).not.toContain("Reviews");
   });
 });
 

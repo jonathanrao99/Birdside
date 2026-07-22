@@ -94,6 +94,26 @@ export function stripHomeAboutSection(html: string): string {
   }
 }
 
+export function splitAroundTestimonialsSection(html: string): {
+  before: string;
+  after: string;
+} {
+  const idx = html.indexOf(MENU_PAGE_LEAD_SECTION_PREFIX);
+  if (idx < 0) {
+    return { before: html, after: "" };
+  }
+
+  try {
+    const { end } = findSectionBounds(html, idx);
+    return {
+      before: html.slice(0, idx),
+      after: html.slice(end)
+    };
+  } catch {
+    return { before: html, after: "" };
+  }
+}
+
 /** Balanced fragments inside `<main class="main-wrapper">` (PatternStrip + OurMenu mount between them). */
 export type HomeMainParts = {
   part1: string;
