@@ -77,15 +77,17 @@ function VolumeOffIcon() {
 
 export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAboutCarouselProps) {
   const N = slides.length;
+  const rootRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef(new Map<string, HTMLVideoElement>());
   const [centerIdx, setCenterIdx] = useState(() =>
     Math.min(Math.max(0, initialIndex), Math.max(0, slides.length - 1))
   );
   const [reducedMotion, setReducedMotion] = useState(false);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
+  const [sectionInView, setSectionInView] = useState(false);
   const [userMuted, setUserMuted] = useState(false);
   const animatingRef = useRef(false);
-  const activeMuted = userMuted || !audioUnlocked;
+  const activeMuted = userMuted || !audioUnlocked || !sectionInView;
 
   const cards: Card[] = slides.map((slide, index) => ({
     id: slide.id,
@@ -117,6 +119,21 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
       window.removeEventListener("keydown", unlockAudio);
     };
   }, [audioUnlocked]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSectionInView(Boolean(entry?.isIntersecting));
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const activeSlide = slides[centerIdx];
@@ -178,7 +195,7 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
   const rootClass = [styles.cardsShell, reducedMotion ? styles.reducedMotion : ""].filter(Boolean).join(" ");
 
   return (
-    <div className={rootClass}>
+    <div ref={rootRef} className={rootClass}>
       <div className={styles.stage}>
         <button type="button" className={`${styles.arrowBtn} ${styles.arrowBtnLeft}`} aria-label="Previous slide" onClick={goPrev}>
           ‹
