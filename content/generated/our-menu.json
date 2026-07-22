@@ -147,7 +147,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Extra Tender",
           "price": "$3.49",
-          "description": "Add a fried Nashville hot tender, your heat. Extra protein for sandwiches, baskets, or wings in Katy and Houston.",
+          "description": "Extra crispy Nashville tender with your heat, perfect for stacking or dipping solo. Extra protein for sandwiches, baskets, or wings in Katy and Houston.",
           "productHref": "/product/extra-tender",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -157,7 +157,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Seasoned Fries",
           "price": "$4.99",
-          "description": "Crispy seasoned fries, golden outside, fluffy inside. Fry side for hot chicken sandwiches and wing combos in Katy or West Houston.",
+          "description": "Golden seasoned fries with crispy edges, fluffy centers, and signature Birdside crunch. Fry side for hot chicken sandwiches and wing combos in Katy or West Houston.",
           "productHref": "/product/french-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -167,7 +167,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Maple Buffalo Ranch Fries",
           "price": "$6.99",
-          "description": "Seasoned fries with maple buffalo, ranch, and chives. Sweet-heat loaded fries in Katy, TX and West Houston.",
+          "description": "Crispy fries loaded with maple buffalo, cool ranch drizzle, and fresh chives. Sweet-heat loaded fries in Katy, TX and West Houston.",
           "productHref": "/product/maple-buffalo-ranch-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -177,7 +177,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Garlic Parmesan Fries",
           "price": "$6.99",
-          "description": "Garlic butter, parmesan, and herbs on crispy fries. Savory loaded fries with a rich, crispy finish.",
+          "description": "Crispy fries tossed in garlic butter, parmesan, fresh herbs, and savory crunch. Savory loaded fries with a rich, crispy finish.",
           "productHref": "/product/garlic-parmesan-fries",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -187,7 +187,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Creamy Mac & Cheese",
           "price": "$4.99",
-          "description": "Creamy three-cheese mac with paprika and chives. Cheesy side for hot chicken baskets and combos, Katy and Houston.",
+          "description": "Creamy three-cheese mac with smoky paprika, chives, and rich comfort in every bite. Cheesy side for hot chicken baskets and combos, Katy and Houston.",
           "productHref": "/product/creamy-mac-cheese",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -197,7 +197,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Large Slaw",
           "price": "$3.99",
-          "description": "Big cup of creamy house slaw, cool crunch for Nashville hot sandwiches and tenders in Katy, TX.",
+          "description": "Creamy house slaw with cool crunch, made for hot chicken stacks and tenders.",
           "productHref": "/product/large-slaw",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -207,7 +207,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Bird Sauce",
           "price": "$0.75",
-          "description": "Bird Sauce or house ranch for wings, fries, and tenders. Birdside dipping sauces in Katy and Houston.",
+          "description": "Signature Bird Sauce with house ranch, built for wings, fries, and tenders. Birdside dipping sauces in Katy and Houston.",
           "productHref": "/product/dipping-sauce",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -217,7 +217,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Wing Sauce",
           "price": "$0.99",
-          "description": "House wing sauce, five flavors. Extra saucy dip for hot wings in Katy, TX.",
+          "description": "House wing sauce in five flavors, made for extra-saucy hot wing bites. Extra saucy dip for hot wings in Katy, TX.",
           "productHref": "/product/wing-sauce",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }
@@ -233,7 +233,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Calypso Lemonade",
           "price": "$3.49",
-          "description": "Calypso lemonade, real fruit and sugar, bottled and cold. Pairs with wings or hot chicken sandwiches in Katy and Houston.",
+          "description": "Cold Calypso lemonade with real fruit, bottled sugar, and bold fruit flavor. Pairs with wings or hot chicken sandwiches in Katy and Houston.",
           "productHref": "/product/calypso-lemonade",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -243,7 +243,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Texas Tea",
           "price": "$3.49",
-          "description": "Cold bottled Texas Tea with real tea flavor and cane sugar. Sweet tea for wings, hot chicken combos, and late-night Birdside orders in Katy.",
+          "description": "Cold bottled Texas Tea with cane sugar, brewed for hot chicken combos and wings. Sweet tea for wings, hot chicken combos, and late-night Birdside orders in Katy.",
           "productHref": "/product/texas-tea",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -253,7 +253,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Soda",
           "price": "$1.99",
-          "description": "Ice-cold fountain soda with wings, hot chicken combos, or late-night food in Katy, TX.",
+          "description": "Ice-cold fountain soda with classic bubbles, perfect for late-night combos and wings.",
           "productHref": "/product/soda",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -263,7 +263,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "Water",
           "price": "$1.50",
-          "description": "Chilled bottled water with spicy Nashville hot chicken. Hydration for Katy and West Houston orders.",
+          "description": "Chilled bottled water for spicy chicken, wings, fries, and saucy hot bites. Hydration for Katy and West Houston orders.",
           "productHref": "/product/water",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }

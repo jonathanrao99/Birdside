@@ -638,6 +638,30 @@
   color: #fff !important;
 }
 
+@media (min-width: 992px) {
+  .navbar .container-medium {
+    max-width: none !important;
+    width: 100%;
+  }
+
+  .navbar .navbar_component {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navbar .navbar_main {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .navbar .navbar_infos {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+}
+
 /* Navbar right CTAs — pill buttons (components/site/HeaderPillCta.tsx). */
 .navbar .navbar_infos {
   display: flex;

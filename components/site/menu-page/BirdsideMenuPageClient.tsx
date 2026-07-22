@@ -19,7 +19,12 @@ function toCarouselItems(tabIndex: number, data: OurMenuData): MenuCarouselItem[
   return tab.items.map((it) => ({
     image: it.imageSrc,
     name: it.name,
-    boost: 1
+    boost:
+      it.productHref === "/product/texas-tea"
+        ? 0.76
+        : it.productHref === "/product/garlic-parmesan-fries"
+          ? 1
+          : 1.12
   }));
 }
 
@@ -64,7 +69,7 @@ export default function BirdsideMenuPageClient({ data }: Props) {
         items={carouselItems}
         onActiveIndexChange={setItemIndex}
       />
-      <MenuPageDetails item={activeItem} categoryLabel={activeTab.label} />
+      <MenuPageDetails item={activeItem} categoryLabel={activeTab.label} showMeta={false} />
     </div>
   );
 }

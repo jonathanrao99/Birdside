@@ -217,6 +217,10 @@
   background: #000;
 }
 
+.root .details {
+  margin-bottom: clamp(4rem, 7vw, 7rem);
+}
+
 .desc {
   margin: 0;
   text-align: center;
