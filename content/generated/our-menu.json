@@ -71,7 +71,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "5PC Wings",
           "price": "$10.99",
-          "description": "Five crispy chicken wings, your flavor, with house ranch. Hot wings order in Katy, TX or Houston takeout.",
+          "description": "Five crispy wings tossed in your favorite sauce, served with cool ranch on the side. Order crispy wings near Katy for pickup or delivery.",
           "productHref": "/product/wing-5pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -81,7 +81,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "5PC Wings Combo",
           "price": "$13.99",
-          "description": "Five wings plus fries in one wing combo, pick your flavor. Value chicken wings near Katy and Houston.",
+          "description": "Five saucy wings with seasoned fries, served with cool ranch on the side. Order wing combos near Katy with fries and ranch.",
           "productHref": "/product/wing-5pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -91,7 +91,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "8PC Wings",
           "price": "$15.99",
-          "description": "Eight chicken wings, two flavors, two ranch cups. Party hot wings for Katy, TX and West Houston late night.",
+          "description": "Eight crispy wings split between two flavors, served with two ranch cups. Order eight-piece wings near Katy for late-night cravings.",
           "productHref": "/product/wing-8pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -101,7 +101,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "8PC Wings Combo",
           "price": "$18.99",
-          "description": "Eight wings, two flavors, plus fries. Full wing combo for Katy takeout or Houston suburb pickup.",
+          "description": "Eight saucy wings with seasoned fries, served with cool ranch on the side. Order saucy wing combos near Katy for pickup.",
           "productHref": "/product/wing-8pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -111,7 +111,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "12PC Wings",
           "price": "$20.99",
-          "description": "Twelve crispy wings, two flavors, ranch on the side. Crowd chicken wings for Katy gatherings or Houston game night.",
+          "description": "Twelve crispy wings made for sharing, tossed in two bold sauce flavors. Order party wings near Katy for game nights.",
           "productHref": "/product/wing-12pc",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -121,7 +121,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "12PC Wings Combo",
           "price": "$23.99",
-          "description": "Twelve wings, two flavors, and fries. Party wing combo for a crowd in Katy or west of Houston.",
+          "description": "Twelve saucy wings with seasoned fries, tossed in two bold sauce flavors. Order crowd-size wing combos near Katy with fries.",
           "productHref": "/product/wing-12pc-combo",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         },
@@ -131,7 +131,7 @@
           "imageSizes": "(max-width: 767px) 92vw, (max-width: 1199px) 45vw, 420px",
           "name": "The Wing Box",
           "price": "$21.99",
-          "description": "Eight wings, two flavors, fries, mac, two ranch cups. Birdside wing box combo: saucy wings and sides for Katy, TX late night or Houston food runs.",
+          "description": "Eight saucy wings with seasoned fries, creamy mac, and two ranch cups. Order late-night Birdside wing boxes near Katy for pickup today.",
           "productHref": "/product/the-wing-box",
           "buttonWId": "5debf1d6-5bce-f936-5eec-abff2c0756c5"
         }

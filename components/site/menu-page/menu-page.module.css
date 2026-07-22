@@ -255,6 +255,14 @@
   background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
+.descNoteLine {
+  display: block;
+}
+
+.descNoteLine:first-child {
+  white-space: nowrap;
+}
+
 .descAccent {
   color: var(--color-primary);
   font-family: var(--_typography---font-family--detail), cursive;
@@ -266,6 +274,12 @@
 
 .descLine {
   display: block;
+}
+
+@media (max-width: 767px) {
+  .descNoteLine:first-child {
+    white-space: normal;
+  }
 }
 
 .price {

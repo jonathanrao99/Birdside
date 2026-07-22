@@ -29,6 +29,62 @@ const BEST_SELLER_NOTES: Record<string, readonly [string, string]> = {
   ]
 };
 
+function splitSentences(text: string): readonly [string, string] {
+  const trimmed = text.trim();
+  const firstSentenceEnd = trimmed.search(/[.!?](\s|$)/);
+  if (firstSentenceEnd < 0) return [trimmed, ""];
+
+  const first = trimmed.slice(0, firstSentenceEnd + 1).trim();
+  const rest = trimmed.slice(firstSentenceEnd + 1).trim();
+  return [first, rest];
+}
+
+function splitIntoTwoLines(text: string): readonly [string, string] {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return [text.trim(), ""];
+
+  const target = text.length / 2;
+  let bestIndex = 1;
+  let bestScore = Number.POSITIVE_INFINITY;
+  let lengthSoFar = 0;
+
+  for (let i = 1; i < words.length; i += 1) {
+    lengthSoFar += words[i - 1].length + (i > 1 ? 1 : 0);
+    const punctuationBonus = /[,;:]$/.test(words[i - 1]) ? -8 : 0;
+    const score = Math.abs(lengthSoFar - target) + punctuationBonus;
+    if (score < bestScore) {
+      bestScore = score;
+      bestIndex = i;
+    }
+  }
+
+  return [words.slice(0, bestIndex).join(" "), words.slice(bestIndex).join(" ")];
+}
+
+function renderWithAccent(text: string) {
+  const parts = text.split(/(Bird Sauce)/g);
+  return parts.map((part, index) =>
+    part === "Bird Sauce" ? (
+      <span key={`${part}-${index}`} className={styles.descAccent}>
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
+
+function renderDescriptionLines(desc: string) {
+  const [primary] = splitSentences(desc);
+  const [first, rest] = splitIntoTwoLines(primary);
+  return (
+    <>
+      <span className={styles.descLine}>{renderWithAccent(first)}</span>
+      <span className={styles.descLine}>{renderWithAccent(rest)}</span>
+    </>
+  );
+}
+
 function renderDescription(item: OurMenuItem, desc: string) {
   if (item.productHref === "/product/the-basket") {
     return (
@@ -79,22 +135,32 @@ function renderDescription(item: OurMenuItem, desc: string) {
     );
   }
 
-  return desc;
+  return renderDescriptionLines(desc);
 }
 
-function getDescriptionNote(item: OurMenuItem) {
-  return BEST_SELLER_NOTES[item.productHref] ?? null;
+function getDescriptionNote(item: OurMenuItem, categoryLabel: string) {
+  const bestSellerNote = BEST_SELLER_NOTES[item.productHref];
+  if (bestSellerNote) return bestSellerNote;
+
+  const note = item.descriptionNote?.trim();
+  if (note) return splitSentences(note);
+
+  const [, localLine] = splitSentences(item.description);
+  if (localLine) return [localLine, "Available for pickup and delivery."] as const;
+
+  return [`${item.name} near Katy, TX.`, "Available for pickup and delivery."] as const;
 }
 
-function renderDescriptionNote(item: OurMenuItem, note: string) {
-  const bestSellerNote = getDescriptionNote(item);
-  if (!bestSellerNote) return note;
-
+function renderDescriptionNote(item: OurMenuItem, categoryLabel: string) {
+  const note = getDescriptionNote(item, categoryLabel);
   return (
     <>
-      {bestSellerNote[0]}
-      <br />
-      {bestSellerNote[1]}
+      <span className={styles.descNoteLine}>{note[0]}</span>
+      {note[1] ? (
+        <span className={styles.descNoteLine}>
+          {note[1]}
+        </span>
+      ) : null}
     </>
   );
 }
@@ -104,12 +170,11 @@ export default function MenuPageDetails({ item, categoryLabel, showMeta = true }
 
   const desc = item.description?.trim();
   const hasDesc = desc.length > 0;
-  const note = item.descriptionNote?.trim() ?? getDescriptionNote(item)?.join(" ");
 
   return (
     <div className={styles.details}>
       {hasDesc ? <p className={styles.desc}>{renderDescription(item, desc)}</p> : null}
-      {note ? <p className={styles.descNote}>{renderDescriptionNote(item, note)}</p> : null}
+      <p className={styles.descNote}>{renderDescriptionNote(item, categoryLabel)}</p>
       <div className={styles.price}>
         <span className={`${styles.priceBurst} ${styles.priceBurstLeft}`} aria-hidden>
           <span />
