@@ -10,15 +10,12 @@
   min-width: 0;
   max-width: 100%;
   box-sizing: border-box;
-  height: calc(100svh - var(--home-nav-stack-h, 0px));
+  height: calc(
+    var(--home-hero-viewport-h, 100vh) - var(--home-nav-stack-h, 0px) +
+      var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+  );
   min-height: 0;
   overflow: hidden;
-}
-
-@supports (height: 100dvh) {
-  .section_home-header:has(.home-hero-video-stage) {
-    height: calc(100dvh - var(--home-nav-stack-h, 0px));
-  }
 }
 
 /* Video fills entire hero section (edge to edge); sits under padded content. */
@@ -257,14 +254,9 @@
 
 @media (min-width: 1200px) {
   .section_home-header:has(.home-hero-video-stage) {
-    height: calc(100svh - var(--home-nav-stack-h, 0px));
-  }
-}
-
-@supports (height: 100dvh) {
-  @media (min-width: 1200px) {
-    .section_home-header:has(.home-hero-video-stage) {
-      height: calc(100dvh - var(--home-nav-stack-h, 0px));
-    }
+    height: calc(
+      var(--home-hero-viewport-h, 100vh) - var(--home-nav-stack-h, 0px) +
+        var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+    );
   }
 }

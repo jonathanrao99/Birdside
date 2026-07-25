@@ -1,9 +1,14 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
-import { useEffect, useRef, useState, type SyntheticEvent } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type SyntheticEvent
+} from "react";
 import { ORDER_NOW_URL } from "@/lib/site-shell-data";
-import "./home-hero-video.css";
 
 type BackdropProps = {
   desktopSrc: string;
@@ -15,6 +20,45 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
   const reducedMotion = useReducedMotion() ?? false;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeSrc, setActiveSrc] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    let frame = 0;
+
+    const updateHeroMeasurements = () => {
+      const viewportHeight = Math.max(
+        window.innerHeight,
+        window.visualViewport?.height ?? 0
+      );
+      root.style.setProperty("--home-hero-viewport-h", `${viewportHeight}px`);
+    };
+
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateHeroMeasurements);
+    };
+
+    updateHeroMeasurements();
+    scheduleUpdate();
+    const settleTimers = [100, 300, 800].map((delay) =>
+      window.setTimeout(updateHeroMeasurements, delay)
+    );
+
+    document.fonts?.ready.then(updateHeroMeasurements).catch(() => undefined);
+    window.addEventListener("load", updateHeroMeasurements);
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("orientationchange", scheduleUpdate);
+    window.visualViewport?.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      settleTimers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("load", updateHeroMeasurements);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("orientationchange", scheduleUpdate);
+      window.visualViewport?.removeEventListener("resize", scheduleUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");

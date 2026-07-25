@@ -57,12 +57,12 @@ body {
 /* Home only: red hero sits under nav + checker; nav stack paints above (z-index). */
 /* Stack height must cover real navbar + checker (strip is 2.5rem once we override Brasa ≤767px 1.5rem). */
 .page-wrapper:has(.section_home-header) {
-  --home-nav-stack-h: var(--site-nav-height, clamp(10.875rem, 22.7svh, 12.75rem));
+  --home-nav-stack-h: clamp(10.875rem, 22.7svh, 12.75rem);
 }
 
 @media (min-width: 992px) {
   .page-wrapper:has(.section_home-header) {
-    --home-nav-stack-h: var(--site-nav-height, clamp(11.25rem, 22.7svh, 12.75rem));
+    --home-nav-stack-h: clamp(11.25rem, 22.7svh, 12.75rem);
   }
 }
 

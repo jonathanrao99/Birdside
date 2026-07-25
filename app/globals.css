@@ -1,3 +1,4 @@
 @import "./styles/globals-tokens.css";
 @import "./styles/globals-home-nav.css";
 @import "./styles/globals-template.css";
+@import "../components/site/home-hero-video.css";

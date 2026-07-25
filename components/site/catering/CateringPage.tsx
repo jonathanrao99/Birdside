@@ -1,42 +1,90 @@
+import Image from "next/image";
 import Link from "next/link";
-import {
-  ORDER_NOW_URL,
-  GOOGLE_MAPS_URL
-} from "@/lib/site-shell-data";
+import { GOOGLE_MAPS_URL, ORDER_NOW_URL } from "@/lib/site-shell-data";
 import styles from "./catering-page.module.css";
 
-const INCLUDED = [
+const CATERING_IMAGES = [
   {
-    title: "Chicken done hot",
-    body: "Trays of tenders, wings, or sandwiches—built so breading stays crisp through pickup."
+    src: "/assets/home/hero-wings-tray.jpg",
+    alt: "Birdside catering spread with wings, sandos, loaded fries, mac, and drinks on a picnic table."
   },
   {
-    title: "Sides & dips",
-    body: "Slaw, fries, mac—paired with what your crowd actually eats. Sauces from our lineup."
+    src: "/assets/menu/covers/wings-spread.webp",
+    alt: "Overhead Birdside tray spread with wings, sandos, fries, mac, sauces, and pickles."
   },
   {
-    title: "Portion guidance",
-    body: "Tell us headcount and budget—we’ll suggest trays so nobody leaves hungry."
+    src: "/assets/menu/footer-banner.webp",
+    alt: "Birdside hot chicken catering trays arranged for a group order."
+  },
+  {
+    src: "/assets/home/about-wings.jpg",
+    alt: "Saucy Birdside wings and seasoned fries ready for sharing."
+  },
+  {
+    src: "/assets/home/about-sando.jpg",
+    alt: "Birdside hot chicken sandwich and sides prepared for pickup."
   }
+] as const;
+
+const PACKAGES = [
+  {
+    title: "Wing trays",
+    body: "Sauced, dry-rubbed, or split by flavor with ranch, Bird Sauce, and napkins ready for the table.",
+    meta: "Best for game nights"
+  },
+  {
+    title: "Sando boxes",
+    body: "Hot chicken sandos with slaw, pickles, fries, and sauce packed tight for office lunches or parties.",
+    meta: "Clean handoff"
+  },
+  {
+    title: "Sides & drinks",
+    body: "Mac, seasoned fries, loaded fries, slaw, bottled drinks, and extra sauce so the order feels complete.",
+    meta: "Crowd insurance"
+  }
+] as const;
+
+const STEPS = [
+  "Send date, pickup time, headcount, and the kind of crowd you are feeding.",
+  "We map proteins, sides, sauces, and portions around your budget and appetite.",
+  "Pickup from Katy with trays staged hot, labeled, and ready to run."
 ] as const;
 
 export default function CateringPage() {
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
+      <header className={styles.hero} aria-labelledby="catering-heading">
+        <div className={styles.heroMedia} aria-hidden="true">
+          <Image
+            src={CATERING_IMAGES[0].src}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroImage}
+          />
+          <div className={styles.heroShade} />
+        </div>
+
         <div className={styles.heroInner}>
-          <p className={styles.kicker}>Katy · trays & pickup</p>
+          <p className={styles.kicker}>Katy catering · halal hot chicken</p>
           <h1 id="catering-heading" className={styles.title}>
-            Catering
+            Catering that
+            <span className={styles.titleAccent}>feeds the whole flock.</span>
           </h1>
           <p className={styles.lede}>
-            Feed the office, the sideline, or the whole block party—Birdside hot
-            chicken, sides, and house sauces in Katy. We package for pickup so you
-            can serve it fresh on your timeline.
+            Birdside trays bring hot chicken sandos, wings, loaded fries, mac,
+            drinks, pickles, and house sauces to offices, parties, teams, and
+            late-night crews across Katy and West Houston.
           </p>
+          <div className={styles.heroStats} aria-label="Catering highlights">
+            <span>Halal</span>
+            <span>Pickup in Katy</span>
+            <span>Built for groups</span>
+          </div>
           <div className={styles.ctaRow}>
             <Link href="/contact" className={styles.btnPrimary}>
-              Plan your order
+              Start a catering order
             </Link>
             <a
               href={ORDER_NOW_URL}
@@ -44,159 +92,143 @@ export default function CateringPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Square pickup
+              Order pickup
             </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.section} aria-labelledby="included-heading">
-        <div className={styles.sectionInner}>
-          <h2 id="included-heading" className={styles.sectionTitle}>
-            What we bring
+      <div className={styles.marquee} aria-hidden="true">
+        <div className={styles.marqueeTrack}>
+          {Array.from({ length: 2 }).map((_, group) => (
+            <div className={styles.marqueeGroup} key={group}>
+              <span>Wings by the tray</span>
+              <span>Sandos stacked</span>
+              <span>Mac, fries, sauce</span>
+              <span>Katy pickup</span>
+              <span>Late-night friendly</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section className={styles.intro} aria-labelledby="intro-heading">
+        <div className={styles.introCopy}>
+          <p className={styles.eyebrow}>No sad party platters</p>
+          <h2 id="intro-heading" className={styles.sectionTitle}>
+            Big trays. Real crunch. Sauce on deck.
           </h2>
-          <div className={styles.grid}>
-            {INCLUDED.map((item) => (
-              <div key={item.title} className={styles.card}>
+          <p className={styles.prose}>
+            Catering should still taste like Birdside: crisp breading, bold heat,
+            full sauce cups, and sides people actually finish. Tell us the crowd
+            size and vibe, and we&apos;ll help build the right tray mix.
+          </p>
+        </div>
+        <div className={styles.introImageWrap}>
+          <Image
+            src={CATERING_IMAGES[1].src}
+            alt={CATERING_IMAGES[1].alt}
+            fill
+            sizes="(max-width: 899px) 100vw, 44vw"
+            className={styles.coverImage}
+          />
+        </div>
+      </section>
+
+      <section className={styles.section} aria-labelledby="packages-heading">
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeader}>
+            <p className={styles.eyebrow}>Build the spread</p>
+            <h2 id="packages-heading" className={styles.sectionTitle}>
+              What to order
+            </h2>
+          </div>
+          <div className={styles.packageGrid}>
+            {PACKAGES.map((item) => (
+              <article className={styles.packageCard} key={item.title}>
+                <p className={styles.packageMeta}>{item.meta}</p>
                 <h3 className={styles.cardTitle}>{item.title}</h3>
                 <p className={styles.cardBody}>{item.body}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="steps-heading">
-        <div className={styles.sectionInner}>
-          <h2 id="steps-heading" className={styles.sectionTitle}>
-            How it works
-          </h2>
-          <ol className={styles.steps}>
-            <li className={styles.step}>
-              <p className={styles.stepTitle}>Reach out</p>
-              <p className={styles.stepBody}>
-                Hit{" "}
-                <Link href="/contact" className={styles.inlineLink}>
-                  Contact
-                </Link>{" "}
-                with date, approximate guests, and anything dietary we should
-                know.
-              </p>
-            </li>
-            <li className={styles.step}>
-              <p className={styles.stepTitle}>Lock the menu</p>
-              <p className={styles.stepBody}>
-                We align proteins, sides, and sauce quantities with your headcount.
-                Browse the{" "}
-                <Link href="/menu" className={styles.inlineLink}>
-                  menu
-                </Link>{" "}
-                for what runs daily.
-              </p>
-            </li>
-            <li className={styles.step}>
-              <p className={styles.stepTitle}>Pickup in Katy</p>
-              <p className={styles.stepBody}>
-                Trays are staged for pickup at{" "}
-                <Link
-                  href="/locations/katy-tx"
-                  className={styles.inlineLink}
-                >
-                  Birdside Katy
-                </Link>
-                . Need directions?{" "}
-                <a
-                  href={GOOGLE_MAPS_URL}
-                  className={styles.inlineLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Google Maps
-                </a>
-                .
-              </p>
-            </li>
-          </ol>
-          <div className={styles.policies}>
-            <p>
-              <strong>Lead time:</strong> ideally{" "}
-              <strong>48 hours notice</strong> for larger trays; tell us if you’re
-              inside a week—we’ll say yes when the line can execute it clean.
-            </p>
-            <p>
-              <strong>Minimums:</strong> depend on day and volume—we quote off
-              your guest count so pricing stays fair for both sides.
-            </p>
+      <section className={styles.gallery} aria-label="Birdside catering food gallery">
+        <div className={styles.galleryWide}>
+          <Image
+            src={CATERING_IMAGES[2].src}
+            alt={CATERING_IMAGES[2].alt}
+            fill
+            sizes="100vw"
+            className={styles.coverImage}
+          />
+        </div>
+        <div className={styles.galleryPair}>
+          <div className={styles.galleryTile}>
+            <Image
+              src={CATERING_IMAGES[3].src}
+              alt={CATERING_IMAGES[3].alt}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className={styles.coverImage}
+            />
+          </div>
+          <div className={styles.galleryTile}>
+            <Image
+              src={CATERING_IMAGES[4].src}
+              alt={CATERING_IMAGES[4].alt}
+              fill
+              sizes="(max-width: 767px) 100vw, 50vw"
+              className={styles.coverImage}
+            />
           </div>
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="faq-heading">
-        <div className={styles.sectionInner}>
-          <h2 id="faq-heading" className={styles.sectionTitle}>
-            Quick answers
-          </h2>
-          <ul className={styles.faqList}>
-            <li>
-              <details className={styles.details}>
-                <summary className={styles.summary}>
-                  Do you deliver?
-                </summary>
-                <p className={styles.answer}>
-                  Catering is built around{" "}
-                  <strong className={styles.answerStrong}>Katy pickup</strong>.
-                  Ask when you reach out—occasionally we can coordinate
-                  handoff; fees depend on timing and distance.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details className={styles.details}>
-                <summary className={styles.summary}>
-                  Halal?
-                </summary>
-                <p className={styles.answer}>
-                  Yes—we operate halal. Flag headcount and any allergy notes in
-                  your catering message so the kitchen can label trays clearly.
-                </p>
-              </details>
-            </li>
-            <li>
-              <details className={styles.details}>
-                <summary className={styles.summary}>
-                  Sauce Lab dips?
-                </summary>
-                <p className={styles.answer}>
-                  House sauces are part of the Birdside story—mention favorites in
-                  your request and we&apos;ll match quantities to your proteins.
-                  Explore flavors on{" "}
-                  <Link href="/sauce-lab" className={styles.inlineLink}>
-                    Sauce Lab
-                  </Link>
-                  .
-                </p>
-              </details>
-            </li>
-          </ul>
+      <section className={styles.section} aria-labelledby="steps-heading">
+        <div className={`${styles.sectionInner} ${styles.stepsLayout}`}>
+          <div>
+            <p className={styles.eyebrow}>Fast planning</p>
+            <h2 id="steps-heading" className={styles.sectionTitle}>
+              How catering works
+            </h2>
+            <p className={styles.prose}>
+              We keep the process direct because your event already has enough
+              moving parts. Larger orders are best with 48 hours notice.
+            </p>
+          </div>
+          <ol className={styles.steps}>
+            {STEPS.map((step) => (
+              <li className={styles.step} key={step}>
+                {step}
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <section
-        className={`${styles.section} ${styles.bottomBand}`}
-        aria-labelledby="bottom-cta"
-      >
+      <section className={styles.bottomBand} aria-labelledby="bottom-heading">
         <div className={styles.bottomInner}>
-          <p id="bottom-cta" className={styles.bottomCopy}>
-            Need sizes before you commit? Message us—we&apos;ll turn around a tray
-            map fast.
-          </p>
-          <div className={styles.ctaRow}>
+          <div>
+            <p className={styles.eyebrow}>Ready when you are</p>
+            <h2 id="bottom-heading" className={styles.bottomTitle}>
+              Tell us the headcount. We&apos;ll bring the heat.
+            </h2>
+          </div>
+          <div className={styles.bottomActions}>
             <Link href="/contact" className={styles.btnPrimary}>
               Contact Birdside
             </Link>
-            <Link href="/faq" className={styles.btnGhost}>
-              FAQ
-            </Link>
+            <a
+              href={GOOGLE_MAPS_URL}
+              className={styles.btnGhostDark}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Katy pickup map
+            </a>
           </div>
         </div>
       </section>

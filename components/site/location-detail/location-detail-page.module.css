@@ -1,0 +1,291 @@
+.page {
+  width: 100%;
+  overflow-x: clip;
+  background: #000;
+  color: #fff;
+}
+
+.hero {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: center;
+  min-height: auto;
+  padding: clamp(2.25rem, 5vw, 4rem) var(--layout-section-padding-x) clamp(3rem, 6vw, 5rem);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(227, 1, 25, 0.22), transparent 30%),
+    linear-gradient(180deg, #000 0%, #050505 62%, #000 100%);
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(28rem, 1.04fr) minmax(24rem, 0.82fr);
+    padding-inline: max(var(--layout-section-padding-x), calc((100vw - var(--layout-content-max)) / 2));
+  }
+}
+
+.mediaPanel {
+  position: relative;
+  min-height: clamp(24rem, 46vw, 38rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.copyPanel {
+  max-width: 42rem;
+  padding-block: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(0.78rem, 1.25vw, 0.95rem);
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #ff3045;
+}
+
+.title,
+.sectionTitle,
+.bottomTitle {
+  margin: 0.7rem 0 0;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.title {
+  font-size: clamp(4rem, 9vw, 7.5rem);
+}
+
+.titleAccent {
+  display: block;
+  margin-top: 0.08em;
+  font-family: var(--_typography---font-family--detail), cursive;
+  font-size: clamp(3.2rem, 7vw, 6rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  text-transform: none;
+  color: #ff3045;
+  text-shadow: 0 2px 20px rgba(227, 1, 25, 0.22);
+}
+
+.lede,
+.prose,
+.infoItem,
+.hoursList {
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  letter-spacing: 0.025em;
+}
+
+.lede {
+  max-width: 38rem;
+  margin: clamp(1rem, 2vw, 1.35rem) 0 0;
+  font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.43;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.infoStack {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.infoItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #fff !important;
+  text-decoration: none;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 800;
+}
+
+.infoIcon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-primary);
+  font-size: 0.45rem;
+  box-shadow: inset 0 0 0 0.4rem var(--color-primary);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+  align-items: center;
+  margin-top: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+
+.btnPrimary,
+.btnGhost,
+.btnDark,
+.btnGhostDark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.58rem 1.55rem;
+  border-radius: 999px;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+
+.btnPrimary,
+.btnGhost {
+  border: 2px solid #fff;
+  box-shadow: none;
+}
+
+.btnPrimary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff !important;
+}
+
+.btnGhost {
+  background: transparent;
+  color: #fff !important;
+}
+
+.btnDark {
+  border: 2px solid #fff;
+  background: #fff;
+  color: #000 !important;
+}
+
+.btnGhostDark {
+  border: 2px solid #fff;
+  color: #fff !important;
+}
+
+.btnPrimary:hover,
+.btnPrimary:focus-visible,
+.btnGhost:hover,
+.btnGhost:focus-visible,
+.btnDark:hover,
+.btnDark:focus-visible,
+.btnGhostDark:hover,
+.btnGhostDark:focus-visible {
+  transform: translateY(-1px);
+}
+
+.details {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  padding: var(--layout-section-padding-y) var(--layout-section-padding-x);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  background: #000;
+}
+
+@media (min-width: 860px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.45fr);
+    padding-inline: max(var(--layout-section-padding-x), calc((100vw - var(--layout-content-max)) / 2));
+  }
+}
+
+.sectionTitle {
+  max-width: 52rem;
+  font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+}
+
+.prose {
+  max-width: 46rem;
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.55vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.hoursCard {
+  padding: clamp(1.25rem, 2.5vw, 1.8rem);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.cardTitle {
+  margin: 0 0 1rem;
+  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hoursList {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+.bottomBand {
+  display: grid;
+  gap: 1.5rem;
+  align-items: end;
+  padding: clamp(3rem, 6vw, 5rem) var(--layout-section-padding-x);
+  background: #000;
+}
+
+@media (min-width: 860px) {
+  .bottomBand {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-inline: max(var(--layout-section-padding-x), calc((100vw - var(--layout-content-max)) / 2));
+  }
+}
+
+.bottomTitle {
+  max-width: 54rem;
+  font-size: clamp(2.15rem, 5.4vw, 4.6rem);
+}
+
+.bottomBand .ctaRow {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .mediaPanel {
+    min-height: 22rem;
+  }
+
+  .btnPrimary,
+  .btnGhost,
+  .btnDark,
+  .btnGhostDark {
+    width: 100%;
+  }
+}

@@ -1231,6 +1231,8 @@ a.footer_social-icon:hover {
   justify-content: center;
   background-color: #000;
   pointer-events: auto;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .birdside-home-preloader--pending {
@@ -1244,6 +1246,8 @@ a.footer_social-icon:hover {
   justify-content: center;
   max-width: min(96vw, 56rem);
   padding-inline: clamp(0.5rem, 3vw, 1.5rem);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .birdside-home-preloader__letter {
@@ -1251,6 +1255,8 @@ a.footer_social-icon:hover {
   width: auto;
   height: clamp(3.25rem, 18vw, 7.5rem);
   object-fit: contain;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
