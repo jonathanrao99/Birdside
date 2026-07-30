@@ -146,6 +146,25 @@
   }
 }
 
+@media (max-width: 899px) {
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-stack {
+    width: 100%;
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
+    white-space: nowrap;
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(2),
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(3) {
+    display: inline;
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line:nth-child(2)::after {
+    content: "\00a0";
+  }
+}
+
 /* Brasa positions this absolute + negative margin for image hero; restore flow so headline stacks above. */
 .section_home-header .home-header_images.home-header_images--video-cta .home-header_button-wrap {
   position: relative;
@@ -212,6 +231,26 @@
 
   .section_home-header .home-header_images.home-header_images--video-cta {
     min-height: 0;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1799px) {
+  .section_home-header .home-header_images.home-header_images--video-cta {
+    padding-bottom: calc(clamp(4.5rem, 6vw, 5.5rem) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
+    font-size: clamp(3.6rem, calc(0.95rem + 4.4vw), 5.25rem);
+  }
+}
+
+@media (min-width: 1800px) {
+  .section_home-header .home-header_images.home-header_images--video-cta {
+    padding-bottom: calc(clamp(3.25rem, 8vw, 6.5rem) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading {
+    font-size: 5.75rem;
   }
 }
 

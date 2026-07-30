@@ -13,6 +13,8 @@ import { useEffect, useLayoutEffect, useState } from "react";
 
 const EASE_NAV = [0.33, 1, 0.32, 1] as const;
 const EASE_BURGER = [0.22, 1, 0.36, 1] as const;
+const COLLAPSED_NAV_QUERY = "(max-width: 1400px)";
+const EXPANDED_NAV_QUERY = "(min-width: 1401px)";
 
 export default function SiteNavbar() {
   const pathname = usePathname();
@@ -42,8 +44,8 @@ export default function SiteNavbar() {
     };
   }, []);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 991px)");
+  useLayoutEffect(() => {
+    const mq = window.matchMedia(COLLAPSED_NAV_QUERY);
     const apply = () => setMobileNavLayout(mq.matches);
     apply();
     mq.addEventListener("change", apply);
@@ -80,7 +82,7 @@ export default function SiteNavbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 992px)");
+    const mq = window.matchMedia(EXPANDED_NAV_QUERY);
     const onChange = () => {
       if (mq.matches) setMenuOpen(false);
     };
@@ -165,6 +167,18 @@ export default function SiteNavbar() {
                       <NavbarMainLink key={item.href} {...item} />
                     )
                   )}
+                  <div className="navbar_menu-ctas" aria-label="Quick actions">
+                    {navInfoBlocks.map((block) => (
+                      <HeaderPillCta
+                        key={`menu-${block.href}`}
+                        className="navbar_menu_pill_cta"
+                        href={block.href}
+                        variant={block.variant}
+                      >
+                        {block.label}
+                      </HeaderPillCta>
+                    ))}
+                  </div>
                 </motion.div>
               </div>
               <div className="navbar_infos">

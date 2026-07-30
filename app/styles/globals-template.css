@@ -583,7 +583,7 @@
   padding-block: clamp(0.2rem, 0.95vw, 0.55rem) !important;
 }
 
-/* Mobile menu: Webflow IX removed — React + motion drive overlay; button replaces inert hamburger div. */
+/* Collapsed menu: React + motion drive overlay; button replaces inert hamburger div. */
 .navbar .navbar_hamburger-wrap {
   margin: 0;
   padding: 0;
@@ -594,7 +594,7 @@
   cursor: pointer;
   min-width: 44px;
   min-height: 44px;
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: center;
 }
@@ -605,16 +605,41 @@
   transform-origin: center;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1400px) {
   /*
-   * Overlay always `display:flex` so open/close can animate; when closed it’s invisible and non-interactive.
-   * Keep bg + link colors on the **closed** state too — otherwise toggling open swaps Brasa beige/dark
-   * text in for one frame while opacity is still high → perceived “flash” instead of a fade.
-   * Opacity/transform/pointer-events: SiteNavbar motion; colors stay static here.
-   */
+    * Overlay always `display:flex` so open/close can animate; when closed it’s invisible and non-interactive.
+    * Keep bg + link colors on the **closed** state too — otherwise toggling open swaps Brasa beige/dark
+    * text in for one frame while opacity is still high → perceived “flash” instead of a fade.
+    * Opacity/transform/pointer-events: SiteNavbar motion; colors stay static here.
+    */
+  .navbar .navbar_hamburger-wrap {
+    position: relative;
+    z-index: 101;
+    display: inline-flex !important;
+  }
+
   .navbar .navbar_links {
     display: flex !important;
+    position: fixed !important;
+    z-index: 99;
+    inset: 0 !important;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.6rem, 1.6vw, 1.1rem);
+    padding: calc(var(--site-nav-height, 5rem) + 1.25rem) clamp(1rem, 5vw, 3rem) 2.5rem;
+    overflow-y: auto;
     background-color: #000 !important;
+    background-image:
+      linear-gradient(rgb(0 0 0 / 0.22), rgb(0 0 0 / 0.34)),
+      url("/assets/brand/hamburger-menu-bg.png");
+    background-position: center;
+    background-repeat: repeat;
+    background-size: min(145vw, 60rem) auto;
     color: #fff !important;
   }
 
@@ -629,11 +654,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
   }
 
   .navbar .navbar_links .navbar_link.w--current .navbar_text {
     color: #fff !important;
   }
+
 }
 
 .navbar .navbar_text,
@@ -676,11 +703,37 @@
   gap: clamp(0.65rem, 1.35vw, 1.05rem);
 }
 
+.navbar .navbar_menu-ctas {
+  display: none;
+}
+
 .navbar .navbar_infos .navbar_header_pill_cta .header-pill-cta {
   font-size: clamp(1.4rem, 1.88vw, 1.5625rem);
   padding: 0.3em 0.7em 0.26em;
   min-height: 44px;
   min-width: 6.15rem;
+}
+
+@media (max-width: 599px) {
+  .navbar .navbar_infos {
+    display: none;
+  }
+
+  .navbar .navbar_links .navbar_menu-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .navbar .navbar_links .navbar_menu_pill_cta .header-pill-cta {
+    font-size: clamp(1.15rem, 6vw, 1.45rem);
+    padding: 0.42em 0.95em 0.36em;
+    min-width: 7rem;
+  }
 }
 
 /* Main nav — OMG Sans (primary display). */
@@ -696,6 +749,12 @@
 @media (min-width: 1800px) {
   .navbar .navbar_links .navbar_text {
     font-size: clamp(2.375rem, 1.6vw, 2.625rem) !important;
+  }
+}
+
+@media (max-width: 1400px) {
+  .navbar .navbar_links .navbar_text {
+    font-size: clamp(2.25rem, 6vw, 4.25rem) !important;
   }
 }
 
