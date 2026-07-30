@@ -115,8 +115,8 @@ export default function TermsPage() {
             <h2>9. Contact</h2>
             <p>
               For questions about these Terms of Service, reach us at{" "}
-              <a href="mailto:birdsidehtx@gmail.com?subject=Terms">
-                birdsidehtx@gmail.com
+              <a href="mailto:hello@birdsidehtx.com?subject=Terms">
+                hello@birdsidehtx.com
               </a>
               .
             </p>

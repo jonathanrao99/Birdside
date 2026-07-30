@@ -141,8 +141,8 @@ export default function PrivacyPage() {
             <h2>11. Contact</h2>
             <p>
               Questions about this privacy policy? Email{" "}
-              <a href="mailto:birdsidehtx@gmail.com?subject=Privacy">
-                birdsidehtx@gmail.com
+              <a href="mailto:hello@birdsidehtx.com?subject=Privacy">
+                hello@birdsidehtx.com
               </a>
               .
             </p>

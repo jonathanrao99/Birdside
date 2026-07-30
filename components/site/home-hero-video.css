@@ -127,8 +127,8 @@
   text-wrap: balance;
   overflow-wrap: break-word;
   text-shadow:
-    0 2px 28px rgb(0 0 0 / 0.55),
-    0 1px 4px rgb(0 0 0 / 0.45);
+    0 2px 7px rgb(0 0 0 / 0.42),
+    0 1px 2px rgb(0 0 0 / 0.34);
 }
 
 .section_home-header .home-header_images.home-header_images--video-cta .home-hero-video-cta-heading__line {

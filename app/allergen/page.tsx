@@ -20,8 +20,8 @@ export default function AllergenPage() {
           </p>
           <p>
             Email{" "}
-            <a href="mailto:birdsidehtx@gmail.com?subject=Allergens">
-              birdsidehtx@gmail.com
+            <a href="mailto:hello@birdsidehtx.com?subject=Allergens">
+              hello@birdsidehtx.com
             </a>{" "}
             for ingredient questions.
           </p>

@@ -257,6 +257,7 @@
 .section_cta {
   --cta-progress: 0;
   --cta-pop: 0;
+  --cta-image-base-width: clamp(16rem, 35vw, 34rem);
   --cta-scale-x: 2.1;
   --cta-scale-y: 2.6;
   /* Let image reach full size before section-end so user scrolls further in the full state */
@@ -266,7 +267,7 @@
 
 .section_cta .cta_image-wrap {
   contain: layout paint style;
-  width: clamp(16rem, 35vw, 34rem) !important;
+  width: var(--cta-image-base-width) !important;
   height: 28vh !important;
   border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
   overflow: hidden;
@@ -379,6 +380,7 @@
   }
 
   .section_cta {
+    --cta-image-base-width: min(94vw, 34rem);
     --cta-scale-x: 2.45;
     --cta-scale-y: 2.85;
     --cta-scale-progress: var(--cta-progress);
@@ -395,7 +397,7 @@
   }
 
   .section_cta .cta_image-wrap {
-    width: min(94vw, 34rem) !important;
+    width: var(--cta-image-base-width) !important;
     height: min(42vh, 22rem) !important;
     position: relative !important;
     margin-left: auto;
@@ -465,6 +467,7 @@
   }
 
   .section_cta {
+    --cta-image-base-width: min(96vw, 29rem);
     --cta-scale-x: 2.02;
     --cta-scale-y: 2.42;
     --cta-scale-progress: var(--cta-progress);
@@ -476,7 +479,7 @@
   }
 
   .section_cta .cta_image-wrap {
-    width: min(96vw, 29rem) !important;
+    width: var(--cta-image-base-width) !important;
     height: min(40vh, 20rem) !important;
     position: relative !important;
     margin-left: auto;
@@ -528,6 +531,7 @@
   }
 
   .section_cta {
+    --cta-image-base-width: min(98vw, 24rem);
     --cta-scale-x: 1.88;
     --cta-scale-y: 2.22;
     --cta-scale-progress: var(--cta-progress);
@@ -538,7 +542,7 @@
   }
 
   .section_cta .cta_image-wrap {
-    width: min(98vw, 24rem) !important;
+    width: var(--cta-image-base-width) !important;
     height: min(38vh, 17rem) !important;
     position: relative !important;
     margin-left: auto;
@@ -687,6 +691,12 @@
   text-transform: uppercase;
   font-size: clamp(1.6875rem, 0.55vw + 1.575rem, 1.9375rem) !important;
   line-height: 1 !important;
+}
+
+@media (min-width: 1800px) {
+  .navbar .navbar_links .navbar_text {
+    font-size: clamp(2.375rem, 1.6vw, 2.625rem) !important;
+  }
 }
 
 .navbar .navbar_infos .navbar_info,

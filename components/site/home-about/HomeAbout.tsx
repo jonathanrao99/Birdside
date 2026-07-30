@@ -6,6 +6,7 @@ const SLIDES: HomeAboutSlide[] = [
     id: "reel-1",
     type: "video",
     src: "/assets/home/reels/reel-1.mp4",
+    poster: "/assets/home/reels/reel-1-poster.jpg",
     alt: "Birdside reel showing a stacked chicken sandwich.",
     caption: "Stacked sandos. Built fresh, served hot."
   },
@@ -20,6 +21,7 @@ const SLIDES: HomeAboutSlide[] = [
     id: "reel-2",
     type: "video",
     src: "/assets/home/reels/reel-2.mp4",
+    poster: "/assets/home/reels/reel-2-poster.jpg",
     alt: "Birdside reel showing sauced wings and ranch.",
     caption: "Fresh out the fryer, full of flavor."
   },
@@ -34,6 +36,7 @@ const SLIDES: HomeAboutSlide[] = [
     id: "reel-3",
     type: "video",
     src: "/assets/home/reels/reel-3.mp4",
+    poster: "/assets/home/reels/reel-3-poster.jpg",
     alt: "Birdside reel showing glazed chicken wings.",
     caption: "Glazed wings, made to share."
   },

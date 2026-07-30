@@ -23,6 +23,9 @@ export function setupCtaProgress(lenis: Lenis | null): () => void {
   const wrapper = document.querySelector(
     ".section_cta .cta_wrapper"
   ) as HTMLElement | null;
+  const imageWrap = document.querySelector(
+    ".section_cta .cta_image-wrap"
+  ) as HTMLElement | null;
   if (!section || !wrapper) {
     return () => {};
   }
@@ -44,6 +47,11 @@ export function setupCtaProgress(lenis: Lenis | null): () => void {
     const sectionProgress = traveled / total;
     const progressStep = snapProgress(clamp01(sectionProgress / IMAGE_GROW_END));
     const pop = sectionProgress >= LOCATION_REVEAL_START ? "1" : "0";
+    const imageWidth = imageWrap?.offsetWidth ?? 0;
+    if (imageWidth > 0) {
+      const fullWidthScale = Math.max(0, window.innerWidth / imageWidth - 1);
+      section.style.setProperty("--cta-scale-x", String(fullWidthScale));
+    }
     section.style.setProperty("--cta-progress", String(progressStep));
     section.style.setProperty("--cta-pop", pop);
     section.classList.toggle("is-cta-pop", pop === "1");

@@ -83,11 +83,13 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
     Math.min(Math.max(0, initialIndex), Math.max(0, slides.length - 1))
   );
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [sectionInView, setSectionInView] = useState(false);
   const [userMuted, setUserMuted] = useState(false);
+  const [activeHasSound, setActiveHasSound] = useState(false);
   const animatingRef = useRef(false);
-  const activeMuted = userMuted || !audioUnlocked || !sectionInView;
+  const sectionInViewRef = useRef(sectionInView);
+  const centerIdxRef = useRef(centerIdx);
+  const playbackRequestRef = useRef(0);
 
   const cards: Card[] = slides.map((slide, index) => ({
     id: slide.id,
@@ -104,58 +106,125 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
   }, []);
 
   useEffect(() => {
-    if (audioUnlocked) return;
-
-    const unlockAudio = () => setAudioUnlocked(true);
-    const options: AddEventListenerOptions = { once: true, passive: true };
-
-    window.addEventListener("pointerdown", unlockAudio, options);
-    window.addEventListener("touchstart", unlockAudio, options);
-    window.addEventListener("keydown", unlockAudio, { once: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", unlockAudio);
-      window.removeEventListener("touchstart", unlockAudio);
-      window.removeEventListener("keydown", unlockAudio);
-    };
-  }, [audioUnlocked]);
+    sectionInViewRef.current = sectionInView;
+    centerIdxRef.current = centerIdx;
+  }, [centerIdx, sectionInView]);
 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const observeTarget = root.closest(".section_home-about") ?? root;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         setSectionInView(Boolean(entry?.isIntersecting));
       },
-      { threshold: 0.12 }
+      { threshold: 0 }
     );
 
-    observer.observe(root);
+    observer.observe(observeTarget);
     return () => observer.disconnect();
   }, []);
+
+  const playActiveWithSound = useCallback((force = false) => {
+    if (reducedMotion || (!force && userMuted) || !sectionInViewRef.current) return;
+
+    const activeSlide = slides[centerIdxRef.current];
+    if (activeSlide?.type !== "video") return;
+
+    const video = videoRefs.current.get(activeSlide.id);
+    if (!video) return;
+
+    const requestId = playbackRequestRef.current + 1;
+    playbackRequestRef.current = requestId;
+
+    video.volume = 1;
+    video.muted = false;
+
+    let settled = false;
+    const fallbackToMuted = () => {
+      if (settled || playbackRequestRef.current !== requestId) return;
+      settled = true;
+      video.muted = true;
+      setActiveHasSound(false);
+      void video.play().catch(() => undefined);
+    };
+
+    const fallbackTimer = window.setTimeout(fallbackToMuted, 700);
+    const play = video.play();
+    if (play) {
+      play
+        .then(() => {
+          if (settled) return;
+          settled = true;
+          window.clearTimeout(fallbackTimer);
+          if (playbackRequestRef.current !== requestId) return;
+          const hasSound = sectionInViewRef.current && !video.paused && !video.muted;
+          setActiveHasSound(hasSound);
+        })
+        .catch(() => {
+          window.clearTimeout(fallbackTimer);
+          fallbackToMuted();
+        });
+    } else {
+      window.clearTimeout(fallbackTimer);
+      setActiveHasSound(sectionInViewRef.current && !video.paused && !video.muted);
+    }
+  }, [reducedMotion, slides, userMuted]);
 
   useEffect(() => {
     const activeSlide = slides[centerIdx];
 
     videoRefs.current.forEach((video, slideId) => {
       const isActive = activeSlide?.id === slideId;
-      video.muted = !isActive || activeMuted;
+      const shouldPlay = isActive && sectionInView && !reducedMotion;
 
-      if (!isActive || reducedMotion) {
+      if (!shouldPlay) {
+        playbackRequestRef.current += 1;
+        video.muted = true;
         video.pause();
+        if (isActive) setActiveHasSound(false);
         return;
       }
 
-      const play = video.play();
-      if (play) {
-        play.catch(() => {
-          video.muted = true;
-          void video.play().catch(() => undefined);
-        });
+      if (userMuted) {
+        video.muted = true;
+        setActiveHasSound(false);
+        void video.play().catch(() => undefined);
+        return;
       }
     });
-  }, [activeMuted, centerIdx, reducedMotion, slides]);
+
+    if (activeSlide?.type === "video" && sectionInView && !reducedMotion && !userMuted) {
+      playActiveWithSound();
+    }
+  }, [centerIdx, playActiveWithSound, reducedMotion, sectionInView, slides, userMuted]);
+
+  useEffect(() => {
+    if (reducedMotion || userMuted) return;
+
+    const handleScrollAudio = () => {
+      if (!sectionInViewRef.current) return;
+
+      const activeSlide = slides[centerIdxRef.current];
+      if (activeSlide?.type !== "video") return;
+
+      const video = videoRefs.current.get(activeSlide.id);
+      if (!video) return;
+
+      playActiveWithSound();
+    };
+
+    window.addEventListener("wheel", handleScrollAudio, { passive: true });
+    window.addEventListener("scroll", handleScrollAudio, { passive: true });
+    window.addEventListener("touchmove", handleScrollAudio, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleScrollAudio);
+      window.removeEventListener("scroll", handleScrollAudio);
+      window.removeEventListener("touchmove", handleScrollAudio);
+    };
+  }, [playActiveWithSound, reducedMotion, slides, userMuted]);
 
   const setVideoRef = useCallback((slideId: string, video: HTMLVideoElement | null) => {
     if (video) {
@@ -168,6 +237,7 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
   const goNext = useCallback(() => {
     if (animatingRef.current || N === 0) return;
     animatingRef.current = true;
+    setActiveHasSound(false);
 
     setCenterIdx((current) => (current + 1) % N);
     window.setTimeout(() => {
@@ -178,6 +248,7 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
   const goPrev = useCallback(() => {
     if (animatingRef.current || N === 0) return;
     animatingRef.current = true;
+    setActiveHasSound(false);
 
     setCenterIdx((current) => (current - 1 + N) % N);
     window.setTimeout(() => {
@@ -186,9 +257,20 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
   }, [N]);
 
   const handleMuteToggle = useCallback(() => {
-    setAudioUnlocked(true);
-    setUserMuted(activeMuted ? false : true);
-  }, [activeMuted]);
+    if (activeHasSound) {
+      setUserMuted(true);
+      setActiveHasSound(false);
+      const activeSlide = slides[centerIdx];
+      if (activeSlide?.type === "video") {
+        const video = videoRefs.current.get(activeSlide.id);
+        if (video) video.muted = true;
+      }
+      return;
+    }
+
+    setUserMuted(false);
+    playActiveWithSound(true);
+  }, [activeHasSound, centerIdx, playActiveWithSound, slides]);
 
   if (N === 0) return null;
 
@@ -216,10 +298,9 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
                   <video
                     ref={(video) => setVideoRef(slide.id, video)}
                     aria-label={alt}
-                    autoPlay={card.slot === 0 && !reducedMotion}
                     className={styles.cardImage}
                     loop
-                    muted={card.slot !== 0 || activeMuted}
+                    muted={card.slot !== 0 || !activeHasSound}
                     playsInline
                     poster={slide.poster}
                     preload={card.slot === 0 ? "auto" : "none"}
@@ -230,13 +311,13 @@ export default function HomeAboutCarousel({ slides, initialIndex = 0 }: HomeAbou
                     <button
                       type="button"
                       className={styles.muteToggle}
-                      aria-label={activeMuted ? "Unmute carousel video" : "Mute carousel video"}
+                      aria-label={activeHasSound ? "Mute carousel video" : "Unmute carousel video"}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleMuteToggle();
                       }}
                     >
-                      {activeMuted ? <VolumeOffIcon /> : <VolumeOnIcon />}
+                      {activeHasSound ? <VolumeOnIcon /> : <VolumeOffIcon />}
                     </button>
                   ) : null}
                 </>
