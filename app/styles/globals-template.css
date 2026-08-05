@@ -354,7 +354,7 @@
   .section_cta {
     position: relative;
     background: url("/assets/home/location-hero-118.jpg") center/cover no-repeat;
-    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .section_cta .cta_wrapper {
@@ -667,7 +667,7 @@
     z-index: 99;
     inset: 0 !important;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     height: 100dvh;
     box-sizing: border-box;
     flex-direction: column;

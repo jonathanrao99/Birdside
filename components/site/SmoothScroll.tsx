@@ -1,7 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
-import { type ReactNode, useEffect, useLayoutEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import ScrollEffectsClient from "@/components/site/ScrollEffectsClient";
 import { LenisProvider } from "@/components/site/lenis-context";
 import { ensureScrollTriggerRegistered } from "@/lib/gsap/register-scroll-trigger";
@@ -20,7 +20,7 @@ type Props = { children: ReactNode };
 export default function SmoothScroll({ children }: Props) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
