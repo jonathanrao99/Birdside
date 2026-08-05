@@ -20,8 +20,6 @@ export function HomeHeroVideoBackdrop({ desktopSrc, mobileSrc }: BackdropProps) 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeSrc, setActiveSrc] = useState<string | null>(null);
 
-  /* Viewport height is now driven purely by 100svh in CSS — no JS measurement needed. */
-
   useEffect(() => {
     const media = window.matchMedia("(max-width: 767px)");
     const update = () => setActiveSrc(media.matches ? mobileSrc : desktopSrc);
