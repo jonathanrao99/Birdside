@@ -11,11 +11,20 @@
   max-width: 100%;
   box-sizing: border-box;
   height: calc(
-    var(--home-hero-viewport-h, 100vh) - var(--home-nav-stack-h, 0px) +
+    100svh - var(--home-nav-stack-h, 0px) +
       var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
   );
   min-height: 0;
   overflow: hidden;
+}
+
+@supports not (height: 100svh) {
+  .section_home-header:has(.home-hero-video-stage) {
+    height: calc(
+      100dvh - var(--home-nav-stack-h, 0px) +
+        var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+    );
+  }
 }
 
 /* Video fills entire hero section (edge to edge); sits under padded content. */
@@ -294,8 +303,17 @@
 @media (min-width: 1200px) {
   .section_home-header:has(.home-hero-video-stage) {
     height: calc(
-      var(--home-hero-viewport-h, 100vh) - var(--home-nav-stack-h, 0px) +
+      100svh - var(--home-nav-stack-h, 0px) +
         var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
     );
+  }
+
+  @supports not (height: 100svh) {
+    .section_home-header:has(.home-hero-video-stage) {
+      height: calc(
+        100dvh - var(--home-nav-stack-h, 0px) +
+          var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+      );
+    }
   }
 }
