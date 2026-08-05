@@ -372,6 +372,10 @@
     display: none !important;
   }
 
+  .section_cta .cta_heading-wrap {
+    display: none !important;
+  }
+
   .section_cta .cta_content {
     display: flex !important;
     transform: none !important;
