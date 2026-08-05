@@ -268,7 +268,7 @@
 .section_cta .cta_image-wrap {
   contain: layout paint style;
   width: var(--cta-image-base-width) !important;
-  height: 28vh !important;
+  height: 28svh !important;
   border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
   overflow: hidden;
   z-index: 3;
@@ -345,7 +345,7 @@
 /* Pre-footer CTA: shorter scroll track on common viewports (template default 150rem) */
 @media (min-width: 992px) {
   .section_cta .cta_wrapper {
-    height: min(250rem, 300vh);
+    height: min(250rem, 300svh);
   }
 }
 
@@ -399,7 +399,7 @@
 
 @media (max-width: 991px) {
   .section_home-header .home-header_component {
-    min-height: min(68vh, 640px);
+    min-height: min(68svh, 640px);
   }
 
   .section_home-header .home-header_heading {
@@ -418,7 +418,7 @@
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(68vw, 420px);
-    height: min(34vh, 380px);
+    height: min(34svh, 380px);
     min-height: 165px;
   }
 
@@ -441,7 +441,7 @@
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(42vh, 22rem) !important;
+    height: min(42svh, 22rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
@@ -488,7 +488,7 @@
 
 @media (max-width: 767px) {
   .section_home-header .home-header_component {
-    min-height: min(62vh, 560px);
+    min-height: min(62svh, 560px);
   }
 
   .section_home-header .home-header_heading {
@@ -505,7 +505,7 @@
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(72vw, 340px);
-    height: min(32vh, 300px);
+    height: min(32svh, 300px);
     min-height: 152px;
   }
 
@@ -518,12 +518,12 @@
   }
 
   .section_cta .cta_wrapper {
-    height: min(126rem, 175vh);
+    height: min(126rem, 175svh);
   }
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(40vh, 20rem) !important;
+    height: min(40svh, 20rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
@@ -569,7 +569,7 @@
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(86vw, 18rem);
-    height: min(30vh, 11.5rem);
+    height: min(30svh, 11.5rem);
     min-height: 128px;
   }
 
@@ -581,12 +581,12 @@
   }
 
   .section_cta .cta_wrapper {
-    height: min(112rem, 160vh);
+    height: min(112rem, 160svh);
   }
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(38vh, 17rem) !important;
+    height: min(38svh, 17rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;

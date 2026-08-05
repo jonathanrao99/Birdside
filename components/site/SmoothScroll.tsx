@@ -64,8 +64,15 @@ export default function SmoothScroll({ children }: Props) {
 
     queueMicrotask(() => {
       setLenis(instance);
+      instance.resize();
       ScrollTrigger.refresh();
     });
+
+    /* Safety net: re-measure after fonts + first paint settle on mobile. */
+    window.setTimeout(() => {
+      instance.resize();
+      ScrollTrigger.refresh();
+    }, 300);
 
     return () => {
       instance.off("scroll", onLenisScroll);
