@@ -1072,7 +1072,7 @@ a.footer_social-icon:hover {
 .footer .birdside-footer-tagline {
   margin: 0;
   max-width: 16rem;
-  font-size: clamp(1.125rem, 1.5vw, 1.1875rem);
+  font-size: clamp(1.375rem, 2vw, 1.4375rem);
   line-height: 1.45;
   letter-spacing: 0.02em;
   font-weight: 400;
@@ -1110,7 +1110,7 @@ a.footer_social-icon:hover {
 
 .footer .birdside-footer-column-link {
   display: inline-block;
-  font-size: clamp(1.3125rem, 1.05vw + 0.5rem, 1.4375rem);
+  font-size: clamp(1.4375rem, 1.05vw + 0.625rem, 1.5625rem);
   line-height: 1.32;
   letter-spacing: 0.02em;
   font-weight: 400;
