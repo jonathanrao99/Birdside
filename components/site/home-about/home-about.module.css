@@ -68,7 +68,7 @@
 .stage {
   position: relative;
   width: 100%;
-  height: 90vw;
+  height: 100vw;
   padding-block: 0;
   perspective: 1400px;
   transform-style: preserve-3d;
@@ -77,14 +77,14 @@
 
 @media (min-width: 768px) {
   .stage {
-    height: 750px;
+    height: 620px;
     padding-block: clamp(1rem, 2vw, 2rem);
   }
 }
 
 @media (min-width: 1024px) {
   .stage {
-    height: 850px;
+    height: 750px;
   }
 }
 
@@ -166,7 +166,7 @@
   top: 50%;
   overflow: hidden;
   width: 60vw;
-  height: 82vw;
+  height: 107vw;
   border-radius: 4vw;
   transition:
     transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
@@ -176,15 +176,15 @@
 
 @media (min-width: 768px) {
   .latestCard {
-    width: 48vw;
-    height: 68vw;
+    width: 40vw;
+    height: 71vw;
     border-radius: 2.5vw;
   }
 }
 
 @media (min-width: 1280px) {
   .latestCard {
-    width: 30vw;
+    width: 25vw;
     height: 44vw;
     border-radius: 1.5vw;
   }

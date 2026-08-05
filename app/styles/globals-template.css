@@ -345,7 +345,7 @@
 /* Pre-footer CTA: shorter scroll track on common viewports (template default 150rem) */
 @media (min-width: 992px) {
   .section_cta .cta_wrapper {
-    height: min(150rem, 190vh);
+    height: min(250rem, 300vh);
   }
 }
 
