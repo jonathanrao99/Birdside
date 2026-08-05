@@ -116,7 +116,7 @@ export default function HomePreloader({ onComplete }: Props) {
       scale: 1,
       y: 0,
       opacity: 0,
-      transformOrigin: "50% 60vh"
+      transformOrigin: "50% 60svh"
     });
 
     const center = (letters.length - 1) / 2;

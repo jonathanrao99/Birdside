@@ -38,6 +38,7 @@ export default function PageTransitionChrome({ children }: Props) {
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [homeIntroDone, setHomeIntroDone] = useState(false);
 
   const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
 
@@ -46,7 +47,8 @@ export default function PageTransitionChrome({ children }: Props) {
 
   const pageLoaderLoading = pathname !== "/" && isPageLoading;
 
-  const bodyScrollLocked = homeLetterIntroActive || pageLoaderLoading;
+  const bodyScrollLocked =
+    (homeLetterIntroActive && !homeIntroDone) || pageLoaderLoading;
 
   const shellLocked = pageLoaderLoading;
 
@@ -71,6 +73,11 @@ export default function PageTransitionChrome({ children }: Props) {
     setIsPageLoading(false);
   }, []);
 
+  const handleHomeIntroComplete = useCallback(() => {
+    setHomeIntroDone(true);
+    setIsPageLoading(false);
+  }, []);
+
   return (
     <>
       <PageLoader
@@ -78,7 +85,7 @@ export default function PageTransitionChrome({ children }: Props) {
         loading={pageLoaderLoading}
         onComplete={handleLoaderComplete}
       />
-      <HomePreloader onComplete={() => setIsPageLoading(false)} />
+      <HomePreloader onComplete={handleHomeIntroComplete} />
       <div
         className={`birdside-page-transition-shell ${shellLocked ? "birdside-page-transition-shell--loading" : ""}`}
       >

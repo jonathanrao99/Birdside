@@ -11,18 +11,18 @@
   max-width: 100%;
   box-sizing: border-box;
   height: calc(
-    100vh - var(--home-nav-stack-h, 0px) +
-      var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+    100svh - var(--home-nav-stack-h, 0px) +
+      var(--home-hero-fold-buffer, clamp(2.5rem, 5svh, 4rem))
   );
   min-height: 0;
   overflow: hidden;
 }
 
-@supports (height: 100svh) {
+@supports not (height: 100svh) {
   .section_home-header:has(.home-hero-video-stage) {
     height: calc(
-      100svh - var(--home-nav-stack-h, 0px) +
-        var(--home-hero-fold-buffer, clamp(2.5rem, 5svh, 4rem))
+      100vh - var(--home-nav-stack-h, 0px) +
+        var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
     );
   }
 }
@@ -102,7 +102,7 @@
   padding-bottom: calc(clamp(2.75rem, 7.5vw, 5.75rem) + env(safe-area-inset-bottom, 0px));
 }
 
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   .section_home-header .home-header_images.home-header_images--video-cta {
     min-height: 0;
   }
@@ -213,7 +213,7 @@
   box-sizing: border-box;
 }
 
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
     min-height: 0;
   }
@@ -274,7 +274,7 @@
   }
 }
 
-@supports (height: 100dvh) {
+@supports (height: 100svh) {
   .section_home-header:has(.home-header_images--video-cta) .home-header_component {
     min-height: 0;
   }
@@ -303,18 +303,18 @@
 @media (min-width: 1200px) {
   .section_home-header:has(.home-hero-video-stage) {
     height: calc(
-      100vh - var(--home-nav-stack-h, 0px) +
-        var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
+      100svh - var(--home-nav-stack-h, 0px) +
+        var(--home-hero-fold-buffer, clamp(2.5rem, 5svh, 4rem))
     );
   }
 }
 
-@supports (height: 100svh) {
+@supports not (height: 100svh) {
   @media (min-width: 1200px) {
     .section_home-header:has(.home-hero-video-stage) {
       height: calc(
-        100svh - var(--home-nav-stack-h, 0px) +
-          var(--home-hero-fold-buffer, clamp(2.5rem, 5svh, 4rem))
+        100vh - var(--home-nav-stack-h, 0px) +
+          var(--home-hero-fold-buffer, clamp(2.5rem, 5vh, 4rem))
       );
     }
   }
