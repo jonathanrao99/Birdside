@@ -349,6 +349,45 @@
   }
 }
 
+/* Static CTA for screens < 1400px: no scroll animation, show bg image + location popup */
+@media (max-width: 1399px) {
+  .section_cta {
+    position: relative;
+    background: url("/assets/home/location-hero-118.jpg") center/cover no-repeat;
+    min-height: 100vh;
+  }
+
+  .section_cta .cta_wrapper {
+    height: auto !important;
+  }
+
+  .section_cta .cta_sticky {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+
+  .section_cta .cta_image-wrap {
+    display: none !important;
+  }
+
+  .section_cta .cta_content {
+    display: flex !important;
+    transform: none !important;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+
+  .section_cta .cta_component {
+    opacity: 1 !important;
+  }
+
+  .section_cta .cta_lottie-1,
+  .section_cta .cta_lottie-2 {
+    display: none !important;
+  }
+}
+
 /* Sticky stack: own compositing layer to reduce scroll jank */
 .section_cta .cta_sticky {
   backface-visibility: hidden;
