@@ -114,7 +114,7 @@ export default function SiteFooter() {
             height={484}
             priority
             sizes="100vw"
-            src="/assets/home/footer-decoration.png"
+            src="/assets/home/footer-decoration.avif"
             width={2356}
           />
         </div>

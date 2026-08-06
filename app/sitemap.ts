@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { statSync } from "fs";
+import path from "path";
 import { getLocationSlugs, getProductSlugs } from "@/lib/site-content";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -29,9 +31,26 @@ const STATIC_PRIORITIES: Partial<Record<(typeof STATIC_PATHS)[number], number>> 
   "/checkout": 0.2
 };
 
+function getLastModified() {
+  const candidates = [
+    path.join(process.cwd(), "content", "generated", "site-content.json"),
+    path.join(process.cwd(), "content", "generated", "our-menu.json")
+  ];
+
+  const latest = candidates.reduce((latestTime, filePath) => {
+    try {
+      return Math.max(latestTime, statSync(filePath).mtimeMs);
+    } catch {
+      return latestTime;
+    }
+  }, 0);
+
+  return latest > 0 ? new Date(latest) : undefined;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
-  const lastModified = new Date();
+  const lastModified = getLastModified();
   const entries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
     url: new URL(path, base).toString(),
     lastModified,

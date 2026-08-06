@@ -63,7 +63,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Birdside HTX | Houston Hot Chicken in Katy, TX",
     description: LOCAL_BUSINESS.description,
-    images: [LOCAL_BUSINESS.ogImagePath]
+    images: [
+      {
+        url: LOCAL_BUSINESS.ogImagePath,
+        alt: "Birdside HTX hot chicken, wings, and sandos"
+      }
+    ]
   },
   robots: {
     index: true,

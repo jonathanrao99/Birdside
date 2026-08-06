@@ -55,6 +55,17 @@ const DUR_ROW_HOLD = 0.25;
 const DUR_CURTAIN = 0.85;
 const DUR_REVEAL = 0.65;
 
+const HOME_PRELOADER_LETTER_DIMS = [
+  { width: 428, height: 446 },
+  { width: 159, height: 484 },
+  { width: 314, height: 484 },
+  { width: 342, height: 484 },
+  { width: 261, height: 484 },
+  { width: 148, height: 484 },
+  { width: 339, height: 484 },
+  { width: 369, height: 484 }
+] as const;
+
 /**
  * First session visit to `/` only: letter-row tracking, scale, curtain slide + reveal zoom
  * on `#birdside-preloader-reveal` (see PageShell). Sits above the image route loader.
@@ -201,12 +212,14 @@ export default function HomePreloader({ onComplete }: Props) {
     >
       <span className="birdside-sr-only">{HOME_PRELOADER_SR_LABEL}</span>
       <div ref={rowRef} className="birdside-home-preloader__letters">
-        {HOME_PRELOADER_LETTER_SRCS.map((src) => (
+        {HOME_PRELOADER_LETTER_SRCS.map((src, index) => (
           // eslint-disable-next-line @next/next/no-img-element -- static letter PNGs
           <img
             key={src}
             src={src}
             alt=""
+            width={HOME_PRELOADER_LETTER_DIMS[index]?.width}
+            height={HOME_PRELOADER_LETTER_DIMS[index]?.height}
             className="birdside-home-preloader__letter"
             decoding="async"
             fetchPriority="high"

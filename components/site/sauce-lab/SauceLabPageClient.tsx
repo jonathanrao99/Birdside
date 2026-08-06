@@ -10,7 +10,8 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
+  type KeyboardEvent
 } from "react";
 import styles from "./sauce-lab-page.module.css";
 
@@ -98,23 +99,13 @@ function SauceSectionContent() {
     }));
 
     const ringLabelsLocal = ringItemsLocal.map((item) => {
-      let labelTitle = (item.sauce?.title || "")
+      const labelTitle = (item.sauce?.title || "")
         .trim()
         .replace(/\s+/g, " ")
         .toUpperCase();
-      if (labelTitle.startsWith("AYONNAISE")) labelTitle = `M${labelTitle}`;
-      const baseTitle = labelTitle.replace(/\s*SAUCE$/, "").trim();
-
-      let finalTitle = baseTitle;
-      if (baseTitle.includes("MAYO") || baseTitle.includes("MAYONNAISE")) {
-        finalTitle = "HOUSE MAYO";
-      } else if (
-        ["CHEESE", "BUFFALO", "BUFFLO", "BUFFLAO"].includes(baseTitle)
-      ) {
-        finalTitle = `${baseTitle} SAUCE`;
-      } else if (baseTitle === "BIRD") {
-        finalTitle = "BIRD SAUCE";
-      }
+      const finalTitle = displayHeadingTitle(
+        labelTitle.startsWith("AYONNAISE") ? `M${labelTitle}` : labelTitle
+      );
 
       return `• ${finalTitle} •`;
     });
@@ -185,6 +176,15 @@ function SauceSectionContent() {
   useEffect(() => {
     transitionRef.current = transitionToIndex;
   });
+
+  const handleRingKeyDown = useCallback(
+    (event: KeyboardEvent<SVGGElement>, targetIndex: number) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      transitionToIndex(targetIndex);
+    },
+    [transitionToIndex]
+  );
 
   useEffect(() => {
     if (!sauceParam || saucesData.length === 0) return;
@@ -290,7 +290,7 @@ function SauceSectionContent() {
 
         <div className={styles.mobileTopGradient} aria-hidden />
 
-        <div className={styles.textBlock}>
+        <div className={styles.textBlock} aria-live="polite" aria-atomic="true">
           <AnimatePresence mode="wait">
             <motion.div
               key={`text-${currentSauce.id}`}
@@ -366,7 +366,8 @@ function SauceSectionContent() {
                 <svg
                   viewBox="0 0 1000 1000"
                   className={styles.ringSvg}
-                  aria-hidden
+                  role="list"
+                  aria-label="Sauce options"
                 >
                   <defs>
                     <path
@@ -381,25 +382,33 @@ function SauceSectionContent() {
                     const offset = ringOffsets[ringIndex] || "0%";
                     const label = ringLabels[ringIndex];
                     return (
-                      <text
+                      <g
                         key={item.id}
-                        fill="white"
-                        textAnchor="middle"
-                        className={`${styles.ringText} ${isActive ? styles.ringTextActive : styles.ringTextInactive}`}
-                        style={{
-                          fontFamily: "SauceDisplay, sans-serif",
-                          fontWeight: 700,
-                          fontSize: isDesktop ? "1.78rem" : "2.2rem",
-                          letterSpacing: isDesktop ? "0.025em" : "0.035em",
-                          textTransform: "uppercase",
-                          transform: isDesktop ? undefined : "translateY(5px)"
-                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Show ${label.replace(/[•]/g, "").trim()}`}
+                        aria-current={isActive ? "true" : undefined}
                         onClick={() => transitionToIndex(item.index)}
+                        onKeyDown={(event) => handleRingKeyDown(event, item.index)}
                       >
-                        <textPath href="#sauce-ring-path-main" startOffset={offset}>
-                          {label}
-                        </textPath>
-                      </text>
+                        <text
+                          fill="white"
+                          textAnchor="middle"
+                          className={`${styles.ringText} ${isActive ? styles.ringTextActive : styles.ringTextInactive}`}
+                          style={{
+                            fontFamily: "SauceDisplay, sans-serif",
+                            fontWeight: 700,
+                            fontSize: isDesktop ? "1.78rem" : "2.2rem",
+                            letterSpacing: isDesktop ? "0.025em" : "0.035em",
+                            textTransform: "uppercase",
+                            transform: isDesktop ? undefined : "translateY(5px)"
+                          }}
+                        >
+                          <textPath href="#sauce-ring-path-main" startOffset={offset}>
+                            {label}
+                          </textPath>
+                        </text>
+                      </g>
                     );
                   })}
                 </svg>

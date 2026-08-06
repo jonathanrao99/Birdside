@@ -98,7 +98,7 @@ export function buildPageMetadata(
       card: "summary_large_image",
       title,
       description,
-      images: [LOCAL_BUSINESS.ogImagePath]
+      images: [{ url: LOCAL_BUSINESS.ogImagePath, alt: DEFAULT_OG_IMAGE.alt }]
     },
     other: LOCAL_GEO_META
   };
@@ -138,7 +138,7 @@ export function buildPlaceholderMetadata(
       card: "summary_large_image",
       title,
       description,
-      images: [LOCAL_BUSINESS.ogImagePath]
+      images: [{ url: LOCAL_BUSINESS.ogImagePath, alt: DEFAULT_OG_IMAGE.alt }]
     },
     other: LOCAL_GEO_META
   };

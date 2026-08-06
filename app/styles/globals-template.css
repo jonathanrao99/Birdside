@@ -353,7 +353,10 @@
 @media (max-width: 1399px) {
   .section_cta {
     position: relative;
-    background: url("/assets/home/location-hero-118.jpg") center/cover no-repeat;
+    background: image-set(
+      url("/assets/home/location-hero-118.avif") type("image/avif"),
+      url("/assets/home/location-hero-118.jpg") type("image/jpeg")
+    ) center/cover no-repeat;
     min-height: var(--birdside-viewport-h);
   }
 
@@ -679,7 +682,10 @@
     background-color: #000 !important;
     background-image:
       linear-gradient(rgb(0 0 0 / 0.22), rgb(0 0 0 / 0.34)),
-      url("/assets/brand/hamburger-menu-bg.png");
+      image-set(
+        url("/assets/brand/hamburger-menu-bg.avif") type("image/avif"),
+        url("/assets/brand/hamburger-menu-bg.png") type("image/png")
+      );
     background-position: center;
     background-repeat: repeat;
     background-size: min(145vw, 60rem) auto;
@@ -1331,6 +1337,30 @@ a.footer_social-icon:hover {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.birdside-skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10003;
+  transform: translateY(-150%);
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #000;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform 0.16s ease;
+}
+
+.birdside-skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 .birdside-home-preloader,

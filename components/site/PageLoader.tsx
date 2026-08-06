@@ -64,6 +64,8 @@ export default function PageLoader({ loading, onComplete }: PageLoaderProps) {
               alt=""
               className="birdside-page-loader__logo-img"
               decoding="async"
+              width={416}
+              height={416}
               src={PAGE_LOADER_LOGO_SRC}
             />
           </motion.div>

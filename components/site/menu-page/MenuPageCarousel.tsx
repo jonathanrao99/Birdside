@@ -9,7 +9,8 @@ import {
   useId,
   useMemo,
   useRef,
-  useState
+  useState,
+  type KeyboardEvent
 } from "react";
 
 export type MenuCarouselItem = {
@@ -201,6 +202,14 @@ export default function MenuPageCarousel({
     },
     [moveBy]
   );
+  const handleCardKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>, clickedSlot: number) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      moveBy(clickedSlot);
+    },
+    [moveBy]
+  );
   const goNext = useCallback(() => moveBy(1), [moveBy]);
   const goPrev = useCallback(() => moveBy(-1), [moveBy]);
 
@@ -386,6 +395,7 @@ export default function MenuPageCarousel({
             const isVisible = isLaptopViewport
               ? Math.abs(card.slot) <= 3
               : Math.abs(card.slot) <= 2;
+            const isInteractiveCard = !isCenter && !isAnimating && isVisible;
 
             return (
               <motion.div
@@ -408,16 +418,16 @@ export default function MenuPageCarousel({
                   position: "absolute",
                   left: "50%",
                   top: "50%",
-                  pointerEvents: isCenter
-                    ? "none"
-                    : isAnimating || !isVisible
-                      ? "none"
-                      : "auto",
+                  pointerEvents: isInteractiveCard ? "auto" : "none",
                   cursor: isCenter ? "default" : isAnimating ? "wait" : "pointer",
                   userSelect: "none"
                 }}
-                onClick={() =>
-                  !isCenter && !isAnimating && isVisible && handleCardClick(card.slot)
+                role={isInteractiveCard ? "button" : undefined}
+                tabIndex={isInteractiveCard ? 0 : -1}
+                aria-label={isInteractiveCard ? `Show ${item.name}` : undefined}
+                onClick={() => isInteractiveCard && handleCardClick(card.slot)}
+                onKeyDown={(event) =>
+                  isInteractiveCard && handleCardKeyDown(event, card.slot)
                 }
               >
                 <div

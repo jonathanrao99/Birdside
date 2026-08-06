@@ -1,6 +1,5 @@
 import { readFileSync } from "fs";
 import path from "path";
-import { siteContentSchema } from "@/lib/site-content-schema";
 
 export type LegacyPageEntry = {
   route: string;
@@ -32,6 +31,7 @@ function loadSiteContent(): SiteContent {
   const parsed = JSON.parse(raw) as SiteContent;
 
   if (process.env.NODE_ENV === "development") {
+    const { siteContentSchema } = require("@/lib/site-content-schema") as typeof import("@/lib/site-content-schema");
     const checked = siteContentSchema.safeParse(parsed);
     if (!checked.success) {
       console.error("[site-content] Zod validation failed:", checked.error.flatten());
