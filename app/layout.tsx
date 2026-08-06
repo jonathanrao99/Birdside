@@ -1,6 +1,8 @@
 import "./globals.css";
 import "lenis/dist/lenis.css";
 import { Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import BootSplash from "@/components/site/BootSplash";
@@ -109,6 +111,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </PageTransitionChrome>
         <JsonLd data={[buildRestaurantJsonLd(), buildWebsiteJsonLd()]} />
         <ElevenLabsConvai />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

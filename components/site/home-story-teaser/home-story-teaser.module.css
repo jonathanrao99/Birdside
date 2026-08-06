@@ -122,7 +122,7 @@
 
 .lede {
   max-width: 39rem;
-  margin: clamp(1.15rem, 2.8vw, 1.75rem) auto 0;
+  margin: 0.5rem auto 0;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   font-weight: 500;
