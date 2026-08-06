@@ -25,6 +25,8 @@
   --layout-section-padding-x: clamp(1rem, 4vw, 2rem);
   --layout-content-max: 1280px;
   --layout-stack-gap: clamp(2rem, 4vw, 3rem);
+  --birdside-vh: 1svh;
+  --birdside-viewport-h: 100svh;
 }
 
 html {
@@ -57,12 +59,12 @@ body {
 /* Home only: red hero sits under nav + checker; nav stack paints above (z-index). */
 /* Stack height must cover real navbar + checker (strip is 2.5rem once we override Brasa ≤767px 1.5rem). */
 .page-wrapper:has(.section_home-header) {
-  --home-nav-stack-h: clamp(10.875rem, 22.7svh, 12.75rem);
+  --home-nav-stack-h: clamp(10.875rem, calc(var(--birdside-vh) * 22.7), 12.75rem);
 }
 
 @media (min-width: 992px) {
   .page-wrapper:has(.section_home-header) {
-    --home-nav-stack-h: clamp(11.25rem, 22.7svh, 12.75rem);
+    --home-nav-stack-h: clamp(11.25rem, calc(var(--birdside-vh) * 22.7), 12.75rem);
   }
 }
 
@@ -88,7 +90,7 @@ body {
  * fixed height on <main>). Wrapper + main both flex so backgrounds bleed edge-to-edge.
  */
 .page-wrapper:has(.sauce-lab-viewport-fill) {
-  --sauce-lab-nav-chrome: clamp(8.25rem, 14.5svh, 11.5rem);
+  --sauce-lab-nav-chrome: clamp(8.25rem, calc(var(--birdside-vh) * 14.5), 11.5rem);
   background-color: #000;
   overflow-x: clip;
 }
@@ -109,7 +111,7 @@ html:has(.sauce-lab-viewport-fill) body {
 .page-wrapper:has(.sauce-lab-viewport-fill) > #birdside-preloader-reveal {
   display: flex;
   flex-direction: column;
-  min-height: 100svh;
+  min-height: var(--birdside-viewport-h);
   background-color: #000;
 }
 
@@ -139,7 +141,7 @@ html:has(.sauce-lab-viewport-fill) body {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  min-height: calc(100svh - var(--sauce-lab-nav-chrome));
+  min-height: calc(var(--birdside-viewport-h) - var(--sauce-lab-nav-chrome));
   background-color: #000;
   overflow-x: clip;
   /* Ring labels extend above the flex box; hidden clips ascenders (e.g. MAPLE BUFFALO). */

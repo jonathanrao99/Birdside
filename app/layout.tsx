@@ -9,6 +9,31 @@ import PageTransitionChrome from "@/components/site/PageTransitionChrome";
 import SmoothScroll from "@/components/site/SmoothScroll";
 import { getSiteUrl } from "@/lib/site-url";
 
+const stableViewportScript = `
+(function () {
+  var root = document.documentElement;
+  var width = window.innerWidth;
+  function setViewport() {
+    var h = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (!h) return;
+    root.style.setProperty('--birdside-vh', h * 0.01 + 'px');
+    root.style.setProperty('--birdside-viewport-h', h + 'px');
+  }
+  setViewport();
+  window.addEventListener('resize', function () {
+    if (window.innerWidth === width) return;
+    width = window.innerWidth;
+    setViewport();
+  }, { passive: true });
+  window.addEventListener('orientationchange', function () {
+    window.setTimeout(function () {
+      width = window.innerWidth;
+      setViewport();
+    }, 250);
+  }, { passive: true });
+})();
+`;
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -33,6 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={spaceGrotesk.variable}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: stableViewportScript }} />
         {/* eslint-disable-next-line @next/next/no-css-tags -- static shared stylesheet loaded once globally */}
         <link href="/vendor/brasa-template.shared.38e119549.min.css" rel="stylesheet" />
       </head>

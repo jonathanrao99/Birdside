@@ -2,8 +2,8 @@
 .section_locations-header {
   --locations-top-chrome: 118px;
   background-color: var(--brand-red) !important;
-  height: calc(100svh - var(--locations-top-chrome));
-  min-height: calc(100svh - var(--locations-top-chrome));
+  height: calc(var(--birdside-viewport-h) - var(--locations-top-chrome));
+  min-height: calc(var(--birdside-viewport-h) - var(--locations-top-chrome));
   display: flex;
   align-items: stretch;
   overflow: hidden;
@@ -164,8 +164,8 @@
 .section_location {
   --location-top-chrome: 132px;
   background-color: var(--brand-red) !important;
-  height: calc(100svh - var(--location-top-chrome)) !important;
-  min-height: calc(100svh - var(--location-top-chrome)) !important;
+  height: calc(var(--birdside-viewport-h) - var(--location-top-chrome)) !important;
+  min-height: calc(var(--birdside-viewport-h) - var(--location-top-chrome)) !important;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -234,8 +234,8 @@
 @media (max-width: 991px) {
   .section_location {
     --location-top-chrome: 122px;
-    height: calc(100svh - var(--location-top-chrome)) !important;
-    min-height: calc(100svh - var(--location-top-chrome)) !important;
+    height: calc(var(--birdside-viewport-h) - var(--location-top-chrome)) !important;
+    min-height: calc(var(--birdside-viewport-h) - var(--location-top-chrome)) !important;
   }
 
   .section_location > .padding-global > .container-xsmall {
@@ -268,7 +268,7 @@
 .section_cta .cta_image-wrap {
   contain: layout paint style;
   width: var(--cta-image-base-width) !important;
-  height: 28svh !important;
+  height: calc(var(--birdside-vh) * 28) !important;
   border-radius: calc((1 - var(--cta-scale-progress)) * 14px);
   overflow: hidden;
   z-index: 3;
@@ -345,7 +345,7 @@
 /* Pre-footer CTA: shorter scroll track on common viewports (template default 150rem) */
 @media (min-width: 992px) {
   .section_cta .cta_wrapper {
-    height: min(250rem, 300svh);
+    height: min(250rem, calc(var(--birdside-vh) * 300));
   }
 }
 
@@ -354,7 +354,7 @@
   .section_cta {
     position: relative;
     background: url("/assets/home/location-hero-118.jpg") center/cover no-repeat;
-    min-height: 100svh;
+    min-height: var(--birdside-viewport-h);
   }
 
   .section_cta .cta_wrapper {
@@ -399,7 +399,7 @@
 
 @media (max-width: 991px) {
   .section_home-header .home-header_component {
-    min-height: min(68svh, 640px);
+    min-height: min(calc(var(--birdside-vh) * 68), 640px);
   }
 
   .section_home-header .home-header_heading {
@@ -411,14 +411,14 @@
   }
 
   .section_home-header .home-header_images {
-    margin-top: clamp(-3vw, -2svh, 0.25rem) !important;
+    margin-top: clamp(-3vw, calc(var(--birdside-vh) * -2), 0.25rem) !important;
   }
 
   .section_home-header .home-header_image-wrap._1,
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(68vw, 420px);
-    height: min(34svh, 380px);
+    height: min(calc(var(--birdside-vh) * 34), 380px);
     min-height: 165px;
   }
 
@@ -441,7 +441,7 @@
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(42svh, 22rem) !important;
+    height: min(calc(var(--birdside-vh) * 42), 22rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
@@ -488,7 +488,7 @@
 
 @media (max-width: 767px) {
   .section_home-header .home-header_component {
-    min-height: min(62svh, 560px);
+    min-height: min(calc(var(--birdside-vh) * 62), 560px);
   }
 
   .section_home-header .home-header_heading {
@@ -505,7 +505,7 @@
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(72vw, 340px);
-    height: min(32svh, 300px);
+    height: min(calc(var(--birdside-vh) * 32), 300px);
     min-height: 152px;
   }
 
@@ -518,12 +518,12 @@
   }
 
   .section_cta .cta_wrapper {
-    height: min(126rem, 175svh);
+    height: min(126rem, calc(var(--birdside-vh) * 175));
   }
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(40svh, 20rem) !important;
+    height: min(calc(var(--birdside-vh) * 40), 20rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
@@ -569,7 +569,7 @@
   .section_home-header .home-header_image-wrap._2,
   .section_home-header .home-header_image-wrap._3 {
     width: min(86vw, 18rem);
-    height: min(30svh, 11.5rem);
+    height: min(calc(var(--birdside-vh) * 30), 11.5rem);
     min-height: 128px;
   }
 
@@ -581,12 +581,12 @@
   }
 
   .section_cta .cta_wrapper {
-    height: min(112rem, 160svh);
+    height: min(112rem, calc(var(--birdside-vh) * 160));
   }
 
   .section_cta .cta_image-wrap {
     width: var(--cta-image-base-width) !important;
-    height: min(38svh, 17rem) !important;
+    height: min(calc(var(--birdside-vh) * 38), 17rem) !important;
     position: relative !important;
     margin-left: auto;
     margin-right: auto;
@@ -668,7 +668,7 @@
     inset: 0 !important;
     width: 100vw;
     height: 100vh;
-    height: 100svh;
+    height: var(--birdside-viewport-h);
     box-sizing: border-box;
     flex-direction: column;
     align-items: center;

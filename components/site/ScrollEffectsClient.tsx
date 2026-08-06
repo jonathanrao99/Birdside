@@ -58,6 +58,10 @@ export default function ScrollEffectsClient() {
   }, [pathname, lenis]);
 
   useEffect(() => {
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      return;
+    }
+
     const ScrollTrigger = ensureScrollTriggerRegistered();
     const unsubs = [setupCtaProgress(lenis), setupHomeMenuParallax(lenis)];
     queueMicrotask(() => {
