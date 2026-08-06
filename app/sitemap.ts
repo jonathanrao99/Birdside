@@ -17,17 +17,32 @@ const STATIC_PATHS = [
   "/allergen"
 ] as const;
 
+const STATIC_PRIORITIES: Partial<Record<(typeof STATIC_PATHS)[number], number>> = {
+  "/": 1,
+  "/menu": 0.9,
+  "/locations": 0.9,
+  "/catering": 0.8,
+  "/faq": 0.8,
+  "/sauce-lab": 0.8,
+  "/privacy": 0.3,
+  "/terms": 0.3,
+  "/checkout": 0.2
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
+  const lastModified = new Date();
   const entries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
     url: new URL(path, base).toString(),
+    lastModified,
     changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.7
+    priority: STATIC_PRIORITIES[path] ?? 0.7
   }));
 
   for (const slug of getProductSlugs()) {
     entries.push({
       url: new URL(`/product/${slug}`, base).toString(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 0.6
     });
@@ -36,8 +51,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const slug of getLocationSlugs()) {
     entries.push({
       url: new URL(`/locations/${slug}`, base).toString(),
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.6
+      priority: 0.85
     });
   }
 

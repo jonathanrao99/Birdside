@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LOCAL_BUSINESS } from "@/lib/local-seo";
 import type { LegacyPageEntry } from "@/lib/site-content";
 import { getRouteContent } from "@/lib/site-content";
 
@@ -39,11 +40,25 @@ const ROUTE_DESCRIPTIONS: Record<string, string> = {
   "/allergen": "Birdside HTX allergen information for guests with food allergies or dietary concerns."
 };
 
+const DEFAULT_OG_IMAGE = {
+  url: LOCAL_BUSINESS.ogImagePath,
+  width: 1200,
+  height: 630,
+  alt: "Birdside HTX hot chicken, wings, sandos, and late-night flavor"
+};
+
+const LOCAL_GEO_META = {
+  "geo.region": "US-TX",
+  "geo.placename": LOCAL_BUSINESS.addressLocality,
+  "geo.position": `${LOCAL_BUSINESS.latitude};${LOCAL_BUSINESS.longitude}`,
+  ICBM: `${LOCAL_BUSINESS.latitude}, ${LOCAL_BUSINESS.longitude}`
+};
+
 /** Prefer real titles; replace Webflow template noise with Birdside naming. */
 export function displayTitle(path: string, entryTitle: string): string {
   const t = entryTitle.trim();
   if (GENERIC_BRASA.test(t) || GENERIC_WEBFLOW_ECOM.test(t)) {
-    if (path === "/") return SITE_NAME;
+    if (path === "/") return "Houston Hot Chicken in Katy, TX | Birdside HTX";
     const label = ROUTE_LABELS[path];
     return label ? `${label} | ${SITE_NAME}` : SITE_NAME;
   }
@@ -65,20 +80,27 @@ export function buildPageMetadata(
       `${SITE_NAME} — wings, sandos, and more in Katy, TX.`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
+    alternates: {
+      canonical: path
+    },
     openGraph: {
       title,
       description,
       url: path,
       siteName: SITE_NAME,
-      type: "website"
+      type: "website",
+      locale: "en_US",
+      images: [DEFAULT_OG_IMAGE]
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description
-    }
+      description,
+      images: [LOCAL_BUSINESS.ogImagePath]
+    },
+    other: LOCAL_GEO_META
   };
 }
 
@@ -98,19 +120,26 @@ export function buildPlaceholderMetadata(
   const label = ROUTE_LABELS[route] ?? route;
   const title = `${label} | ${SITE_NAME}`;
   return {
-    title,
+    title: { absolute: title },
     description,
+    alternates: {
+      canonical: route
+    },
     openGraph: {
       title,
       description,
       url: route,
       siteName: SITE_NAME,
-      type: "website"
+      type: "website",
+      locale: "en_US",
+      images: [DEFAULT_OG_IMAGE]
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description
-    }
+      description,
+      images: [LOCAL_BUSINESS.ogImagePath]
+    },
+    other: LOCAL_GEO_META
   };
 }
