@@ -62,31 +62,15 @@ export default function ScrollEffectsClient() {
       return;
     }
 
-    let cancelled = false;
-    let unsubs: Array<() => void> = [];
-    let rafA = 0;
-    let rafB = 0;
-
-    const bindScrollEffects = () => {
-      if (cancelled) return;
-      const ScrollTrigger = ensureScrollTriggerRegistered();
-      unsubs = [setupCtaProgress(lenis), setupHomeMenuParallax(lenis)];
-      queueMicrotask(() => {
-        if (!cancelled) ScrollTrigger.refresh();
-      });
-    };
-
-    rafA = requestAnimationFrame(() => {
-      rafB = requestAnimationFrame(bindScrollEffects);
+    const ScrollTrigger = ensureScrollTriggerRegistered();
+    const unsubs = [setupCtaProgress(lenis), setupHomeMenuParallax(lenis)];
+    queueMicrotask(() => {
+      ScrollTrigger.refresh();
     });
-
     return () => {
-      cancelled = true;
-      if (rafA) cancelAnimationFrame(rafA);
-      if (rafB) cancelAnimationFrame(rafB);
       unsubs.forEach((u) => u());
       queueMicrotask(() => {
-        ensureScrollTriggerRegistered().refresh();
+        ScrollTrigger.refresh();
       });
     };
   }, [lenis, pathname]);

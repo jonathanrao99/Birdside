@@ -31,14 +31,6 @@ function MainContent({ children }: { children: ReactNode }) {
   return <main id="main-content">{children}</main>;
 }
 
-function SkipLink() {
-  return (
-    <a className="birdside-skip-link" href="#main-content">
-      Skip to main content
-    </a>
-  );
-}
-
 export default function PageShell({
   mainHtml = "",
   mainSlots,
@@ -49,7 +41,6 @@ export default function PageShell({
   if (mainSlots && mainSlots.length > 0) {
     return (
       <div className="page-wrapper">
-        <SkipLink />
         <div id="birdside-preloader-reveal">
           <SiteNavbar />
           {lead}
@@ -69,7 +60,6 @@ export default function PageShell({
     const afterHtml = mainHtml.slice(splitIndex);
     return (
       <div className="page-wrapper">
-        <SkipLink />
         <div id="birdside-preloader-reveal">
           <SiteNavbar />
           {lead}
@@ -86,7 +76,6 @@ export default function PageShell({
 
   return (
     <div className="page-wrapper">
-      <SkipLink />
       <div id="birdside-preloader-reveal">
         <SiteNavbar />
         {lead}

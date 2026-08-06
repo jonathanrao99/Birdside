@@ -75,7 +75,7 @@ export default function LocationDetailPage() {
             Find the black truck.
           </h2>
           <p className={styles.lede}>
-            1989 N Fry Rd. Open nightly from 5 PM to 12:30 AM. Follow the heat.
+            1989 N Fry Rd. Open nightly. Follow the heat.
           </p>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function LocationDetailPage() {
           <h2 id="map-heading" className={styles.sectionTitle}>
             Easy to find.
           </h2>
-          <p className={styles.lede}>1989 N Fry Rd. Katy, TX 77449. Open 5 PM to 12:30 AM daily.</p>
+          <p className={styles.lede}>1989 N Fry Rd. Katy, TX 77449. Open nightly.</p>
           <div className={styles.actions}>
             <div className="home-header_button-wrap">
               <a

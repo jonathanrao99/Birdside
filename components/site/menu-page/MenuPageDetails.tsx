@@ -172,7 +172,7 @@ export default function MenuPageDetails({ item, categoryLabel, showMeta = true }
   const hasDesc = desc.length > 0;
 
   return (
-    <div className={styles.details} aria-live="polite" aria-atomic="true">
+    <div className={styles.details}>
       {hasDesc ? <p className={styles.desc}>{renderDescription(item, desc)}</p> : null}
       <p className={styles.descNote}>{renderDescriptionNote(item, categoryLabel)}</p>
       <div className={styles.price}>
