@@ -78,18 +78,17 @@
 .heroRow {
   display: grid;
   gap: clamp(2.25rem, 6vw, 5.5rem);
-}
-
-@media (min-width: 900px) {
-  .heroRow {
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.42fr);
-    align-items: end;
-  }
+  justify-items: center;
+  text-align: center;
 }
 
 .heroCopy {
   max-width: 58rem;
 }
+
+.lede {
+  max-width: 39rem;
+  margin: clamp(1.15rem, 2.8vw, 1.75rem) auto 0;
 
 .eyebrow {
   margin: 0 0 clamp(0.85rem, 2vw, 1.15rem);
@@ -127,47 +126,11 @@
 
 .lede {
   max-width: 39rem;
-  margin: clamp(1.15rem, 2.8vw, 1.75rem) 0 0;
+  margin: clamp(1.15rem, 2.8vw, 1.75rem) auto 0;
   font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0.02em;
   color: var(--color-muted);
-}
-
-.hoursBlock {
-  display: grid;
-  gap: 0.55rem;
-  padding-top: clamp(1.2rem, 3vw, 1.75rem);
-  border-top: 3px solid var(--color-primary);
-}
-
-.hoursLabel,
-.hoursNote {
-  font-family: var(--_typography---font-family--secondary), system-ui, sans-serif;
-  letter-spacing: 0.035em;
-  color: var(--color-muted);
-}
-
-.hoursLabel {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.hoursTime {
-  font-family: var(--_typography---font-family--primary), Impact, sans-serif;
-  font-size: clamp(2.05rem, 4.6vw, 3.15rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-  color: var(--color-text);
-}
-
-.hoursNote {
-  max-width: 19rem;
-  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
-  line-height: 1.4;
 }
