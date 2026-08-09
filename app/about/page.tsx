@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = buildPlaceholderMetadata(
   "/about",
-  "Our story: Birdside HTX in Katy — late-night halal hot chicken, house-made sauces, tight menu execution, and catering for crews."
+  "Our story: Birdside HTX is a family-owned Katy food truck serving 100% halal hot chicken, cooked fresh to order since 2023."
 );
 
 export default function AboutRoutePage() {
