@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import JsonLd from "@/components/site/JsonLd";
 import LocationDetailPage from "@/components/site/location-detail/LocationDetailPage";
 import PageShell from "@/components/site/PageShell";
+import { buildBreadcrumbJsonLd } from "@/lib/local-seo";
 import { buildPageMetadata } from "@/lib/page-metadata";
 import { getLocationContent, getLocationSlugs } from "@/lib/site-content";
 
@@ -30,11 +32,31 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
   if (slug === "katy-tx") {
     return (
-      <PageShell
-        mainSlots={[<LocationDetailPage key="katy-location" />]}
-      />
+      <>
+        <JsonLd
+          data={buildBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Locations", path: "/locations" },
+            { name: "Katy, TX", path: content.route }
+          ])}
+        />
+        <PageShell
+          mainSlots={[<LocationDetailPage key="katy-location" />]}
+        />
+      </>
     );
   }
 
-  return <PageShell mainHtml={content.mainHtml} />;
+  return (
+    <>
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Locations", path: "/locations" },
+          { name: content.title.split(/[|—]/)[0]?.trim() || slug, path: content.route }
+        ])}
+      />
+      <PageShell mainHtml={content.mainHtml} />
+    </>
+  );
 }

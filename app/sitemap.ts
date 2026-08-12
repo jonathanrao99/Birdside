@@ -8,7 +8,6 @@ const STATIC_PATHS = [
   "/menu",
   "/contact",
   "/locations",
-  "/checkout",
   "/sauce-lab",
   "/catering",
   "/faq",
@@ -25,8 +24,7 @@ const STATIC_PRIORITIES: Partial<Record<(typeof STATIC_PATHS)[number], number>> 
   "/faq": 0.8,
   "/sauce-lab": 0.8,
   "/privacy": 0.3,
-  "/terms": 0.3,
-  "/checkout": 0.2
+  "/terms": 0.3
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

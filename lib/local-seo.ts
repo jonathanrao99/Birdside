@@ -1,4 +1,5 @@
 import { GOOGLE_MAPS_URL, ORDER_NOW_URL, footerSocialLinks } from "@/lib/site-shell-data";
+import type { OurMenuData } from "@/lib/our-menu-types";
 import { getSiteUrl } from "@/lib/site-url";
 
 export const LOCAL_BUSINESS = {
@@ -143,6 +144,62 @@ export function buildWebsiteJsonLd() {
     url: siteUrl,
     publisher: { "@id": `${siteUrl}/#restaurant` },
     inLanguage: "en-US"
+  };
+}
+
+export function buildBreadcrumbJsonLd(items: readonly { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path)
+    }))
+  };
+}
+
+function parsePrice(price: string) {
+  const match = price.match(/\$\s*([0-9]+(?:\.[0-9]{1,2})?)/);
+  return match?.[1];
+}
+
+export function buildMenuJsonLd(data: OurMenuData) {
+  const siteUrl = getSiteUrl().replace(/\/$/, "");
+  return {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "@id": `${siteUrl}/menu#menu`,
+    name: "Birdside HTX Menu",
+    url: absoluteUrl("/menu"),
+    provider: { "@id": `${siteUrl}/#restaurant` },
+    inLanguage: "en-US",
+    hasMenuSection: data.tabs.map((tab) => ({
+      "@type": "MenuSection",
+      name: tab.label,
+      hasMenuItem: tab.items.map((item) => {
+        const price = parsePrice(item.price);
+        return {
+          "@type": "MenuItem",
+          name: item.name,
+          description: item.description,
+          image: absoluteUrl(item.imageSrc),
+          url: absoluteUrl(item.productHref),
+          ...(price
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  price,
+                  priceCurrency: "USD",
+                  availability: "https://schema.org/InStock",
+                  url: LOCAL_BUSINESS.orderUrl
+                }
+              }
+            : {})
+        };
+      })
+    }))
   };
 }
 

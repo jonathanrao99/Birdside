@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/.wf_graphql/", "/api/"]
+      disallow: ["/.wf_graphql/", "/api/", "/checkout"]
     },
     sitemap: new URL("/sitemap.xml", base).toString()
   };

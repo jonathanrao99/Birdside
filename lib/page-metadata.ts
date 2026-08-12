@@ -47,6 +47,8 @@ const DEFAULT_OG_IMAGE = {
   alt: "Birdside HTX hot chicken, wings, sandos, and late-night flavor"
 };
 
+const NO_INDEX_ROUTES = new Set(["/checkout"]);
+
 const LOCAL_GEO_META = {
   "geo.region": "US-TX",
   "geo.placename": LOCAL_BUSINESS.addressLocality,
@@ -79,7 +81,7 @@ export function buildPageMetadata(
       ROUTE_DESCRIPTIONS[path] ||
       `${SITE_NAME} — wings, sandos, and more in Katy, TX.`;
 
-  return {
+  const metadata: Metadata = {
     title: { absolute: title },
     description,
     alternates: {
@@ -102,6 +104,19 @@ export function buildPageMetadata(
     },
     other: LOCAL_GEO_META
   };
+
+  if (NO_INDEX_ROUTES.has(path)) {
+    metadata.robots = {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false
+      }
+    };
+  }
+
+  return metadata;
 }
 
 export function createStaticRouteMetadata(route: string): () => Metadata {
@@ -119,7 +134,7 @@ export function buildPlaceholderMetadata(
 ): Metadata {
   const label = ROUTE_LABELS[route] ?? route;
   const title = `${label} | ${SITE_NAME}`;
-  return {
+  const metadata: Metadata = {
     title: { absolute: title },
     description,
     alternates: {
@@ -142,4 +157,17 @@ export function buildPlaceholderMetadata(
     },
     other: LOCAL_GEO_META
   };
+
+  if (NO_INDEX_ROUTES.has(route)) {
+    metadata.robots = {
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false
+      }
+    };
+  }
+
+  return metadata;
 }
