@@ -48,12 +48,10 @@ type Props = {
 };
 
 /** GSAP segment durations (seconds). */
-const DUR_INITIAL_HOLD = 0.35;
-const DUR_GAP = 0.85;
-const DUR_ROW_SCALE = 0.55;
-const DUR_ROW_HOLD = 0.25;
-const DUR_CURTAIN = 0.85;
-const DUR_REVEAL = 0.65;
+const DUR_GAP = 1.8;
+const DUR_SETTLE = 0.15;
+const DUR_CURTAIN = 1.15;
+const DUR_REVEAL = 1.0;
 
 /**
  * First session visit to `/` only: letter-row tracking, scale, curtain slide + reveal zoom
@@ -122,6 +120,7 @@ export default function HomePreloader({ onComplete }: Props) {
     const center = (letters.length - 1) / 2;
     const spread = Math.min(Math.max(window.innerWidth * 0.075, 42), 92);
 
+    gsap.set(container, { force3D: true });
     gsap.set(row, { force3D: true });
     gsap.set(letters, {
       x: (i) => (i - center) * spread,
@@ -132,7 +131,6 @@ export default function HomePreloader({ onComplete }: Props) {
     let cancelled = false;
     const tl = gsap.timeline({
       paused: true,
-      defaults: { ease: "power3.out" },
       onComplete: () => {
         gsap.set(reveal, { clearProps: "all" });
         finish();
@@ -141,25 +139,22 @@ export default function HomePreloader({ onComplete }: Props) {
 
     tl.to(letters, {
       x: 0,
-      duration: DUR_GAP
-    }, DUR_INITIAL_HOLD);
-
-    tl.to(row, {
-      duration: DUR_ROW_SCALE + DUR_ROW_HOLD
-    });
+      duration: DUR_GAP,
+      ease: "power3.inOut"
+    }, 0);
 
     tl.to(container, {
       yPercent: 100,
       duration: DUR_CURTAIN,
-      ease: "power4.inOut"
-    });
+      ease: "power3.inOut"
+    }, `>-=${DUR_SETTLE}`);
 
     tl.to(
       reveal,
       {
         opacity: 1,
         duration: DUR_REVEAL,
-        ease: "power3.out"
+        ease: "power2.out"
       },
       "<"
     );
@@ -174,6 +169,7 @@ export default function HomePreloader({ onComplete }: Props) {
     return () => {
       cancelled = true;
       tl.kill();
+      gsap.set(container, { clearProps: "transform" });
       gsap.set(letters, { clearProps: "transform,willChange" });
       gsap.set("#birdside-preloader-reveal", { clearProps: "all" });
     };
