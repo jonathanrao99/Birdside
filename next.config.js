@@ -43,7 +43,7 @@ const nextConfig = {
     if (process.env.NODE_ENV === "production") {
       const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://elfsightcdn.com https://universe-static.elfsightcdn.com",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://unpkg.com https://elfsightcdn.com https://universe-static.elfsightcdn.com https://*.elevenlabs.io",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: blob: https:",
         "font-src 'self' data: https://cdn.prod.website-files.com",
